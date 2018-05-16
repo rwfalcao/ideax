@@ -135,7 +135,7 @@ def idea_new(request):
 def idea_edit(request, pk):
     idea = get_object_or_404(Idea, pk=pk)
 
-    if request.user.userprofile == idea.author or request.user.userprofile.manager:
+    if ((request.user.userprofile == idea.author and idea.get_current_phase() == Phase.GROW) or request.user.userprofile.manager):
         if request.method == "POST":
             form = IdeaForm(request.POST, instance=idea)
         else:
