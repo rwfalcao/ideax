@@ -21,6 +21,8 @@ from django.http import HttpResponse
 from django.template.loader import get_template
 from django.template import Context
 from django.conf import settings
+from django.contrib.auth.models import Group, Permission
+from django.contrib.auth.decorators import permission_required
 
 def index(request):
     if request.user.is_authenticated:
@@ -124,6 +126,7 @@ def save_idea(request, form, template_name, new=False):
     return render(request, template_name, {'form': form})
 
 @login_required
+@permission_required('ideax.add_idea',raise_exception=True)
 def idea_new(request):
     if request.method == "POST":
         form = IdeaForm(request.POST)
@@ -132,10 +135,12 @@ def idea_new(request):
     return save_idea(request, form, 'ideax/idea_new.html', True)
 
 @login_required
+@permission_required('ideax.change_idea',raise_exception=True)
 def idea_edit(request, pk):
     idea = get_object_or_404(Idea, pk=pk)
 
-    if ((request.user.userprofile == idea.author and idea.get_current_phase() == Phase.GROW) or request.user.userprofile.manager):
+    if ((request.user.userprofile == idea.author and idea.get_current_phase() == Phase.GROW)
+                    or request.user.groups.filter(name="Gerencial").exists()):
         if request.method == "POST":
             form = IdeaForm(request.POST, instance=idea)
         else:
@@ -147,6 +152,7 @@ def idea_edit(request, pk):
         return redirect('index')
 
 @login_required
+@permission_required('ideax.delete_idea',raise_exception=True)
 def idea_remove(request, pk):
     idea = get_object_or_404(Idea, pk=pk)
     data = dict()
