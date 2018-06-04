@@ -88,9 +88,11 @@ def idea_filter(request, phase_pk):
 
     data = dict()
     data['html_idea_list'] = render_to_string('ideax/idea_list_loop.html', context, request=request)
+    data['empty'] = 0
 
     if not ideas:
         data['html_idea_list'] = render_to_string('ideax/includes/empty.html', request=request)
+        data['empty'] = 1
     return JsonResponse(data)
 
 

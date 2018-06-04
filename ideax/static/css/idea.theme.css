@@ -31,7 +31,6 @@ body {
 }
 .idea-list-bg h1 {
     font-family: 'Open Sans', sans;
-    font-size: 7vmin;
     height: 110px;
     margin-top: 40px;
     color: #fff;
@@ -172,6 +171,21 @@ border-radius: 2px;
         width: 100%;
     }
 } */
+
+.small-title{
+  font-size: 3vmin;
+}
+.medium-title{
+  font-size: 4vmin;
+}
+.big-title{
+  font-size: 5vmin;
+}
+
+.empty-filter{
+  text-align: center;
+  font-size: 1.2em;
+}
 
 .separator {
 width: 1px;
@@ -440,6 +454,12 @@ transform: rotate(0deg);
 bottom: 0;
 transform: rotate(180deg);
 transition-delay: 0.7s;
+}
+
+.footer{
+  position: absolute;
+    width: 100%;
+    bottom: 0;
 }
 
 /*Landing Page*/

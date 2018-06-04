@@ -331,7 +331,18 @@ function filterIdeas(url){
     type: 'get',
     dataType: 'json',
     success: function (data){
-      $("#idea-list-group").html(data.html_idea_list);
+      $("#idea-list-group").empty();
+      $(".empty-filter").empty();
+      
+      if(data.empty == 0){
+        $(".empty-filter").empty();
+        $("#idea-list-group").html(data.html_idea_list);
+      }
+      else{
+        $(".empty-filter").empty();
+        $(".empty-filter").html(data.html_idea_list);
+      }
+      
     }
   });
 };
