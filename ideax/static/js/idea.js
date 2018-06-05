@@ -1,6 +1,7 @@
 $('.expand-button').on('click', function (evt) {
   let ideaText = evt.currentTarget.parentNode.parentNode.querySelector('p');
   ideaText.classList.toggle('expand');
+  $(this).classList.toggle('expand-btn');
   //console.log($(evt.currentTarget).parent().parent());
 });
 

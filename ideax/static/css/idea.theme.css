@@ -1,5 +1,9 @@
 body {
   /* font-family: "Titillium Web", "Open Sans", sans-serif; */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 100vh;
 }
 
 .ideax-body {
@@ -87,7 +91,7 @@ body {
 }
 
 .readmore-block p {
-  height: 100px;
+  max-height: 100px;
   overflow: auto;
   position: relative;
 }
@@ -105,13 +109,14 @@ body {
 } */
 
 .readmore-block p.expand {
-  height: 400px;
+  max-height: 400px;
+  height: auto;
   overflow: auto;
-  -webkit-transition: height 1s linear; 
-  -moz-transition: height 1s linear; 
-  -ms-transition: height 1s linear; 
-  -o-transition: height 1s linear; 
-  transition: height 1s linear;
+  -webkit-transition: max-height 0.5s linear; 
+  -moz-transition: max-height 0.5s linear; 
+  -ms-transition: max-height 0.5s linear; 
+  -o-transition: max-height 0.5s linear; 
+  transition: max-height 0.5s linear;
 }
 
 .fab-button {
@@ -456,11 +461,6 @@ transform: rotate(180deg);
 transition-delay: 0.7s;
 }
 
-.footer{
-  position: absolute;
-    width: 100%;
-    bottom: 0;
-}
 
 /*Landing Page*/
 .brief-explanation {
