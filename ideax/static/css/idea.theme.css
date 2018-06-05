@@ -1,5 +1,9 @@
 body {
   /* font-family: "Titillium Web", "Open Sans", sans-serif; */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 100vh;
 }
 
 .ideax-body {
@@ -31,7 +35,6 @@ body {
 }
 .idea-list-bg h1 {
     font-family: 'Open Sans', sans;
-    font-size: 7vmin;
     height: 110px;
     margin-top: 40px;
     color: #fff;
@@ -88,7 +91,7 @@ body {
 }
 
 .readmore-block p {
-  height: 100px;
+  max-height: 100px;
   overflow: auto;
   position: relative;
 }
@@ -106,13 +109,14 @@ body {
 } */
 
 .readmore-block p.expand {
-  height: 400px;
+  max-height: 400px;
+  height: auto;
   overflow: auto;
-  -webkit-transition: height 1s linear;
-  -moz-transition: height 1s linear;
-  -ms-transition: height 1s linear;
-  -o-transition: height 1s linear;
-  transition: height 1s linear;
+  -webkit-transition: max-height 0.5s linear;
+  -moz-transition: max-height 0.5s linear;
+  -ms-transition: max-height 0.5s linear;
+  -o-transition: max-height 0.5s linear;
+  transition: max-height 0.5s linear;
 }
 
 .fab-button {
@@ -172,6 +176,21 @@ border-radius: 2px;
         width: 100%;
     }
 } */
+
+.small-title{
+  font-size: 3vmin;
+}
+.medium-title{
+  font-size: 4vmin;
+}
+.big-title{
+  font-size: 5vmin;
+}
+
+.empty-filter{
+  text-align: center;
+  font-size: 1.2em;
+}
 
 .separator {
 width: 1px;
@@ -441,6 +460,7 @@ bottom: 0;
 transform: rotate(180deg);
 transition-delay: 0.7s;
 }
+
 
 /*Landing Page*/
 .brief-explanation {
