@@ -50,5 +50,5 @@ def change_phase_email(idea, to_emails):
     mail = Mailer()
     mail.send_messages(subject=_('Idea change phase!'),
     template='ideax/email/change_phase.html',
-    context={'customer': "Kelvin", 'data': timezone.localtime(timezone.now())},
+    context={},
     to_emails=to_emails)

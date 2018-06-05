@@ -67,12 +67,10 @@ def get_ideas_init(request):
     ideas_dic['ideas_created_by_me'] = get_ideas_created(request)
     return ideas_dic
 
-
 def get_phases():
     phase_dic = dict()
     phase_dic['phases'] = Phase.choices()
     return phase_dic
-
 
 def idea_filter(request, phase_pk):
     if phase_pk == 0:
@@ -96,7 +94,6 @@ def idea_filter(request, phase_pk):
     if not ideas:
         data['html_idea_list'] = render_to_string('ideax/includes/empty.html', request=request)
     return JsonResponse(data)
-
 
 @login_required
 def save_idea(request, form, template_name, new=False):
@@ -277,7 +274,7 @@ def open_category_new(request, ):
     return JsonResponse(data)
 
 @login_required
-@permission_required('ideax.add_criterion',raise_exception=True)
+@permission_required('ideax.add_category',raise_exception=True)
 def category_new(request):
     if request.method == "POST":
         form = CategoryForm(request.POST)
@@ -307,7 +304,7 @@ def save_category(request, template_name, form):
     return JsonResponse(data)
 
 @login_required
-@permission_required('ideax.change_criterion',raise_exception=True)
+@permission_required('ideax.change_category',raise_exception=True)
 def category_edit(request, pk):
     category = get_object_or_404(Category, pk=pk)
     if request.method == "POST":
@@ -318,7 +315,7 @@ def category_edit(request, pk):
     return save_category(request,'ideax/category_edit.html',form)
 
 @login_required
-@permission_required('ideax.delete_criterion',raise_exception=True)
+@permission_required('ideax.delete_category',raise_exception=True)
 def category_remove(request, pk):
     category = get_object_or_404(Category, pk=pk)
     data = dict()

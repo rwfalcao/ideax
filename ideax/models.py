@@ -23,11 +23,12 @@ user_logged_in.connect(check_user_profile)
 class Phase(Enum):
     GROW     = (1, _('Discussion'), 'discussion', 'comments')
     RATE     = (2, _('Evaluation'), 'rate','clipboard')
-    APROVED  = (3, _('Approval'), 'aproved','star')
-    ACT      = (4, _('Evolution'), 'develop','tasks')
-    DONE     = (5, _('Done'), 'done', 'check')
-    ARCHIVED = (6, _('Archived'), 'archived', 'archive')
-    PAUSED   = (7, _('Paused'), 'paused', 'pause')
+    IDEATION = (3, _('Ideation'), 'ideation','ideation')
+    APROVED  = (4, _('Approval'), 'aproved','star')
+    ACT      = (5, _('Evolution'), 'develop','tasks')
+    DONE     = (6, _('Done'), 'done', 'check')
+    ARCHIVED = (7, _('Archived'), 'archived', 'archive')
+    PAUSED   = (8, _('Paused'), 'paused', 'pause')
 
 
     def __init__(self, id, description, css_class, icon_class):
@@ -147,7 +148,7 @@ class Comment(MPTTModel):
     class MPTTMeta:
         order_insertion_by = ['-date']
 
-    
+
 
 class UserProfile (models.Model):
     user = models.OneToOneField('auth.User',on_delete=models.PROTECT)

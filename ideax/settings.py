@@ -175,11 +175,11 @@ PERMISSIONS={
 }
 
 CELERY_ACCEPT_CONTENT = ['pickle', 'json','application/text']
-CELERY_BROKER_URL = 'amqp://myuser:mypassword@127.0.0.1:5672/myvhost'
-EMAIL_HOST = 'localhost'
-EMAIL_PORT = '1025'
-EMAIL_HOST_USER = 'demo.djangosend@gmail.com'
-EMAIL_HOST_PASSWORD = '24052018@demo'
-#EMAIL_USE_TLS = False # TLS settings
-#EMAIL_USE_SSL = False # TLS settings
-EMAIL_BACKEND = 'djcelery_email.backends.CeleryEmailBackend'
+CELERY_BROKER_URL = config('CELERY_BROKER_URL')
+EMAIL_HOST = config('EMAIL_HOST')
+EMAIL_PORT = config('EMAIL_PORT')
+EMAIL_HOST_USER = config('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
+EMAIL_USE_TLS = config('EMAIL_USE_TLS', default=0, cast=bool)
+EMAIL_USE_SSL = config('EMAIL_USE_SSL', default=0, cast=bool)
+EMAIL_BACKEND = config('EMAIL_BACKEND', default='djcelery_email.backends.CeleryEmailBackend')
