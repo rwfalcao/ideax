@@ -157,11 +157,6 @@ class UserProfile (models.Model):
     ip = models.CharField(max_length=20, null=True)
     manager = models.NullBooleanField(default=False)
 
-    """
-     it is necessary add manager group in MANAGER_GROUP key in .env file
-    """
-    def is_manager_group(self):
-        return self.user.groups.filter(name=config("MANAGER_GROUP")).exists()
 
 class Dimension(models.Model):
     title = models.CharField(max_length=200)

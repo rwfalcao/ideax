@@ -754,3 +754,7 @@ transition-delay: 0.7s;
   padding-top: 0.35rem;
   padding-bottom: 0.35rem;
 }
+
+#evaluation_form label {
+  font-weight: bold;
+}
