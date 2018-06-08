@@ -192,9 +192,11 @@ border-radius: 2px;
   font-size: 1.2em;
 }
 
-.card-icons a{
+.card-icons a,
+.like-menu a{
   text-decoration: none;
   outline: 0;
+
 }
 
 .permission-error{
@@ -241,7 +243,7 @@ border-radius: 2px;
   max-width: 800px;
 }
 
-.nav-link.active {
+.phase-list .nav-link.active {
   font-weight: bold;
   background-color: #fff !important;
   color: #0056b3 !important;
@@ -249,17 +251,17 @@ border-radius: 2px;
   border-radius: 0px;
 }
   
-.nav-link.active:hover {
+.phase-list .nav-link.active:hover {
   border-left: solid 0px #0056b3;
 }
 
 
-.nav-item:hover{
+.phase-list .nav-item:hover{
   border-left: solid 4px #0056b3;
   background-color: #ededed;
 }
 
-nav.phase-filter{
+.phase-list .nav.phase-filter{
   background-color: #fff;
   
 }
