@@ -44,6 +44,8 @@ INSTALLED_APPS = [
     'widget_tweaks',
     'ideax',
     'mptt',
+    'djcelery',
+    'djcelery_email',
 ]
 
 MIDDLEWARE = [
@@ -153,6 +155,9 @@ if AUTH_LDAP_SERVER_URI!='':
         'django.contrib.auth.backends.ModelBackend',
         'django_auth_ldap.backend.LDAPBackend',
     ]
+    AUTH_LDAP_PROFILE_ATTR_MAP = {
+        "memberOf" : "memberOf",
+    }
 else:
     AUTHENTICATION_BACKENDS = [
         'django.contrib.auth.backends.ModelBackend',
@@ -164,3 +169,17 @@ import logging
 logger = logging.getLogger('django_auth_ldap')
 logger.addHandler(logging.StreamHandler())
 logger.setLevel(logging.DEBUG)
+
+PERMISSIONS={
+    "MANAGE_IDEA" : "ideax.manage_idea",
+}
+
+CELERY_ACCEPT_CONTENT = ['pickle', 'json','application/text']
+CELERY_BROKER_URL = config('CELERY_BROKER_URL')
+EMAIL_HOST = config('EMAIL_HOST')
+EMAIL_PORT = config('EMAIL_PORT')
+EMAIL_HOST_USER = config('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
+EMAIL_USE_TLS = config('EMAIL_USE_TLS', default=0, cast=bool)
+EMAIL_USE_SSL = config('EMAIL_USE_SSL', default=0, cast=bool)
+EMAIL_BACKEND = config('EMAIL_BACKEND', default='djcelery_email.backends.CeleryEmailBackend')

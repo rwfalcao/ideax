@@ -149,6 +149,8 @@ $(function () {
         var score = data.score_value;
         $("#score").removeClass("hide");
         $("#score_value").html(score.toFixed(2));
+        var progressBarWidth = Math.round((score.toFixed(2)/5 * 100)*100) / 100;
+        $("#score_progress_bar").css({width: progressBarWidth.toFixed(0)+'%'})
 
         showMessage("#evaluation-message", data.msg, "alert-info");
       },
