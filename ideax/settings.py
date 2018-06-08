@@ -175,11 +175,11 @@ PERMISSIONS={
 }
 
 CELERY_ACCEPT_CONTENT = ['pickle', 'json','application/text']
-CELERY_BROKER_URL = config('CELERY_BROKER_URL')
-EMAIL_HOST = config('EMAIL_HOST')
-EMAIL_PORT = config('EMAIL_PORT')
-EMAIL_HOST_USER = config('EMAIL_HOST_USER')
-EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
+CELERY_BROKER_URL = config('CELERY_BROKER_URL', default='')
+EMAIL_HOST = config('EMAIL_HOST', default='')
+EMAIL_PORT = config('EMAIL_PORT', default='')
+EMAIL_HOST_USER = config('EMAIL_HOST_USER', default='')
+EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD', default='')
 EMAIL_USE_TLS = config('EMAIL_USE_TLS', default=0, cast=bool)
 EMAIL_USE_SSL = config('EMAIL_USE_SSL', default=0, cast=bool)
-EMAIL_BACKEND = config('EMAIL_BACKEND', default='djcelery_email.backends.CeleryEmailBackend')
+EMAIL_BACKEND = config('EMAIL_BACKEND', default='')

@@ -23,8 +23,6 @@ from django.template import Context
 from django.conf import settings
 from django.contrib.auth.models import Group, Permission
 from django.contrib.auth.decorators import permission_required
-from .mailer import Mailer
-from .mailer import change_phase_email
 
 def index(request):
     if request.user.is_authenticated:

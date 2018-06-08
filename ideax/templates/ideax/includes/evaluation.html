@@ -22,7 +22,7 @@
   {% for field in form_evaluation %}
     <div class="form-group{% if field.errors %} has-error{% endif %}">
       {% if field.label != '' %}
-        <label for="{{field.id_for_label}}" data-toggle="tooltip" data-placement="bottom" title="{{field.help_text}}" >{{field.label}}</label>
+        <label for="{{field.id_for_label}}" data-toggle="tooltip" data-placement="bottom" title="{{field.help_text}}" >{{field.label}}: </label> {{field.help_text}}
       {%endif%}
       {{ field|add_class:'form-control' }}
       {% for error in field.errors %}
