@@ -2,7 +2,11 @@
 {% load staticfiles i18n %}
 
 {% block content %}
-<div class="container">
-  {% trans 'You don\'t have permission to access this feature' %}
+<div class="container permission-error">
+    <img src="{% static 'images/idea-403.png' %}">
+  <p>{% trans 'You don\'t have permission to access this feature' %}</p>
+  <button type="button" onclick="window.history.go(-1); return false;" class="btn btn-secondary">{% trans 'Back' %}</button>
 </div>
+
+
 {% endblock %}

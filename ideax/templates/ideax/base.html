@@ -83,8 +83,9 @@
               {% trans 'Terms of use' %}
             </div>
             <div class="modal-footer">
-              <a id="term-decline" class="term-btn" href="{% url 'logout' %}">{% trans 'Cancel' %}</a>
-              <a id="term-accept" class="term-btn" href="{% url 'accept_term' %}">{% trans 'Accept' %}</a>
+              <a type="button" href="{% url 'logout' %}" class="btn btn-light">{% trans 'Cancel' %}</a>
+              <a type="button" href="{% url 'accept_term' %}" class="btn btn-success">{% trans 'Accept' %}</a>
+              
             </div>
           </div>
         </div>
