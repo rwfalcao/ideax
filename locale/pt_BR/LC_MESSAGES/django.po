@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-06-01 15:24-0300\n"
+"POT-Creation-Date: 2018-06-08 10:30-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,9 +18,27 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Generator: Poedit 2.0.7\n"
 
+#: ideax/feeds.py:6 ideax/templates/ideax/idea_detail.html:71
+msgid "Comments"
+msgstr "Comentários"
+
+#: ideax/feeds.py:8 ideax/feeds.py:28
+msgid "Sharing ideas"
+msgstr "idea X compartilhando ideias!"
+
+#: ideax/feeds.py:14 ideax/feeds.py:34
+#, fuzzy
+#| msgid "New Idea"
+msgid "Idea"
+msgstr "Criar Ideia"
+
 #: ideax/feeds.py:18
 msgid "Comment by: "
 msgstr "Comentário por: "
+
+#: ideax/feeds.py:26
+msgid "New ideas"
+msgstr "Novas Ideias"
 
 #: ideax/forms.py:10 ideax/forms.py:24 ideax/forms.py:38
 msgid "Title"
@@ -31,17 +49,17 @@ msgid "Summary"
 msgstr "Resumo"
 
 #: ideax/forms.py:10 ideax/forms.py:24
-#: ideax/templates/ideax/idea_detail.html:78
+#: ideax/templates/ideax/idea_detail.html:89
 msgid "Oportunity"
 msgstr "Oportunidade"
 
 #: ideax/forms.py:10 ideax/forms.py:24
-#: ideax/templates/ideax/idea_detail.html:69
+#: ideax/templates/ideax/idea_detail.html:80
 msgid "Solution"
 msgstr "Solução"
 
 #: ideax/forms.py:10 ideax/forms.py:24
-#: ideax/templates/ideax/idea_detail.html:87
+#: ideax/templates/ideax/idea_detail.html:98
 msgid "Target"
 msgstr "Público-alvo"
 
@@ -70,39 +88,49 @@ msgid "Weight"
 msgstr "Peso"
 
 #: ideax/forms.py:31 ideax/forms.py:38
-#: ideax/templates/ideax/idea_detail.html:57
+#: ideax/templates/ideax/idea_detail.html:68
 #: ideax/templates/ideax/includes/partial_category_list.html:6
 msgid "Description"
 msgstr "Descrição"
 
-#: ideax/models.py:24 ideax/templates/ideax/includes/idea_detail.html:55
+#: ideax/models.py:24 ideax/templates/ideax/includes/idea_detail.html:57
 msgid "Discussion"
 msgstr "Discussão"
 
-#: ideax/models.py:25 ideax/templates/ideax/idea_detail.html:63
-#: ideax/templates/ideax/includes/idea_detail.html:56
+#: ideax/models.py:25 ideax/templates/ideax/idea_detail.html:74
+#: ideax/templates/ideax/includes/idea_detail.html:58
 msgid "Evaluation"
 msgstr "Avaliação"
 
-#: ideax/models.py:26 ideax/templates/ideax/includes/idea_detail.html:57
+#: ideax/models.py:26 ideax/templates/ideax/includes/idea_detail.html:59
+#, fuzzy
+#| msgid "New Idea"
+msgid "Ideation"
+msgstr "Criar Ideia"
+
+#: ideax/models.py:27 ideax/templates/ideax/includes/idea_detail.html:60
 msgid "Approval"
 msgstr "Aprovação"
 
-#: ideax/models.py:27 ideax/templates/ideax/includes/idea_detail.html:58
+#: ideax/models.py:28 ideax/templates/ideax/includes/idea_detail.html:61
 msgid "Evolution"
 msgstr "Evolução"
 
-#: ideax/models.py:28 ideax/templates/ideax/includes/idea_detail.html:59
+#: ideax/models.py:29 ideax/templates/ideax/includes/idea_detail.html:62
 msgid "Done"
 msgstr "Feitas"
 
-#: ideax/models.py:29 ideax/templates/ideax/includes/idea_detail.html:60
+#: ideax/models.py:30 ideax/templates/ideax/includes/idea_detail.html:63
 msgid "Archived"
 msgstr "Arquivadas"
 
-#: ideax/models.py:30 ideax/templates/ideax/includes/idea_detail.html:61
+#: ideax/models.py:31 ideax/templates/ideax/includes/idea_detail.html:64
 msgid "Paused"
 msgstr "Pausadas"
+
+#: ideax/templates/403.html:7
+msgid "You don\\"
+msgstr ""
 
 #: ideax/templates/ideax/base.html:44
 #, python-format
@@ -134,19 +162,19 @@ msgstr "Ajuda"
 msgid "Login"
 msgstr "Entrar"
 
-#: ideax/templates/ideax/base.html:73
+#: ideax/templates/ideax/base.html:72
 msgid "New Idea"
 msgstr "Criar Ideia"
 
-#: ideax/templates/ideax/base.html:88 ideax/templates/ideax/base.html:92
+#: ideax/templates/ideax/base.html:85 ideax/templates/ideax/base.html:89
 msgid "Terms of use"
 msgstr "Termo de uso"
 
-#: ideax/templates/ideax/base.html:95
+#: ideax/templates/ideax/base.html:92
 msgid "Cancel"
 msgstr "Cancelar"
 
-#: ideax/templates/ideax/base.html:96
+#: ideax/templates/ideax/base.html:93
 msgid "Accept"
 msgstr "Aceitar"
 
@@ -179,7 +207,7 @@ msgid "New Criterion"
 msgstr "Novo Critério"
 
 #: ideax/templates/ideax/criterion_list.html:9
-#: ideax/templates/ideax/includes/idea_detail.html:64
+#: ideax/templates/ideax/includes/idea_detail.html:69
 #: ideax/templates/ideax/includes/partial_category_list.html:8
 #: ideax/templates/ideax/phase_list.html:8
 msgid "Edit"
@@ -195,37 +223,21 @@ msgid "New Comment"
 msgstr "Novo Comentário"
 
 #: ideax/templates/ideax/form.html:23
-#: ideax/templates/ideax/idea_detail.html:109
+#: ideax/templates/ideax/idea_detail.html:122
 msgid "Comment"
 msgstr "Comentar"
 
-#: ideax/templates/ideax/idea_detail.html:17
+#: ideax/templates/ideax/idea_detail.html:29
 #, fuzzy
 #| msgid "Manage Ideas"
 msgid "Banner Idea"
 msgstr "Gestão de ideias"
 
-#: ideax/templates/ideax/idea_detail.html:21
+#: ideax/templates/ideax/idea_detail.html:33
 #: ideax/templates/ideax/includes/idea_detail.html:45
 #: ideax/templates/ideax/includes/idea_detail.html:46
 msgid "By"
 msgstr "Por"
-
-#: ideax/templates/ideax/idea_detail.html:29
-msgid "Like"
-msgstr "Curtir"
-
-#: ideax/templates/ideax/idea_detail.html:37
-msgid "Dislike"
-msgstr "Não Curti"
-
-#: ideax/templates/ideax/idea_detail.html:44
-msgid "Share"
-msgstr "Compartilhar"
-
-#: ideax/templates/ideax/idea_detail.html:60
-msgid "Comments"
-msgstr "Comentários"
 
 #: ideax/templates/ideax/idea_edit.html:7
 #, fuzzy
@@ -263,7 +275,7 @@ msgstr "Pesquisar"
 msgid "Create Idea"
 msgstr "Cadastrar Ideia"
 
-#: ideax/templates/ideax/includes/empty.html:5
+#: ideax/templates/ideax/includes/empty.html:4
 msgid "There are no ideas at this stage!"
 msgstr "Não existem ideias nesta etapa!"
 
@@ -275,15 +287,15 @@ msgstr "Avaliação não realizada"
 msgid "Details..."
 msgstr "Detalhes…"
 
-#: ideax/templates/ideax/includes/idea_detail.html:54
+#: ideax/templates/ideax/includes/idea_detail.html:56
 msgid "Idea Stage"
 msgstr "Fase da Ideia"
 
-#: ideax/templates/ideax/includes/idea_detail.html:63
+#: ideax/templates/ideax/includes/idea_detail.html:68
 msgid "Actions"
 msgstr "Ações"
 
-#: ideax/templates/ideax/includes/idea_detail.html:65
+#: ideax/templates/ideax/includes/idea_detail.html:70
 msgid "Delete"
 msgstr ""
 
@@ -442,53 +454,62 @@ msgstr "placeholder:senha"
 msgid "Sign in"
 msgstr "Acessar"
 
-#: ideax/views.py:44
+#: ideax/views.py:46
 #, fuzzy
 #| msgid "Term of use accept!"
 msgid "Term of use accepted!"
 msgstr "Termo de uso aceito!"
 
-#: ideax/views.py:46
+#: ideax/views.py:48
 #, fuzzy
 #| msgid "Term of use already accepty!"
 msgid "Term of use already accepted!"
 msgstr "Termo de uso já aceito!"
 
-#: ideax/views.py:121
+#: ideax/views.py:122
 msgid "Idea saved successfully!"
 msgstr "Ideia salva com sucesso!"
 
-#: ideax/views.py:146 ideax/views.py:169
+#: ideax/views.py:150 ideax/views.py:175
 msgid "Not supported action"
 msgstr "Ação não suportada"
 
-#: ideax/views.py:243
+#: ideax/views.py:253
 msgid "Something went wrong or you're not allowed!"
 msgstr "Aconteceu algum problema ou seu acesso não é permitido!"
 
-#: ideax/views.py:248
+#: ideax/views.py:258
 msgid "Evaluation done successfully!"
 msgstr "Avaliação feita com sucesso!"
 
-#: ideax/views.py:388
+#: ideax/views.py:405
 msgid "Phase change successfully!"
 msgstr "Fase alterada com sucesso!"
 
-#: ideax/views.py:426
+#: ideax/views.py:444
 msgid "You need to log in to post new comments."
 msgstr "É necessário estar logado para postar comentários."
 
-#: ideax/views.py:434
+#: ideax/views.py:452
 msgid "Please check your message it has inappropriate content."
 msgstr "Verifique sua mensagem ela tem conteúdo inapropriado."
 
-#: ideax/views.py:437
+#: ideax/views.py:455
 msgid "You have to write a comment."
 msgstr "É necessário escrever um comentário."
 
-#: ideax/views.py:454
+#: ideax/views.py:472
 msgid "Your comment has been posted."
 msgstr "Comentário postado com sucesso."
+
+#~ msgid "Like"
+#~ msgstr "Curtir"
+
+#~ msgid "Dislike"
+#~ msgstr "Não Curti"
+
+#~ msgid "Share"
+#~ msgstr "Compartilhar"
 
 #~ msgid "Development"
 #~ msgstr "Evolução"
@@ -510,6 +531,3 @@ msgstr "Comentário postado com sucesso."
 
 #~ msgid "Software in beta stage"
 #~ msgstr "Software em estágio beta"
-
-#~ msgid "Idea X sharing ideas!"
-#~ msgstr "idea X compartilhando ideias!"

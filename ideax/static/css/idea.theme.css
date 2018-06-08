@@ -80,11 +80,9 @@ body {
   padding-top: 14px;
   color: #666;
   padding-bottom: 14px;
+  padding-left: 15px;
 }
 
-.readmore-block {
-
-}
 .readmore-block h4 {
   padding-bottom: 5px;
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
@@ -130,10 +128,12 @@ body {
 .fab-button a.btn {
   /* box-shadow:0px 0px 3px rgba(0,0,0,0.5),3px 3px 3px rgba(0,0,0,0.25); */
   box-shadow: 0 0 4px rgba(0,0,0,.14), 0 4px 8px rgba(0,0,0,.28);
-  padding-top: 17px;
+  padding-top: 16px;
   border-radius: 50%;
   height: 70px;
   width: 70px;
+  padding-left: 5px;
+}
 
 }
 
@@ -191,6 +191,83 @@ border-radius: 2px;
   text-align: center;
   font-size: 1.2em;
 }
+
+.card-icons a,
+.like-menu a{
+  text-decoration: none;
+  outline: 0;
+
+}
+
+.permission-error{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.permission-error img{
+  width: 293px;
+  height: 543px;
+  display: block;
+}
+
+.permission-error{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.permission-error img{
+  width: 293px;
+  height: 543px;
+  display: block;
+}
+
+.permission-error p{
+  margin-top: 25px;
+  font-size: 1.5em;
+  font-weight: bold;
+  max-width: 350px;
+  text-align: center;
+}
+
+#modal-term .modal-content{
+  max-height: 85vh;
+}
+
+#modal-term #modal-term-text{
+  overflow-y: auto;
+  
+}
+#modal-term .modal-dialog{
+  max-width: 800px;
+}
+
+.phase-list .nav-link.active {
+  font-weight: bold;
+  background-color: #fff !important;
+  color: #0056b3 !important;
+  border-left: solid 4px #0056b3;
+  border-radius: 0px;
+}
+  
+.phase-list .nav-link.active:hover {
+  border-left: solid 0px #0056b3;
+}
+
+
+.phase-list .nav-item:hover{
+  border-left: solid 4px #0056b3;
+  background-color: #ededed;
+}
+
+.phase-list .nav.phase-filter{
+  background-color: #fff;
+  
+}
+
+
+
 
 .separator {
 width: 1px;
@@ -276,9 +353,7 @@ margin-bottom: 0;
 resize: none;
 } */
 
-.nav-link.active {
-font-weight: bold;
-}
+
 
 .form-group.comment-group {
 margin-top: 5px;
@@ -626,6 +701,30 @@ transition-delay: 0.7s;
   #idea-list {
     flex-direction: column !important;
     align-items: center;
+  }
+}
+@media (max-width: 776px){
+  .nav-link.active:hover {
+    border-right: 0px;
+  }
+
+  .nav-link.active {
+    border-right: 0px;
+  }
+  
+  
+  .nav-item:hover{
+    border-right: 0px;
+    
+  }
+}
+
+
+@media (max-width: 400px) {
+  .permission-error img{
+    width: 220px;
+    height: 430px;
+    display: block;
   }
 }
 @media (min-width: 481px) and (max-width: 767px) {

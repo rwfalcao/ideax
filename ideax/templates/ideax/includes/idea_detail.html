@@ -18,7 +18,7 @@
     <div class="text-left pb-2 pt-2">
         <a href="{% url 'idea_detail' pk=idea.pk %}">{% trans 'Details...' %}</a>
     </div>
-    <div class="text-right">
+    <div class="text-right card-icons">
       <span class="badge badge-secondary">{{ idea.get_current_phase.description }}</span>
       <a class="like badge" onclick="vote('{% url 'like_ideia' pk=idea.pk %}', '.liked_idea_{{idea.id}}', '.disliked_idea_{{idea.id}}', '.like_{{idea.id}}', '.dislike_{{idea.id}}')" href="javascript:void(0)">
         <i class="{%if idea.id in ideas_liked %} fas {% else %} far {% endif %} fa-thumbs-up like_{{idea.id}}" ></i>
