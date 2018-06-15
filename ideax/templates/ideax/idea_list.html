@@ -68,14 +68,15 @@
           </div>
           {% endfor %}
           {%if not ideas %}
-            {% include 'ideax/includes/empty.html' %}
+           {% include 'ideax/includes/empty.html' %}
           {%else%}
-            <div class="input-group mb-3">
+            <div id="idea-search" class="input-group mb-3" style="display: none">
               <input type="text" class="form-control" placeholder="{% trans 'Search for...' %}" aria-label="{% trans 'Search Box' %}" aria-describedby="basic-addon2">
               <div class="input-group-append">
                 <button class="btn btn-outline-secondary" type="button">{% trans 'Search' %}</button>
               </div>
             </div>
+            <div class="empty-filter"></div>
             <div class="group card-columns" id="idea-list-group">
               {% for idea in ideas %}
                 {% include 'ideax/includes/idea_detail.html' %}
@@ -86,6 +87,6 @@
         </div>
       </div>
     </div>
-    
-    
+
+
 {% endblock %}

@@ -44,6 +44,8 @@ INSTALLED_APPS = [
     'widget_tweaks',
     'ideax',
     'mptt',
+    'djcelery',
+    'djcelery_email',
 ]
 
 MIDDLEWARE = [
@@ -153,6 +155,9 @@ if AUTH_LDAP_SERVER_URI!='':
         'django.contrib.auth.backends.ModelBackend',
         'django_auth_ldap.backend.LDAPBackend',
     ]
+    AUTH_LDAP_PROFILE_ATTR_MAP = {
+        "memberOf" : "memberOf",
+    }
 else:
     AUTHENTICATION_BACKENDS = [
         'django.contrib.auth.backends.ModelBackend',
@@ -164,3 +169,35 @@ import logging
 logger = logging.getLogger('django_auth_ldap')
 logger.addHandler(logging.StreamHandler())
 logger.setLevel(logging.DEBUG)
+
+PERMISSIONS={
+    "MANAGE_IDEA" : "ideax.manage_idea",
+}
+
+CELERY_ACCEPT_CONTENT = ['pickle', 'json','application/text']
+CELERY_BROKER_URL = config('CELERY_BROKER_URL', default='')
+EMAIL_HOST = config('EMAIL_HOST', default='')
+EMAIL_PORT = config('EMAIL_PORT', default='')
+EMAIL_HOST_USER = config('EMAIL_HOST_USER', default='')
+EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD', default='')
+EMAIL_USE_TLS = config('EMAIL_USE_TLS', default=0, cast=bool)
+EMAIL_USE_SSL = config('EMAIL_USE_SSL', default=0, cast=bool)
+
+if config('EMAIL_BACKEND', default='') != '':
+    EMAIL_BACKEND = config('EMAIL_BACKEND', default='')
+
+if config('DEFAULT_FROM_EMAIL', default='') != '':
+    DEFAULT_FROM_EMAIL=config('DEFAULT_FROM_EMAIL')
+
+IPWARE_META_PRECEDENCE_ORDER = (
+    'HTTP_X_FORWARDED_FOR',
+    'REMOTE_ADDR',
+    'HTTP_X_FORWARDED',
+    'HTTP_CLIENT_IP',
+    'HTTP_X_REAL_IP',
+    'X_FORWARDED_FOR',
+    'HTTP_X_CLUSTER_CLIENT_IP',
+    'HTTP_FORWARDED_FOR',
+    'HTTP_FORWARDED',
+    'HTTP_VIA',
+)

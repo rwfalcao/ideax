@@ -1,5 +1,9 @@
 body {
   /* font-family: "Titillium Web", "Open Sans", sans-serif; */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 100vh;
 }
 
 .ideax-body {
@@ -21,7 +25,7 @@ body {
     /* background-position-y: bottom; */
     /* background-position-y: center;
     background-size: cover; */
-    
+
     height: 200px;
     margin-top: 0px;
     margin-left: -15px;
@@ -31,7 +35,6 @@ body {
 }
 .idea-list-bg h1 {
     font-family: 'Open Sans', sans;
-    font-size: 7vmin;
     height: 110px;
     margin-top: 40px;
     color: #fff;
@@ -77,42 +80,41 @@ body {
   padding-top: 14px;
   color: #666;
   padding-bottom: 14px;
+  padding-left: 15px;
 }
 
-.readmore-block {
-
-}
 .readmore-block h4 {
   padding-bottom: 5px;
   border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 }
 
 .readmore-block p {
-  height: 100px;
+  max-height: 100px;
   overflow: auto;
   position: relative;
 }
 /* .readmore-block p.narrow-text:after {
   position: absolute;
-  bottom: 0;  
+  bottom: 0;
   height: 100%;
   width: 100%;
   content: "";
   background: linear-gradient(to top,
-     rgba(255,255,255, 1) 20%, 
+     rgba(255,255,255, 1) 20%,
      rgba(255,255,255, 0) 80%
   );
   pointer-events: none;
 } */
 
 .readmore-block p.expand {
-  height: 400px;
+  max-height: 400px;
+  height: auto;
   overflow: auto;
-  -webkit-transition: height 1s linear; 
-  -moz-transition: height 1s linear; 
-  -ms-transition: height 1s linear; 
-  -o-transition: height 1s linear; 
-  transition: height 1s linear;
+  -webkit-transition: max-height 0.5s linear;
+  -moz-transition: max-height 0.5s linear;
+  -ms-transition: max-height 0.5s linear;
+  -o-transition: max-height 0.5s linear;
+  transition: max-height 0.5s linear;
 }
 
 .fab-button {
@@ -126,10 +128,12 @@ body {
 .fab-button a.btn {
   /* box-shadow:0px 0px 3px rgba(0,0,0,0.5),3px 3px 3px rgba(0,0,0,0.25); */
   box-shadow: 0 0 4px rgba(0,0,0,.14), 0 4px 8px rgba(0,0,0,.28);
-  padding-top: 17px;
+  padding-top: 16px;
   border-radius: 50%;
   height: 70px;
   width: 70px;
+  padding-left: 5px;
+}
 
 }
 
@@ -172,6 +176,103 @@ border-radius: 2px;
         width: 100%;
     }
 } */
+
+.small-title{
+  font-size: 3vmin;
+}
+.medium-title{
+  font-size: 4vmin;
+}
+.big-title{
+  font-size: 5vmin;
+}
+
+.empty-filter{
+  text-align: center;
+  font-size: 1.2em;
+}
+
+.card-icons a,
+.like-menu a{
+  text-decoration: none;
+  outline: 0;
+
+}
+
+.like-menu{
+  margin-bottom: 15px;
+  margin-top: 15px;
+}
+
+.permission-error{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.permission-error img{
+  width: 293px;
+  height: 543px;
+  display: block;
+}
+
+.permission-error{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.permission-error img{
+  width: 293px;
+  height: 543px;
+  display: block;
+}
+
+.permission-error p{
+  margin-top: 25px;
+  font-size: 1.5em;
+  font-weight: bold;
+  max-width: 350px;
+  text-align: center;
+}
+
+#modal-term .modal-content{
+  max-height: 85vh;
+}
+
+#modal-term #modal-term-text{
+  overflow-y: auto;
+
+}
+#modal-term .modal-dialog{
+  max-width: 800px;
+}
+
+.phase-list .nav-link.active {
+  font-weight: bold;
+  background-color: #fff !important;
+  color: #0056b3 !important;
+  border-left: solid 4px #0056b3;
+  border-radius: 0px;
+}
+
+.phase-list .nav-link.active:hover {
+  border-left: solid 0px #0056b3;
+}
+
+
+.phase-list .nav-item:hover{
+  border-left: solid 4px #0056b3;
+  background-color: #ededed;
+}
+
+.phase-list .nav.phase-filter{
+  background-color: #fff;
+
+}
+
+
+
 
 .separator {
 width: 1px;
@@ -257,9 +358,7 @@ margin-bottom: 0;
 resize: none;
 } */
 
-.nav-link.active {
-font-weight: bold;
-}
+
 
 .form-group.comment-group {
 margin-top: 5px;
@@ -442,6 +541,7 @@ transform: rotate(180deg);
 transition-delay: 0.7s;
 }
 
+
 /*Landing Page*/
 .brief-explanation {
   background: url("../images/lamp_idea_1-50.png");
@@ -608,6 +708,30 @@ transition-delay: 0.7s;
     align-items: center;
   }
 }
+@media (max-width: 776px){
+  .nav-link.active:hover {
+    border-right: 0px;
+  }
+
+  .nav-link.active {
+    border-right: 0px;
+  }
+
+
+  .nav-item:hover{
+    border-right: 0px;
+
+  }
+}
+
+
+@media (max-width: 400px) {
+  .permission-error img{
+    width: 220px;
+    height: 430px;
+    display: block;
+  }
+}
 @media (min-width: 481px) and (max-width: 767px) {
   .functionality {
     background-position-x: 50%;
@@ -700,4 +824,41 @@ transition-delay: 0.7s;
   margin-bottom: 10px;
   border-top-left-radius: 0;
   border-top-right-radius: 0;
+}
+
+.idea-detail-summary {
+  padding: 25px;
+  color: #7a7979;
+}
+
+.idea-detail-summary p{
+  font-size: 20px
+}
+.like{
+  color: #28a745;
+}
+
+.dislike {
+  color: #dc3545;
+}
+
+.like, .dislike, .comments, .share {
+  font-size:90% !important
+}
+
+.comments{
+  color: #1279e0;
+}
+
+.button-card-idea {
+  font-size: .700rem;
+}
+
+.card-footer {
+  padding-top: 0.35rem;
+  padding-bottom: 0.35rem;
+}
+
+#evaluation_form label {
+  font-weight: bold;
 }

@@ -21,6 +21,17 @@ from django.http import HttpResponse
 from django.template.loader import get_template
 from django.template import Context
 from django.conf import settings
+from django.contrib.auth.models import Group, Permission
+from django.contrib.auth.decorators import permission_required
+from django.core import mail
+from django.core.mail import EmailMessage
+from .mail_util import Mail_Util
+from .report_util import generate_pdf_report
+import mistune
+from .util import get_ip
+
+
+mail_util = Mail_Util()
 
 def index(request):
     if request.user.is_authenticated:
@@ -39,14 +50,13 @@ def accept_use_term(request):
         user_profile = UserProfile.objects.get(user=request.user)
         user_profile.use_term_accept = True
         user_profile.acceptance_date = timezone.localtime(timezone.now())
-        user_profile.ip = request.META.get('REMOTE_ADDR')
+        user_profile.ip = get_ip(request)
         user_profile.save()
         messages.success(request, _('Term of use accepted!'))
     else:
         messages.success(request, _('Term of use already accepted!'))
 
     return redirect('index')
-
 
 @login_required
 def idea_list(request):
@@ -63,24 +73,23 @@ def get_ideas_init(request):
     ideas_dic['ideas_created_by_me'] = get_ideas_created(request)
     return ideas_dic
 
-
 def get_phases():
     phase_dic = dict()
     phase_dic['phases'] = Phase.choices()
     return phase_dic
 
-
 def idea_filter(request, phase_pk):
-    if phase_pk == 0:
-        filtered_phases = Phase_History.objects.filter(current=1)
-    else:
-        filtered_phases = Phase_History.objects.filter(current_phase=phase_pk, current=1)
+    #if phase_pk == 0:
+    #    filtered_phases = Phase_History.objects.filter(current=1)
+    #else:
+    #    filtered_phases = Phase_History.objects.filter(current_phase=phase_pk, current=1)
 
-    ideas = [];
-    for phase in filtered_phases:
-        if phase.idea.discarded == False:
-            ideas.append(phase.idea)
-    ideas.sort(key=lambda idea:idea.creation_date)
+    #ideas = [];
+    #for phase in filtered_phases:
+    #    if phase.idea.discarded == False:
+    #        ideas.append(phase.idea)
+    #ideas.sort(key=lambda idea:idea.creation_date)
+    ideas =  Idea.objects.filter(discarded=False, phase_history__current_phase=phase_pk, phase_history__current=1).annotate(count_like=Count(Case(When(popular_vote__like = True, then=1)))).order_by('-count_like')
     context={'ideas': ideas,
              'ideas_liked': get_ideas_voted(request, True),
              'ideas_disliked': get_ideas_voted(request, False),
@@ -88,11 +97,12 @@ def idea_filter(request, phase_pk):
 
     data = dict()
     data['html_idea_list'] = render_to_string('ideax/idea_list_loop.html', context, request=request)
+    data['empty'] = 0
 
     if not ideas:
         data['html_idea_list'] = render_to_string('ideax/includes/empty.html', request=request)
+        data['empty'] = 1
     return JsonResponse(data)
-
 
 @login_required
 def save_idea(request, form, template_name, new=False):
@@ -124,6 +134,7 @@ def save_idea(request, form, template_name, new=False):
     return render(request, template_name, {'form': form})
 
 @login_required
+@permission_required('ideax.add_idea',raise_exception=True)
 def idea_new(request):
     if request.method == "POST":
         form = IdeaForm(request.POST)
@@ -132,10 +143,12 @@ def idea_new(request):
     return save_idea(request, form, 'ideax/idea_new.html', True)
 
 @login_required
+@permission_required('ideax.change_idea',raise_exception=True)
 def idea_edit(request, pk):
     idea = get_object_or_404(Idea, pk=pk)
 
-    if request.user.userprofile == idea.author or request.user.userprofile.manager:
+    if ((request.user.userprofile == idea.author and idea.get_current_phase() == Phase.GROW)
+                    or request.user.has_perm(settings.PERMISSIONS["MANAGE_IDEA"])):
         if request.method == "POST":
             form = IdeaForm(request.POST, instance=idea)
         else:
@@ -147,11 +160,13 @@ def idea_edit(request, pk):
         return redirect('index')
 
 @login_required
+@permission_required('ideax.delete_idea',raise_exception=True)
 def idea_remove(request, pk):
     idea = get_object_or_404(Idea, pk=pk)
     data = dict()
 
-    if ((request.user.userprofile == idea.author or request.user.userprofile.manager) and request.is_ajax()):
+    if ((request.user.userprofile == idea.author and idea.get_current_phase() == Phase.GROW)
+                    or request.user.has_perm(settings.PERMISSIONS["MANAGE_IDEA"])):
         if request.method == 'POST':
             idea.discarded = True
             idea.save()
@@ -170,6 +185,7 @@ def idea_remove(request, pk):
         return redirect('index')
 
 @login_required
+@permission_required('ideax.add_criterion',raise_exception=True)
 def criterion_new(request):
     if request.method == "POST":
         form = CriterionForm(request.POST)
@@ -183,11 +199,13 @@ def criterion_new(request):
     return render(request, 'ideax/criterion_edit.html', {'form': form})
 
 @login_required
+@permission_required('ideax.add_criterion',raise_exception=True)
 def criterion_list(request):
     criterion = Criterion.objects.all()
     return render(request, 'ideax/criterion_list.html', {'criterions': criterion})
 
 @login_required
+@permission_required('ideax.change_criterion',raise_exception=True)
 def criterion_edit(request, pk):
     criterion = get_object_or_404(Criterion, pk=pk)
     if request.method == "POST":
@@ -201,6 +219,7 @@ def criterion_edit(request, pk):
     return render(request, 'ideax/criterion_edit.html', {'form': form})
 
 @login_required
+@permission_required('ideax.add_evaluation',raise_exception=True)
 def idea_evaluation(request, idea_pk):
     valuator = UserProfile.objects.get(user=request.user)
     idea = get_object_or_404(Idea, pk=idea_pk)
@@ -263,6 +282,8 @@ def open_category_new(request, ):
                                          request=request,)
     return JsonResponse(data)
 
+@login_required
+@permission_required('ideax.add_category',raise_exception=True)
 def category_new(request):
     if request.method == "POST":
         form = CategoryForm(request.POST)
@@ -292,6 +313,7 @@ def save_category(request, template_name, form):
     return JsonResponse(data)
 
 @login_required
+@permission_required('ideax.change_category',raise_exception=True)
 def category_edit(request, pk):
     category = get_object_or_404(Category, pk=pk)
     if request.method == "POST":
@@ -301,6 +323,8 @@ def category_edit(request, pk):
 
     return save_category(request,'ideax/category_edit.html',form)
 
+@login_required
+@permission_required('ideax.delete_category',raise_exception=True)
 def category_remove(request, pk):
     category = get_object_or_404(Category, pk=pk)
     data = dict()
@@ -326,6 +350,7 @@ def get_category_list():
     return {'category_list': Category.objects.filter(discarded=False)}
 
 @login_required
+@permission_required('ideax.add_popular_vote',raise_exception=True)
 def like_popular_vote(request, pk):
     user = UserProfile.objects.get(user=request.user)
     vote = Popular_Vote.objects.filter(voter=user,idea__pk=pk)
@@ -369,6 +394,7 @@ def get_ideas_created(request):
     return ideas_created
 
 @login_required
+@permission_required('ideax.add_phase_history',raise_exception=True)
 def change_idea_phase(request, pk, new_phase):
     idea = Idea.objects.get(pk=pk)
     phase = Phase.get_phase_by_id(new_phase)
@@ -386,13 +412,16 @@ def change_idea_phase(request, pk, new_phase):
                                           current=True)
         phase_history_new.save()
         messages.success(request, _('Phase change successfully!'))
+        context = {}
+        context['idea'] = idea
+        mail_util.send_mail(mail_util.generate_messages("[IdeiaX] - " + str(_('Phase change')), 'ideax/phase_change_email.html', context, [idea.author.user.email]))
 
     return redirect('index')
 
 @login_required
 def idea_detail(request, pk):
     idea = get_object_or_404(Idea, pk=pk)
-    comments = idea.comment_set.all()
+    comments = idea.comment_set.filter(deleted=False);
 
     data = dict()
     data["comments"] = comments
@@ -420,7 +449,8 @@ def idea_detail(request, pk):
 
     return render(request, 'ideax/idea_detail.html', data)
 
-
+@login_required
+@permission_required('ideax.add_comment',raise_exception=True)
 def post_comment(request):
     if not request.user.is_authenticated:
         return JsonResponse({'msg': _("You need to log in to post new comments.")}, status=500)
@@ -444,11 +474,12 @@ def post_comment(request):
     idea = Idea.objects.get(id=idea_id)
 
     comment = Comment(author=author,
-                      raw_comment=raw_comment,
+                      raw_comment=mistune.markdown(raw_comment),
                       parent=parent_object,
                       idea=idea,
                       date=timezone.now(),
-                      comment_phase=idea.get_current_phase().id)
+                      comment_phase=idea.get_current_phase().id,
+                      ip=get_ip(request))
 
     comment.save()
     return JsonResponse({"msg" : _("Your comment has been posted.")})
@@ -463,3 +494,17 @@ def idea_comments(request, pk):
 def get_term_of_user(request):
     term = Use_Term.objects.get(final_date__isnull=True)
     return JsonResponse({"term" : term.term })
+
+def idea_detail_pdf(request, idea_id):
+    idea = Idea.objects.get(pk=idea_id)
+    data = dict()
+    initial = collections.OrderedDict()
+    data['idea'] = idea
+    for i in idea.evaluation_set.all().order_by('dimension__id'):
+        initial[EvaluationForm.FORMAT_ID % i.dimension.pk] = i
+
+    data['evaluation_detail']= initial
+    pdf_file = generate_pdf_report('ideax/ftec.html', request.build_absolute_uri(), data)
+    response = HttpResponse(pdf_file, content_type='application/pdf')
+    response['Content-Disposition'] = 'filename="idea_report.pdf"'
+    return response
