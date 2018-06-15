@@ -1,4 +1,6 @@
-{% extends 'ideax/base.html' %} {% load i18n %} {% block content %}
+{% extends 'ideax/base.html' %}
+{% load i18n staticfiles %}
+{% block content %}
 <div class="idea-list-bg" id="idea-title">
   <h1 class="display-3 desktop-title
     {% if idea.title|length <= 70 %}
@@ -7,7 +9,7 @@
       medium-title
     {% else %}
       small-title
-    {% endif %} 
+    {% endif %}
   ">{{ idea.title }}</h1>
 </div>
 <div class="container">
@@ -31,11 +33,12 @@
       <p>
         <a href="#">
           <small class="text-muted">{% trans 'By' %}
-            <span id="real-author"></span>@{{idea.author.user}}</small>
+          <span id="real-author"></span>@{{idea.author.user}}</small>
         </a>
       </p>
+      <span class="badge badge-secondary">{{ idea.get_current_phase.description }}</span>
       <div class="like-menu">
-        <span class="badge badge-secondary">{{ idea.get_current_phase.description }}</span>
+
         <a class="like badge" onclick="vote('{% url 'like_ideia' pk=idea.pk %}', '.liked_idea_{{idea.id}}', '.disliked_idea_{{idea.id}}', '.like_{{idea.id}}', '.dislike_{{idea.id}}')"
           href="javascript:void(0)">
 
@@ -52,13 +55,20 @@
             {{ idea.count_dislikes }}
           </span>
         </a>
-        <a href="javascript:void(0);" class="badge share">
-          <i class="fas fa-share-alt"></i>
-          <span>
-            0
-          </span>
+        <!--
+        <a href="{% url 'idea_detail_pdf' idea_id=idea.pk %}" class="badge share">
+          <i class="fas fa-download"></i>
+        </a>
+      -->
+      </div>
+      {%if perms.ideax.manage_idea %}
+      <div>
+        <a href="{% url 'idea_detail_pdf' idea_id=idea.pk %}" role="button" aria-pressed="true" class="btn btn-outline-info btn-sm" target="_blank">
+          <i class="fas fa-download"></i> {% trans 'Technical details' %}
         </a>
       </div>
+      {%endif%}
+
     </div>
     <!-- Idea Information -->
     <div class="col-md-9">
@@ -116,6 +126,9 @@
                 <div class="col-lg-12">
                   <textarea class="form-control" rows="3" id="commentContent"></textarea>
                 </div>
+              </div>
+              <div class="col-lg-12">
+                <img src="{% static 'images/markdown.png' %}"/> <a href="http://bit.ly/2HRRaym" target="_blank"><span style="font-size: 12px;">{%trans 'Support Markdown'%}</span></a>
               </div>
               <div class="form-group">
                 <div class="col-lg-12 text-right">

@@ -121,6 +121,13 @@ class Idea(models.Model):
         return Phase.get_phase_by_id(self.phase_history_set.get(current=True).current_phase)
     def get_absolute_url(self):
         return "/idea/%i/" % self.id
+    def get_approval_rate(self):
+        sum = self.count_likes() + self.count_dislikes()
+        if sum > 0:
+            return self.count_likes()/sum*100
+        else:
+            return 0
+
 
 class Vote(models.Model):
     evaluation_item = models.ForeignKey(Evaluation_Item,on_delete=models.PROTECT)
@@ -144,6 +151,7 @@ class Comment(MPTTModel):
     date = models.DateTimeField()
     comment_phase = models.PositiveSmallIntegerField()
     deleted = models.BooleanField(default=False)
+    ip = models.CharField(max_length=20, null=True)
 
     class MPTTMeta:
         order_insertion_by = ['-date']

@@ -23,6 +23,15 @@ from django.template import Context
 from django.conf import settings
 from django.contrib.auth.models import Group, Permission
 from django.contrib.auth.decorators import permission_required
+from django.core import mail
+from django.core.mail import EmailMessage
+from .mail_util import Mail_Util
+from .report_util import generate_pdf_report
+import mistune
+from .util import get_ip
+
+
+mail_util = Mail_Util()
 
 def index(request):
     if request.user.is_authenticated:
@@ -41,14 +50,13 @@ def accept_use_term(request):
         user_profile = UserProfile.objects.get(user=request.user)
         user_profile.use_term_accept = True
         user_profile.acceptance_date = timezone.localtime(timezone.now())
-        user_profile.ip = request.META.get('REMOTE_ADDR')
+        user_profile.ip = get_ip(request)
         user_profile.save()
         messages.success(request, _('Term of use accepted!'))
     else:
         messages.success(request, _('Term of use already accepted!'))
 
     return redirect('index')
-
 
 @login_required
 def idea_list(request):
@@ -71,16 +79,17 @@ def get_phases():
     return phase_dic
 
 def idea_filter(request, phase_pk):
-    if phase_pk == 0:
-        filtered_phases = Phase_History.objects.filter(current=1)
-    else:
-        filtered_phases = Phase_History.objects.filter(current_phase=phase_pk, current=1)
+    #if phase_pk == 0:
+    #    filtered_phases = Phase_History.objects.filter(current=1)
+    #else:
+    #    filtered_phases = Phase_History.objects.filter(current_phase=phase_pk, current=1)
 
-    ideas = [];
-    for phase in filtered_phases:
-        if phase.idea.discarded == False:
-            ideas.append(phase.idea)
-    ideas.sort(key=lambda idea:idea.creation_date)
+    #ideas = [];
+    #for phase in filtered_phases:
+    #    if phase.idea.discarded == False:
+    #        ideas.append(phase.idea)
+    #ideas.sort(key=lambda idea:idea.creation_date)
+    ideas =  Idea.objects.filter(discarded=False, phase_history__current_phase=phase_pk, phase_history__current=1).annotate(count_like=Count(Case(When(popular_vote__like = True, then=1)))).order_by('-count_like')
     context={'ideas': ideas,
              'ideas_liked': get_ideas_voted(request, True),
              'ideas_disliked': get_ideas_voted(request, False),
@@ -403,13 +412,16 @@ def change_idea_phase(request, pk, new_phase):
                                           current=True)
         phase_history_new.save()
         messages.success(request, _('Phase change successfully!'))
+        context = {}
+        context['idea'] = idea
+        mail_util.send_mail(mail_util.generate_messages("[IdeiaX] - " + str(_('Phase change')), 'ideax/phase_change_email.html', context, [idea.author.user.email]))
 
     return redirect('index')
 
 @login_required
 def idea_detail(request, pk):
     idea = get_object_or_404(Idea, pk=pk)
-    comments = idea.comment_set.all()
+    comments = idea.comment_set.filter(deleted=False);
 
     data = dict()
     data["comments"] = comments
@@ -462,11 +474,12 @@ def post_comment(request):
     idea = Idea.objects.get(id=idea_id)
 
     comment = Comment(author=author,
-                      raw_comment=raw_comment,
+                      raw_comment=mistune.markdown(raw_comment),
                       parent=parent_object,
                       idea=idea,
                       date=timezone.now(),
-                      comment_phase=idea.get_current_phase().id)
+                      comment_phase=idea.get_current_phase().id,
+                      ip=get_ip(request))
 
     comment.save()
     return JsonResponse({"msg" : _("Your comment has been posted.")})
@@ -481,3 +494,17 @@ def idea_comments(request, pk):
 def get_term_of_user(request):
     term = Use_Term.objects.get(final_date__isnull=True)
     return JsonResponse({"term" : term.term })
+
+def idea_detail_pdf(request, idea_id):
+    idea = Idea.objects.get(pk=idea_id)
+    data = dict()
+    initial = collections.OrderedDict()
+    data['idea'] = idea
+    for i in idea.evaluation_set.all().order_by('dimension__id'):
+        initial[EvaluationForm.FORMAT_ID % i.dimension.pk] = i
+
+    data['evaluation_detail']= initial
+    pdf_file = generate_pdf_report('ideax/ftec.html', request.build_absolute_uri(), data)
+    response = HttpResponse(pdf_file, content_type='application/pdf')
+    response['Content-Disposition'] = 'filename="idea_report.pdf"'
+    return response

@@ -4,7 +4,7 @@
 
 <html>
     <head>
-        <title>Ideia X</title>
+        <title>Ideia X {%if idea %} #{{idea.id}} - {{idea.category.title}} {%endif%}</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <!-- <link rel="stylesheet" href="{% static 'css/idea.css' %}"> -->
         <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
@@ -85,7 +85,7 @@
             <div class="modal-footer">
               <a type="button" href="{% url 'logout' %}" class="btn btn-light">{% trans 'Cancel' %}</a>
               <a type="button" href="{% url 'accept_term' %}" class="btn btn-success">{% trans 'Accept' %}</a>
-              
+
             </div>
           </div>
         </div>

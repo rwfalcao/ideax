@@ -199,6 +199,11 @@ border-radius: 2px;
 
 }
 
+.like-menu{
+  margin-bottom: 15px;
+  margin-top: 15px;
+}
+
 .permission-error{
   display: flex;
   flex-direction: column;
@@ -237,7 +242,7 @@ border-radius: 2px;
 
 #modal-term #modal-term-text{
   overflow-y: auto;
-  
+
 }
 #modal-term .modal-dialog{
   max-width: 800px;
@@ -250,7 +255,7 @@ border-radius: 2px;
   border-left: solid 4px #0056b3;
   border-radius: 0px;
 }
-  
+
 .phase-list .nav-link.active:hover {
   border-left: solid 0px #0056b3;
 }
@@ -263,7 +268,7 @@ border-radius: 2px;
 
 .phase-list .nav.phase-filter{
   background-color: #fff;
-  
+
 }
 
 
@@ -711,11 +716,11 @@ transition-delay: 0.7s;
   .nav-link.active {
     border-right: 0px;
   }
-  
-  
+
+
   .nav-item:hover{
     border-right: 0px;
-    
+
   }
 }
 

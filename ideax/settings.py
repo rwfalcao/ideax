@@ -182,4 +182,22 @@ EMAIL_HOST_USER = config('EMAIL_HOST_USER', default='')
 EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD', default='')
 EMAIL_USE_TLS = config('EMAIL_USE_TLS', default=0, cast=bool)
 EMAIL_USE_SSL = config('EMAIL_USE_SSL', default=0, cast=bool)
-EMAIL_BACKEND = config('EMAIL_BACKEND', default='')
+
+if config('EMAIL_BACKEND', default='') != '':
+    EMAIL_BACKEND = config('EMAIL_BACKEND', default='')
+
+if config('DEFAULT_FROM_EMAIL', default='') != '':
+    DEFAULT_FROM_EMAIL=config('DEFAULT_FROM_EMAIL')
+
+IPWARE_META_PRECEDENCE_ORDER = (
+    'HTTP_X_FORWARDED_FOR',
+    'REMOTE_ADDR',
+    'HTTP_X_FORWARDED',
+    'HTTP_CLIENT_IP',
+    'HTTP_X_REAL_IP',
+    'X_FORWARDED_FOR',
+    'HTTP_X_CLUSTER_CLIENT_IP',
+    'HTTP_FORWARDED_FOR',
+    'HTTP_FORWARDED',
+    'HTTP_VIA',
+)
