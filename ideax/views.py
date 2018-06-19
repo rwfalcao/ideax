@@ -37,10 +37,10 @@ mail_util = Mail_Util()
 
 def audit(username, ip_addr, operation, className, objectId):
     logger.info(
-        '%(username)s|%(ip_addr)s|%(operation)s|%(className)s|%(objectId)s', 
-        { 
-            'username': username, 
-            'ip_addr': ip_addr, 
+        '%(username)s|%(ip_addr)s|%(operation)s|%(className)s|%(objectId)s',
+        {
+            'username': username,
+            'ip_addr': ip_addr,
             'operation': operation,
             'className': className,
             'objectId': objectId
@@ -52,12 +52,6 @@ def index(request):
         audit(request.user.username, get_client_ip(request), 'LIST_IDEAS_PAGE', Idea.__name__, '')
         return idea_list(request)
     return render(request, 'ideax/index.html')
-
-def get_page_body(boxes):
-    for box in boxes:
-        if box.element_tag == 'body':
-            return box
-        return get_page_body(box.all_children())
 
 @login_required
 def accept_use_term(request):
@@ -97,16 +91,6 @@ def get_phases():
     return phase_dic
 
 def idea_filter(request, phase_pk):
-    #if phase_pk == 0:
-    #    filtered_phases = Phase_History.objects.filter(current=1)
-    #else:
-    #    filtered_phases = Phase_History.objects.filter(current_phase=phase_pk, current=1)
-
-    #ideas = [];
-    #for phase in filtered_phases:
-    #    if phase.idea.discarded == False:
-    #        ideas.append(phase.idea)
-    #ideas.sort(key=lambda idea:idea.creation_date)
     ideas =  Idea.objects.filter(discarded=False, phase_history__current_phase=phase_pk, phase_history__current=1).annotate(count_like=Count(Case(When(popular_vote__like = True, then=1)))).order_by('-count_like')
     context={'ideas': ideas,
              'ideas_liked': get_ideas_voted(request, True),
@@ -147,9 +131,9 @@ def save_idea(request, form, template_name, new=False):
             else:
                 idea.save()
             messages.success(request, _('Idea saved successfully!'))
-            
+
             audit(request.user.username, get_client_ip(request), 'SAVE_IDEA_OPERATION', Idea.__name__, str(idea.id))
-            
+
             return redirect('idea_list')
 
     return render(request, template_name, {'form': form})
@@ -163,7 +147,7 @@ def idea_new(request):
         form = IdeaForm()
 
     audit(request.user.username, get_client_ip(request), 'CREATE_IDEA_FORM', Idea.__name__, '')
-    
+
     return save_idea(request, form, 'ideax/idea_new.html', True)
 
 @login_required
@@ -177,9 +161,9 @@ def idea_edit(request, pk):
             form = IdeaForm(request.POST, instance=idea)
         else:
             form = IdeaForm(instance=idea)
-        
+
         audit(request.user.username, get_client_ip(request), 'EDIT_IDEA_FORM', Idea.__name__, str(idea.id))
-        
+
         return save_idea(request, form, 'ideax/idea_edit.html')
     else:
         messages.error(request, _('Not supported action'))
@@ -206,7 +190,7 @@ def idea_remove(request, pk):
                                                  request=request,)
 
         audit(request.user.username, get_client_ip(request), 'REMOVE_IDEA_CONFIRMATION', Idea.__name__, str(idea.id))
-        
+
         return JsonResponse(data)
     else:
         messages.error(request, _('Not supported action'))
@@ -315,7 +299,7 @@ def criterion_remove(request, pk):
     criterion.delete()
 
     audit(request.user.username, get_client_ip(request), 'REMOVE_CRITERION_SAVE', Criterion.__name__, str(pk))
-    
+
     return redirect('criterion_list')
 
 def open_category_new(request, ):
@@ -413,8 +397,8 @@ def like_popular_vote(request, pk):
         audit(request.user.username, get_client_ip(request), 'LIKE_SAVE', Popular_Vote.__name__, str(like.id))
     else:
         if vote[0].like == like_boolean:
+            audit(request.user.username, get_client_ip(request), 'DISLIKE_SAVE', Popular_Vote.__name__, str(vote[0].id))
             vote.delete()
-            audit(request.user.username, get_client_ip(request), 'DISLIKE_SAVE', Popular_Vote.__name__, str(vote.id))
             like_boolean = None
         else:
             vote.update(like=like_boolean)
@@ -536,7 +520,7 @@ def post_comment(request):
                       idea=idea,
                       date=timezone.now(),
                       comment_phase=idea.get_current_phase().id,
-                      ip=get_client_ip(request))
+                      ip=get_ip(request))
 
     comment.save()
     audit(request.user.username, get_client_ip(request), 'COMMENT_SAVE', Comment.__name__, str(comment.id))
