@@ -7,7 +7,7 @@ pytz==2017.3
 Pillow==5.1.0
 wordfilter==0.2.6.2
 django-celery==3.2.2
-django-celery-email==2.0.0
+django-celery-email<2.0.0
 WeasyPrint==0.42.3
 mistune==0.8.3
 django-ipware==2.1.0

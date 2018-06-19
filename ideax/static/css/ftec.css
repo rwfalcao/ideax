@@ -6,9 +6,8 @@
 }
 
 body,html{
-  font-family: serif !important;
+  font-family: "Apple Garamond", "Baskerville", "Times New Roman", "Droid Serif", "Times", "Source Serif Pro", serif !important;
   width: 100%;
-
 }
 
 .wrapper{
@@ -25,6 +24,10 @@ body,html{
   width: 140px;
   padding-bottom: 20px;
   position: absolute;
+}
+
+.document {
+  page-break-after: always;
 }
 
 .ftec-header{
@@ -56,11 +59,12 @@ body,html{
 }
 
 .doc-title{
-  font-size: 18px;
+  font-size: 1.9em;
   font-weight: bold;
   text-align: center;
   margin-top: 40px;
   margin-bottom: 50px;
+  text-transform: uppercase;
 }
 
 .general-info .info h3,
@@ -68,15 +72,24 @@ body,html{
   font-size: 17px;
   font-weight: bold;
   text-transform: uppercase;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.4);
 }
 
 .general-info .info{
-  border-bottom: 1px solid rgba(1,1,1,0.4);
-  margin-bottom: 20px;
+  /* border-bottom: 1px solid rgba(1,1,1,0.4); */
+  margin-bottom: 40px;
 }
 
-.extra-info{
+.info p {
+  text-align: justify;
+}
+
+.extra-info {
   font-size: 15px;
+}
+
+.extra-info dl {
+  padding-left: 50px;
 }
 
 h3.att-title,
@@ -103,7 +116,7 @@ h3.att-score{
 }
 
 .att-id{
-  font-size: 15px;
+  font-size: 20px;
   text-align: center;
   text-transform: uppercase;
 }
@@ -115,6 +128,7 @@ h3.att-score{
 .eval{
   font-size: 14px;
   margin: 30px 0;
+  text-align: center;
 }
 
 .eval p{
@@ -123,6 +137,8 @@ h3.att-score{
 
 .eval ul{
   margin-left: 45px;
+  list-style: none;
+  padding: 0;
 }
 
 .att-score{

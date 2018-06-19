@@ -26,15 +26,30 @@ from django.contrib.auth.decorators import permission_required
 from django.core import mail
 from django.core.mail import EmailMessage
 from .mail_util import Mail_Util
-from .report_util import generate_pdf_report
 import mistune
-from .util import get_ip
+from .util import get_ip, get_client_ip
+import logging
 
+# Creating log object
+logger = logging.getLogger('audit_log')
 
 mail_util = Mail_Util()
 
+def audit(username, ip_addr, operation, className, objectId):
+    logger.info(
+        '%(username)s|%(ip_addr)s|%(operation)s|%(className)s|%(objectId)s', 
+        { 
+            'username': username, 
+            'ip_addr': ip_addr, 
+            'operation': operation,
+            'className': className,
+            'objectId': objectId
+        }
+    )
+
 def index(request):
     if request.user.is_authenticated:
+        audit(request.user.username, get_client_ip(request), 'LIST_IDEAS_PAGE', Idea.__name__, '')
         return idea_list(request)
     return render(request, 'ideax/index.html')
 
@@ -53,9 +68,12 @@ def accept_use_term(request):
         user_profile.ip = get_ip(request)
         user_profile.save()
         messages.success(request, _('Term of use accepted!'))
+        #logger.info('%(username)s|%(ip_addr)s|%(message)s', { 'username': request.user.username, 'ip_addr': get_client_ip(request), 'message': 'Term of use accepted!'})
     else:
         messages.success(request, _('Term of use already accepted!'))
+        #logger.info('%(username)s|%(ip_addr)s|%(message)s', { 'username': request.user.username, 'ip_addr': get_client_ip(request), 'message': 'Term of use already accepted!'})
 
+    audit(request.user.username, get_client_ip(request), 'ACCEPT_TERMS_OF_USE_OPERATION', UserProfile.__name__, '')
     return redirect('index')
 
 @login_required
@@ -129,6 +147,9 @@ def save_idea(request, form, template_name, new=False):
             else:
                 idea.save()
             messages.success(request, _('Idea saved successfully!'))
+            
+            audit(request.user.username, get_client_ip(request), 'SAVE_IDEA_OPERATION', Idea.__name__, str(idea.id))
+            
             return redirect('idea_list')
 
     return render(request, template_name, {'form': form})
@@ -140,6 +161,9 @@ def idea_new(request):
         form = IdeaForm(request.POST)
     else:
         form = IdeaForm()
+
+    audit(request.user.username, get_client_ip(request), 'CREATE_IDEA_FORM', Idea.__name__, '')
+    
     return save_idea(request, form, 'ideax/idea_new.html', True)
 
 @login_required
@@ -153,7 +177,9 @@ def idea_edit(request, pk):
             form = IdeaForm(request.POST, instance=idea)
         else:
             form = IdeaForm(instance=idea)
-
+        
+        audit(request.user.username, get_client_ip(request), 'EDIT_IDEA_FORM', Idea.__name__, str(idea.id))
+        
         return save_idea(request, form, 'ideax/idea_edit.html')
     else:
         messages.error(request, _('Not supported action'))
@@ -179,6 +205,8 @@ def idea_remove(request, pk):
                                                  context,
                                                  request=request,)
 
+        audit(request.user.username, get_client_ip(request), 'REMOVE_IDEA_CONFIRMATION', Idea.__name__, str(idea.id))
+        
         return JsonResponse(data)
     else:
         messages.error(request, _('Not supported action'))
@@ -192,6 +220,9 @@ def criterion_new(request):
         if form.is_valid():
             criterion = form.save(commit=False)
             criterion.save()
+
+            audit(request.user.username, get_client_ip(request), 'CREATE_NEW_CRITERION_OPERATION', Criterion.__name__, str(criterion.id))
+
             return redirect('criterion_list')
     else:
         form = CriterionForm()
@@ -202,6 +233,7 @@ def criterion_new(request):
 @permission_required('ideax.add_criterion',raise_exception=True)
 def criterion_list(request):
     criterion = Criterion.objects.all()
+    audit(request.user.username, get_client_ip(request), 'CRITERION_LIST', Criterion.__name__, '')
     return render(request, 'ideax/criterion_list.html', {'criterions': criterion})
 
 @login_required
@@ -213,9 +245,13 @@ def criterion_edit(request, pk):
         if form.is_valid():
             criterion = form.save(commit=False)
             criterion.save()
+
+            audit(request.user.username, get_client_ip(request), 'EDIT_CRITERION_SAVE', Criterion.__name__, str(criterion.id))
+
             return redirect('criterion_list')
     else:
         form = CriterionForm(instance=criterion)
+
     return render(request, 'ideax/criterion_edit.html', {'form': form})
 
 @login_required
@@ -254,9 +290,14 @@ def idea_evaluation(request, idea_pk):
 
                 evaluation.save()
 
+                audit(request.user.username, get_client_ip(request), 'CREATE_EVALUATION_SAVE', Evaluation.__name__, str(evaluation.id))
+
             idea_score = soma/divisor
             idea.score = idea_score
             idea.save()
+
+            audit(request.user.username, get_client_ip(request), 'EDIT_IDEA_EVALUATION_SAVE', Idea.__name__, str(idea.id))
+
             data['score_value'] = idea_score
         else:
             data["msg"] = _("Something went wrong or you're not allowed!")
@@ -272,6 +313,9 @@ def criterion_remove(request, pk):
     criterion = get_object_or_404(Criterion, pk=pk)
 
     criterion.delete()
+
+    audit(request.user.username, get_client_ip(request), 'REMOVE_CRITERION_SAVE', Criterion.__name__, str(pk))
+    
     return redirect('criterion_list')
 
 def open_category_new(request, ):
@@ -301,6 +345,9 @@ def save_category(request, template_name, form):
         if form.is_valid():
             category = form.save(commit=False)
             category.save()
+
+            audit(request.user.username, get_client_ip(request), 'CATEGORY_SAVE', Category.__name__, str(category.id))
+
             data['form_is_valid'] = True
         else:
             data['form_is_valid'] = False
@@ -331,6 +378,7 @@ def category_remove(request, pk):
     if request.method == 'POST':
         category.discarded = True
         category.save()
+        audit(request.user.username, get_client_ip(request), 'REMOVE_CATEGORY_SAVE', Category.__name__, str(category.id))
         data['form_is_valid'] = True
         data['html_list'] = render_to_string('ideax/includes/partial_category_list.html',
                                              get_category_list())
@@ -343,6 +391,7 @@ def category_remove(request, pk):
     return JsonResponse(data)
 
 def category_list(request):
+    audit(request.user.username, get_client_ip(request), 'CATEGORY_LIST', Category.__name__, '')
     return render(request, 'ideax/category_list.html', get_category_list())
 
 
@@ -361,9 +410,11 @@ def like_popular_vote(request, pk):
     if vote.count() == 0:
         like = Popular_Vote(like=like_boolean,voter=user,voting_date=timezone.now(),idea=idea_)
         like.save()
+        audit(request.user.username, get_client_ip(request), 'LIKE_SAVE', Popular_Vote.__name__, str(like.id))
     else:
         if vote[0].like == like_boolean:
             vote.delete()
+            audit(request.user.username, get_client_ip(request), 'DISLIKE_SAVE', Popular_Vote.__name__, str(vote.id))
             like_boolean = None
         else:
             vote.update(like=like_boolean)
@@ -411,6 +462,7 @@ def change_idea_phase(request, pk, new_phase):
                                           author=UserProfile.objects.get(user=request.user),
                                           current=True)
         phase_history_new.save()
+        audit(request.user.username, get_client_ip(request), 'CHANGE_PHASE_SAVE', Phase.__name__, str(phase_history_new.id))
         messages.success(request, _('Phase change successfully!'))
         context = {}
         context['idea'] = idea
@@ -484,9 +536,10 @@ def post_comment(request):
                       idea=idea,
                       date=timezone.now(),
                       comment_phase=idea.get_current_phase().id,
-                      ip=get_ip(request))
+                      ip=get_client_ip(request))
 
     comment.save()
+    audit(request.user.username, get_client_ip(request), 'COMMENT_SAVE', Comment.__name__, str(comment.id))
     return JsonResponse({"msg" : _("Your comment has been posted.")})
 
 def idea_comments(request, pk):
@@ -509,7 +562,9 @@ def idea_detail_pdf(request, idea_id):
         initial[EvaluationForm.FORMAT_ID % i.dimension.pk] = i
 
     data['evaluation_detail']= initial
-    pdf_file = generate_pdf_report('ideax/ftec.html', request.build_absolute_uri(), data)
-    response = HttpResponse(pdf_file, content_type='application/pdf')
-    response['Content-Disposition'] = 'filename="idea_report.pdf"'
-    return response
+    audit(request.user.username, get_client_ip(request), 'REPORT_GENERATE', Idea.__name__, str(idea.id))
+    return render(request, 'ideax/ftec.html', data)
+    #pdf_file = generate_pdf_report('ideax/ftec.html', request.build_absolute_uri(), data)
+    #response = HttpResponse('pdf_file', content_type='text/plain')
+    #response['Content-Disposition'] = 'filename="idea_report.txt"'
+    #return response
