@@ -8,6 +8,8 @@ from decouple import config
 import random
 from django.conf import settings
 from django.utils.translation import ugettext_lazy as _
+from django.contrib.auth.models import User, Group
+
 
 
 def check_user_profile(sender, user, request, **kwargs):
@@ -17,6 +19,7 @@ def check_user_profile(sender, user, request, **kwargs):
         user_profile = UserProfile()
         user_profile.user = request.user
         user_profile.save()
+        request.user.groups.add(Group.objects.get(name=settings.GENERAL_USER_GROUP))
 
 user_logged_in.connect(check_user_profile)
 

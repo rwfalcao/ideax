@@ -228,3 +228,5 @@ LOGGING = {
         }
     }
 }
+
+GENERAL_USER_GROUP=config('GENERAL_USER_GROUP')

@@ -1,7 +1,7 @@
-from ipware import get_client_ip
+from ipware import get_client_ip as get_client_ipware
 
 def get_ip(request):
-    client_ip, is_routable = get_client_ip(request)
+    client_ip, is_routable = get_client_ipware(request)
     if client_ip is None:
         # it's necessary LOG this information
         return request.META.get('REMOTE_ADDR')
