@@ -453,7 +453,6 @@ def change_idea_phase(request, pk, new_phase):
         try:
             mail_util.send_mail(mail_util.generate_messages("[IdeiaX] - " + str(_('Phase change')), 'ideax/phase_change_email.html', context, [idea.author.user.email]))
         except Exception as e:
-            # LOG this Exception
             pass
 
 
