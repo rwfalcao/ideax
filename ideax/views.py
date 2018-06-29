@@ -6,7 +6,7 @@ from django.template.loader import render_to_string
 from django.views.decorators.csrf import ensure_csrf_cookie, csrf_protect
 from django.views.decorators.http import require_http_methods
 from django.db.models import Count, Case, When
-from .models import Idea, Criterion,Popular_Vote, Phase, Phase_History,Category, Comment, UserProfile, Dimension, Evaluation, Category_Image, Use_Term
+from .models import Idea, Criterion,Popular_Vote, Phase, Phase_History,Category, Comment, UserProfile, Dimension, Evaluation, Category_Image, Use_Term, Challenge
 from .forms import IdeaForm, CriterionForm,IdeaFormUpdate, CategoryForm, EvaluationForm, EvaluationForm
 from .singleton import Profanity_Check
 from django import forms
@@ -83,6 +83,7 @@ def get_ideas_init(request):
     ideas_dic['ideas_liked'] = get_ideas_voted(request, True)
     ideas_dic['ideas_disliked'] = get_ideas_voted(request, False)
     ideas_dic['ideas_created_by_me'] = get_ideas_created(request)
+    ideas_dic['challenges'] = get_featured_challenges(request)
     return ideas_dic
 
 def get_phases():
@@ -551,3 +552,10 @@ def idea_detail_pdf(request, idea_id):
     #response = HttpResponse('pdf_file', content_type='text/plain')
     #response['Content-Disposition'] = 'filename="idea_report.txt"'
     #return response
+
+def get_featured_challenges(request):
+    return Challenge.objects.filter(active=True)
+
+def challenge_detail(request, challenge_pk):
+     challenge = get_object_or_404(Challenge, pk=challenge_pk)
+     return render(request, 'ideax/challenge_detail.html', {'challenge' : challenge, 'ideas': challenge.idea_set.all()})

@@ -858,3 +858,8 @@ transition-delay: 0.7s;
 #evaluation_form label {
   font-weight: bold;
 }
+
+#carouselExampleIndicators img {
+    width: 960px;
+    height: 200px;
+  }

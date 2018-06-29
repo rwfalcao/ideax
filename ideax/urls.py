@@ -39,6 +39,7 @@ urlpatterns = [
     path('feed/comment/latest',Comment_Feed()),
     path('feed/idea/latest', New_Idea_Feed()),
     path('report/idea/<int:idea_id>/detail/', views.idea_detail_pdf, name="idea_detail_pdf"),
+    path('challenge/<int:challenge_pk>/', views.challenge_detail, name="challenge_detail"),    
 
 ]
 
