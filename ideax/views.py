@@ -117,10 +117,14 @@ def save_idea(request, form, template_name, new=False):
                 idea.author = UserProfile.objects.get(user=request.user)
                 idea.creation_date = timezone.now()
                 idea.phase= Phase.GROW.id
-                category_image = Category_Image.get_random_image(idea.category)
+
 
                 if(idea.challenge):
                     idea.category = idea.challenge.category
+                    category_image = Category_Image.get_random_image(idea.challenge.category)
+                else:
+                    category_image = Category_Image.get_random_image(idea.category)
+
                 if category_image:
                     idea.category_image = category_image.image.url
 

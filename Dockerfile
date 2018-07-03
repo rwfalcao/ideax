@@ -7,9 +7,9 @@ RUN \
 
 RUN \
     cd /var/www; \
-    wget -q -O ideax.tar.gz https://github.com/dataprev/ideax/archive/challengefeature.tar.gz; \
+    wget -q -O ideax.tar.gz https://github.com/dataprev/ideax/archive/master.tar.gz; \
     tar xf ideax.tar.gz; \
-    mv ideax-challengefeature ideax; \
+    mv ideax-master ideax; \
     rm ideax.tar.gz; \
     cd ideax; \
     pip install -r docker/requeriments.txt
