@@ -7,11 +7,11 @@ body {
 }
 
 .idea-list-bg {
-    background-color: #A5DCF0;
-    background-image: url('https://pixabay.com/get/e834b30a28f5073ed1534705fb0938c9bd22ffd41cb2114797f0c67caf/light-bulbs-1125016_1920.jpg');
+    background-color: #004779;
+    background-image: url('../images/bg_ideia_azul_62.png');
     /* background-image: url('../images/science.png'); */
-    background-repeat: repeat-x;
-    background-position-y: bottom;
+    background-repeat: no-repeat;
+    background-position-y: 50%;
     /* background: #4b79a1;
     background: -webkit-linear-gradient(to right, #4b79a1, #283e51);
     background: linear-gradient(to right, #4b79a1, #283e51); */
@@ -22,17 +22,18 @@ body {
     /* background-position-y: center;
     background-size: cover; */
 
-    height: 200px;
+    height: 206px;
     margin-top: 0px;
     margin-left: -15px;
     margin-right: -15px;
     margin-bottom: 10px;
-    padding-top: 50px;
+    padding-top: 56px;
+    background-position: right;
 }
 .idea-list-bg h1 {
     font-family: 'Open Sans', sans;
     height: 150px;
-    padding-top: 40px;
+    padding-top: 25px;
     color: #fff;
     text-align: center;
     text-shadow: 0 1px 4px rgba(0,0,0,0.06);
@@ -45,12 +46,12 @@ body {
 .challenge-list-bg {
     background-color: #A5DCF0;
     background-image: url('../images/challenge_bg.jpg');
-    height: 200px;
+    height: 206px;
     margin-top: 0px;
     margin-left: -15px;
     margin-right: -15px;
     margin-bottom: 10px;
-    padding-top: 50px;
+    padding-top: 56px;
     background-position-x: 60%;
     background-position-y: 20%;
 }
@@ -911,4 +912,8 @@ transition-delay: 0.7s;
 }
 .carousel-challenge p {
   margin-bottom: 0px;
+}
+
+.nav-bg {
+  background-color: rgba(0, 0, 0, 0.8);
 }
