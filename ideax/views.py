@@ -6,8 +6,8 @@ from django.template.loader import render_to_string
 from django.views.decorators.csrf import ensure_csrf_cookie, csrf_protect
 from django.views.decorators.http import require_http_methods
 from django.db.models import Count, Case, When
-from .models import Idea, Criterion,Popular_Vote, Phase, Phase_History,Category, Comment, UserProfile, Dimension, Evaluation, Category_Image, Use_Term
-from .forms import IdeaForm, CriterionForm,IdeaFormUpdate, CategoryForm, EvaluationForm, EvaluationForm
+from .models import Idea, Criterion,Popular_Vote, Phase, Phase_History,Category, Comment, UserProfile, Dimension, Evaluation, Category_Image, Use_Term, Challenge
+from .forms import IdeaForm, CriterionForm,IdeaFormUpdate, CategoryForm, EvaluationForm, EvaluationForm, ChallengeForm
 from .singleton import Profanity_Check
 from django import forms
 from wordfilter import Wordfilter
@@ -83,6 +83,7 @@ def get_ideas_init(request):
     ideas_dic['ideas_liked'] = get_ideas_voted(request, True)
     ideas_dic['ideas_disliked'] = get_ideas_voted(request, False)
     ideas_dic['ideas_created_by_me'] = get_ideas_created(request)
+    ideas_dic['challenges'] = get_featured_challenges(request)
     return ideas_dic
 
 def get_phases():
@@ -116,7 +117,14 @@ def save_idea(request, form, template_name, new=False):
                 idea.author = UserProfile.objects.get(user=request.user)
                 idea.creation_date = timezone.now()
                 idea.phase= Phase.GROW.id
-                category_image = Category_Image.get_random_image(idea.category)
+
+
+                if(idea.challenge):
+                    idea.category = idea.challenge.category
+                    category_image = Category_Image.get_random_image(idea.challenge.category)
+                else:
+                    category_image = Category_Image.get_random_image(idea.category)
+
                 if category_image:
                     idea.category_image = category_image.image.url
 
@@ -551,3 +559,30 @@ def idea_detail_pdf(request, idea_id):
     #response = HttpResponse('pdf_file', content_type='text/plain')
     #response['Content-Disposition'] = 'filename="idea_report.txt"'
     #return response
+
+def get_featured_challenges(request):
+    return Challenge.objects.filter(active=True)
+
+@login_required
+def challenge_detail(request, challenge_pk):
+     challenge = get_object_or_404(Challenge, pk=challenge_pk)
+     return render(request, 'ideax/challenge_detail.html', {'challenge' : challenge, 'ideas': challenge.idea_set.all()})
+
+@login_required
+@permission_required('ideax.change_idea',raise_exception=True)
+def challenge_new(request):
+    form = ChallengeForm()
+
+    if request.method == "POST":
+        form = ChallengeForm(request.POST)
+        #myfile = request.FILES['image']
+
+        messages.success(request, _('Challenge saved successfully!'))
+        challenge = form.save(commit=False)
+        challenge.author = UserProfile.objects.get(user=request.user)
+        challenge.creation_date = timezone.now()
+        challenge.limit_date = timezone.now()
+        challenge.save()
+        return redirect('idea_list')
+
+    return render(request, 'ideax/challenge_new.html', {'form': form})

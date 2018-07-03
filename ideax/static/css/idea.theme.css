@@ -7,11 +7,11 @@ body {
 }
 
 .idea-list-bg {
-    background-color: #A5DCF0;
-    background-image: url('../images/asteroids.jpg');
+    background-color: #004779;
+    background-image: url('../images/bg_ideia_azul_62.png');
     /* background-image: url('../images/science.png'); */
-    background-repeat: repeat-x;
-    background-position-y: bottom;
+    background-repeat: no-repeat;
+    background-position-y: 50%;
     /* background: #4b79a1;
     background: -webkit-linear-gradient(to right, #4b79a1, #283e51);
     background: linear-gradient(to right, #4b79a1, #283e51); */
@@ -22,14 +22,41 @@ body {
     /* background-position-y: center;
     background-size: cover; */
 
-    height: 200px;
+    height: 206px;
     margin-top: 0px;
     margin-left: -15px;
     margin-right: -15px;
     margin-bottom: 10px;
-    padding-top: 50px;
+    padding-top: 56px;
+    background-position: right;
 }
 .idea-list-bg h1 {
+    font-family: 'Open Sans', sans;
+    height: 150px;
+    padding-top: 25px;
+    color: #fff;
+    text-align: center;
+    text-shadow: 0 1px 4px rgba(0,0,0,0.06);
+    background-color: rgba(0, 0, 0, 0.5);
+    /* white-space: nowrap; */
+    /* overflow: auto; */
+    /* text-overflow: ellipsis; */
+}
+
+.challenge-list-bg {
+    background-color: #A5DCF0;
+    background-image: url('../images/challenge_bg.jpg');
+    height: 206px;
+    margin-top: 0px;
+    margin-left: -15px;
+    margin-right: -15px;
+    margin-bottom: 10px;
+    padding-top: 56px;
+    background-position-x: 60%;
+    background-position-y: 20%;
+}
+
+.challenge-list-bg h1 {
     font-family: 'Open Sans', sans;
     height: 150px;
     padding-top: 40px;
@@ -40,6 +67,15 @@ body {
     /* white-space: nowrap; */
     /* overflow: auto; */
     /* text-overflow: ellipsis; */
+}
+
+.challenge-body {
+  overflow-x: scroll;
+}
+
+.challenge-menu a {
+  margin-bottom: 8px;
+  display: block;
 }
 /* .idea-list-bg h1.desktop-title {
   font-size: 5vmin;
@@ -857,4 +893,27 @@ transition-delay: 0.7s;
 
 #evaluation_form label {
   font-weight: bold;
+}
+
+#carouselExampleIndicators img {
+  width: 960px;
+  height: 200px;
+}
+
+.carousel-challenge {
+  background-color: rgba(0, 0, 0, 0.60);
+
+  position: fixed;
+  width: 100%;
+  padding-bottom: 5px !important;
+  padding-top: 0;
+  left: 0;
+  right: 0;
+}
+.carousel-challenge p {
+  margin-bottom: 0px;
+}
+
+.nav-bg {
+  background-color: rgba(0, 0, 0, 0.8);
 }

@@ -1,13 +1,15 @@
 from django import forms
 from django.utils.translation import ugettext_lazy as _
-from .models import Idea, Criterion, Category, Dimension, Category_Dimension, Evaluation
+from .models import Idea, Criterion, Category, Dimension, Category_Dimension, Evaluation, Challenge
+from django.utils import timezone
+from django.contrib.admin.widgets import AdminDateWidget
 
 class IdeaForm(forms.ModelForm):
 
     class Meta:
         model = Idea
-        fields = ('title', 'summary', 'oportunity', 'solution', 'target', 'category' )
-        labels = {'title': _('Title'), 'summary': _('Summary') , 'oportunity': _('Oportunity'), 'solution': _('Solution'), 'target': _('Target'),'category': _('Category')}
+        fields = ('title', 'summary', 'oportunity', 'solution', 'target', 'category', 'challenge' )
+        labels = {'title': _('Title'), 'summary': _('Summary') , 'oportunity': _('Oportunity'), 'solution': _('Solution'), 'target': _('Target'),'category': _('Category'), 'challenge': _('Challenge')}
         widgets = {
             'summary': forms.Textarea(attrs={'placeholder': _('Sell your idea in 140 characters!')}),
             'oportunity': forms.Textarea(attrs={'placeholder': _('Describe the problem or opportunity your idea will meet!')}),
@@ -36,6 +38,13 @@ class CategoryForm(forms.ModelForm):
         model = Category
         fields = ('title', 'description', )
         labels = {'title':_('Title'), 'description': _('Description') }
+
+class ChallengeForm(forms.ModelForm):
+    class Meta:
+        model = Challenge
+        fields = ('title', 'image', 'summary', 'requester', 'description', 'active' , 'featured', 'category',)
+
+
 
 class EvaluationForm(forms.Form):
     FORMAT_ID = 'category_dimension_%s'

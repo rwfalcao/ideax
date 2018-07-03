@@ -3,6 +3,7 @@ from django.urls import path
 from django.contrib.auth import views as auth_views
 from django.conf import settings
 from django.conf.urls.static import static
+from django.views.i18n import JavaScriptCatalog
 
 from . import views
 from ideax.feeds import *
@@ -39,7 +40,8 @@ urlpatterns = [
     path('feed/comment/latest',Comment_Feed()),
     path('feed/idea/latest', New_Idea_Feed()),
     path('report/idea/<int:idea_id>/detail/', views.idea_detail_pdf, name="idea_detail_pdf"),
-
+    path('challenge/<int:challenge_pk>/', views.challenge_detail, name="challenge_detail"),
+    path('challenge/new/', views.challenge_new, name='challenge_new'),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

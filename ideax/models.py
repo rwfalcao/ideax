@@ -110,7 +110,7 @@ class Idea(models.Model):
     score = models.FloatField(default=0)
     category_image = models.CharField(max_length=200, default=settings.MEDIA_URL+'category/default.png' )
     summary = models.TextField(max_length=140, null=True, blank=False)
-
+    challenge = models.ForeignKey('Challenge', models.SET_NULL,null=True, blank=True)
 
     def count_popular_vote(self, like_boolean):
         return self.popular_vote_set.filter(like=like_boolean).count()
@@ -131,6 +131,22 @@ class Idea(models.Model):
         else:
             return 0
 
+class Challenge(models.Model):
+    image = models.ImageField(upload_to='challenges/')
+    title = models.CharField(max_length=100)
+    summary = models.TextField(max_length=140, null=True, blank=False)
+    requester = models.CharField(max_length=140, null=True, blank=False)
+    description = models.TextField(max_length=2500)
+    limit_date =  models.DateTimeField()
+    active = models.BooleanField(default=True)
+    author = models.ForeignKey('UserProfile',on_delete=models.CASCADE)
+    creation_date = models.DateTimeField()
+    featured = models.BooleanField(default=False)
+    category = models.ForeignKey('Category', models.SET_NULL,null=True)
+    discarted = models.BooleanField(default=False)
+
+    def __str__(self):
+        return self.title
 
 class Vote(models.Model):
     evaluation_item = models.ForeignKey(Evaluation_Item,on_delete=models.PROTECT)
