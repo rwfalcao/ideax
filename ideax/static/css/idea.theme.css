@@ -70,7 +70,7 @@ body {
 }
 
 .challenge-body {
-  overflow-x: scroll;
+  overflow-x: hidden;
 }
 
 .challenge-menu a {
@@ -917,3 +917,9 @@ transition-delay: 0.7s;
 .nav-bg {
   background-color: rgba(0, 0, 0, 0.8);
 }
+
+.btn-idea-new {
+    color: #fff;
+    background-color: #04406B;
+    border-color: #04406B;
+  }

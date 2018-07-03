@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-06-15 17:08-0300\n"
+"POT-Creation-Date: 2018-07-03 17:15-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -38,89 +38,94 @@ msgstr "Comentário por: "
 msgid "New ideas"
 msgstr "Novas Ideias"
 
-#: ideax/forms.py:10 ideax/forms.py:24 ideax/forms.py:38
+#: ideax/forms.py:12 ideax/forms.py:26 ideax/forms.py:40
 msgid "Title"
 msgstr "Título"
 
-#: ideax/forms.py:10
+#: ideax/forms.py:12
 msgid "Summary"
 msgstr "Resumo"
 
-#: ideax/forms.py:10 ideax/forms.py:24 ideax/templates/ideax/ftec.html:42
+#: ideax/forms.py:12 ideax/forms.py:26 ideax/templates/ideax/ftec.html:51
 #: ideax/templates/ideax/idea_detail.html:99
 msgid "Oportunity"
 msgstr "Oportunidade"
 
-#: ideax/forms.py:10 ideax/forms.py:24 ideax/templates/ideax/ftec.html:46
+#: ideax/forms.py:12 ideax/forms.py:26 ideax/templates/ideax/ftec.html:55
 #: ideax/templates/ideax/idea_detail.html:90
 msgid "Solution"
 msgstr "Solução"
 
-#: ideax/forms.py:10 ideax/forms.py:24 ideax/templates/ideax/ftec.html:50
+#: ideax/forms.py:12 ideax/forms.py:26 ideax/templates/ideax/ftec.html:59
 #: ideax/templates/ideax/idea_detail.html:108
 msgid "Target"
 msgstr "Público-alvo"
 
-#: ideax/forms.py:10
+#: ideax/forms.py:12
 msgid "Category"
 msgstr "Categoria"
 
 #: ideax/forms.py:12
+msgid "Challenge"
+msgstr ""
+
+#: ideax/forms.py:14
 msgid "Sell your idea in 140 characters!"
 msgstr "Venda sua ideia em 140 caracteres!"
 
-#: ideax/forms.py:13
+#: ideax/forms.py:15
 msgid "Describe the problem or opportunity your idea will meet!"
 msgstr "Descreva o problema ou a oportunidade que sua ideia irá atender!"
 
-#: ideax/forms.py:14
+#: ideax/forms.py:16
 msgid "Describe the solution very clearly and succinctly!"
 msgstr "Descreva a solução de forma bastante clara e sucinta!"
 
-#: ideax/forms.py:15
+#: ideax/forms.py:17
 msgid "Indicate who your solution audience is"
 msgstr "Indique quem é o público-alvo da sua solução"
 
-#: ideax/forms.py:31
+#: ideax/forms.py:33
 msgid "Weight"
 msgstr "Peso"
 
-#: ideax/forms.py:31 ideax/forms.py:38
+#: ideax/forms.py:33 ideax/forms.py:40
+#: ideax/templates/ideax/challenge_detail.html:45
 #: ideax/templates/ideax/idea_detail.html:78
 #: ideax/templates/ideax/includes/partial_category_list.html:6
 msgid "Description"
 msgstr "Descrição"
 
-#: ideax/models.py:24 ideax/templates/ideax/includes/idea_detail.html:57
+#: ideax/models.py:27 ideax/templates/ideax/includes/idea_detail.html:57
 msgid "Discussion"
 msgstr "Discussão"
 
-#: ideax/models.py:25 ideax/templates/ideax/idea_detail.html:84
+#: ideax/models.py:28 ideax/templates/ideax/idea_detail.html:84
 #: ideax/templates/ideax/includes/idea_detail.html:58
 msgid "Evaluation"
 msgstr "Avaliação"
 
-#: ideax/models.py:26 ideax/templates/ideax/includes/idea_detail.html:59
+#: ideax/models.py:29 ideax/templates/ideax/includes/idea_detail.html:59
 msgid "Ideation"
 msgstr "Ideação"
 
-#: ideax/models.py:27 ideax/templates/ideax/includes/idea_detail.html:60
+#: ideax/models.py:30 ideax/templates/ideax/includes/idea_detail.html:60
 msgid "Approval"
 msgstr "Aprovação"
 
-#: ideax/models.py:28 ideax/templates/ideax/includes/idea_detail.html:61
+#: ideax/models.py:31 ideax/templates/ideax/includes/idea_detail.html:61
 msgid "Evolution"
 msgstr "Evolução"
 
-#: ideax/models.py:29 ideax/templates/ideax/includes/idea_detail.html:62
+#: ideax/models.py:32 ideax/templates/ideax/includes/idea_detail.html:62
 msgid "Done"
 msgstr "Feitas"
 
-#: ideax/models.py:30 ideax/templates/ideax/includes/idea_detail.html:63
+#: ideax/models.py:33 ideax/templates/ideax/includes/idea_detail.html:63
 msgid "Archived"
 msgstr "Arquivadas"
 
-#: ideax/models.py:31 ideax/templates/ideax/includes/idea_detail.html:64
+#: ideax/models.py:34 ideax/templates/ideax/includes/idea_detail.html:64
 msgid "Paused"
 msgstr "Pausadas"
 
@@ -128,7 +133,8 @@ msgstr "Pausadas"
 msgid "You don\\"
 msgstr ""
 
-#: ideax/templates/403.html:8 ideax/templates/ideax/idea_edit.html:15
+#: ideax/templates/403.html:8 ideax/templates/ideax/challenge_new.html:14
+#: ideax/templates/ideax/idea_edit.html:15
 #: ideax/templates/ideax/idea_new.html:13
 msgid "Return"
 msgstr "Voltar"
@@ -195,6 +201,7 @@ msgid "New Category"
 msgstr "Nova Categoria"
 
 #: ideax/templates/ideax/category_new.html:9
+#: ideax/templates/ideax/challenge_new.html:15
 #: ideax/templates/ideax/criterion_edit.html:12
 #: ideax/templates/ideax/idea_new.html:14
 #: ideax/templates/ideax/includes/evaluation.html:34
@@ -202,6 +209,37 @@ msgstr "Nova Categoria"
 #: ideax/templates/ideax/phase_edit.html:12
 msgid "Save"
 msgstr "Salvar"
+
+#: ideax/templates/ideax/challenge_detail.html:24
+#: ideax/templates/ideax/idea_detail.html:35
+#: ideax/templates/ideax/includes/idea_detail.html:45
+#: ideax/templates/ideax/includes/idea_detail.html:46
+msgid "By"
+msgstr "Por"
+
+#: ideax/templates/ideax/challenge_detail.html:33
+msgid "Expire Date"
+msgstr "Válido até"
+
+#: ideax/templates/ideax/challenge_detail.html:35
+msgid "Submit Idea"
+msgstr "Enviar Ideia"
+
+#: ideax/templates/ideax/challenge_detail.html:38
+msgid "Ideas Related"
+msgstr "Ideias Relacionadas"
+
+#: ideax/templates/ideax/challenge_detail.html:47
+msgid "Related Ideas Challenge"
+msgstr "Ideias Relacionadas ao Desafio"
+
+#: ideax/templates/ideax/challenge_detail.html:55
+msgid "We dont have any ideas yet"
+msgstr "Não existem ideias cadastradas ainda."
+
+#: ideax/templates/ideax/challenge_new.html:7
+msgid "New Challenge"
+msgstr "Novo Desafio"
 
 #: ideax/templates/ideax/criterion_edit.html:6
 msgid "New Criterion"
@@ -228,51 +266,45 @@ msgstr "Novo Comentário"
 msgid "Comment"
 msgstr "Comentar"
 
-#: ideax/templates/ideax/ftec.html:55
+#: ideax/templates/ideax/ftec.html:64
 msgid "Additional Information"
 msgstr "Informações Adicionais"
 
-#: ideax/templates/ideax/ftec.html:57
+#: ideax/templates/ideax/ftec.html:66
 msgid "Author"
 msgstr "Autor"
 
-#: ideax/templates/ideax/ftec.html:58
+#: ideax/templates/ideax/ftec.html:69
 msgid "Date of registration"
 msgstr "Data do cadastro"
 
-#: ideax/templates/ideax/ftec.html:59 ideax/templates/ideax/ftec.html:72
+#: ideax/templates/ideax/ftec.html:72 ideax/templates/ideax/ftec.html:92
 msgid "Total Score"
 msgstr "Pontuação Total"
 
-#: ideax/templates/ideax/ftec.html:60
+#: ideax/templates/ideax/ftec.html:75
 msgid "Acceptance Rate"
 msgstr "Índice de aceitação"
 
-#: ideax/templates/ideax/ftec.html:61
+#: ideax/templates/ideax/ftec.html:78
 msgid "Total Votes"
 msgstr "Total de votos"
 
-#: ideax/templates/ideax/ftec.html:62
+#: ideax/templates/ideax/ftec.html:81
 msgid "Identifier"
 msgstr "Identificador"
 
-#: ideax/templates/ideax/ftec.html:70
+#: ideax/templates/ideax/ftec.html:90
 msgid "Attachment"
 msgstr "Anexo"
 
-#: ideax/templates/ideax/ftec.html:71
+#: ideax/templates/ideax/ftec.html:91
 msgid "Evaluation of the Innovation Team"
 msgstr "Avaliação da Equipe de Inovação"
 
 #: ideax/templates/ideax/idea_detail.html:31
 msgid "Banner Idea"
 msgstr "Gestão de ideias"
-
-#: ideax/templates/ideax/idea_detail.html:35
-#: ideax/templates/ideax/includes/idea_detail.html:45
-#: ideax/templates/ideax/includes/idea_detail.html:46
-msgid "By"
-msgstr "Por"
 
 #: ideax/templates/ideax/idea_detail.html:67
 msgid "Technical details"
@@ -488,53 +520,57 @@ msgstr "placeholder:senha"
 msgid "Sign in"
 msgstr "Acessar"
 
-#: ideax/views.py:55
+#: ideax/views.py:64
 msgid "Term of use accepted!"
 msgstr "Termo de uso aceito!"
 
-#: ideax/views.py:57
+#: ideax/views.py:67
 msgid "Term of use already accepted!"
 msgstr "Termo de uso já aceito!"
 
-#: ideax/views.py:131
+#: ideax/views.py:141
 msgid "Idea saved successfully!"
 msgstr "Ideia salva com sucesso!"
 
-#: ideax/views.py:159 ideax/views.py:184
+#: ideax/views.py:177 ideax/views.py:204
 msgid "Not supported action"
 msgstr "Ação não suportada"
 
-#: ideax/views.py:262
+#: ideax/views.py:295
 msgid "Something went wrong or you're not allowed!"
 msgstr "Aconteceu algum problema ou seu acesso não é permitido!"
 
-#: ideax/views.py:267
+#: ideax/views.py:300
 msgid "Evaluation done successfully!"
 msgstr "Avaliação feita com sucesso!"
 
-#: ideax/views.py:414
+#: ideax/views.py:458
 msgid "Phase change successfully!"
 msgstr "Fase alterada com sucesso!"
 
-#: ideax/views.py:417
+#: ideax/views.py:462
 msgid "Phase change"
 msgstr "Fase alterad "
 
-#: ideax/views.py:456
+#: ideax/views.py:504
 msgid "You need to log in to post new comments."
 msgstr "É necessário estar logado para postar comentários."
 
-#: ideax/views.py:464
+#: ideax/views.py:512
 msgid "Please check your message it has inappropriate content."
 msgstr "Verifique sua mensagem ela tem conteúdo inapropriado."
 
-#: ideax/views.py:467
+#: ideax/views.py:515
 msgid "You have to write a comment."
 msgstr "É necessário escrever um comentário."
 
-#: ideax/views.py:485
+#: ideax/views.py:534
 msgid "Your comment has been posted."
 msgstr "Comentário postado com sucesso."
+
+#: ideax/views.py:580
+msgid "Challenge saved successfully!"
+msgstr "Desafio salvo com sucesso!"
 
 #~ msgid "Like"
 #~ msgstr "Curtir"

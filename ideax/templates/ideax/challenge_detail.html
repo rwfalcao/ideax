@@ -32,7 +32,7 @@
         <span class="badge badge-secondary">{{ idea.get_current_phase.description }}</span>
         <p>{% trans 'Expire Date' %}: <span>{{challenge.limit_date|date:"d/m/Y"}}</span></p>
         <a href="{% url 'idea_new' %}" role="button" aria-pressed="true" class="btn btn-outline-info btn-sm" target="_blank">
-            {% trans 'Subit Idea' %}
+            {% trans 'Submit Idea' %}
         </a>
         <a href="#related-ideas" role="button" aria-pressed="true" class="btn btn-outline-info btn-sm">
             {% trans 'Ideas Related' %}

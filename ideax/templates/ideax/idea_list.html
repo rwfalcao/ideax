@@ -76,7 +76,7 @@
                 <button class="btn btn-outline-secondary" type="button">{% trans 'Search' %}</button>
               </div>
             </div>
-            <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel" style="margin-bottom: 25px">
+            <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
               <ol class="carousel-indicators" style="margin-bottom: 3px;">
                 {% for i in challenges %}
                   <li data-target="#carouselExampleIndicators" data-slide-to="{{ forloop.counter }}" class="{%if forloop.counter == 1%} active {%endif%}"></li>
@@ -105,12 +105,13 @@
                 <span class="sr-only">Next</span>
               </a>
           </div>
-            <div class="empty-filter"></div>
-            <div class="group card-columns" id="idea-list-group">
-              {% for idea in ideas %}
-                {% include 'ideax/includes/idea_detail.html' %}
-              {% endfor %}
-            </div>
+          <hr>
+          <div class="empty-filter"></div>
+          <div class="group card-columns" id="idea-list-group">
+            {% for idea in ideas %}
+              {% include 'ideax/includes/idea_detail.html' %}
+            {% endfor %}
+          </div>
           {%endif%}
           {% include 'ideax/includes/modals.html' %}
         </div>
