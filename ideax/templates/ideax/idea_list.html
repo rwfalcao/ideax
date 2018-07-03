@@ -77,7 +77,7 @@
               </div>
             </div>
             <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel" style="margin-bottom: 25px">
-              <ol class="carousel-indicators">
+              <ol class="carousel-indicators" style="margin-bottom: 3px;">
                 {% for i in challenges %}
                   <li data-target="#carouselExampleIndicators" data-slide-to="{{ forloop.counter }}" class="{%if forloop.counter == 1%} active {%endif%}"></li>
                 {% endfor%}
@@ -86,11 +86,12 @@
                 {% for challenge in challenges %}
                 <div class="carousel-item {%if forloop.counter == 1%} active {%endif%}">
                   <img class="d-block w-100" src="{{challenge.image.url}}" alt="First slide">
-
-                  <div class="carousel-caption d-none d-md-block">
-                    <h5>{{challenge.title}}</h5>
-                    <p>{{challenge.summary}}</p>
-                  </div>
+                  <a href="{% url 'challenge_detail' challenge_pk=challenge.pk %}">
+                    <div class="carousel-caption d-none d-md-block carousel-challenge" >
+                      <h5>{{challenge.title}}</h5>
+                      <p>{{challenge.summary}}</p>
+                    </div>
+                  </a>
 
                 </div>
                 {%endfor%}

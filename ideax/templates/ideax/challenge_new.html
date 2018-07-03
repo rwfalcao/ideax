@@ -1,0 +1,21 @@
+{% extends 'ideax/base.html' %}
+{% load widget_tweaks i18n %}
+{{ form.media }}
+
+{% block content %}
+  <div class="idea-list-bg">
+      <h1 class="display-3">{% trans 'New Challenge' %}</h1>
+  </div>
+  <div class="container">
+      <form method="post" class="form post-form" action="{% url 'challenge_new' %}" enctype="multipart/form-data">
+        {% csrf_token %}
+        {% include 'ideax/includes/partial_challenge_form.html' %}
+        <div class="button-group">
+          <a class="back-redirect btn" href="/">{% trans 'Return' %}</a>
+          <button type="submit" class="btn btn-primary">{% trans 'Save' %}</button>
+        </div>
+      </form>
+  </div>
+  <br />
+
+{% endblock %}

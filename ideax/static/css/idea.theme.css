@@ -8,7 +8,7 @@ body {
 
 .idea-list-bg {
     background-color: #A5DCF0;
-    background-image: url('../images/asteroids.jpg');
+    background-image: url('https://pixabay.com/get/e834b30a28f5073ed1534705fb0938c9bd22ffd41cb2114797f0c67caf/light-bulbs-1125016_1920.jpg');
     /* background-image: url('../images/science.png'); */
     background-repeat: repeat-x;
     background-position-y: bottom;
@@ -40,6 +40,41 @@ body {
     /* white-space: nowrap; */
     /* overflow: auto; */
     /* text-overflow: ellipsis; */
+}
+
+.challenge-list-bg {
+    background-color: #A5DCF0;
+    background-image: url('../images/challenge_bg.jpg');
+    height: 200px;
+    margin-top: 0px;
+    margin-left: -15px;
+    margin-right: -15px;
+    margin-bottom: 10px;
+    padding-top: 50px;
+    background-position-x: 60%;
+    background-position-y: 20%;
+}
+
+.challenge-list-bg h1 {
+    font-family: 'Open Sans', sans;
+    height: 150px;
+    padding-top: 40px;
+    color: #fff;
+    text-align: center;
+    text-shadow: 0 1px 4px rgba(0,0,0,0.06);
+    background-color: rgba(0, 0, 0, 0.5);
+    /* white-space: nowrap; */
+    /* overflow: auto; */
+    /* text-overflow: ellipsis; */
+}
+
+.challenge-body {
+  overflow-x: scroll;
+}
+
+.challenge-menu a {
+  margin-bottom: 8px;
+  display: block;
 }
 /* .idea-list-bg h1.desktop-title {
   font-size: 5vmin;
@@ -860,6 +895,20 @@ transition-delay: 0.7s;
 }
 
 #carouselExampleIndicators img {
-    width: 960px;
-    height: 200px;
-  }
+  width: 960px;
+  height: 200px;
+}
+
+.carousel-challenge {
+  background-color: rgba(0, 0, 0, 0.60);
+
+  position: fixed;
+  width: 100%;
+  padding-bottom: 5px !important;
+  padding-top: 0;
+  left: 0;
+  right: 0;
+}
+.carousel-challenge p {
+  margin-bottom: 0px;
+}

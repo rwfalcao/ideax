@@ -1,7 +1,9 @@
 {% extends 'ideax/base.html' %}
 {% load i18n staticfiles %}
+{% load markdownify %}
+
 {% block content %}
-<div class="idea-list-bg" id="idea-title">
+<div class="challenge-list-bg" id="idea-title">
   <h1 class="display-3 desktop-title
     {% if challenge.title|length <= 70 %}
       big-title
@@ -18,77 +20,41 @@
       <p class="text-center">
           {{challenge.summary}}
       </p>
-    </div>
-  </div>
-  <div class="row">
-    <!-- Idea Utils -->
-    <div class="col-md-3 text-center pb-3">
-      <div>
-        <img src="{{challene.image.url}}" class="img-fluid img-thumbnail" alt="{% trans 'Banner Idea' %}" />
-      </div>
-      <p>
-        <a href="#">
-          <small class="text-muted">{% trans 'By' %}
-          <span id="real-author"></span>@{{idea.author.user}}</small>
-        </a>
+      <p class="text-center">
+        <small class="text-muted">{% trans 'By' %}
+          <span id="real-author"></span>{{challenge.requester}}</small>
       </p>
-      <span class="badge badge-secondary">{{ idea.get_current_phase.description }}</span>
-      <div class="like-menu">
-
-      </div>
-
-    </div>
-    <!-- Idea Information -->
-    <div class="col-md-9">
-      <ul class="nav nav-tabs nav-fill mb-3" id="idea-pills-tab" role="tablist">
-        <li class="nav-item">
-          <a class="nav-link active" id="description-tab" data-toggle="pill" href="#description" role="tab" aria-controls="description"
-            aria-selected="true">{% trans 'Description' %}</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" id="comments-tab" data-toggle="pill" href="#comments" role="tab" aria-controls="comments" aria-selected="false">{% trans 'Comments' %}</a>
-        </li>
-      </ul>
-      <div class="tab-content" id="pills-tabContent">
-        <div class="tab-pane fade show active" id="description" role="tabpanel" aria-labelledby="description-tab">
-          <h4>{% trans 'Description' %}</h4>
-          <p>{{ challenge.description|linebreaksbr }}</p>
-        </div>
-        <div class="tab-pane fade" id="comments" role="tabpanel" aria-labelledby="comments-tab">
-        <div id="comment-message" class="alert alert-dismissible fade show" role="alert" style="display:none">
-        </div>
-          <form id="commentForm" class="form-horizontal" data-idea-id="{{idea.pk}}" action="/post/comment/">
-            {% csrf_token %}
-            <fieldset>
-              <div class="form-group comment-group">
-                <label for="commentContent" class="col-lg-2 control-label"></label>
-
-                <div class="col-lg-12">
-                  <textarea class="form-control" rows="3" id="commentContent"></textarea>
-                </div>
-              </div>
-              <div class="col-lg-12">
-                <img src="{% static 'images/markdown.png' %}"/> <a href="http://bit.ly/2HRRaym" target="_blank"><span style="font-size: 12px;">{%trans 'Support Markdown'%}</span></a>
-              </div>
-              <div class="form-group">
-                <div class="col-lg-12 text-right">
-                  <button id="submit_comment" type="submit" class="btn btn-primary">{% trans 'Comment' %}</button>
-                </div>
-              </div>
-            </fieldset>
-          </form>
-          <div class="container">
-
-          </div>
-        </div>
-      </div>
     </div>
   </div>
   <div class="row">
-    <div class="group card-columns" id="idea-list-group">
-      {% for idea in ideas %}
-        {% include 'ideax/includes/idea_detail.html' %}
-      {% endfor %}
+    <div class="col-md-3 text-center pb-3">
+      <div class="challenge-menu">
+        <span class="badge badge-secondary">{{ idea.get_current_phase.description }}</span>
+        <p>{% trans 'Expire Date' %}: <span>{{challenge.limit_date|date:"d/m/Y"}}</span></p>
+        <a href="{% url 'idea_new' %}" role="button" aria-pressed="true" class="btn btn-outline-info btn-sm" target="_blank">
+            {% trans 'Subit Idea' %}
+        </a>
+        <a href="#related-ideas" role="button" aria-pressed="true" class="btn btn-outline-info btn-sm">
+            {% trans 'Ideas Related' %}
+        </a>
+      </div>
+    </div>
+
+    <div class="col-md-9">
+      <div class="challenge-body" >
+          <h4>{% trans 'Description' %}</h4>
+          <p>{{ challenge.description|linebreaksbr| markdown| safe }}</p>
+          <h4 id="related-ideas">{% trans 'Related Ideas Challenge' %}</h4>
+          {% if ideas %}
+          <div class="group card-columns" id="idea-list-group">
+            {% for idea in ideas %}
+              {% include 'ideax/includes/idea_detail.html' %}
+            {% endfor %}
+          </div>
+          {%else%}
+          {% trans 'We dont have any ideas yet' %}
+          {%endif%}
+      </div>
     </div>
   </div>
 </div>

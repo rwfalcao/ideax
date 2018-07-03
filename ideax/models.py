@@ -110,7 +110,7 @@ class Idea(models.Model):
     score = models.FloatField(default=0)
     category_image = models.CharField(max_length=200, default=settings.MEDIA_URL+'category/default.png' )
     summary = models.TextField(max_length=140, null=True, blank=False)
-    challenge = models.ForeignKey('Challenge', models.SET_NULL,null=True)
+    challenge = models.ForeignKey('Challenge', models.SET_NULL,null=True, blank=True)
 
     def count_popular_vote(self, like_boolean):
         return self.popular_vote_set.filter(like=like_boolean).count()
@@ -135,7 +135,7 @@ class Challenge(models.Model):
     image = models.ImageField(upload_to='challenges/')
     title = models.CharField(max_length=100)
     summary = models.TextField(max_length=140, null=True, blank=False)
-    requester = models.TextField(max_length=140, null=True, blank=False)
+    requester = models.CharField(max_length=140, null=True, blank=False)
     description = models.TextField(max_length=2500)
     limit_date =  models.DateTimeField()
     active = models.BooleanField(default=True)

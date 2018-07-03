@@ -1,6 +1,8 @@
 from django import forms
 from django.utils.translation import ugettext_lazy as _
-from .models import Idea, Criterion, Category, Dimension, Category_Dimension, Evaluation
+from .models import Idea, Criterion, Category, Dimension, Category_Dimension, Evaluation, Challenge
+from django.utils import timezone
+from django.contrib.admin.widgets import AdminDateWidget
 
 class IdeaForm(forms.ModelForm):
 
@@ -36,6 +38,13 @@ class CategoryForm(forms.ModelForm):
         model = Category
         fields = ('title', 'description', )
         labels = {'title':_('Title'), 'description': _('Description') }
+
+class ChallengeForm(forms.ModelForm):
+    class Meta:
+        model = Challenge
+        fields = ('title', 'image', 'summary', 'requester', 'description', 'active' , 'featured', 'category',)
+
+
 
 class EvaluationForm(forms.Form):
     FORMAT_ID = 'category_dimension_%s'
