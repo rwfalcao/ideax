@@ -42,8 +42,10 @@ class CategoryForm(forms.ModelForm):
 class ChallengeForm(forms.ModelForm):
     class Meta:
         model = Challenge
-        fields = ('title', 'image', 'summary', 'requester', 'description', 'active' , 'featured', 'category',)
-
+        fields = ('title', 'image', 'summary', 'requester', 'description', 'active' , 'limit_date', 'featured', 'category',)
+        widgets = {
+            'limit_date' : forms.DateInput(attrs={'placeholder' : 'dd/mm/aaaa'}),
+        }
 
 
 class EvaluationForm(forms.Form):

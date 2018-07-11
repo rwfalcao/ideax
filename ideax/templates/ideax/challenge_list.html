@@ -1,0 +1,31 @@
+{% extends 'ideax/base.html' %}
+{% load widget_tweaks i18n %}
+{{ form.media }}
+
+{% block content %}
+  <div class="challenge-list-bg">
+      <h1 class="display-3">{% trans 'Explore Challenges' %}</h1>
+  </div>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-2"></div>
+      <div class="col-lg-10">
+        <div id="carouselExampleIndicators">
+          <div class="carousel-inner">
+            {% for challenge in challenges %}
+            <div class="carousel-item active" style="padding-top: 20px;">
+              <img class="d-block w-100" src="{{challenge.image.url}}" alt="First slide">
+              <a href="{% url 'challenge_detail' challenge_pk=challenge.pk %}">
+                <div class="carousel-caption d-none d-md-block carousel-challenge" >
+                  <h5>{{challenge.title}}</h5>
+                  <p>{{challenge.summary}}</p>
+                </div>
+              </a>
+            </div>
+            {%endfor%}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}

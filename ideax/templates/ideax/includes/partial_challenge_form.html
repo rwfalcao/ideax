@@ -8,14 +8,15 @@
     <p class="help-block">{{ error }}</p>
   {% endfor %}
 </div>
-<!--
+
+
 <div class="form-group{% if form.image.errors %} has-error{% endif %}">
   <label for="{{form.image.id_for_label}}">{{form.image.label}}</label>
   {{ form.image|add_class:'form-control' }}
   {% for error in form.image.errors %}
     <p class="help-block">{{ error }}</p>
   {% endfor %}
-</div> -->
+</div>
 
 <div class="form-group{% if form.summary.errors %} has-error{% endif %}">
   <label for="{{form.summary.id_for_label}}">{{form.summary.label}}</label>
@@ -40,14 +41,13 @@
     <p class="help-block">{{ error }}</p>
   {% endfor %}
 </div>
-<!--
 <div class="form-group{% if form.limit_date.errors %} has-error{% endif %}">
   <label for="{{form.limit_date.id_for_label}}">{{form.limit_date.label}}</label>
   {{ form.limit_date }}
   {% for error in form.limit_date.errors %}
     <p class="help-block">{{ error }}</p>
   {% endfor %}
-</div>-->
+</div>
 
 <div class="form-group{% if form.active.errors %} has-error{% endif %}">
   <label for="{{form.active.id_for_label}}">{{form.active.label}}</label>
@@ -72,10 +72,3 @@
     <p class="help-block">{{ error }}</p>
   {% endfor %}
 </div>
-
-<script>
-    var django = django || {};
-    django.jQuery = $;
-</script>
-<script type="text/javascript" src="/admin/jsi18n/"></script>
-{{ formset.media }}

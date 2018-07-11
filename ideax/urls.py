@@ -42,6 +42,9 @@ urlpatterns = [
     path('report/idea/<int:idea_id>/detail/', views.idea_detail_pdf, name="idea_detail_pdf"),
     path('challenge/<int:challenge_pk>/', views.challenge_detail, name="challenge_detail"),
     path('challenge/new/', views.challenge_new, name='challenge_new'),
+    path('challenge/edit/<int:challenge_pk>', views.challenge_edit, name='challenge_edit'),
+    path('challenge/list', views.challenge_list, name='challenge_list'),
+    path('report', views.report_ideas, name='report_ideas'),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

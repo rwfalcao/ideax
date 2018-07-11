@@ -29,6 +29,10 @@ from .mail_util import Mail_Util
 import mistune
 from .util import get_ip, get_client_ip
 import logging
+from django.core.files.storage import FileSystemStorage, default_storage
+from django.db import connection
+import csv
+from django.http import StreamingHttpResponse
 
 # Creating log object
 logger = logging.getLogger('audit_log')
@@ -261,7 +265,7 @@ def idea_evaluation(request, idea_pk):
     data = dict()
     if request.POST:
         form_ = EvaluationForm(request.POST, extra=dim)
-        if form_.is_valid() and request.user.userprofile.manager:
+        if form_.is_valid():
             for i in dim:
                 divisor += i.weight
                 dimension_value = i.weight * form_.cleaned_data[EvaluationForm.FORMAT_ID % i.pk].value
@@ -276,6 +280,8 @@ def idea_evaluation(request, idea_pk):
                                             note=form_.cleaned_data[EvaluationForm.FORMAT_ID_NOTE % i.pk],)
                 else:
                     evaluation = Evaluation.objects.get(dimension=i, idea=idea)
+                    evaluation.valuator = valuator
+                    evaluation.evaluation_date = timezone.now()
                     evaluation.category_dimension = form_.cleaned_data[EvaluationForm.FORMAT_ID % i.pk]
                     evaluation.note = form_.cleaned_data[EvaluationForm.FORMAT_ID_NOTE % i.pk]
                     evaluation.dimension_value=dimension_value
@@ -442,7 +448,7 @@ def change_idea_phase(request, pk, new_phase):
     idea = Idea.objects.get(pk=pk)
     phase = Phase.get_phase_by_id(new_phase)
 
-    if phase != None and request.user.userprofile.manager:
+    if phase != None:
         phase_history_current = Phase_History.objects.get(idea=idea, current=True)
         phase_history_current.current = False
         phase_history_current.save()
@@ -574,15 +580,77 @@ def challenge_new(request):
     form = ChallengeForm()
 
     if request.method == "POST":
-        form = ChallengeForm(request.POST)
-        #myfile = request.FILES['image']
+        form = ChallengeForm(request.POST, request.FILES)
 
-        messages.success(request, _('Challenge saved successfully!'))
-        challenge = form.save(commit=False)
-        challenge.author = UserProfile.objects.get(user=request.user)
-        challenge.creation_date = timezone.now()
-        challenge.limit_date = timezone.now()
-        challenge.save()
-        return redirect('idea_list')
-
+        if form.is_valid():
+            #path  = file_upload(request)
+            challenge = form.save(commit=False)
+            challenge.author = UserProfile.objects.get(user=request.user)
+            challenge.creation_date = timezone.now()
+            challenge.save()
+            messages.success(request, _('Challenge saved successfully!'))
+            return redirect('idea_list')
     return render(request, 'ideax/challenge_new.html', {'form': form})
+
+def challenge_edit(request, challenge_pk):
+    challenge = get_object_or_404(Challenge, pk=challenge_pk)
+
+    if request.method == "POST":
+        form = ChallengeForm(request.POST, request.FILES, instance=challenge)
+
+        if form.is_valid():
+            challenge = form.save(commit=False)
+            challenge.save()
+            messages.success(request, _('Challenge saved successfully!'))
+            return redirect('idea_list')
+    else:
+        form = ChallengeForm(instance=challenge)
+
+    return render(request, 'ideax/challenge_edit.html', {'form': form})
+
+def file_upload(request):
+    myfile = request.FILES['image']
+    fs = FileSystemStorage()
+    filename = fs.save(myfile.name, myfile)
+    uploaded_file_url = fs.url(filename)
+    return uploaded_file_url
+
+def challenge_list(request):
+    challenges = Challenge.objects.filter(discarted=False)
+    return render(request, 'ideax/challenge_list.html', {'challenges': challenges})
+
+@login_required
+def report_ideas(request):
+    if (request.user.has_perm(settings.PERMISSIONS["MANAGE_IDEA"])):
+        csv_path = 'RELATORIO_IDEIAS.csv'
+        cursor = connection.cursor()
+        cursor.execute('''select i.id as id_ideia ,
+    	   i.title as titulo,
+    	   i.score as pontuacao,
+    	   au.username as usuario,
+    	   ic.title as categoria,
+    	   sum(case when pv.`like` = 1 then 1 else 0 end) as qtde_likes,
+    	   sum(case when pv.`like` = 0 then 1 else 0 end) as qtde_dislikes,
+    	   (CASE WHEN ph.current_phase = 1 THEN 'Discussao' WHEN ph.current_phase = 2 THEN 'Avaliacao' WHEN ph.current_phase = 3 THEN 'Ideacao' WHEN ph.current_phase = 4 THEN 'Aprovacao' WHEN ph.current_phase = 5 THEN 'Evolucao' WHEN ph.current_phase = 6 THEN 'Feita' WHEN ph.current_phase = 7 THEN 'Arquivada' WHEN ph.current_phase = 8 THEN 'Pausada' ELSE 0 END) as fase,
+    	   (select count(*) from ideax_comment where idea_id = i.id) as qtde_comentarios
+            	from ideax_idea i inner join ideax_popular_vote pv on i.id = pv.idea_id
+            	inner join ideax_phase_history ph on i.id = ph.idea_id
+            	inner join ideax_category ic on i.category_id = ic.id
+            	inner join ideax_userprofile iu on i.author_id = iu.id
+            	inner join auth_user au on au.id = iu.user_id
+            where ph.current = 1 and i.discarded = 0
+            group by i.id, ph.current_phase''')
+        data = cursor.fetchall()
+
+        with open(csv_path,'w',newline='') as f_handle:
+            writer = csv.writer(f_handle)
+            header = ['id_ideia', 'titulo', 'pontuacao', 'usuario', 'categoria', 'qtde_likes', 'qtde_dislikes', 'fase', 'qtde_comentarios']
+            writer.writerow(header)
+            for row in data:
+                writer.writerow(row)
+
+        response = StreamingHttpResponse(open(csv_path), content_type='text/csv')
+        response['Content-Disposition'] = 'attachment; filename=' + csv_path
+        return response
+
+    return redirect('index')
