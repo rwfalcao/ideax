@@ -654,3 +654,11 @@ def report_ideas(request):
         return response
 
     return redirect('index')
+
+@login_required
+#@permission_required('ideax.add_idea',raise_exception=True)
+def idea_new_from_challenge(request, challenge_pk):
+    challenge = get_object_or_404(Challenge, pk=challenge_pk)
+    form = IdeaForm(initial={'challenge': challenge, 'category': challenge.category},)
+    audit(request.user.username, get_client_ip(request), 'CREATE_IDEA_FORM_FROM_MISSION', Idea.__name__, '')
+    return save_idea(request, form, 'ideax/idea_new.html', True)
