@@ -76,8 +76,20 @@ def accept_use_term(request):
 
 @login_required
 def idea_list(request):
+    from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
     ideas = get_ideas_init(request)
     ideas['phases'] = Phase.choices()
+
+    page = request.GET.get('page', 1)
+    paginator = Paginator(ideas['ideas'], 5)
+
+    try:
+        ideas['ideas'] = paginator.page(page)
+    except PageNotAnInteger:
+        ideas['ideas'] = paginator.page(1)
+    except EmptyPage:
+        ideas['ideas'] = paginator.page(paginator.num_pages)
+
     return render(request, 'ideax/idea_list.html', ideas)
 
 @login_required
@@ -656,7 +668,7 @@ def report_ideas(request):
     return redirect('index')
 
 @login_required
-#@permission_required('ideax.add_idea',raise_exception=True)
+@permission_required('ideax.add_idea',raise_exception=True)
 def idea_new_from_challenge(request, challenge_pk):
     challenge = get_object_or_404(Challenge, pk=challenge_pk)
     form = IdeaForm(initial={'challenge': challenge, 'category': challenge.category},)
