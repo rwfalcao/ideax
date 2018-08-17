@@ -8,8 +8,8 @@ class IdeaForm(forms.ModelForm):
 
     class Meta:
         model = Idea
-        fields = ('title', 'summary', 'oportunity', 'solution', 'target', 'category', 'challenge' )
-        labels = {'title': _('Title'), 'summary': _('Summary') , 'oportunity': _('Oportunity'), 'solution': _('Solution'), 'target': _('Target'),'category': _('Category'), 'challenge': _('Challenge')}
+        fields = ('title', 'summary', 'oportunity', 'solution', 'target', 'category', 'challenge', 'authors' )
+        labels = {'title': _('Title'), 'summary': _('Summary') , 'oportunity': _('Oportunity'), 'solution': _('Solution'), 'target': _('Target'),'category': _('Category'), 'challenge': _('Challenge'), 'authors': _('Authors')}
         widgets = {
             'summary': forms.Textarea(attrs={'placeholder': _('Sell your idea in 140 characters!')}),
             'oportunity': forms.Textarea(attrs={'placeholder': _('Describe the problem or opportunity your idea will meet!')}),

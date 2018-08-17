@@ -6,8 +6,8 @@ from django.template.loader import render_to_string
 from django.views.decorators.csrf import ensure_csrf_cookie, csrf_protect
 from django.views.decorators.http import require_http_methods
 from django.db.models import Count, Case, When
-from .models import Idea, Criterion,Popular_Vote, Phase, Phase_History,Category, Comment, UserProfile, Dimension, Evaluation, Category_Image, Use_Term, Challenge
-from .forms import IdeaForm, CriterionForm,IdeaFormUpdate, CategoryForm, EvaluationForm, EvaluationForm, ChallengeForm
+from .models import Idea, Criterion, Popular_Vote, Phase, Phase_History, Category, Comment, UserProfile, Dimension, Evaluation, Category_Image, Use_Term, Challenge
+from .forms import IdeaForm, CriterionForm, IdeaFormUpdate, CategoryForm, EvaluationForm, EvaluationForm, ChallengeForm
 from .singleton import Profanity_Check
 from django import forms
 from wordfilter import Wordfilter
@@ -90,6 +90,24 @@ def idea_list(request):
     except EmptyPage:
         ideas['ideas'] = paginator.page(paginator.num_pages)
 
+
+    cursor = connection.cursor()
+    cursor.execute('''select current_phase as phase, count(*) as qtd
+                      from ideax_phase_history ph inner join ideax_idea i on ph.idea_id = i.id
+                      where ph.current =1 and i.discarded = 0 group by current_phase order by phase''')
+    data = cursor.fetchall()
+
+    phases = dict()
+    for i in Phase.choices():
+        phases[i[0]] = {'phase': i[1], 'qtd': 0}
+
+
+    for d in data:
+        phases[d[0]]['qtd'] = d[1]
+
+    ideas['phases'] = phases
+
+
     return render(request, 'ideax/idea_list.html', ideas)
 
 @login_required
@@ -129,10 +147,12 @@ def save_idea(request, form, template_name, new=False):
     if request.method == "POST":
         if form.is_valid():
             idea = form.save(commit=False)
+            print("Autores ")
+            print(request.POST.get('authors'))
             if new:
                 idea.author = UserProfile.objects.get(user=request.user)
                 idea.creation_date = timezone.now()
-                idea.phase= Phase.GROW.id
+                idea.phase = Phase.GROW.id
 
 
                 if(idea.challenge):

@@ -923,3 +923,7 @@ transition-delay: 0.7s;
     background-color: #04406B;
     border-color: #04406B;
   }
+
+.count-ideas {
+  float: right;
+}
