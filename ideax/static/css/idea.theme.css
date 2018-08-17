@@ -6,6 +6,8 @@ body {
   min-height: 100vh;
 }
 
+
+
 .idea-list-bg {
     background-color: #004779;
     background-image: url('../images/bg_ideia_azul_62.png');
@@ -55,6 +57,7 @@ body {
     background-position-x: 60%;
     background-position-y: 20%;
 }
+
 
 .challenge-list-bg h1 {
     font-family: 'Open Sans', sans;
@@ -923,3 +926,25 @@ transition-delay: 0.7s;
     background-color: #04406B;
     border-color: #04406B;
   }
+.edit-term-of-use {
+  color: #1f5093;
+}
+
+.img-dimension {
+  max-height:120px !important;
+  max-width:268px;
+  width: auto;
+  height: auto;
+  padding: 0px;
+  margin: 15px;
+  align-items: center !important;
+}
+
+.terms-of-use-break-line{
+  word-break: break-all;
+}
+
+.use-term-paragraph {
+  text-indent: 2em;
+  text-align: justify;
+}

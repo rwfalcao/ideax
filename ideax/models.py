@@ -184,6 +184,9 @@ class UserProfile (models.Model):
     ip = models.CharField(max_length=20, null=True)
     manager = models.NullBooleanField(default=False)
 
+    def __str__(self):
+        return self.user.username
+
 
 class Dimension(models.Model):
     title = models.CharField(max_length=200)
@@ -217,3 +220,14 @@ class Use_Term(models.Model):
     term = models.TextField(max_length=12500)
     init_date = models.DateTimeField()
     final_date = models.DateTimeField(blank=True, null=True)
+
+    @property
+    def is_past_due(self):
+        if timezone.now() < self.final_date:
+            return True
+        return False
+
+    def is_invalid_date(self):
+        if self.final_date < self.init_date:
+            return True
+        return False

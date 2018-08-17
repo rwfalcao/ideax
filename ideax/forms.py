@@ -1,6 +1,6 @@
 from django import forms
 from django.utils.translation import ugettext_lazy as _
-from .models import Idea, Criterion, Category, Dimension, Category_Dimension, Evaluation, Challenge
+from .models import Idea, Criterion, Category, Dimension, Category_Dimension, Evaluation, Challenge, Use_Term, Category_Image
 from django.utils import timezone
 from django.contrib.admin.widgets import AdminDateWidget
 
@@ -38,15 +38,29 @@ class CategoryForm(forms.ModelForm):
         model = Category
         fields = ('title', 'description', )
         labels = {'title':_('Title'), 'description': _('Description') }
+class CategoryImageForm(forms.ModelForm):
+
+    class Meta:
+        model = Category_Image
+        fields = ('description', 'image', 'category')
+        labels = {'description':_('Description'),'image':_('Image'),'category':_('Category')}
 
 class ChallengeForm(forms.ModelForm):
+
     class Meta:
         model = Challenge
         fields = ('title', 'image', 'summary', 'requester', 'description', 'active' , 'limit_date', 'featured', 'category',)
+        labels = {'title':_('Title'),'image':_('Image'),'summary':_('Summary'),
+                  'requester':_('Requester'),'description':_('Description'),'active':_('Active'),'limit_date':_('Limit Date'),'featured':_('Featured'),'category':_('Category')}
         widgets = {
             'limit_date' : forms.DateInput(attrs={'placeholder' : 'dd/mm/aaaa'}),
         }
+class UseTermForm(forms.ModelForm):
 
+    class Meta:
+        model = Use_Term
+        fields = ('creator', 'term', 'init_date', 'final_date')
+        labels = {'creator':_('Creator'), 'term':_('Term'), 'init_date':_('Initial Date'), 'final_date':_('Final Date')}
 
 class EvaluationForm(forms.Form):
     FORMAT_ID = 'category_dimension_%s'

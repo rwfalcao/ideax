@@ -18,11 +18,12 @@ msgstr ""
 msgid "New ideas"
 msgstr ""
 
-#: ideax/forms.py:12 ideax/forms.py:26 ideax/forms.py:40
+#: ideax/forms.py:12 ideax/forms.py:26 ideax/forms.py:40 ideax/forms.py:53
+#: ideax/templates/ideax/includes/partial_category_list.html:6
 msgid "Title"
 msgstr ""
 
-#: ideax/forms.py:12
+#: ideax/forms.py:12 ideax/forms.py:53
 msgid "Summary"
 msgstr ""
 
@@ -41,7 +42,8 @@ msgstr ""
 msgid "Target"
 msgstr ""
 
-#: ideax/forms.py:12
+#: ideax/forms.py:12 ideax/forms.py:46 ideax/forms.py:54
+#: ideax/templates/ideax/includes/partial_category_image_list.html:7
 msgid "Category"
 msgstr ""
 
@@ -69,43 +71,87 @@ msgstr ""
 msgid "Weight"
 msgstr ""
 
-#: ideax/forms.py:33 ideax/forms.py:40
+#: ideax/forms.py:33 ideax/forms.py:40 ideax/forms.py:46 ideax/forms.py:54
 #: ideax/templates/ideax/challenge_detail.html:45
 #: ideax/templates/ideax/idea_detail.html:78
-#: ideax/templates/ideax/includes/partial_category_list.html:6
+#: ideax/templates/ideax/includes/partial_category_image_list.html:8
+#: ideax/templates/ideax/includes/partial_category_list.html:7
 msgid "Description"
 msgstr ""
 
-#: ideax/models.py:27 ideax/templates/ideax/includes/idea_detail.html:57
+#: ideax/forms.py:46 ideax/forms.py:53
+#: ideax/templates/ideax/includes/partial_category_image_list.html:9
+msgid "Image"
+msgstr ""
+
+#: ideax/forms.py:54
+msgid "Requester"
+msgstr ""
+
+#: ideax/forms.py:54
+#: ideax/templates/ideax/includes/partial_use_term_list.html:26
+#: ideax/templates/ideax/use_term_detail.html:20
+msgid "Active"
+msgstr ""
+
+#: ideax/forms.py:54
+msgid "Limit Date"
+msgstr ""
+
+#: ideax/forms.py:54
+msgid "Featured"
+msgstr ""
+
+#: ideax/forms.py:63
+#: ideax/templates/ideax/includes/partial_use_term_list.html:7
+msgid "Creator"
+msgstr ""
+
+#: ideax/forms.py:63
+#: ideax/templates/ideax/includes/partial_use_term_list.html:8
+msgid "Term"
+msgstr ""
+
+#: ideax/forms.py:63
+#: ideax/templates/ideax/includes/partial_use_term_list.html:9
+msgid "Initial Date"
+msgstr ""
+
+#: ideax/forms.py:63
+#: ideax/templates/ideax/includes/partial_use_term_list.html:10
+msgid "Final Date"
+msgstr ""
+
+#: ideax/models.py:27 ideax/templates/ideax/includes/idea_detail.html:60
 msgid "Discussion"
 msgstr ""
 
 #: ideax/models.py:28 ideax/templates/ideax/idea_detail.html:84
-#: ideax/templates/ideax/includes/idea_detail.html:58
+#: ideax/templates/ideax/includes/idea_detail.html:61
 msgid "Evaluation"
 msgstr ""
 
-#: ideax/models.py:29 ideax/templates/ideax/includes/idea_detail.html:59
+#: ideax/models.py:29 ideax/templates/ideax/includes/idea_detail.html:62
 msgid "Ideation"
 msgstr ""
 
-#: ideax/models.py:30 ideax/templates/ideax/includes/idea_detail.html:60
+#: ideax/models.py:30 ideax/templates/ideax/includes/idea_detail.html:63
 msgid "Approval"
 msgstr ""
 
-#: ideax/models.py:31 ideax/templates/ideax/includes/idea_detail.html:61
+#: ideax/models.py:31 ideax/templates/ideax/includes/idea_detail.html:64
 msgid "Evolution"
 msgstr ""
 
-#: ideax/models.py:32 ideax/templates/ideax/includes/idea_detail.html:62
+#: ideax/models.py:32 ideax/templates/ideax/includes/idea_detail.html:65
 msgid "Done"
 msgstr ""
 
-#: ideax/models.py:33 ideax/templates/ideax/includes/idea_detail.html:63
+#: ideax/models.py:33 ideax/templates/ideax/includes/idea_detail.html:66
 msgid "Archived"
 msgstr ""
 
-#: ideax/models.py:34 ideax/templates/ideax/includes/idea_detail.html:64
+#: ideax/models.py:34 ideax/templates/ideax/includes/idea_detail.html:67
 msgid "Paused"
 msgstr ""
 
@@ -113,92 +159,123 @@ msgstr ""
 msgid "You don\\"
 msgstr ""
 
-#: ideax/templates/403.html:8 ideax/templates/ideax/challenge_new.html:14
+#: ideax/templates/403.html:8 ideax/templates/ideax/category_edit.html:36
+#: ideax/templates/ideax/category_image_edit.html:14
+#: ideax/templates/ideax/category_image_new.html:14
+#: ideax/templates/ideax/category_new.html:37
+#: ideax/templates/ideax/challenge_edit.html:14
+#: ideax/templates/ideax/challenge_new.html:14
 #: ideax/templates/ideax/idea_edit.html:15
 #: ideax/templates/ideax/idea_new.html:13
+#: ideax/templates/ideax/use_term_detail.html:30
+#: ideax/templates/ideax/use_term_edit.html:56
+#: ideax/templates/ideax/use_term_new.html:55
 msgid "Return"
 msgstr ""
 
-#: ideax/templates/ideax/base.html:44
+#: ideax/templates/ideax/base.html:48
 #, python-format
 msgid "Hi, %(name)s!"
 msgstr ""
 
-#: ideax/templates/ideax/base.html:51 ideax/templates/ideax/idea_list.html:6
+#: ideax/templates/ideax/base.html:55 ideax/templates/ideax/idea_list.html:6
 msgid "Explore Ideas"
 msgstr ""
 
-#: ideax/templates/ideax/base.html:52
+#: ideax/templates/ideax/base.html:56
 msgid "Users"
 msgstr ""
 
-#: ideax/templates/ideax/base.html:53
+#: ideax/templates/ideax/base.html:57
 msgid "Terms of Use and Privacy"
 msgstr ""
 
-#: ideax/templates/ideax/base.html:54
+#: ideax/templates/ideax/base.html:58
 msgid "Logout"
 msgstr ""
 
-#: ideax/templates/ideax/base.html:61
+#: ideax/templates/ideax/base.html:65
 #: ideax/templates/ideax/includes/chatbot.html:5
 msgid "Help"
 msgstr ""
 
-#: ideax/templates/ideax/base.html:64
+#: ideax/templates/ideax/base.html:68
 msgid "Login"
 msgstr ""
 
-#: ideax/templates/ideax/base.html:72
+#: ideax/templates/ideax/base.html:76
 msgid "New Idea"
 msgstr ""
 
-#: ideax/templates/ideax/base.html:85 ideax/templates/ideax/base.html:89
+#: ideax/templates/ideax/base.html:89 ideax/templates/ideax/base.html:93
 msgid "Terms of use"
 msgstr ""
 
-#: ideax/templates/ideax/base.html:92
+#: ideax/templates/ideax/base.html:96
 msgid "Cancel"
 msgstr ""
 
-#: ideax/templates/ideax/base.html:93
+#: ideax/templates/ideax/base.html:97
 msgid "Accept"
 msgstr ""
 
-#: ideax/templates/ideax/category_edit.html:5
+#: ideax/templates/ideax/category_edit.html:6
 msgid "Update Category"
 msgstr ""
 
-#: ideax/templates/ideax/category_edit.html:11
+#: ideax/templates/ideax/category_edit.html:37
 #: ideax/templates/ideax/idea_edit.html:16
 #: ideax/templates/ideax/includes/partial_idea_update.html:22
+#: ideax/templates/ideax/use_term_edit.html:57
 msgid "Update"
 msgstr ""
 
-#: ideax/templates/ideax/category_list.html:8
-#: ideax/templates/ideax/category_new.html:3
-msgid "New Category"
+#: ideax/templates/ideax/category_image_edit.html:6
+msgid "Edit Category Image"
 msgstr ""
 
-#: ideax/templates/ideax/category_new.html:9
+#: ideax/templates/ideax/category_image_edit.html:15
+#: ideax/templates/ideax/category_image_new.html:15
+#: ideax/templates/ideax/category_new.html:38
+#: ideax/templates/ideax/challenge_edit.html:15
 #: ideax/templates/ideax/challenge_new.html:15
-#: ideax/templates/ideax/criterion_edit.html:12
+#: ideax/templates/ideax/criterion_edit.html:14
 #: ideax/templates/ideax/idea_new.html:14
 #: ideax/templates/ideax/includes/evaluation.html:34
 #: ideax/templates/ideax/includes/partial_idea_create.html:25
 #: ideax/templates/ideax/phase_edit.html:12
+#: ideax/templates/ideax/use_term_new.html:56
 msgid "Save"
+msgstr ""
+
+#: ideax/templates/ideax/category_image_list.html:6
+msgid "Category Images"
+msgstr ""
+
+#: ideax/templates/ideax/category_image_list.html:16
+#: ideax/templates/ideax/category_image_new.html:7
+msgid "New Category Image"
+msgstr ""
+
+#: ideax/templates/ideax/category_list.html:6
+msgid "Categorys"
+msgstr ""
+
+#: ideax/templates/ideax/category_list.html:16
+#: ideax/templates/ideax/category_new.html:7
+msgid "New Category"
 msgstr ""
 
 #: ideax/templates/ideax/challenge_detail.html:24
 #: ideax/templates/ideax/idea_detail.html:35
-#: ideax/templates/ideax/includes/idea_detail.html:45
-#: ideax/templates/ideax/includes/idea_detail.html:46
+#: ideax/templates/ideax/includes/idea_detail.html:48
+#: ideax/templates/ideax/includes/idea_detail.html:49
+#: ideax/templates/ideax/use_term_detail.html:15
 msgid "By"
 msgstr ""
 
 #: ideax/templates/ideax/challenge_detail.html:33
-msgid "Expire Date"
+msgid "Expiration Date"
 msgstr ""
 
 #: ideax/templates/ideax/challenge_detail.html:35
@@ -217,24 +294,25 @@ msgstr ""
 msgid "We dont have any ideas yet"
 msgstr ""
 
+#: ideax/templates/ideax/challenge_edit.html:7
+msgid "Edit Challenge"
+msgstr ""
+
+#: ideax/templates/ideax/challenge_list.html:7
+msgid "Explore Challenges"
+msgstr ""
+
+#: ideax/templates/ideax/challenge_list.html:12
 #: ideax/templates/ideax/challenge_new.html:7
 msgid "New Challenge"
 msgstr ""
 
-#: ideax/templates/ideax/criterion_edit.html:6
+#: ideax/templates/ideax/criterion_edit.html:7
 msgid "New Criterion"
 msgstr ""
 
-#: ideax/templates/ideax/criterion_list.html:9
-#: ideax/templates/ideax/includes/idea_detail.html:69
-#: ideax/templates/ideax/includes/partial_category_list.html:8
-#: ideax/templates/ideax/phase_list.html:8
-msgid "Edit"
-msgstr ""
-
-#: ideax/templates/ideax/criterion_list.html:10
-#: ideax/templates/ideax/phase_list.html:9
-msgid "Remove"
+#: ideax/templates/ideax/criterion_list.html:6
+msgid "Criterion List"
 msgstr ""
 
 #: ideax/templates/ideax/form.html:14
@@ -331,41 +409,52 @@ msgstr ""
 msgid "Evaluation not yet done"
 msgstr ""
 
-#: ideax/templates/ideax/includes/idea_detail.html:19
+#: ideax/templates/ideax/includes/idea_detail.html:22
 msgid "Details..."
 msgstr ""
 
-#: ideax/templates/ideax/includes/idea_detail.html:56
+#: ideax/templates/ideax/includes/idea_detail.html:59
 msgid "Idea Stage"
 msgstr ""
 
-#: ideax/templates/ideax/includes/idea_detail.html:68
+#: ideax/templates/ideax/includes/idea_detail.html:71
 msgid "Actions"
 msgstr ""
 
-#: ideax/templates/ideax/includes/idea_detail.html:70
+#: ideax/templates/ideax/includes/idea_detail.html:72
+#: ideax/templates/ideax/includes/partial_category_image_list.html:10
+#: ideax/templates/ideax/includes/partial_category_list.html:8
+#: ideax/templates/ideax/includes/partial_use_term_list.html:12
+#: ideax/templates/ideax/phase_list.html:8
+#: ideax/templates/ideax/use_term_detail.html:31
+msgid "Edit"
+msgstr ""
+
+#: ideax/templates/ideax/includes/idea_detail.html:73
 msgid "Delete"
 msgstr ""
 
-#: ideax/templates/ideax/includes/partial_category_list.html:7
-msgid "key_word"
-msgstr ""
-
+#: ideax/templates/ideax/includes/partial_category_image_list.html:11
 #: ideax/templates/ideax/includes/partial_category_list.html:9
-#: ideax/templates/ideax/includes/partial_category_remove.html:21
+#: ideax/templates/ideax/includes/partial_category_remove.html:27
+#: ideax/templates/ideax/includes/partial_use_term_list.html:13
+#: ideax/templates/ideax/includes/partial_use_term_remove.html:27
 msgid "Discard"
 msgstr ""
 
-#: ideax/templates/ideax/includes/partial_category_remove.html:10
-msgid "Confirm category removal"
-msgstr ""
-
-#: ideax/templates/ideax/includes/partial_category_remove.html:16
-msgid "Would you like to delete the category?"
+#: ideax/templates/ideax/includes/partial_category_remove.html:14
+#: ideax/templates/ideax/includes/partial_use_term_remove.html:14
+msgid "Confirm use term removal"
 msgstr ""
 
 #: ideax/templates/ideax/includes/partial_category_remove.html:20
+#: ideax/templates/ideax/includes/partial_use_term_remove.html:20
+msgid "Would you like to delete the use term?"
+msgstr ""
+
+#: ideax/templates/ideax/includes/partial_category_remove.html:26
 #: ideax/templates/ideax/includes/partial_idea_update.html:21
+#: ideax/templates/ideax/includes/partial_use_term_remove.html:26
 msgid "Close"
 msgstr ""
 
@@ -391,6 +480,19 @@ msgstr ""
 
 #: ideax/templates/ideax/includes/partial_idea_update.html:8
 msgid "Update Idea"
+msgstr ""
+
+#: ideax/templates/ideax/includes/partial_use_term_list.html:11
+msgid "Status"
+msgstr ""
+
+#: ideax/templates/ideax/includes/partial_use_term_list.html:14
+msgid "Detail"
+msgstr ""
+
+#: ideax/templates/ideax/includes/partial_use_term_list.html:26
+#: ideax/templates/ideax/use_term_detail.html:20
+msgid "Inactive"
 msgstr ""
 
 #: ideax/templates/ideax/index.html:8
@@ -458,6 +560,40 @@ msgstr ""
 msgid "New phase"
 msgstr ""
 
+#: ideax/templates/ideax/phase_list.html:9
+msgid "Remove"
+msgstr ""
+
+#: ideax/templates/ideax/use_term_detail.html:8
+msgid "Term Of Use"
+msgstr ""
+
+#: ideax/templates/ideax/use_term_detail.html:19
+msgid "Expiration Date "
+msgstr ""
+
+#: ideax/templates/ideax/use_term_detail.html:20
+msgid "Status "
+msgstr ""
+
+#: ideax/templates/ideax/use_term_edit.html:7
+msgid "Update Term of Use"
+msgstr ""
+
+#: ideax/templates/ideax/use_term_list.html:6
+#, fuzzy
+#| msgid "Term of use accept!"
+msgid "Terms of Use"
+msgstr "Termo de uso aceito!"
+
+#: ideax/templates/ideax/use_term_list.html:12
+msgid "New Terms of Use"
+msgstr ""
+
+#: ideax/templates/ideax/use_term_new.html:7
+msgid "Create Use Term"
+msgstr ""
+
 #: ideax/templates/registration/login.html:4
 msgid "Your username and password didn't match. Please try again."
 msgstr ""
@@ -486,58 +622,98 @@ msgstr ""
 msgid "Sign in"
 msgstr ""
 
-#: ideax/views.py:64
+#: ideax/views.py:71
 #, fuzzy
 #| msgid "Term of use accept!"
 msgid "Term of use accepted!"
 msgstr "Termo de uso aceito!"
 
-#: ideax/views.py:67
+#: ideax/views.py:74
 #, fuzzy
 #| msgid "Term of use accept!"
 msgid "Term of use already accepted!"
 msgstr "Termo de uso aceito!"
 
-#: ideax/views.py:141
+#: ideax/views.py:160
 msgid "Idea saved successfully!"
 msgstr ""
 
-#: ideax/views.py:177 ideax/views.py:204
+#: ideax/views.py:196 ideax/views.py:223
 msgid "Not supported action"
 msgstr ""
 
-#: ideax/views.py:295
+#: ideax/views.py:316
 msgid "Something went wrong or you're not allowed!"
 msgstr ""
 
-#: ideax/views.py:300
+#: ideax/views.py:321
 msgid "Evaluation done successfully!"
 msgstr ""
 
-#: ideax/views.py:458
+#: ideax/views.py:345
+msgid "Category saved successfully!"
+msgstr ""
+
+#: ideax/views.py:360
+msgid "Category changed successfully!"
+msgstr ""
+
+#: ideax/views.py:374
+msgid "Category removed successfully!"
+msgstr ""
+
+#: ideax/views.py:451
 msgid "Phase change successfully!"
 msgstr ""
 
-#: ideax/views.py:462
+#: ideax/views.py:455
 msgid "Phase change"
 msgstr ""
 
-#: ideax/views.py:504
+#: ideax/views.py:497
 msgid "You need to log in to post new comments."
 msgstr ""
 
-#: ideax/views.py:512
+#: ideax/views.py:505
 msgid "Please check your message it has inappropriate content."
 msgstr ""
 
-#: ideax/views.py:515
+#: ideax/views.py:508
 msgid "You have to write a comment."
 msgstr ""
 
-#: ideax/views.py:534
+#: ideax/views.py:527
 msgid "Your comment has been posted."
 msgstr ""
 
-#: ideax/views.py:580
+#: ideax/views.py:546 ideax/views.py:584
+msgid "Invalid Final Date"
+msgstr ""
+
+#: ideax/views.py:549
+#, fuzzy
+#| msgid "Term of use accept!"
+msgid "Terms of Use saved successfully!"
+msgstr "Termo de uso aceito!"
+
+#: ideax/views.py:576
+#, fuzzy
+#| msgid "Term of use accept!"
+msgid "Terms of Use removed successfully!"
+msgstr "Termo de uso aceito!"
+
+#: ideax/views.py:637 ideax/views.py:650
 msgid "Challenge saved successfully!"
+msgstr ""
+
+#: ideax/views.py:722
+msgid "Category Image saved successfully!"
+msgstr ""
+
+#: ideax/views.py:744
+msgid "Category Image changed successfully!"
+msgstr ""
+
+#: ideax/views.py:755
+msgid "Category Image removed successfully!"
 msgstr ""

@@ -1,13 +1,16 @@
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.shortcuts import render, get_object_or_404, redirect
 from django.utils import timezone
+from django.http import HttpResponse
+from datetime import date
+from django.utils.timezone import utc
 from django.http import JsonResponse
 from django.template.loader import render_to_string
 from django.views.decorators.csrf import ensure_csrf_cookie, csrf_protect
 from django.views.decorators.http import require_http_methods
 from django.db.models import Count, Case, When
 from .models import Idea, Criterion,Popular_Vote, Phase, Phase_History,Category, Comment, UserProfile, Dimension, Evaluation, Category_Image, Use_Term, Challenge
-from .forms import IdeaForm, CriterionForm,IdeaFormUpdate, CategoryForm, EvaluationForm, EvaluationForm, ChallengeForm
+from .forms import IdeaForm, CriterionForm, IdeaFormUpdate, CategoryForm, CategoryImageForm, EvaluationForm, EvaluationForm, ChallengeForm, UseTermForm
 from .singleton import Profanity_Check
 from django import forms
 from wordfilter import Wordfilter
@@ -328,46 +331,23 @@ def criterion_remove(request, pk):
 
     return redirect('criterion_list')
 
-def open_category_new(request, ):
-    data = dict()
-    context = {'form': CategoryForm()}
-    data['html_form'] = render_to_string('ideax/category_new.html',
-                                         context,
-                                         request=request,)
-    return JsonResponse(data)
 
 @login_required
 @permission_required('ideax.add_category',raise_exception=True)
 def category_new(request):
     if request.method == "POST":
         form = CategoryForm(request.POST)
-    else:
-        form = CategoryForm()
-
-    if request.is_ajax():
-        return save_category(request, 'ideax/category_new.html', form)
-    else:
-        return redirect('category_list')
-
-def save_category(request, template_name, form):
-    data = dict()
-    if request.method == "POST":
         if form.is_valid():
             category = form.save(commit=False)
+            category.author = UserProfile.objects.get(user=request.user)
+            category.creation_date = timezone.now()
             category.save()
-
-            audit(request.user.username, get_client_ip(request), 'CATEGORY_SAVE', Category.__name__, str(category.id))
-
-            data['form_is_valid'] = True
-        else:
-            data['form_is_valid'] = False
-
-        data['html_list'] = render_to_string('ideax/includes/partial_category_list.html',
-                                             get_category_list())
-    context = {'form' : form}
-    data['html_form'] = render_to_string(template_name, context, request=request,)
-
-    return JsonResponse(data)
+            messages.success(request, _('Category saved successfully!'))
+            audit(request.user.username, get_client_ip(request), 'CREATE_CATEGORY', Category.__name__, category.id)
+            return redirect('category_list')
+    else:
+        form = CategoryForm()
+    return render(request, 'ideax/category_new.html', {'form': form})
 
 @login_required
 @permission_required('ideax.change_category',raise_exception=True)
@@ -375,30 +355,25 @@ def category_edit(request, pk):
     category = get_object_or_404(Category, pk=pk)
     if request.method == "POST":
         form = CategoryForm(request.POST, instance=category)
+        if form.is_valid():
+            form.save()
+            messages.success(request, _('Category changed successfully!'))
+            audit(request.user.username, get_client_ip(request), 'EDIT_CATEGORY_SAVE', Category.__name__, str(category.id))
+            return redirect('category_list')
     else:
         form = CategoryForm(instance=category)
 
-    return save_category(request,'ideax/category_edit.html',form)
+    return render(request, 'ideax/category_edit.html', {'form':form})
 
 @login_required
 @permission_required('ideax.delete_category',raise_exception=True)
 def category_remove(request, pk):
     category = get_object_or_404(Category, pk=pk)
-    data = dict()
-    if request.method == 'POST':
-        category.discarded = True
-        category.save()
-        audit(request.user.username, get_client_ip(request), 'REMOVE_CATEGORY_SAVE', Category.__name__, str(category.id))
-        data['form_is_valid'] = True
-        data['html_list'] = render_to_string('ideax/includes/partial_category_list.html',
-                                             get_category_list())
-    else:
-        context = {'category': category}
-        data['html_form'] = render_to_string('ideax/includes/partial_category_remove.html',
-                                             context,
-                                             request=request)
-
-    return JsonResponse(data)
+    category.discarded = True
+    category.save()
+    messages.success(request, _('Category removed successfully!'))
+    audit(request.user.username, get_client_ip(request), 'REMOVE_CATEGORY', Category.__name__, str(pk))
+    return redirect('category_list')
 
 def category_list(request):
     audit(request.user.username, get_client_ip(request), 'CATEGORY_LIST', Category.__name__, '')
@@ -562,6 +537,65 @@ def get_term_of_user(request):
     term = Use_Term.objects.get(final_date__isnull=True)
     return JsonResponse({"term" : term.term })
 
+def use_term_new(request):
+
+    if request.method == "POST":
+        form = UseTermForm(request.POST)
+        if form.is_valid():
+            if form.cleaned_data['final_date'] < form.cleaned_data['init_date']:
+                messages.error(request, _('Invalid Final Date'))
+            else:
+                form.save()
+                messages.success(request, _('Terms of Use saved successfully!'))
+                return redirect('use_term_list')
+    else:
+        form = UseTermForm()
+    return render(request, 'ideax/use_term_new.html', {'form': form})
+
+def use_term_list(request):
+    return render(request, 'ideax/use_term_list.html',get_use_term_list())
+
+def get_use_term_list():
+    return {'use_term_list': Use_Term.objects.all(), 'today': date.today()}
+
+def use_term_edit(request, pk):
+    use_term = get_object_or_404(Use_Term, pk=pk)
+    if request.method == "POST":
+        use_term_form = UseTermForm(request.POST, instance=use_term)
+    else:
+        use_term_form = UseTermForm(instance=use_term)
+    return save_use_term(request, use_term_form)
+
+def use_term_remove(request, pk):
+    use_term = get_object_or_404(Use_Term, pk=pk)
+
+
+    if request.method == 'GET':
+        use_term.final_date = timezone.now()
+        use_term.save()
+        messages.success(request, _('Terms of Use removed successfully!'))
+        return render(request, 'ideax/use_term_list.html', get_use_term_list())
+
+def save_use_term(request, form):
+    if request.method == "POST":
+        if form.is_valid():
+            use_term = form.save(commit=False)
+            if use_term.is_invalid_date():
+                messages.error(request, _('Invalid Final Date'))
+                return redirect('use_term_edit', pk = use_term.id)
+            else:
+                use_term.save()
+                return render(request, 'ideax/use_term_list.html', get_use_term_list())
+    else:
+
+        return render(request, 'ideax/use_term_edit.html', {'form': form})
+
+@login_required
+def use_term_detail(request, pk):
+     use_term = get_object_or_404(Use_Term, pk=pk)
+     return render(request, 'ideax/use_term_detail.html', {'use_term' : use_term})
+
+
 def idea_detail_pdf(request, idea_id):
     idea = Idea.objects.get(pk=idea_id)
     data = dict()
@@ -674,3 +708,50 @@ def idea_new_from_challenge(request, challenge_pk):
     form = IdeaForm(initial={'challenge': challenge, 'category': challenge.category},)
     audit(request.user.username, get_client_ip(request), 'CREATE_IDEA_FORM_FROM_MISSION', Idea.__name__, '')
     return save_idea(request, form, 'ideax/idea_new.html', True)
+
+@login_required
+def category_image_new(request):
+    if request.method == "POST":
+        form = CategoryImageForm(request.POST, request.FILES)
+
+        if form.is_valid():
+            category_image = form.save(commit=False)
+            category_image.author = UserProfile.objects.get(user=request.user)
+            category_image.creation_date = timezone.now()
+            category_image.save()
+            messages.success(request, _('Category Image saved successfully!'))
+            audit(request.user.username, get_client_ip(request), 'CREATE_CATEGORY_IMAGE', Category_Image.__name__, category_image.id)
+            return redirect('category_image_list')
+    else:
+        form = CategoryImageForm()
+    return render(request, 'ideax/category_image_new.html', {'form': form})
+
+@login_required
+def category_image_list(request):
+    category_images = Category_Image.objects.all()
+    audit(request.user.username, get_client_ip(request), 'LIST_CATEGORY_IMAGE', Category_Image.__name__,'')
+    return render(request, 'ideax/category_image_list.html', {'category_images': category_images})
+
+@login_required
+def category_image_edit(request, pk):
+    category_image = get_object_or_404(Category_Image, pk=pk)
+
+    if request.method == "POST":
+        form = CategoryImageForm(request.POST, request.FILES, instance=category_image)
+
+        if form.is_valid():
+            form.save()
+            messages.success(request, _('Category Image changed successfully!'))
+            audit(request.user.username, get_client_ip(request), 'EDIT_CATEGORY_IMAGE', Category_Image.__name__, str(pk))
+            return redirect('category_image_list')
+    else:
+        form = CategoryImageForm(instance=category_image)
+    return render(request, 'ideax/category_image_edit.html', {'form': form})
+
+@login_required
+def category_image_remove(request, pk):
+    category_image = get_object_or_404(Category_Image, pk=pk)
+    category_image.delete()
+    messages.success(request, _('Category Image removed successfully!'))
+    audit(request.user.username, get_client_ip(request), 'REMOVE_CATEGORY_IMAGE', Category_Image.__name__, str(pk))
+    return redirect('category_image_list')

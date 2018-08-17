@@ -28,8 +28,7 @@ urlpatterns = [
     path('idea/<int:pk>/changephase/<int:new_phase>/', views.change_idea_phase, name='change_phase'),
     path('idea/filter/<int:phase_pk>', views.idea_filter, name ="idea_filter"),
     path('category/new/', views.category_new, name='category_new'),
-    path('category/', views.open_category_new, name='open_category_new'),
-    path('category/list', views.category_list, name='category_list'),
+    path('category/list/', views.category_list, name='category_list'),
     path('category/<int:pk>/edit/', views.category_edit, name='category_edit'),
     path('category/<int:pk>/remove/', views.category_remove, name='category_remove'),
     #path('idea/comment/<int:pk>', views.form_redirect, name='form'),
@@ -44,8 +43,17 @@ urlpatterns = [
     path('challenge/<int:challenge_pk>/', views.challenge_detail, name="challenge_detail"),
     path('challenge/new/', views.challenge_new, name='challenge_new'),
     path('challenge/edit/<int:challenge_pk>', views.challenge_edit, name='challenge_edit'),
-    path('challenge/list', views.challenge_list, name='challenge_list'),
+    path('challenge/list/', views.challenge_list, name='challenge_list'),
     path('report', views.report_ideas, name='report_ideas'),
+    path('useterm/new/', views.use_term_new, name='use_term_new'),
+    path('useterm/list/', views.use_term_list, name='use_term_list'),
+    path('useterm/<int:pk>/', views.use_term_detail, name='use_term_detail'),
+    path('useterm/<int:pk>/edit/', views.use_term_edit, name='use_term_edit'),
+    path('useterm/<int:pk>/remove/', views.use_term_remove, name='use_term_remove'),
+    path('categoryimage/new/', views.category_image_new, name='category_image_new'),
+    path('categoryimage/list/', views.category_image_list, name='category_image_list'),
+    path('categoryimage/<int:pk>/edit/', views.category_image_edit, name='category_image_edit'),
+    path('categoryimage/<int:pk>/remove/', views.category_image_remove, name='category_image_remove'),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

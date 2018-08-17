@@ -1,0 +1,21 @@
+{% extends 'ideax/base.html' %}
+{% load staticfiles i18n %}
+
+{% block content %}
+  <div class="idea-list-bg">
+      <h1 class="display-3">{% trans 'Terms of Use' %}</h1>
+  </div>
+
+  <div class="container">
+
+  <div class="button-group">
+    <button type="button" onclick="location.href='{% url 'use_term_new' %}';" class="btn btn-primary"> {% trans 'New Terms of Use' %} </button>
+  </div>
+
+    <div id="use_term-list">
+      {% include 'ideax/includes/partial_use_term_list.html' %}
+    </div>
+
+  </div>
+
+{% endblock %}

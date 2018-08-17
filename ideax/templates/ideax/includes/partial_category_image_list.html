@@ -1,0 +1,31 @@
+{% load widget_tweaks i18n %}
+<div class="container">
+  <table class="table">
+    <thead>
+      <tr>
+
+        <th>{% trans 'Category' %}</th>
+        <th>{% trans 'Description' %}</th>
+        <th>{% trans 'Image' %}</th>
+        <th>{% trans 'Edit' %}</th>
+        <th>{% trans 'Discard' %}</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for category_image in category_images %}
+        <tr>
+          <td>{{category_image.category}}</td>
+          <td>{{category_image.description}}</td>
+          <td><img width="268" height="120" class="d-block w-100" src="{{category_image.image.url}}" alt="First slide"></td>
+
+          <div class="button-group">
+            <td><button type="button" class="btn" onclick="location.href='{% url 'category_image_edit' pk=category_image.pk %}';"><i class="fa fa-edit"></i></button></td>
+            <td><button type="button" class="btn" onclick="location.href='{% url 'category_image_remove' pk=category_image.pk %}';"><i class="fa fa-trash"></i></button></td>
+          </div>
+
+        </tr>
+      {% endfor %}
+
+  </tbody>
+  </table>
+</div>

@@ -11,7 +11,7 @@
         {% csrf_token %}
         {% include 'ideax/includes/partial_challenge_form.html' %}
         <div class="button-group">
-          <a class="back-redirect btn" href="/">{% trans 'Return' %}</a>
+          <a href="{% url 'challenge_list' %}">{% trans 'Return' %}</a>
           <button type="submit" class="btn btn-primary">{% trans 'Save' %}</button>
         </div>
       </form>
