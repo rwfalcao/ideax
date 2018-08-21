@@ -47,6 +47,7 @@ urlpatterns = [
     path('report', views.report_ideas, name='report_ideas'),
     path('useterm/new/', views.use_term_new, name='use_term_new'),
     path('useterm/list/', views.use_term_list, name='use_term_list'),
+    path('useterm/', views.get_valid_use_term, name='use_term'),
     path('useterm/<int:pk>/', views.use_term_detail, name='use_term_detail'),
     path('useterm/<int:pk>/edit/', views.use_term_edit, name='use_term_edit'),
     path('useterm/<int:pk>/remove/', views.use_term_remove, name='use_term_remove'),

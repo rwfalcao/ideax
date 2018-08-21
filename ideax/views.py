@@ -2,7 +2,8 @@ from django.contrib.auth.decorators import login_required, user_passes_test
 from django.shortcuts import render, get_object_or_404, redirect
 from django.utils import timezone
 from django.http import HttpResponse
-from datetime import date
+from datetime import date, datetime
+import pytz
 from django.utils.timezone import utc
 from django.http import JsonResponse
 from django.template.loader import render_to_string
@@ -537,64 +538,72 @@ def get_term_of_user(request):
     term = Use_Term.objects.get(final_date__isnull=True)
     return JsonResponse({"term" : term.term })
 
-def use_term_new(request):
-
-    if request.method == "POST":
-        form = UseTermForm(request.POST)
-        if form.is_valid():
-            if form.cleaned_data['final_date'] < form.cleaned_data['init_date']:
-                messages.error(request, _('Invalid Final Date'))
-            else:
-                form.save()
-                messages.success(request, _('Terms of Use saved successfully!'))
-                return redirect('use_term_list')
-    else:
-        form = UseTermForm()
-    return render(request, 'ideax/use_term_new.html', {'form': form})
-
 def use_term_list(request):
     return render(request, 'ideax/use_term_list.html',get_use_term_list())
 
 def get_use_term_list():
     return {'use_term_list': Use_Term.objects.all(), 'today': date.today()}
 
+def use_term_new(request):
+    if request.method == "POST":
+        form = UseTermForm(request.POST)
+    else:
+        form = UseTermForm()
+    return save_use_term(request, form, 'ideax/use_term_new.html')
+
+@login_required
 def use_term_edit(request, pk):
     use_term = get_object_or_404(Use_Term, pk=pk)
     if request.method == "POST":
         use_term_form = UseTermForm(request.POST, instance=use_term)
     else:
         use_term_form = UseTermForm(instance=use_term)
-    return save_use_term(request, use_term_form)
+    return save_use_term(request, use_term_form, 'ideax/use_term_edit.html')
 
+@login_required
+def save_use_term(request, form, template_name):
+    if request.method == "POST":
+        if form.is_valid():
+            use_term = form.save(commit=False)
+            use_terms = Use_Term.objects.all()
+            for term in use_terms:
+                if term.is_past_due:
+                    active = True
+                    break
+                else:
+                    active = False
+            if use_term.is_invalid_date():
+                messages.error(request, _('Invalid Final Date'))
+                return render(request, template_name, {'form': form})
+            if active:
+                messages.error(request, _('Already exists a active Term Of Use'))
+                return render(request, template_name, {'form': form})
+            use_term.save()
+            messages.success(request, _('Term of Use saved successfully!'))
+            return redirect('use_term_list')
+    else:
+        return render(request, template_name, {'form': form})
+
+@login_required
 def use_term_remove(request, pk):
     use_term = get_object_or_404(Use_Term, pk=pk)
-
-
     if request.method == 'GET':
         use_term.final_date = timezone.now()
         use_term.save()
         messages.success(request, _('Terms of Use removed successfully!'))
         return render(request, 'ideax/use_term_list.html', get_use_term_list())
 
-def save_use_term(request, form):
-    if request.method == "POST":
-        if form.is_valid():
-            use_term = form.save(commit=False)
-            if use_term.is_invalid_date():
-                messages.error(request, _('Invalid Final Date'))
-                return redirect('use_term_edit', pk = use_term.id)
-            else:
-                use_term.save()
-                return render(request, 'ideax/use_term_list.html', get_use_term_list())
-    else:
-
-        return render(request, 'ideax/use_term_edit.html', {'form': form})
-
 @login_required
 def use_term_detail(request, pk):
      use_term = get_object_or_404(Use_Term, pk=pk)
      return render(request, 'ideax/use_term_detail.html', {'use_term' : use_term})
 
+def get_valid_use_term(request):
+    use_terms = Use_Term.objects.all()
+    for term in use_terms:
+        if term.is_past_due:
+            valid_use_term = term
+    return render(request, 'ideax/use_term.html', {'use_term' : valid_use_term})
 
 def idea_detail_pdf(request, idea_id):
     idea = Idea.objects.get(pk=idea_id)
