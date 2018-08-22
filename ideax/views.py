@@ -535,8 +535,11 @@ def idea_comments(request, pk):
     return JsonResponse(data)
 
 def get_term_of_user(request):
-    term = Use_Term.objects.get(final_date__isnull=True)
-    return JsonResponse({"term" : term.term })
+    term = Use_Term.objects.filter(final_date__gte=datetime.now())
+    if term.exists():
+        return JsonResponse({"term" : term[0].term })
+    else:
+        return JsonResponse({"term" : _("No Term of Use found")})
 
 def use_term_list(request):
     return render(request, 'ideax/use_term_list.html',get_use_term_list())
@@ -603,7 +606,8 @@ def get_valid_use_term(request):
     for term in use_terms:
         if term.is_past_due:
             valid_use_term = term
-    return render(request, 'ideax/use_term.html', {'use_term' : valid_use_term})
+            return render(request, 'ideax/use_term.html', {'use_term' : valid_use_term})
+    return render(request, 'ideax/use_term.html', {'use_term' : _("No Term of Use found")})
 
 def idea_detail_pdf(request, idea_id):
     idea = Idea.objects.get(pk=idea_id)

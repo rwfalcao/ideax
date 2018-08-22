@@ -484,12 +484,6 @@ msgstr ""
 msgid "Update Idea"
 msgstr ""
 
-#: ideax/templates/ideax/includes/partial_use_term.html:3
-#: ideax/templates/ideax/use_term.html:7
-#: ideax/templates/ideax/use_term_detail.html:8
-msgid "Term Of Use"
-msgstr ""
-
 #: ideax/templates/ideax/includes/partial_use_term_list.html:10
 msgid "Status"
 msgstr ""
@@ -570,6 +564,11 @@ msgstr ""
 
 #: ideax/templates/ideax/phase_list.html:9
 msgid "Remove"
+msgstr ""
+
+#: ideax/templates/ideax/use_term.html:7
+#: ideax/templates/ideax/use_term_detail.html:8
+msgid "Term Of Use"
 msgstr ""
 
 #: ideax/templates/ideax/use_term_detail.html:19
@@ -690,38 +689,44 @@ msgstr ""
 msgid "Your comment has been posted."
 msgstr ""
 
-#: ideax/views.py:576
+#: ideax/views.py:542 ideax/views.py:610
+#, fuzzy
+#| msgid "Term of use accept!"
+msgid "No Term of Use found"
+msgstr "Termo de uso aceito!"
+
+#: ideax/views.py:579
 msgid "Invalid Final Date"
 msgstr ""
 
-#: ideax/views.py:579
+#: ideax/views.py:582
 msgid "Already exists a active Term Of Use"
 msgstr ""
 
-#: ideax/views.py:582
+#: ideax/views.py:585
 #, fuzzy
 #| msgid "Term of use accept!"
 msgid "Term of Use saved successfully!"
 msgstr "Termo de uso aceito!"
 
-#: ideax/views.py:593
+#: ideax/views.py:596
 #, fuzzy
 #| msgid "Term of use accept!"
 msgid "Terms of Use removed successfully!"
 msgstr "Termo de uso aceito!"
 
-#: ideax/views.py:646 ideax/views.py:659
+#: ideax/views.py:650 ideax/views.py:663
 msgid "Challenge saved successfully!"
 msgstr ""
 
-#: ideax/views.py:731
+#: ideax/views.py:735
 msgid "Category Image saved successfully!"
 msgstr ""
 
-#: ideax/views.py:753
+#: ideax/views.py:757
 msgid "Category Image changed successfully!"
 msgstr ""
 
-#: ideax/views.py:764
+#: ideax/views.py:768
 msgid "Category Image removed successfully!"
 msgstr ""

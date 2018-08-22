@@ -219,7 +219,7 @@ class Use_Term(models.Model):
     creator = models.ForeignKey('UserProfile',on_delete=models.PROTECT)
     term = models.TextField(max_length=12500)
     init_date = models.DateTimeField()
-    final_date = models.DateTimeField(blank=True, null=True)
+    final_date = models.DateTimeField()
 
     @property
     def is_past_due(self):

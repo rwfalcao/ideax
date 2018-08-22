@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-08-21 11:52-0300\n"
+"POT-Creation-Date: 2018-08-22 13:55-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -504,12 +504,6 @@ msgstr "Confirmar"
 msgid "Update Idea"
 msgstr "Atualizar Ideia"
 
-#: ideax/templates/ideax/includes/partial_use_term.html:3
-#: ideax/templates/ideax/use_term.html:7
-#: ideax/templates/ideax/use_term_detail.html:8
-msgid "Term Of Use"
-msgstr "Termo de uso"
-
 #: ideax/templates/ideax/includes/partial_use_term_list.html:10
 msgid "Status"
 msgstr "Status"
@@ -605,6 +599,11 @@ msgstr "Nova Fase"
 #: ideax/templates/ideax/phase_list.html:9
 msgid "Remove"
 msgstr "Remover"
+
+#: ideax/templates/ideax/use_term.html:7
+#: ideax/templates/ideax/use_term_detail.html:8
+msgid "Term Of Use"
+msgstr "Termo de uso"
 
 #: ideax/templates/ideax/use_term_detail.html:19
 msgid "Expiration Date "
@@ -719,35 +718,39 @@ msgstr "É necessário escrever um comentário."
 msgid "Your comment has been posted."
 msgstr "Comentário postado com sucesso."
 
-#: ideax/views.py:576
+#: ideax/views.py:542 ideax/views.py:610
+msgid "No Term of Use found"
+msgstr "Termo de Uso não encontrado"
+
+#: ideax/views.py:579
 msgid "Invalid Final Date"
 msgstr "Data Final Inválida"
 
-#: ideax/views.py:579
+#: ideax/views.py:582
 msgid "Already exists a active Term Of Use"
 msgstr "Já existe um Termo de Uso ativo"
 
-#: ideax/views.py:582
+#: ideax/views.py:585
 msgid "Term of Use saved successfully!"
 msgstr "Termo de Uso salvo com sucesso!"
 
-#: ideax/views.py:593
+#: ideax/views.py:596
 msgid "Terms of Use removed successfully!"
 msgstr "Termo de Uso removido com sucesso!"
 
-#: ideax/views.py:646 ideax/views.py:659
+#: ideax/views.py:650 ideax/views.py:663
 msgid "Challenge saved successfully!"
 msgstr "Desafio salvo com sucesso!"
 
-#: ideax/views.py:731
+#: ideax/views.py:735
 msgid "Category Image saved successfully!"
 msgstr "Imagem da Categoria salva com sucesso!"
 
-#: ideax/views.py:753
+#: ideax/views.py:757
 msgid "Category Image changed successfully!"
 msgstr "Imagem da Categoria alterada com sucesso!"
 
-#: ideax/views.py:764
+#: ideax/views.py:768
 msgid "Category Image removed successfully!"
 msgstr "Imagem da Categoria removida com sucesso!"
 

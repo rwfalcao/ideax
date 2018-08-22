@@ -1,0 +1,577 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.9~svn20110310	//
+0001_initial.py	../ideax/migrations/0001_initial.py	1;"	kind:file	line:1
+0002_auto_20180221_1629.py	../ideax/migrations/0002_auto_20180221_1629.py	1;"	kind:file	line:1
+0003_auto_20180225_1220.py	../ideax/migrations/0003_auto_20180225_1220.py	1;"	kind:file	line:1
+0004_auto_20180307_1451.py	../ideax/migrations/0004_auto_20180307_1451.py	1;"	kind:file	line:1
+0005_category_discarded.py	../ideax/migrations/0005_category_discarded.py	1;"	kind:file	line:1
+0006_comment.py	../ideax/migrations/0006_comment.py	1;"	kind:file	line:1
+0007_auto_20180328_1543.py	../ideax/migrations/0007_auto_20180328_1543.py	1;"	kind:file	line:1
+0008_auto_20180329_1444.py	../ideax/migrations/0008_auto_20180329_1444.py	1;"	kind:file	line:1
+0009_userprofile_manager.py	../ideax/migrations/0009_userprofile_manager.py	1;"	kind:file	line:1
+0010_auto_20180413_1245.py	../ideax/migrations/0010_auto_20180413_1245.py	1;"	kind:file	line:1
+0011_idea_score.py	../ideax/migrations/0011_idea_score.py	1;"	kind:file	line:1
+0012_evaluation_note.py	../ideax/migrations/0012_evaluation_note.py	1;"	kind:file	line:1
+0013_category_image.py	../ideax/migrations/0013_category_image.py	1;"	kind:file	line:1
+0014_auto_20180503_1241.py	../ideax/migrations/0014_auto_20180503_1241.py	1;"	kind:file	line:1
+0015_auto_20180507_1703.py	../ideax/migrations/0015_auto_20180507_1703.py	1;"	kind:file	line:1
+0016_idea_summary.py	../ideax/migrations/0016_idea_summary.py	1;"	kind:file	line:1
+0017_auto_20180507_1815.py	../ideax/migrations/0017_auto_20180507_1815.py	1;"	kind:file	line:1
+0018_comment_ip.py	../ideax/migrations/0018_comment_ip.py	1;"	kind:file	line:1
+0019_auto_20180629_1909.py	../ideax/migrations/0019_auto_20180629_1909.py	1;"	kind:file	line:1
+0020_auto_20180705_1122.py	../ideax/migrations/0020_auto_20180705_1122.py	1;"	kind:file	line:1
+ACT	../ideax/models.py	/^    ACT      = (5, _('Evolution'), 'develop','tasks')$/;"	kind:variable	line:31
+ALLOWED_HOSTS	../ideax/settings.py	/^ALLOWED_HOSTS = ['127.0.0.1']$/;"	kind:variable	line:32
+APROVED	../ideax/models.py	/^    APROVED  = (4, _('Approval'), 'aproved','star')$/;"	kind:variable	line:30
+ARCHIVED	../ideax/models.py	/^    ARCHIVED = (7, _('Archived'), 'archived', 'archive')$/;"	kind:variable	line:33
+AUTHENTICATION_BACKENDS	../ideax/settings.py	/^    AUTHENTICATION_BACKENDS = [$/;"	kind:variable	line:154
+AUTHENTICATION_BACKENDS	../ideax/settings.py	/^    AUTHENTICATION_BACKENDS = [$/;"	kind:variable	line:162
+AUTH_LDAP_BIND_DN	../ideax/settings.py	/^    AUTH_LDAP_BIND_DN = config('AUTH_LDAP_BIND_DN', default='')$/;"	kind:variable	line:144
+AUTH_LDAP_BIND_PASSWORD	../ideax/settings.py	/^    AUTH_LDAP_BIND_PASSWORD = config('AUTH_LDAP_BIND_PASSWORD', default='')$/;"	kind:variable	line:145
+AUTH_LDAP_GLOBAL_OPTIONS	../ideax/settings.py	/^    AUTH_LDAP_GLOBAL_OPTIONS = {ldap.OPT_X_TLS_REQUIRE_CERT : ldap.OPT_X_TLS_NEVER}$/;"	kind:variable	line:146
+AUTH_LDAP_PROFILE_ATTR_MAP	../ideax/settings.py	/^    AUTH_LDAP_PROFILE_ATTR_MAP = {$/;"	kind:variable	line:158
+AUTH_LDAP_SERVER_URI	../ideax/settings.py	/^AUTH_LDAP_SERVER_URI = config('AUTH_LDAP_SERVER_URI', default='')$/;"	kind:variable	line:139
+AUTH_LDAP_START_TLS	../ideax/settings.py	/^    AUTH_LDAP_START_TLS = config('AUTH_LDAP_START_TLS', default=0, cast=bool)$/;"	kind:variable	line:147
+AUTH_LDAP_USER_ATTR_MAP	../ideax/settings.py	/^    AUTH_LDAP_USER_ATTR_MAP = {$/;"	kind:variable	line:149
+AUTH_LDAP_USER_SEARCH	../ideax/settings.py	/^    AUTH_LDAP_USER_SEARCH = LDAPSearch(config('AUTH_LDAP_USER_SEARCH', default='ou=users,dc=example,dc=com'), ldap.SCOPE_SUBTREE, "(uid=%(user)s)")$/;"	kind:variable	line:148
+AUTH_PASSWORD_VALIDATORS	../ideax/settings.py	/^AUTH_PASSWORD_VALIDATORS = [$/;"	kind:variable	line:96
+BASE_DIR	../ideax/settings.py	/^BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))$/;"	kind:variable	line:18
+Badword	../ideax/badwords.py	/^class Badword(object):$/;"	kind:class	line:5
+BlogConfig	../ideax/apps.py	/^class BlogConfig(AppConfig):$/;"	kind:class	line:4
+CELERY_ACCEPT_CONTENT	../ideax/settings.py	/^CELERY_ACCEPT_CONTENT = ['pickle', 'json','application\/text']$/;"	kind:variable	line:177
+CELERY_BROKER_URL	../ideax/settings.py	/^CELERY_BROKER_URL = config('CELERY_BROKER_URL', default='')$/;"	kind:variable	line:178
+Category	../ideax/models.py	/^class Category(models.Model):$/;"	kind:class	line:78
+CategoryForm	../ideax/forms.py	/^class CategoryForm(forms.ModelForm):$/;"	kind:class	line:35
+CategoryImageForm	../ideax/forms.py	/^class CategoryImageForm(forms.ModelForm):$/;"	kind:class	line:41
+Category_Dimension	../ideax/models.py	/^class Category_Dimension(models.Model):$/;"	kind:class	line:201
+Category_Image	../ideax/models.py	/^class Category_Image(models.Model):$/;"	kind:class	line:89
+Challenge	../ideax/models.py	/^class Challenge(models.Model):$/;"	kind:class	line:134
+ChallengeForm	../ideax/forms.py	/^class ChallengeForm(forms.ModelForm):$/;"	kind:class	line:48
+Comment	../ideax/models.py	/^class Comment(MPTTModel):$/;"	kind:class	line:164
+Comment_Feed	../ideax/feeds.py	/^class Comment_Feed(Feed):$/;"	kind:class	line:5
+Criterion	../ideax/models.py	/^class Criterion(models.Model):$/;"	kind:class	line:67
+CriterionForm	../ideax/forms.py	/^class CriterionForm(forms.ModelForm):$/;"	kind:class	line:28
+DATABASES	../ideax/settings.py	/^DATABASES = {$/;"	kind:variable	line:89
+DEBUG	../ideax/settings.py	/^DEBUG = True$/;"	kind:variable	line:30
+DEFAULT_FROM_EMAIL	../ideax/settings.py	/^    DEFAULT_FROM_EMAIL=config('DEFAULT_FROM_EMAIL')$/;"	kind:variable	line:190
+DONE	../ideax/models.py	/^    DONE     = (6, _('Done'), 'done', 'check')$/;"	kind:variable	line:32
+Dimension	../ideax/models.py	/^class Dimension(models.Model):$/;"	kind:class	line:191
+EMAIL_BACKEND	../ideax/settings.py	/^    EMAIL_BACKEND = config('EMAIL_BACKEND', default='')$/;"	kind:variable	line:187
+EMAIL_HOST	../ideax/settings.py	/^EMAIL_HOST = config('EMAIL_HOST', default='')$/;"	kind:variable	line:179
+EMAIL_HOST_PASSWORD	../ideax/settings.py	/^EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD', default='')$/;"	kind:variable	line:182
+EMAIL_HOST_USER	../ideax/settings.py	/^EMAIL_HOST_USER = config('EMAIL_HOST_USER', default='')$/;"	kind:variable	line:181
+EMAIL_PORT	../ideax/settings.py	/^EMAIL_PORT = config('EMAIL_PORT', default='')$/;"	kind:variable	line:180
+EMAIL_USE_SSL	../ideax/settings.py	/^EMAIL_USE_SSL = config('EMAIL_USE_SSL', default=0, cast=bool)$/;"	kind:variable	line:184
+EMAIL_USE_TLS	../ideax/settings.py	/^EMAIL_USE_TLS = config('EMAIL_USE_TLS', default=0, cast=bool)$/;"	kind:variable	line:183
+Evaluation	../ideax/models.py	/^class Evaluation(models.Model):$/;"	kind:class	line:209
+EvaluationForm	../ideax/forms.py	/^class EvaluationForm(forms.Form):$/;"	kind:class	line:65
+Evaluation_Item	../ideax/models.py	/^class Evaluation_Item(models.Model):$/;"	kind:class	line:74
+FORMAT_ID	../ideax/forms.py	/^    FORMAT_ID = 'category_dimension_%s'$/;"	kind:variable	line:66
+FORMAT_ID_NOTE	../ideax/forms.py	/^    FORMAT_ID_NOTE = 'note_dimension_%s'$/;"	kind:variable	line:67
+GENERAL_USER_GROUP	../ideax/settings.py	/^GENERAL_USER_GROUP=config('GENERAL_USER_GROUP')$/;"	kind:variable	line:232
+GROW	../ideax/models.py	/^    GROW     = (1, _('Discussion'), 'discussion', 'comments')$/;"	kind:variable	line:27
+IDEATION	../ideax/models.py	/^    IDEATION = (3, _('Ideation'), 'ideation','ideation')$/;"	kind:variable	line:29
+INSTALLED_APPS	../ideax/settings.py	/^INSTALLED_APPS = [$/;"	kind:variable	line:36
+IPWARE_META_PRECEDENCE_ORDER	../ideax/settings.py	/^IPWARE_META_PRECEDENCE_ORDER = ($/;"	kind:variable	line:192
+Idea	../ideax/models.py	/^class Idea(models.Model):$/;"	kind:class	line:101
+IdeaForm	../ideax/forms.py	/^class IdeaForm(forms.ModelForm):$/;"	kind:class	line:7
+IdeaFormUpdate	../ideax/forms.py	/^class IdeaFormUpdate(forms.ModelForm):$/;"	kind:class	line:21
+LANGUAGES	../ideax/settings.py	/^LANGUAGES = ($/;"	kind:variable	line:121
+LANGUAGE_CODE	../ideax/settings.py	/^LANGUAGE_CODE = 'pt-BR'$/;"	kind:variable	line:115
+LOCALE_PATHS	../ideax/settings.py	/^LOCALE_PATHS = (os.path.join(BASE_DIR, 'locale'),)$/;"	kind:variable	line:126
+LOGGING	../ideax/settings.py	/^LOGGING = {$/;"	kind:variable	line:205
+LOGIN_REDIRECT_URL	../ideax/settings.py	/^LOGIN_REDIRECT_URL = '\/idea\/list'$/;"	kind:variable	line:136
+LOGOUT_REDIRECT_URL	../ideax/settings.py	/^LOGOUT_REDIRECT_URL = '\/'$/;"	kind:variable	line:137
+MEDIA_ROOT	../ideax/settings.py	/^MEDIA_ROOT = os.path.join(BASE_DIR, 'media')$/;"	kind:variable	line:21
+MEDIA_URL	../ideax/settings.py	/^MEDIA_URL = '\/media\/'$/;"	kind:variable	line:20
+MIDDLEWARE	../ideax/settings.py	/^MIDDLEWARE = [$/;"	kind:variable	line:51
+MPTTMeta	../ideax/models.py	/^    class MPTTMeta:$/;"	kind:class	line:175
+Mail_Util	../ideax/mail_util.py	/^class Mail_Util:$/;"	kind:class	line:5
+Meta	../ideax/forms.py	/^    class Meta:$/;"	kind:class	line:23
+Meta	../ideax/forms.py	/^    class Meta:$/;"	kind:class	line:30
+Meta	../ideax/forms.py	/^    class Meta:$/;"	kind:class	line:37
+Meta	../ideax/forms.py	/^    class Meta:$/;"	kind:class	line:43
+Meta	../ideax/forms.py	/^    class Meta:$/;"	kind:class	line:50
+Meta	../ideax/forms.py	/^    class Meta:$/;"	kind:class	line:60
+Meta	../ideax/forms.py	/^    class Meta:$/;"	kind:class	line:9
+Migration	../ideax/migrations/0001_initial.py	/^class Migration(migrations.Migration):$/;"	kind:class	line:8
+Migration	../ideax/migrations/0002_auto_20180221_1629.py	/^class Migration(migrations.Migration):$/;"	kind:class	line:6
+Migration	../ideax/migrations/0003_auto_20180225_1220.py	/^class Migration(migrations.Migration):$/;"	kind:class	line:6
+Migration	../ideax/migrations/0004_auto_20180307_1451.py	/^class Migration(migrations.Migration):$/;"	kind:class	line:8
+Migration	../ideax/migrations/0005_category_discarded.py	/^class Migration(migrations.Migration):$/;"	kind:class	line:6
+Migration	../ideax/migrations/0006_comment.py	/^class Migration(migrations.Migration):$/;"	kind:class	line:9
+Migration	../ideax/migrations/0007_auto_20180328_1543.py	/^class Migration(migrations.Migration):$/;"	kind:class	line:6
+Migration	../ideax/migrations/0008_auto_20180329_1444.py	/^class Migration(migrations.Migration):$/;"	kind:class	line:8
+Migration	../ideax/migrations/0009_userprofile_manager.py	/^class Migration(migrations.Migration):$/;"	kind:class	line:6
+Migration	../ideax/migrations/0010_auto_20180413_1245.py	/^class Migration(migrations.Migration):$/;"	kind:class	line:7
+Migration	../ideax/migrations/0011_idea_score.py	/^class Migration(migrations.Migration):$/;"	kind:class	line:6
+Migration	../ideax/migrations/0012_evaluation_note.py	/^class Migration(migrations.Migration):$/;"	kind:class	line:6
+Migration	../ideax/migrations/0013_category_image.py	/^class Migration(migrations.Migration):$/;"	kind:class	line:7
+Migration	../ideax/migrations/0014_auto_20180503_1241.py	/^class Migration(migrations.Migration):$/;"	kind:class	line:6
+Migration	../ideax/migrations/0015_auto_20180507_1703.py	/^class Migration(migrations.Migration):$/;"	kind:class	line:7
+Migration	../ideax/migrations/0016_idea_summary.py	/^class Migration(migrations.Migration):$/;"	kind:class	line:6
+Migration	../ideax/migrations/0017_auto_20180507_1815.py	/^class Migration(migrations.Migration):$/;"	kind:class	line:6
+Migration	../ideax/migrations/0018_comment_ip.py	/^class Migration(migrations.Migration):$/;"	kind:class	line:6
+Migration	../ideax/migrations/0019_auto_20180629_1909.py	/^class Migration(migrations.Migration):$/;"	kind:class	line:7
+Migration	../ideax/migrations/0020_auto_20180705_1122.py	/^class Migration(migrations.Migration):$/;"	kind:class	line:7
+New_Idea_Feed	../ideax/feeds.py	/^class New_Idea_Feed(Feed):$/;"	kind:class	line:25
+PAUSED	../ideax/models.py	/^    PAUSED   = (8, _('Paused'), 'paused', 'pause')$/;"	kind:variable	line:34
+PERMISSIONS	../ideax/settings.py	/^PERMISSIONS={$/;"	kind:variable	line:173
+PRIVATE_IPS_PREFIX	../ideax/util.py	/^PRIVATE_IPS_PREFIX = ('10.', '172.', '192.', )$/;"	kind:variable	line:11
+Phase	../ideax/models.py	/^class Phase(Enum):$/;"	kind:class	line:26
+Phase_History	../ideax/models.py	/^class Phase_History(models.Model):$/;"	kind:class	line:59
+Popular_Vote	../ideax/models.py	/^class Popular_Vote(models.Model):$/;"	kind:class	line:158
+Profanity_Check	../ideax/singleton.py	/^class Profanity_Check:$/;"	kind:class	line:5
+RATE	../ideax/models.py	/^    RATE     = (2, _('Evaluation'), 'rate','clipboard')$/;"	kind:variable	line:28
+ROOT_URLCONF	../ideax/settings.py	/^ROOT_URLCONF = 'ideax.urls'$/;"	kind:variable	line:62
+SECRET_KEY	../ideax/settings.py	/^SECRET_KEY = config('SECRET_KEY')$/;"	kind:variable	line:26
+STATIC_ROOT	../ideax/settings.py	/^STATIC_ROOT = os.path.join(BASE_DIR, 'static')$/;"	kind:variable	line:134
+STATIC_URL	../ideax/settings.py	/^STATIC_URL = '\/static\/'$/;"	kind:variable	line:133
+TEMPLATES	../ideax/settings.py	/^TEMPLATES = [$/;"	kind:variable	line:64
+TIME_ZONE	../ideax/settings.py	/^TIME_ZONE = 'America\/Sao_Paulo'$/;"	kind:variable	line:116
+USE_I18N	../ideax/settings.py	/^USE_I18N = True$/;"	kind:variable	line:119
+USE_L10N	../ideax/settings.py	/^USE_L10N = True$/;"	kind:variable	line:117
+USE_TZ	../ideax/settings.py	/^USE_TZ = True$/;"	kind:variable	line:118
+UseTermForm	../ideax/forms.py	/^class UseTermForm(forms.ModelForm):$/;"	kind:class	line:58
+Use_Term	../ideax/models.py	/^class Use_Term(models.Model):$/;"	kind:class	line:218
+UserProfile	../ideax/models.py	/^class UserProfile (models.Model):$/;"	kind:class	line:180
+Vote	../ideax/models.py	/^class Vote(models.Model):$/;"	kind:class	line:151
+WSGI_APPLICATION	../ideax/settings.py	/^WSGI_APPLICATION = 'ideax.wsgi.application'$/;"	kind:variable	line:81
+__all__	../ideax/__init__.py	/^__all__ = ['celery_app']$/;"	kind:variable	line:3
+__init__	../ideax/badwords.py	/^    def __init__(self, datafile=None):$/;"	kind:member	line:8
+__init__	../ideax/forms.py	/^    def __init__(self, *args, **kwargs):$/;"	kind:member	line:69
+__init__	../ideax/mail_util.py	/^    def __init__(self):$/;"	kind:member	line:6
+__init__	../ideax/models.py	/^    def __init__(self, id, description, css_class, icon_class):$/;"	kind:member	line:37
+__init__.py	../ideax/__init__.py	1;"	kind:file	line:1
+__init__.py	../ideax/migrations/__init__.py	1;"	kind:file	line:1
+__location__	../ideax/singleton.py	/^    __location__ = os.path.realpath($/;"	kind:variable	line:6
+__str__	../ideax/models.py	/^    def __str__(self):$/;"	kind:member	line:148
+__str__	../ideax/models.py	/^    def __str__(self):$/;"	kind:member	line:187
+__str__	../ideax/models.py	/^    def __str__(self):$/;"	kind:member	line:198
+__str__	../ideax/models.py	/^    def __str__(self):$/;"	kind:member	line:206
+__str__	../ideax/models.py	/^    def __str__(self):$/;"	kind:member	line:71
+__str__	../ideax/models.py	/^    def __str__(self):$/;"	kind:member	line:86
+accept_use_term	../ideax/views.py	/^def accept_use_term(request):$/;"	kind:function	line:65
+acceptance_date	../ideax/models.py	/^    acceptance_date = models.DateTimeField(null=True)$/;"	kind:variable	line:183
+active	../ideax/models.py	/^    active = models.BooleanField(default=True)$/;"	kind:variable	line:141
+admin.py	../ideax/admin.py	1;"	kind:file	line:1
+app	../ideax/celery.py	/^app = Celery('ideax', broker=settings.CELERY_BROKER_URL)$/;"	kind:variable	line:10
+application	../ideax/wsgi.py	/^application = get_wsgi_application()$/;"	kind:variable	line:16
+apps.py	../ideax/apps.py	1;"	kind:file	line:1
+audit	../ideax/views.py	/^def audit(username, ip_addr, operation, className, objectId):$/;"	kind:function	line:46
+author	../docs/conf.py	/^author = 'The IdeaX Authors'$/;"	kind:variable	line:51
+author	../ideax/models.py	/^    author = models.ForeignKey('UserProfile',on_delete=models.CASCADE)$/;"	kind:variable	line:107
+author	../ideax/models.py	/^    author = models.ForeignKey('UserProfile',on_delete=models.CASCADE)$/;"	kind:variable	line:142
+author	../ideax/models.py	/^    author = models.ForeignKey('UserProfile',on_delete=models.DO_NOTHING)$/;"	kind:variable	line:64
+author	../ideax/models.py	/^    author = models.ForeignKey('UserProfile',on_delete=models.PROTECT)$/;"	kind:variable	line:166
+badword	../ideax/singleton.py	/^    badword = Badword(os.path.join(__location__, 'badwords.json'))$/;"	kind:variable	line:9
+badwords.py	../ideax/badwords.py	1;"	kind:file	line:1
+blacklist	../ideax/badwords.py	/^    blacklist = []$/;"	kind:variable	line:6
+category	../ideax/models.py	/^    category = models.ForeignKey('Category', models.SET_NULL,null=True)$/;"	kind:variable	line:108
+category	../ideax/models.py	/^    category = models.ForeignKey('Category', models.SET_NULL,null=True)$/;"	kind:variable	line:145
+category	../ideax/models.py	/^    category = models.ForeignKey('Category', models.SET_NULL,null=True)$/;"	kind:variable	line:92
+category_dimension	../ideax/models.py	/^    category_dimension = models.ForeignKey('Category_Dimension',on_delete=models.PROTECT)$/;"	kind:variable	line:213
+category_edit	../ideax/views.py	/^def category_edit(request, pk):$/;"	kind:function	line:355
+category_image	../ideax/models.py	/^    category_image = models.CharField(max_length=200, default=settings.MEDIA_URL+'category\/default.png' )$/;"	kind:variable	line:111
+category_image_edit	../ideax/views.py	/^def category_image_edit(request, pk):$/;"	kind:function	line:748
+category_image_list	../ideax/views.py	/^def category_image_list(request):$/;"	kind:function	line:742
+category_image_new	../ideax/views.py	/^def category_image_new(request):$/;"	kind:function	line:725
+category_image_remove	../ideax/views.py	/^def category_image_remove(request, pk):$/;"	kind:function	line:764
+category_list	../ideax/views.py	/^def category_list(request):$/;"	kind:function	line:379
+category_new	../ideax/views.py	/^def category_new(request):$/;"	kind:function	line:338
+category_remove	../ideax/views.py	/^def category_remove(request, pk):$/;"	kind:function	line:371
+celery.py	../ideax/celery.py	1;"	kind:file	line:1
+challenge	../ideax/models.py	/^    challenge = models.ForeignKey('Challenge', models.SET_NULL,null=True, blank=True)$/;"	kind:variable	line:113
+challenge_detail	../ideax/views.py	/^def challenge_detail(request, challenge_pk):$/;"	kind:function	line:631
+challenge_edit	../ideax/views.py	/^def challenge_edit(request, challenge_pk):$/;"	kind:function	line:653
+challenge_list	../ideax/views.py	/^def challenge_list(request):$/;"	kind:function	line:676
+challenge_new	../ideax/views.py	/^def challenge_new(request):$/;"	kind:function	line:637
+change_idea_phase	../ideax/views.py	/^def change_idea_phase(request, pk, new_phase):$/;"	kind:function	line:435
+check_user_profile	../ideax/models.py	/^def check_user_profile(sender, user, request, **kwargs):$/;"	kind:function	line:15
+choices	../ideax/models.py	/^    def choices(cls):$/;"	kind:member	line:45
+comment_phase	../ideax/models.py	/^    comment_phase = models.PositiveSmallIntegerField()$/;"	kind:variable	line:171
+conf.py	../docs/conf.py	1;"	kind:file	line:1
+context_processors.py	../ideax/context_processors.py	1;"	kind:file	line:1
+copyright	../docs/conf.py	/^copyright = '2018, The IdeaX Authors'$/;"	kind:variable	line:50
+count_dislikes	../ideax/models.py	/^    def count_dislikes(self):$/;"	kind:member	line:117
+count_likes	../ideax/models.py	/^    def count_likes(self):$/;"	kind:member	line:119
+count_popular_vote	../ideax/models.py	/^    def count_popular_vote(self, like_boolean):$/;"	kind:member	line:115
+creation_date	../ideax/models.py	/^    creation_date = models.DateTimeField('data criação')$/;"	kind:variable	line:106
+creation_date	../ideax/models.py	/^    creation_date = models.DateTimeField()$/;"	kind:variable	line:143
+creator	../ideax/models.py	/^    creator = models.ForeignKey('UserProfile',on_delete=models.PROTECT)$/;"	kind:variable	line:219
+criterion	../ideax/models.py	/^    criterion = models.ForeignKey(Criterion,on_delete=models.PROTECT)$/;"	kind:variable	line:76
+criterion_edit	../ideax/views.py	/^def criterion_edit(request, pk):$/;"	kind:function	line:253
+criterion_list	../ideax/views.py	/^def criterion_list(request):$/;"	kind:function	line:246
+criterion_new	../ideax/views.py	/^def criterion_new(request):$/;"	kind:function	line:229
+criterion_remove	../ideax/views.py	/^def criterion_remove(request, pk):$/;"	kind:function	line:326
+current	../ideax/models.py	/^    current = models.BooleanField()$/;"	kind:variable	line:65
+current_phase	../ideax/models.py	/^    current_phase = models.PositiveSmallIntegerField()$/;"	kind:variable	line:60
+date	../ideax/models.py	/^    date = models.DateTimeField()$/;"	kind:variable	line:170
+date_change	../ideax/models.py	/^    date_change = models.DateTimeField('data da mudança')$/;"	kind:variable	line:62
+default_dburl	../ideax/settings.py	/^default_dburl = 'sqlite:\/\/\/' + os.path.join(BASE_DIR, 'db.sqlite3')$/;"	kind:variable	line:87
+deleted	../ideax/models.py	/^    deleted = models.BooleanField(default=False)$/;"	kind:variable	line:172
+dependencies	../ideax/migrations/0001_initial.py	/^    dependencies = [$/;"	kind:variable	line:12
+dependencies	../ideax/migrations/0002_auto_20180221_1629.py	/^    dependencies = [$/;"	kind:variable	line:8
+dependencies	../ideax/migrations/0003_auto_20180225_1220.py	/^    dependencies = [$/;"	kind:variable	line:8
+dependencies	../ideax/migrations/0004_auto_20180307_1451.py	/^    dependencies = [$/;"	kind:variable	line:10
+dependencies	../ideax/migrations/0005_category_discarded.py	/^    dependencies = [$/;"	kind:variable	line:8
+dependencies	../ideax/migrations/0006_comment.py	/^    dependencies = [$/;"	kind:variable	line:11
+dependencies	../ideax/migrations/0007_auto_20180328_1543.py	/^    dependencies = [$/;"	kind:variable	line:8
+dependencies	../ideax/migrations/0008_auto_20180329_1444.py	/^    dependencies = [$/;"	kind:variable	line:10
+dependencies	../ideax/migrations/0009_userprofile_manager.py	/^    dependencies = [$/;"	kind:variable	line:8
+dependencies	../ideax/migrations/0010_auto_20180413_1245.py	/^    dependencies = [$/;"	kind:variable	line:9
+dependencies	../ideax/migrations/0011_idea_score.py	/^    dependencies = [$/;"	kind:variable	line:8
+dependencies	../ideax/migrations/0012_evaluation_note.py	/^    dependencies = [$/;"	kind:variable	line:8
+dependencies	../ideax/migrations/0013_category_image.py	/^    dependencies = [$/;"	kind:variable	line:9
+dependencies	../ideax/migrations/0014_auto_20180503_1241.py	/^    dependencies = [$/;"	kind:variable	line:8
+dependencies	../ideax/migrations/0015_auto_20180507_1703.py	/^    dependencies = [$/;"	kind:variable	line:9
+dependencies	../ideax/migrations/0016_idea_summary.py	/^    dependencies = [$/;"	kind:variable	line:8
+dependencies	../ideax/migrations/0017_auto_20180507_1815.py	/^    dependencies = [$/;"	kind:variable	line:8
+dependencies	../ideax/migrations/0018_comment_ip.py	/^    dependencies = [$/;"	kind:variable	line:8
+dependencies	../ideax/migrations/0019_auto_20180629_1909.py	/^    dependencies = [$/;"	kind:variable	line:9
+dependencies	../ideax/migrations/0020_auto_20180705_1122.py	/^    dependencies = [$/;"	kind:variable	line:9
+description	../ideax/feeds.py	/^    description = str(_('Sharing ideas'))$/;"	kind:variable	line:28
+description	../ideax/feeds.py	/^    description = str(_('Sharing ideas'))$/;"	kind:variable	line:8
+description	../ideax/models.py	/^    description = models.CharField(max_length=200)$/;"	kind:variable	line:202
+description	../ideax/models.py	/^    description = models.CharField(max_length=200)$/;"	kind:variable	line:80
+description	../ideax/models.py	/^    description = models.CharField(max_length=40)$/;"	kind:variable	line:68
+description	../ideax/models.py	/^    description = models.CharField(max_length=50)$/;"	kind:variable	line:90
+description	../ideax/models.py	/^    description = models.CharField(max_length=500)$/;"	kind:variable	line:193
+description	../ideax/models.py	/^    description = models.TextField(max_length=2500)$/;"	kind:variable	line:139
+dimension	../ideax/models.py	/^    dimension = models.ForeignKey('Dimension',on_delete=models.PROTECT)$/;"	kind:variable	line:204
+dimension	../ideax/models.py	/^    dimension = models.ForeignKey('Dimension',on_delete=models.PROTECT)$/;"	kind:variable	line:212
+dimension_value	../ideax/models.py	/^    dimension_value = models.IntegerField()$/;"	kind:variable	line:215
+discarded	../ideax/models.py	/^    discarded = models.BooleanField(default=False)$/;"	kind:variable	line:109
+discarded	../ideax/models.py	/^    discarded = models.BooleanField(default=False)$/;"	kind:variable	line:81
+discarted	../ideax/models.py	/^    discarted = models.BooleanField(default=False)$/;"	kind:variable	line:146
+epub_author	../docs/conf.py	/^epub_author = author$/;"	kind:variable	line:174
+epub_copyright	../docs/conf.py	/^epub_copyright = copyright$/;"	kind:variable	line:176
+epub_exclude_files	../docs/conf.py	/^epub_exclude_files = ['search.html']$/;"	kind:variable	line:188
+epub_publisher	../docs/conf.py	/^epub_publisher = author$/;"	kind:variable	line:175
+epub_title	../docs/conf.py	/^epub_title = project$/;"	kind:variable	line:173
+evaluation_date	../ideax/models.py	/^    evaluation_date = models.DateTimeField()$/;"	kind:variable	line:214
+evaluation_item	../ideax/models.py	/^    evaluation_item = models.ForeignKey(Evaluation_Item,on_delete=models.PROTECT)$/;"	kind:variable	line:152
+exclude_patterns	../docs/conf.py	/^exclude_patterns = ['_build', 'Thumbs.db', '.DS_Store']$/;"	kind:variable	line:72
+export_vars	../ideax/context_processors.py	/^def export_vars(request):$/;"	kind:function	line:4
+extensions	../docs/conf.py	/^extensions = []$/;"	kind:variable	line:34
+featured	../ideax/models.py	/^    featured = models.BooleanField(default=False)$/;"	kind:variable	line:144
+feeds.py	../ideax/feeds.py	1;"	kind:file	line:1
+field	../ideax/migrations/0001_initial.py	/^            field=models.ForeignKey(on_delete=django.db.models.deletion.PROTECT, to='ideax.Phase'),$/;"	kind:variable	line:75
+field	../ideax/migrations/0002_auto_20180221_1629.py	/^            field=models.PositiveSmallIntegerField(choices=[(1, 'Crescendo'), (2, 'Avaliando'), (3, 'Agindo'), (2, 'Feito')]),$/;"	kind:variable	line:16
+field	../ideax/migrations/0003_auto_20180225_1220.py	/^            field=models.PositiveSmallIntegerField(choices=[(1, 'Crescendo')]),$/;"	kind:variable	line:16
+field	../ideax/migrations/0004_auto_20180307_1451.py	/^            field=models.BooleanField(default=False),$/;"	kind:variable	line:42
+field	../ideax/migrations/0004_auto_20180307_1451.py	/^            field=models.ForeignKey(null=True, on_delete=django.db.models.deletion.SET_NULL, to='ideax.Category'),$/;"	kind:variable	line:52
+field	../ideax/migrations/0004_auto_20180307_1451.py	/^            field=models.ForeignKey(on_delete=django.db.models.deletion.DO_NOTHING, to='ideax.Idea'),$/;"	kind:variable	line:47
+field	../ideax/migrations/0005_category_discarded.py	/^            field=models.BooleanField(default=False),$/;"	kind:variable	line:16
+field	../ideax/migrations/0007_auto_20180328_1543.py	/^            field=models.TextField(max_length=2500, null=True),$/;"	kind:variable	line:25
+field	../ideax/migrations/0007_auto_20180328_1543.py	/^            field=models.TextField(max_length=2500, null=True),$/;"	kind:variable	line:30
+field	../ideax/migrations/0007_auto_20180328_1543.py	/^            field=models.TextField(max_length=500, null=True),$/;"	kind:variable	line:35
+field	../ideax/migrations/0008_auto_20180329_1444.py	/^            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='ideax.UserProfile'),$/;"	kind:variable	line:37
+field	../ideax/migrations/0008_auto_20180329_1444.py	/^            field=models.ForeignKey(on_delete=django.db.models.deletion.DO_NOTHING, to='ideax.UserProfile'),$/;"	kind:variable	line:42
+field	../ideax/migrations/0008_auto_20180329_1444.py	/^            field=models.ForeignKey(on_delete=django.db.models.deletion.PROTECT, to='ideax.UserProfile'),$/;"	kind:variable	line:27
+field	../ideax/migrations/0008_auto_20180329_1444.py	/^            field=models.ForeignKey(on_delete=django.db.models.deletion.PROTECT, to='ideax.UserProfile'),$/;"	kind:variable	line:47
+field	../ideax/migrations/0008_auto_20180329_1444.py	/^            field=models.ForeignKey(on_delete=django.db.models.deletion.PROTECT, to='ideax.UserProfile'),$/;"	kind:variable	line:52
+field	../ideax/migrations/0008_auto_20180329_1444.py	/^            field=models.TextField(),$/;"	kind:variable	line:32
+field	../ideax/migrations/0009_userprofile_manager.py	/^            field=models.NullBooleanField(default=False),$/;"	kind:variable	line:16
+field	../ideax/migrations/0010_auto_20180413_1245.py	/^            field=models.ForeignKey(on_delete=django.db.models.deletion.PROTECT, to='ideax.Dimension'),$/;"	kind:variable	line:48
+field	../ideax/migrations/0011_idea_score.py	/^            field=models.FloatField(default=0),$/;"	kind:variable	line:16
+field	../ideax/migrations/0012_evaluation_note.py	/^            field=models.TextField(null=True),$/;"	kind:variable	line:16
+field	../ideax/migrations/0014_auto_20180503_1241.py	/^            field=models.CharField(max_length=20, null=True),$/;"	kind:variable	line:21
+field	../ideax/migrations/0014_auto_20180503_1241.py	/^            field=models.DateTimeField(null=True),$/;"	kind:variable	line:16
+field	../ideax/migrations/0015_auto_20180507_1703.py	/^            field=models.CharField(default='\/media\/category\/default.png', max_length=200),$/;"	kind:variable	line:27
+field	../ideax/migrations/0016_idea_summary.py	/^            field=models.CharField(max_length=140, null=True),$/;"	kind:variable	line:16
+field	../ideax/migrations/0017_auto_20180507_1815.py	/^            field=models.TextField(max_length=140, null=True),$/;"	kind:variable	line:16
+field	../ideax/migrations/0018_comment_ip.py	/^            field=models.CharField(max_length=20, null=True),$/;"	kind:variable	line:16
+field	../ideax/migrations/0019_auto_20180629_1909.py	/^            field=models.ForeignKey(null=True, on_delete=django.db.models.deletion.SET_NULL, to='ideax.Challenge'),$/;"	kind:variable	line:35
+field	../ideax/migrations/0020_auto_20180705_1122.py	/^            field=models.CharField(max_length=140, null=True),$/;"	kind:variable	line:17
+field	../ideax/migrations/0020_auto_20180705_1122.py	/^            field=models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.SET_NULL, to='ideax.Challenge'),$/;"	kind:variable	line:22
+fields	../ideax/forms.py	/^        fields = ('creator', 'term', 'init_date', 'final_date')$/;"	kind:variable	line:62
+fields	../ideax/forms.py	/^        fields = ('description', 'image', 'category')$/;"	kind:variable	line:45
+fields	../ideax/forms.py	/^        fields = ('description','peso')$/;"	kind:variable	line:32
+fields	../ideax/forms.py	/^        fields = ('title', 'description', )$/;"	kind:variable	line:39
+fields	../ideax/forms.py	/^        fields = ('title', 'image', 'summary', 'requester', 'description', 'active' , 'limit_date', 'featured', 'category',)$/;"	kind:variable	line:52
+fields	../ideax/forms.py	/^        fields = ('title', 'oportunity', 'solution', 'target')$/;"	kind:variable	line:25
+fields	../ideax/forms.py	/^        fields = ('title', 'summary', 'oportunity', 'solution', 'target', 'category', 'challenge' )$/;"	kind:variable	line:11
+fields	../ideax/migrations/0001_initial.py	/^            fields=[$/;"	kind:variable	line:19
+fields	../ideax/migrations/0001_initial.py	/^            fields=[$/;"	kind:variable	line:27
+fields	../ideax/migrations/0001_initial.py	/^            fields=[$/;"	kind:variable	line:35
+fields	../ideax/migrations/0001_initial.py	/^            fields=[$/;"	kind:variable	line:45
+fields	../ideax/migrations/0001_initial.py	/^            fields=[$/;"	kind:variable	line:53
+fields	../ideax/migrations/0001_initial.py	/^            fields=[$/;"	kind:variable	line:63
+fields	../ideax/migrations/0004_auto_20180307_1451.py	/^            fields=[$/;"	kind:variable	line:18
+fields	../ideax/migrations/0004_auto_20180307_1451.py	/^            fields=[$/;"	kind:variable	line:26
+fields	../ideax/migrations/0006_comment.py	/^            fields=[$/;"	kind:variable	line:19
+fields	../ideax/migrations/0008_auto_20180329_1444.py	/^            fields=[$/;"	kind:variable	line:18
+fields	../ideax/migrations/0010_auto_20180413_1245.py	/^            fields=[$/;"	kind:variable	line:16
+fields	../ideax/migrations/0010_auto_20180413_1245.py	/^            fields=[$/;"	kind:variable	line:24
+fields	../ideax/migrations/0010_auto_20180413_1245.py	/^            fields=[$/;"	kind:variable	line:35
+fields	../ideax/migrations/0013_category_image.py	/^            fields=[$/;"	kind:variable	line:16
+fields	../ideax/migrations/0015_auto_20180507_1703.py	/^            fields=[$/;"	kind:variable	line:16
+fields	../ideax/migrations/0019_auto_20180629_1909.py	/^            fields=[$/;"	kind:variable	line:16
+file_upload	../ideax/views.py	/^def file_upload(request):$/;"	kind:function	line:669
+final_date	../ideax/models.py	/^    final_date = models.DateTimeField()$/;"	kind:variable	line:222
+final_date	../ideax/models.py	/^    final_date = models.DateTimeField(blank=True, null=True)$/;"	kind:variable	line:196
+forms.py	../ideax/forms.py	1;"	kind:file	line:1
+generate_messages	../ideax/mail_util.py	/^    def generate_messages(self, subject, template, context, emails):$/;"	kind:member	line:18
+get_absolute_url	../ideax/models.py	/^    def get_absolute_url(self):$/;"	kind:member	line:125
+get_all_image_header	../ideax/models.py	/^    def get_all_image_header(self):$/;"	kind:member	line:83
+get_approval_rate	../ideax/models.py	/^    def get_approval_rate(self):$/;"	kind:member	line:127
+get_category_list	../ideax/views.py	/^def get_category_list():$/;"	kind:function	line:384
+get_client_ip	../ideax/util.py	/^def get_client_ip(request):$/;"	kind:function	line:13
+get_css_class	../ideax/models.py	/^    def get_css_class(cls, id):$/;"	kind:member	line:56
+get_current_phase	../ideax/models.py	/^    def get_current_phase(self):$/;"	kind:member	line:123
+get_current_phase_history	../ideax/models.py	/^    def get_current_phase_history(self):$/;"	kind:member	line:121
+get_featured_challenges	../ideax/views.py	/^def get_featured_challenges(request):$/;"	kind:function	line:627
+get_ideas_created	../ideax/views.py	/^def get_ideas_created(request):$/;"	kind:function	line:425
+get_ideas_init	../ideax/views.py	/^def get_ideas_init(request):$/;"	kind:function	line:100
+get_ideas_voted	../ideax/views.py	/^def get_ideas_voted(request, vote):$/;"	kind:function	line:416
+get_ip	../ideax/util.py	/^def get_ip(request):$/;"	kind:function	line:3
+get_phase_by_id	../ideax/models.py	/^    def get_phase_by_id(cls, id):$/;"	kind:member	line:49
+get_phases	../ideax/views.py	/^def get_phases():$/;"	kind:function	line:109
+get_random_image	../ideax/models.py	/^    def get_random_image(cls, category):$/;"	kind:member	line:95
+get_term_of_user	../ideax/views.py	/^def get_term_of_user(request):$/;"	kind:function	line:537
+get_use_term_list	../ideax/views.py	/^def get_use_term_list():$/;"	kind:function	line:547
+get_valid_use_term	../ideax/views.py	/^def get_valid_use_term(request):$/;"	kind:function	line:604
+html_sidebars	../docs/conf.py	/^html_sidebars = {$/;"	kind:variable	line:104
+html_static_path	../docs/conf.py	/^html_static_path = ['_static']$/;"	kind:variable	line:97
+html_theme	../docs/conf.py	/^html_theme = 'sphinx_rtd_theme'$/;"	kind:variable	line:86
+htmlhelp_basename	../docs/conf.py	/^htmlhelp_basename = 'IdeiaXdoc'$/;"	kind:variable	line:115
+idea	../ideax/models.py	/^    idea = models.ForeignKey('Idea',on_delete=models.DO_NOTHING)$/;"	kind:variable	line:63
+idea	../ideax/models.py	/^    idea = models.ForeignKey('Idea',on_delete=models.PROTECT)$/;"	kind:variable	line:155
+idea	../ideax/models.py	/^    idea = models.ForeignKey('Idea',on_delete=models.PROTECT)$/;"	kind:variable	line:162
+idea	../ideax/models.py	/^    idea = models.ForeignKey('Idea',on_delete=models.PROTECT)$/;"	kind:variable	line:165
+idea	../ideax/models.py	/^    idea = models.ForeignKey('Idea',on_delete=models.PROTECT)$/;"	kind:variable	line:211
+idea_comments	../ideax/views.py	/^def idea_comments(request, pk):$/;"	kind:function	line:530
+idea_detail	../ideax/views.py	/^def idea_detail(request, pk):$/;"	kind:function	line:464
+idea_detail_pdf	../ideax/views.py	/^def idea_detail_pdf(request, idea_id):$/;"	kind:function	line:611
+idea_edit	../ideax/views.py	/^def idea_edit(request, pk):$/;"	kind:function	line:183
+idea_evaluation	../ideax/views.py	/^def idea_evaluation(request, idea_pk):$/;"	kind:function	line:271
+idea_filter	../ideax/views.py	/^def idea_filter(request, phase_pk):$/;"	kind:function	line:114
+idea_list	../ideax/views.py	/^def idea_list(request):$/;"	kind:function	line:82
+idea_new	../ideax/views.py	/^def idea_new(request):$/;"	kind:function	line:171
+idea_new_from_challenge	../ideax/views.py	/^def idea_new_from_challenge(request, challenge_pk):$/;"	kind:function	line:718
+idea_remove	../ideax/views.py	/^def idea_remove(request, pk):$/;"	kind:function	line:202
+image	../ideax/models.py	/^    image = models.ImageField(upload_to='category\/')$/;"	kind:variable	line:91
+image	../ideax/models.py	/^    image = models.ImageField(upload_to='challenges\/')$/;"	kind:variable	line:135
+index	../ideax/views.py	/^def index(request):$/;"	kind:function	line:58
+init_date	../ideax/models.py	/^    init_date = models.DateTimeField()$/;"	kind:variable	line:195
+init_date	../ideax/models.py	/^    init_date = models.DateTimeField()$/;"	kind:variable	line:221
+initial	../ideax/migrations/0001_initial.py	/^    initial = True$/;"	kind:variable	line:10
+ip	../ideax/models.py	/^    ip = models.CharField(max_length=20, null=True)$/;"	kind:variable	line:173
+ip	../ideax/models.py	/^    ip = models.CharField(max_length=20, null=True)$/;"	kind:variable	line:184
+is_invalid_date	../ideax/models.py	/^    def is_invalid_date(self):$/;"	kind:member	line:230
+is_past_due	../ideax/models.py	/^    def is_past_due(self):$/;"	kind:member	line:225
+item_description	../ideax/feeds.py	/^    def item_description(self, item):$/;"	kind:member	line:16
+item_description	../ideax/feeds.py	/^    def item_description(self, item):$/;"	kind:member	line:36
+item_link	../ideax/feeds.py	/^    def item_link(self, item):$/;"	kind:member	line:21
+item_link	../ideax/feeds.py	/^    def item_link(self, item):$/;"	kind:member	line:39
+item_title	../ideax/feeds.py	/^    def item_title(self, item):$/;"	kind:member	line:13
+item_title	../ideax/feeds.py	/^    def item_title(self, item):$/;"	kind:member	line:33
+items	../ideax/feeds.py	/^    def items(self):$/;"	kind:member	line:10
+items	../ideax/feeds.py	/^    def items(self):$/;"	kind:member	line:30
+labels	../ideax/forms.py	/^        labels = {'creator':_('Creator'), 'term':_('Term'), 'init_date':_('Initial Date'), 'final_date':_('Final Date')}$/;"	kind:variable	line:63
+labels	../ideax/forms.py	/^        labels = {'description':_('Description'),'image':_('Image'),'category':_('Category')}$/;"	kind:variable	line:46
+labels	../ideax/forms.py	/^        labels = {'peso': _('Weight'), 'description': _('Description'), }$/;"	kind:variable	line:33
+labels	../ideax/forms.py	/^        labels = {'title': _('Title'), 'oportunity': _('Oportunity'), 'solution': _('Solution'), 'target': _('Target'),  }$/;"	kind:variable	line:26
+labels	../ideax/forms.py	/^        labels = {'title': _('Title'), 'summary': _('Summary') , 'oportunity': _('Oportunity'), 'solution': _('Solution'), 'target': _('Target'),'category': _('Category'), 'challenge': _('Challenge')}$/;"	kind:variable	line:12
+labels	../ideax/forms.py	/^        labels = {'title':_('Title'), 'description': _('Description') }$/;"	kind:variable	line:40
+labels	../ideax/forms.py	/^        labels = {'title':_('Title'),'image':_('Image'),'summary':_('Summary'),$/;"	kind:variable	line:53
+language	../docs/conf.py	/^language = 'en'$/;"	kind:variable	line:67
+latex_documents	../docs/conf.py	/^latex_documents = [$/;"	kind:variable	line:141
+latex_elements	../docs/conf.py	/^latex_elements = {$/;"	kind:variable	line:120
+like	../ideax/models.py	/^    like = models.BooleanField()$/;"	kind:variable	line:159
+like_popular_vote	../ideax/views.py	/^def like_popular_vote(request, pk):$/;"	kind:function	line:389
+limit_date	../ideax/models.py	/^    limit_date =  models.DateTimeField()$/;"	kind:variable	line:140
+link	../ideax/feeds.py	/^    link = "\/rss"$/;"	kind:variable	line:27
+link	../ideax/feeds.py	/^    link = "\/rss"$/;"	kind:variable	line:7
+load_json	../ideax/badwords.py	/^    def load_json(self, file):$/;"	kind:member	line:12
+logger	../ideax/settings.py	/^logger = logging.getLogger('django_auth_ldap')$/;"	kind:variable	line:169
+logger	../ideax/views.py	/^logger = logging.getLogger('audit_log')$/;"	kind:variable	line:42
+mail_util	../ideax/views.py	/^mail_util = Mail_Util()$/;"	kind:variable	line:44
+mail_util.py	../ideax/mail_util.py	1;"	kind:file	line:1
+man_pages	../docs/conf.py	/^man_pages = [$/;"	kind:variable	line:151
+manage.py	../manage.py	1;"	kind:file	line:1
+manager	../ideax/models.py	/^    manager = models.NullBooleanField(default=False)$/;"	kind:variable	line:185
+markdown	../ideax/templatetags/markdownify.py	/^def markdown(value):$/;"	kind:function	line:7
+markdownify.py	../ideax/templatetags/markdownify.py	1;"	kind:file	line:1
+master_doc	../docs/conf.py	/^master_doc = 'index'$/;"	kind:variable	line:46
+model	../ideax/forms.py	/^        model = Category$/;"	kind:variable	line:38
+model	../ideax/forms.py	/^        model = Category_Image$/;"	kind:variable	line:44
+model	../ideax/forms.py	/^        model = Challenge$/;"	kind:variable	line:51
+model	../ideax/forms.py	/^        model = Criterion$/;"	kind:variable	line:31
+model	../ideax/forms.py	/^        model = Idea$/;"	kind:variable	line:10
+model	../ideax/forms.py	/^        model = Idea$/;"	kind:variable	line:24
+model	../ideax/forms.py	/^        model = Use_Term$/;"	kind:variable	line:61
+model_name	../ideax/migrations/0001_initial.py	/^            model_name='idea',$/;"	kind:variable	line:73
+model_name	../ideax/migrations/0002_auto_20180221_1629.py	/^            model_name='idea',$/;"	kind:variable	line:14
+model_name	../ideax/migrations/0003_auto_20180225_1220.py	/^            model_name='idea',$/;"	kind:variable	line:14
+model_name	../ideax/migrations/0004_auto_20180307_1451.py	/^            model_name='idea',$/;"	kind:variable	line:36
+model_name	../ideax/migrations/0004_auto_20180307_1451.py	/^            model_name='idea',$/;"	kind:variable	line:40
+model_name	../ideax/migrations/0004_auto_20180307_1451.py	/^            model_name='idea',$/;"	kind:variable	line:50
+model_name	../ideax/migrations/0004_auto_20180307_1451.py	/^            model_name='phase_history',$/;"	kind:variable	line:45
+model_name	../ideax/migrations/0005_category_discarded.py	/^            model_name='category',$/;"	kind:variable	line:14
+model_name	../ideax/migrations/0007_auto_20180328_1543.py	/^            model_name='category',$/;"	kind:variable	line:14
+model_name	../ideax/migrations/0007_auto_20180328_1543.py	/^            model_name='idea',$/;"	kind:variable	line:19
+model_name	../ideax/migrations/0007_auto_20180328_1543.py	/^            model_name='idea',$/;"	kind:variable	line:23
+model_name	../ideax/migrations/0007_auto_20180328_1543.py	/^            model_name='idea',$/;"	kind:variable	line:28
+model_name	../ideax/migrations/0007_auto_20180328_1543.py	/^            model_name='idea',$/;"	kind:variable	line:33
+model_name	../ideax/migrations/0008_auto_20180329_1444.py	/^            model_name='comment',$/;"	kind:variable	line:25
+model_name	../ideax/migrations/0008_auto_20180329_1444.py	/^            model_name='comment',$/;"	kind:variable	line:30
+model_name	../ideax/migrations/0008_auto_20180329_1444.py	/^            model_name='idea',$/;"	kind:variable	line:35
+model_name	../ideax/migrations/0008_auto_20180329_1444.py	/^            model_name='phase_history',$/;"	kind:variable	line:40
+model_name	../ideax/migrations/0008_auto_20180329_1444.py	/^            model_name='popular_vote',$/;"	kind:variable	line:45
+model_name	../ideax/migrations/0008_auto_20180329_1444.py	/^            model_name='vote',$/;"	kind:variable	line:50
+model_name	../ideax/migrations/0009_userprofile_manager.py	/^            model_name='userprofile',$/;"	kind:variable	line:14
+model_name	../ideax/migrations/0010_auto_20180413_1245.py	/^            model_name='category_dimension',$/;"	kind:variable	line:46
+model_name	../ideax/migrations/0011_idea_score.py	/^            model_name='idea',$/;"	kind:variable	line:14
+model_name	../ideax/migrations/0012_evaluation_note.py	/^            model_name='evaluation',$/;"	kind:variable	line:14
+model_name	../ideax/migrations/0014_auto_20180503_1241.py	/^            model_name='userprofile',$/;"	kind:variable	line:14
+model_name	../ideax/migrations/0014_auto_20180503_1241.py	/^            model_name='userprofile',$/;"	kind:variable	line:19
+model_name	../ideax/migrations/0015_auto_20180507_1703.py	/^            model_name='idea',$/;"	kind:variable	line:25
+model_name	../ideax/migrations/0016_idea_summary.py	/^            model_name='idea',$/;"	kind:variable	line:14
+model_name	../ideax/migrations/0017_auto_20180507_1815.py	/^            model_name='idea',$/;"	kind:variable	line:14
+model_name	../ideax/migrations/0018_comment_ip.py	/^            model_name='comment',$/;"	kind:variable	line:14
+model_name	../ideax/migrations/0019_auto_20180629_1909.py	/^            model_name='idea',$/;"	kind:variable	line:33
+model_name	../ideax/migrations/0020_auto_20180705_1122.py	/^            model_name='challenge',$/;"	kind:variable	line:15
+model_name	../ideax/migrations/0020_auto_20180705_1122.py	/^            model_name='idea',$/;"	kind:variable	line:20
+models.py	../ideax/models.py	1;"	kind:file	line:1
+name	../ideax/apps.py	/^    name = 'ideax'$/;"	kind:variable	line:5
+name	../ideax/migrations/0001_initial.py	/^            name='Criterion',$/;"	kind:variable	line:18
+name	../ideax/migrations/0001_initial.py	/^            name='Evaluation_Item',$/;"	kind:variable	line:26
+name	../ideax/migrations/0001_initial.py	/^            name='Idea',$/;"	kind:variable	line:34
+name	../ideax/migrations/0001_initial.py	/^            name='Phase',$/;"	kind:variable	line:44
+name	../ideax/migrations/0001_initial.py	/^            name='Popular_Vote',$/;"	kind:variable	line:52
+name	../ideax/migrations/0001_initial.py	/^            name='Vote',$/;"	kind:variable	line:62
+name	../ideax/migrations/0001_initial.py	/^            name='phase',$/;"	kind:variable	line:74
+name	../ideax/migrations/0002_auto_20180221_1629.py	/^            name='Phase',$/;"	kind:variable	line:19
+name	../ideax/migrations/0002_auto_20180221_1629.py	/^            name='phase',$/;"	kind:variable	line:15
+name	../ideax/migrations/0003_auto_20180225_1220.py	/^            name='phase',$/;"	kind:variable	line:15
+name	../ideax/migrations/0004_auto_20180307_1451.py	/^            name='Category',$/;"	kind:variable	line:17
+name	../ideax/migrations/0004_auto_20180307_1451.py	/^            name='Phase_History',$/;"	kind:variable	line:25
+name	../ideax/migrations/0004_auto_20180307_1451.py	/^            name='category',$/;"	kind:variable	line:51
+name	../ideax/migrations/0004_auto_20180307_1451.py	/^            name='discarded',$/;"	kind:variable	line:41
+name	../ideax/migrations/0004_auto_20180307_1451.py	/^            name='idea',$/;"	kind:variable	line:46
+name	../ideax/migrations/0004_auto_20180307_1451.py	/^            name='phase',$/;"	kind:variable	line:37
+name	../ideax/migrations/0005_category_discarded.py	/^            name='discarded',$/;"	kind:variable	line:15
+name	../ideax/migrations/0006_comment.py	/^            name='Comment',$/;"	kind:variable	line:18
+name	../ideax/migrations/0007_auto_20180328_1543.py	/^            name='description',$/;"	kind:variable	line:20
+name	../ideax/migrations/0007_auto_20180328_1543.py	/^            name='oportunity',$/;"	kind:variable	line:24
+name	../ideax/migrations/0007_auto_20180328_1543.py	/^            name='solution',$/;"	kind:variable	line:29
+name	../ideax/migrations/0007_auto_20180328_1543.py	/^            name='target',$/;"	kind:variable	line:34
+name	../ideax/migrations/0008_auto_20180329_1444.py	/^            name='UserProfile',$/;"	kind:variable	line:17
+name	../ideax/migrations/0008_auto_20180329_1444.py	/^            name='author',$/;"	kind:variable	line:26
+name	../ideax/migrations/0008_auto_20180329_1444.py	/^            name='author',$/;"	kind:variable	line:36
+name	../ideax/migrations/0008_auto_20180329_1444.py	/^            name='author',$/;"	kind:variable	line:41
+name	../ideax/migrations/0008_auto_20180329_1444.py	/^            name='raw_comment',$/;"	kind:variable	line:31
+name	../ideax/migrations/0008_auto_20180329_1444.py	/^            name='voter',$/;"	kind:variable	line:46
+name	../ideax/migrations/0008_auto_20180329_1444.py	/^            name='voter',$/;"	kind:variable	line:51
+name	../ideax/migrations/0009_userprofile_manager.py	/^            name='manager',$/;"	kind:variable	line:15
+name	../ideax/migrations/0010_auto_20180413_1245.py	/^            name='Category_Dimension',$/;"	kind:variable	line:15
+name	../ideax/migrations/0010_auto_20180413_1245.py	/^            name='Dimension',$/;"	kind:variable	line:23
+name	../ideax/migrations/0010_auto_20180413_1245.py	/^            name='Evaluation',$/;"	kind:variable	line:34
+name	../ideax/migrations/0010_auto_20180413_1245.py	/^            name='dimension',$/;"	kind:variable	line:47
+name	../ideax/migrations/0011_idea_score.py	/^            name='score',$/;"	kind:variable	line:15
+name	../ideax/migrations/0012_evaluation_note.py	/^            name='note',$/;"	kind:variable	line:15
+name	../ideax/migrations/0013_category_image.py	/^            name='Category_Image',$/;"	kind:variable	line:15
+name	../ideax/migrations/0014_auto_20180503_1241.py	/^            name='acceptance_date',$/;"	kind:variable	line:15
+name	../ideax/migrations/0014_auto_20180503_1241.py	/^            name='ip',$/;"	kind:variable	line:20
+name	../ideax/migrations/0015_auto_20180507_1703.py	/^            name='Use_Term',$/;"	kind:variable	line:15
+name	../ideax/migrations/0015_auto_20180507_1703.py	/^            name='category_image',$/;"	kind:variable	line:26
+name	../ideax/migrations/0016_idea_summary.py	/^            name='summary',$/;"	kind:variable	line:15
+name	../ideax/migrations/0017_auto_20180507_1815.py	/^            name='summary',$/;"	kind:variable	line:15
+name	../ideax/migrations/0018_comment_ip.py	/^            name='ip',$/;"	kind:variable	line:15
+name	../ideax/migrations/0019_auto_20180629_1909.py	/^            name='Challenge',$/;"	kind:variable	line:15
+name	../ideax/migrations/0019_auto_20180629_1909.py	/^            name='challenge',$/;"	kind:variable	line:34
+name	../ideax/migrations/0020_auto_20180705_1122.py	/^            name='challenge',$/;"	kind:variable	line:21
+name	../ideax/migrations/0020_auto_20180705_1122.py	/^            name='requester',$/;"	kind:variable	line:16
+new_name	../ideax/migrations/0007_auto_20180328_1543.py	/^            new_name='title',$/;"	kind:variable	line:16
+note	../ideax/models.py	/^    note = models.TextField(null=True)$/;"	kind:variable	line:216
+old_name	../ideax/migrations/0007_auto_20180328_1543.py	/^            old_name='key_word',$/;"	kind:variable	line:15
+operations	../ideax/migrations/0001_initial.py	/^    operations = [$/;"	kind:variable	line:16
+operations	../ideax/migrations/0002_auto_20180221_1629.py	/^    operations = [$/;"	kind:variable	line:12
+operations	../ideax/migrations/0003_auto_20180225_1220.py	/^    operations = [$/;"	kind:variable	line:12
+operations	../ideax/migrations/0004_auto_20180307_1451.py	/^    operations = [$/;"	kind:variable	line:15
+operations	../ideax/migrations/0005_category_discarded.py	/^    operations = [$/;"	kind:variable	line:12
+operations	../ideax/migrations/0006_comment.py	/^    operations = [$/;"	kind:variable	line:16
+operations	../ideax/migrations/0007_auto_20180328_1543.py	/^    operations = [$/;"	kind:variable	line:12
+operations	../ideax/migrations/0008_auto_20180329_1444.py	/^    operations = [$/;"	kind:variable	line:15
+operations	../ideax/migrations/0009_userprofile_manager.py	/^    operations = [$/;"	kind:variable	line:12
+operations	../ideax/migrations/0010_auto_20180413_1245.py	/^    operations = [$/;"	kind:variable	line:13
+operations	../ideax/migrations/0011_idea_score.py	/^    operations = [$/;"	kind:variable	line:12
+operations	../ideax/migrations/0012_evaluation_note.py	/^    operations = [$/;"	kind:variable	line:12
+operations	../ideax/migrations/0013_category_image.py	/^    operations = [$/;"	kind:variable	line:13
+operations	../ideax/migrations/0014_auto_20180503_1241.py	/^    operations = [$/;"	kind:variable	line:12
+operations	../ideax/migrations/0015_auto_20180507_1703.py	/^    operations = [$/;"	kind:variable	line:13
+operations	../ideax/migrations/0016_idea_summary.py	/^    operations = [$/;"	kind:variable	line:12
+operations	../ideax/migrations/0017_auto_20180507_1815.py	/^    operations = [$/;"	kind:variable	line:12
+operations	../ideax/migrations/0018_comment_ip.py	/^    operations = [$/;"	kind:variable	line:12
+operations	../ideax/migrations/0019_auto_20180629_1909.py	/^    operations = [$/;"	kind:variable	line:13
+operations	../ideax/migrations/0020_auto_20180705_1122.py	/^    operations = [$/;"	kind:variable	line:13
+oportunity	../ideax/models.py	/^    oportunity = models.TextField(max_length=2500, null=True)$/;"	kind:variable	line:103
+options	../ideax/migrations/0006_comment.py	/^            options={$/;"	kind:variable	line:33
+order_insertion_by	../ideax/models.py	/^        order_insertion_by = ['-date']$/;"	kind:variable	line:176
+parent	../ideax/models.py	/^    parent = TreeForeignKey('self', related_name='children',$/;"	kind:variable	line:168
+peso	../ideax/models.py	/^    peso = models.IntegerField()$/;"	kind:variable	line:69
+post_comment	../ideax/views.py	/^def post_comment(request):$/;"	kind:function	line:496
+previous_phase	../ideax/models.py	/^    previous_phase = models.PositiveSmallIntegerField()$/;"	kind:variable	line:61
+project	../docs/conf.py	/^project = 'IdeaX'$/;"	kind:variable	line:49
+pygments_style	../docs/conf.py	/^pygments_style = 'sphinx'$/;"	kind:variable	line:75
+raw_comment	../ideax/models.py	/^    raw_comment = models.TextField()$/;"	kind:variable	line:167
+register	../ideax/templatetags/markdownify.py	/^register = template.Library()$/;"	kind:variable	line:4
+release	../docs/conf.py	/^release = ''$/;"	kind:variable	line:60
+report_ideas	../ideax/views.py	/^def report_ideas(request):$/;"	kind:function	line:681
+report_util.py	../ideax/report_util.py	1;"	kind:file	line:1
+requester	../ideax/models.py	/^    requester = models.CharField(max_length=140, null=True, blank=False)$/;"	kind:variable	line:138
+save_idea	../ideax/views.py	/^def save_idea(request, form, template_name, new=False):$/;"	kind:function	line:131
+save_use_term	../ideax/views.py	/^def save_use_term(request, form, template_name):$/;"	kind:function	line:567
+score	../ideax/models.py	/^    score = models.FloatField(default=0)$/;"	kind:variable	line:110
+search_badwords	../ideax/badwords.py	/^    def search_badwords(self, txt):$/;"	kind:member	line:17
+send_mail	../ideax/mail_util.py	/^    def send_mail(self, messages):$/;"	kind:member	line:9
+send_messages	../ideax/mail_util.py	/^    def send_messages(self, subject, template, context, emails):$/;"	kind:member	line:14
+settings.py	../ideax/settings.py	1;"	kind:file	line:1
+singleton.py	../ideax/singleton.py	1;"	kind:file	line:1
+solution	../ideax/models.py	/^    solution = models.TextField(max_length=2500, null=True)$/;"	kind:variable	line:104
+source_suffix	../docs/conf.py	/^source_suffix = '.rst'$/;"	kind:variable	line:43
+summary	../ideax/models.py	/^    summary = models.TextField(max_length=140, null=True, blank=False)$/;"	kind:variable	line:112
+summary	../ideax/models.py	/^    summary = models.TextField(max_length=140, null=True, blank=False)$/;"	kind:variable	line:137
+target	../ideax/models.py	/^    target = models.TextField(max_length=500, null=True)$/;"	kind:variable	line:105
+templates_path	../docs/conf.py	/^templates_path = ['_templates']$/;"	kind:variable	line:37
+term	../ideax/models.py	/^    term = models.TextField(max_length=12500)$/;"	kind:variable	line:220
+tests.py	../ideax/tests.py	1;"	kind:file	line:1
+texinfo_documents	../docs/conf.py	/^texinfo_documents = [$/;"	kind:variable	line:162
+title	../ideax/feeds.py	/^    title = "ideax - "+str(_('Comments'))+": "$/;"	kind:variable	line:6
+title	../ideax/feeds.py	/^    title = "ideax - "+str(_('New ideas'))$/;"	kind:variable	line:26
+title	../ideax/models.py	/^    title = models.CharField(max_length=100)$/;"	kind:variable	line:136
+title	../ideax/models.py	/^    title = models.CharField(max_length=200)$/;"	kind:variable	line:102
+title	../ideax/models.py	/^    title = models.CharField(max_length=200)$/;"	kind:variable	line:192
+title	../ideax/models.py	/^    title = models.CharField(max_length=50)$/;"	kind:variable	line:79
+todo_include_todos	../docs/conf.py	/^todo_include_todos = False$/;"	kind:variable	line:78
+urlpatterns	../ideax/urls.py	/^urlpatterns = [$/;"	kind:variable	line:11
+urls.py	../ideax/urls.py	1;"	kind:file	line:1
+use_term_accept	../ideax/models.py	/^    use_term_accept = models.NullBooleanField(default=False)$/;"	kind:variable	line:182
+use_term_detail	../ideax/views.py	/^def use_term_detail(request, pk):$/;"	kind:function	line:600
+use_term_edit	../ideax/views.py	/^def use_term_edit(request, pk):$/;"	kind:function	line:558
+use_term_list	../ideax/views.py	/^def use_term_list(request):$/;"	kind:function	line:544
+use_term_new	../ideax/views.py	/^def use_term_new(request):$/;"	kind:function	line:550
+use_term_remove	../ideax/views.py	/^def use_term_remove(request, pk):$/;"	kind:function	line:591
+user	../ideax/models.py	/^    user = models.OneToOneField('auth.User',on_delete=models.PROTECT)$/;"	kind:variable	line:181
+util.py	../ideax/util.py	1;"	kind:file	line:1
+valuator	../ideax/models.py	/^    valuator = models.ForeignKey('UserProfile',on_delete=models.PROTECT)$/;"	kind:variable	line:210
+value	../ideax/models.py	/^    value = models.IntegerField()$/;"	kind:variable	line:153
+value	../ideax/models.py	/^    value = models.IntegerField()$/;"	kind:variable	line:203
+value	../ideax/models.py	/^    value = models.IntegerField(default=0)$/;"	kind:variable	line:75
+version	../docs/conf.py	/^version = ''$/;"	kind:variable	line:58
+views.py	../ideax/views.py	1;"	kind:file	line:1
+voter	../ideax/models.py	/^    voter = models.ForeignKey('UserProfile',on_delete=models.PROTECT)$/;"	kind:variable	line:154
+voter	../ideax/models.py	/^    voter = models.ForeignKey('UserProfile',on_delete=models.PROTECT)$/;"	kind:variable	line:160
+voting_date	../ideax/models.py	/^    voting_date = models.DateTimeField('data da votação')$/;"	kind:variable	line:156
+voting_date	../ideax/models.py	/^    voting_date = models.DateTimeField()$/;"	kind:variable	line:161
+weight	../ideax/models.py	/^    weight = models.IntegerField()$/;"	kind:variable	line:194
+widgets	../ideax/forms.py	/^        widgets = {$/;"	kind:variable	line:13
+widgets	../ideax/forms.py	/^        widgets = {$/;"	kind:variable	line:55
+wordcheck	../ideax/singleton.py	/^    def wordcheck(cls, *args, **kwargs):$/;"	kind:member	line:12
+wsgi.py	../ideax/wsgi.py	1;"	kind:file	line:1
