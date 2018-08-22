@@ -46,6 +46,7 @@ urlpatterns = [
     path('challenge/edit/<int:challenge_pk>', views.challenge_edit, name='challenge_edit'),
     path('challenge/list', views.challenge_list, name='challenge_list'),
     path('report', views.report_ideas, name='report_ideas'),
+    path('jsi18n/', JavaScriptCatalog.as_view(), name='javascript-catalog'),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

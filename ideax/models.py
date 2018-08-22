@@ -210,6 +210,9 @@ class UserProfile (models.Model):
     ip = models.CharField(max_length=20, null=True)
     manager = models.NullBooleanField(default=False)
 
+    def __str__(self):
+        return self.user.username
+
 
 class Dimension(models.Model):
     title = models.CharField(max_length=200)

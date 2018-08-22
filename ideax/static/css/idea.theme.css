@@ -927,3 +927,18 @@ transition-delay: 0.7s;
 .count-ideas {
   float: right;
 }
+
+.selector {
+  float: none !important;  
+  overflow: auto;  
+}
+
+.selector select {
+  border: 1px solid #ccc;
+}
+
+.authors-new-idea h2{
+  font-size: 13px;
+  padding: 8px;
+  margin-bottom: 0;  
+}

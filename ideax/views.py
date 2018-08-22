@@ -126,7 +126,7 @@ def get_phases():
     return phase_dic
 
 def idea_filter(request, phase_pk):
-    ideas =  Idea.objects.filter(discarded=False, phase_history__current_phase=phase_pk, phase_history__current=1).annotate(count_like=Count(Case(When(popular_vote__like = True, then=1)))).order_by('-count_like')
+    ideas = Idea.objects.filter(discarded=False, phase_history__current_phase=phase_pk, phase_history__current=1).annotate(count_like=Count(Case(When(popular_vote__like = True, then=1)))).order_by('-count_like')
     context={'ideas': ideas,
              'ideas_liked': get_ideas_voted(request, True),
              'ideas_disliked': get_ideas_voted(request, False),
@@ -147,12 +147,11 @@ def save_idea(request, form, template_name, new=False):
     if request.method == "POST":
         if form.is_valid():
             idea = form.save(commit=False)
-            print("Autores ")
-            print(request.POST.get('authors'))
+            
             if new:
                 idea.author = UserProfile.objects.get(user=request.user)
                 idea.creation_date = timezone.now()
-                idea.phase = Phase.GROW.id
+                idea.phase= Phase.GROW.id
 
 
                 if(idea.challenge):
@@ -164,7 +163,7 @@ def save_idea(request, form, template_name, new=False):
                 if category_image:
                     idea.category_image = category_image.image.url
 
-                idea.save()
+                idea.save()                
                 phase_history = Phase_History(current_phase=Phase.GROW.id,
                                               previous_phase=0,
                                               date_change=timezone.now(),
@@ -174,6 +173,12 @@ def save_idea(request, form, template_name, new=False):
                 phase_history.save()
             else:
                 idea.save()
+
+            idea.authors.clear()
+            if form.cleaned_data['authors']:
+                for author in form.cleaned_data['authors']:
+                    idea.authors.add(author)
+
             messages.success(request, _('Idea saved successfully!'))
 
             audit(request.user.username, get_client_ip(request), 'SAVE_IDEA_OPERATION', Idea.__name__, str(idea.id))
@@ -189,6 +194,7 @@ def idea_new(request):
         form = IdeaForm(request.POST)
     else:
         form = IdeaForm()
+        form.authors = [request.user]
 
     audit(request.user.username, get_client_ip(request), 'CREATE_IDEA_FORM', Idea.__name__, '')
 

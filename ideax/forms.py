@@ -1,21 +1,33 @@
 from django import forms
 from django.utils.translation import ugettext_lazy as _
-from .models import Idea, Criterion, Category, Dimension, Category_Dimension, Evaluation, Challenge
+from .models import Idea, Criterion, Category, Dimension, Category_Dimension, Evaluation, Challenge, UserProfile
 from django.utils import timezone
 from django.contrib.admin.widgets import AdminDateWidget
+from django.contrib.admin.widgets import FilteredSelectMultiple
+import os
+from django.conf import settings
+
 
 class IdeaForm(forms.ModelForm):
+    authors = forms.ModelMultipleChoiceField(queryset=UserProfile.objects.filter(user__is_staff=False).exclude(user__email__isnull=True), 
+                                                  widget=FilteredSelectMultiple("", is_stacked=False), required=True)
 
     class Meta:
         model = Idea
         fields = ('title', 'summary', 'oportunity', 'solution', 'target', 'category', 'challenge', 'authors' )
-        labels = {'title': _('Title'), 'summary': _('Summary') , 'oportunity': _('Oportunity'), 'solution': _('Solution'), 'target': _('Target'),'category': _('Category'), 'challenge': _('Challenge'), 'authors': _('Authors')}
+        labels = {'title': _('Title'), 'summary': _('Summary'), 'oportunity': _('Oportunity'), 'solution': _('Solution'), 'target': _('Target'),'category': _('Category'), 'challenge': _('Challenge'), 'authors': _('Authors')}
         widgets = {
             'summary': forms.Textarea(attrs={'placeholder': _('Sell your idea in 140 characters!')}),
             'oportunity': forms.Textarea(attrs={'placeholder': _('Describe the problem or opportunity your idea will meet!')}),
             'solution': forms.Textarea(attrs={'placeholder': _('Describe the solution very clearly and succinctly!')}),
-            'target': forms.Textarea(attrs={'placeholder': _('Indicate who your solution audience is')}),
+            'target': forms.Textarea(attrs={'placeholder': _('Indicate who your solution audience is')}),           
         }
+
+    class Media:
+        css = {
+            'all': (os.path.join(settings.BASE_DIR, '/static/admin/css/widgets.css'),),
+        }
+        js = ('/admin/jsi18n', 'jquery.js', 'jquery.init.js', 'core.js', 'SelectBox.js', 'SelectFilter2.js'),
 
 
 class IdeaFormUpdate(forms.ModelForm):
@@ -25,6 +37,7 @@ class IdeaFormUpdate(forms.ModelForm):
         fields = ('title', 'oportunity', 'solution', 'target')
         labels = {'title': _('Title'), 'oportunity': _('Oportunity'), 'solution': _('Solution'), 'target': _('Target'),  }
 
+
 class CriterionForm(forms.ModelForm):
 
     class Meta:
@@ -32,19 +45,21 @@ class CriterionForm(forms.ModelForm):
         fields = ('description','peso')
         labels = {'peso': _('Weight'), 'description': _('Description'), }
 
+
 class CategoryForm(forms.ModelForm):
 
     class Meta:
         model = Category
         fields = ('title', 'description', )
-        labels = {'title':_('Title'), 'description': _('Description') }
+        labels = {'title': _('Title'), 'description': _('Description')}
+
 
 class ChallengeForm(forms.ModelForm):
     class Meta:
         model = Challenge
         fields = ('title', 'image', 'summary', 'requester', 'description', 'active' , 'limit_date', 'featured', 'category',)
         widgets = {
-            'limit_date' : forms.DateInput(attrs={'placeholder' : 'dd/mm/aaaa'}),
+            'limit_date': forms.DateInput(attrs={'placeholder': 'dd/mm/aaaa'}),
         }
 
 
