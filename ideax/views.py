@@ -10,7 +10,7 @@ from django.template.loader import render_to_string
 from django.views.decorators.csrf import ensure_csrf_cookie, csrf_protect
 from django.views.decorators.http import require_http_methods
 from django.db.models import Count, Case, When
-from .models import Idea, Criterion,Popular_Vote, Phase, Phase_History,Category, Comment, UserProfile, Dimension, Evaluation, Category_Image, Use_Term, Challenge
+from .models import Idea, Criterion, Popular_Vote, Phase, Phase_History, Category, Comment, UserProfile, Dimension, Evaluation, Category_Image, Use_Term, Challenge
 from .forms import IdeaForm, CriterionForm, IdeaFormUpdate, CategoryForm, CategoryImageForm, EvaluationForm, EvaluationForm, ChallengeForm, UseTermForm
 from .singleton import Profanity_Check
 from django import forms
@@ -552,7 +552,7 @@ def use_term_new(request):
         form = UseTermForm(request.POST)
     else:
         form = UseTermForm()
-    return save_use_term(request, form, 'ideax/use_term_new.html')
+    return save_use_term(request, form, 'ideax/use_term_new.html', True)
 
 @login_required
 def use_term_edit(request, pk):
@@ -564,9 +564,10 @@ def use_term_edit(request, pk):
     return save_use_term(request, use_term_form, 'ideax/use_term_edit.html')
 
 @login_required
-def save_use_term(request, form, template_name):
+def save_use_term(request, form, template_name, new = False):
     if request.method == "POST":
         if form.is_valid():
+            active = False
             use_term = form.save(commit=False)
             use_terms = Use_Term.objects.all()
             for term in use_terms:
@@ -578,7 +579,7 @@ def save_use_term(request, form, template_name):
             if use_term.is_invalid_date():
                 messages.error(request, _('Invalid Final Date'))
                 return render(request, template_name, {'form': form})
-            if active:
+            if active and new:
                 messages.error(request, _('Already exists a active Term Of Use'))
                 return render(request, template_name, {'form': form})
             use_term.save()

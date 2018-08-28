@@ -3,6 +3,7 @@ from django.utils.translation import ugettext_lazy as _
 from .models import Idea, Criterion, Category, Dimension, Category_Dimension, Evaluation, Challenge, Use_Term, Category_Image
 from django.utils import timezone
 from django.contrib.admin.widgets import AdminDateWidget
+from tinymce import TinyMCE
 
 class IdeaForm(forms.ModelForm):
 
@@ -56,11 +57,14 @@ class ChallengeForm(forms.ModelForm):
             'limit_date' : forms.DateInput(attrs={'placeholder' : 'dd/mm/aaaa'}),
         }
 class UseTermForm(forms.ModelForm):
-
+    
     class Meta:
         model = Use_Term
         fields = ('creator', 'term', 'init_date', 'final_date')
         labels = {'creator':_('Creator'), 'term':_('Term'), 'init_date':_('Initial Date'), 'final_date':_('Final Date')}
+        widgets = {
+            'term' : TinyMCE(),
+        }
 
 class EvaluationForm(forms.Form):
     FORMAT_ID = 'category_dimension_%s'
