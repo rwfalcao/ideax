@@ -16,7 +16,7 @@
             <ul class="phase-list nav nav-pills flex-column">
               {% for key, value in phases.items %}
                   <li class="nav-item" onclick="filterIdeas('{% url 'idea_filter' phase_pk=key %}')">
-                    <a class="nav-link {% if key == 1 %} active {% endif %}" href="#">{{ value.phase }} <span class="badge badge-pill badge-primary count-ideas">{{ value.qtd }}</span></a>
+                    <a class="nav-link {% if key == phase_req %} active {% endif %}" href="#">{{ value.phase }} <span class="badge badge-pill badge-primary count-ideas">{{ value.qtd }}</span></a>
                   </li>
               {% endfor %}
             </ul>
@@ -39,7 +39,23 @@
         <div class="col-sm-12 d-block d-sm-block d-md-none pb-2">
           <nav class="phase-filter">
             <ul class="phase-list nav nav-pills nav-justified">
-              {{phases.items}}
+              {% for key, value in phases.items %}
+                {%if forloop.counter < 3%}
+                  <li class="nav-item" onclick="filterIdeas('{% url 'idea_filter' phase_pk=key %}')">
+                    <a class="nav-link {% if key == phase_req %} active {% endif %}" href="#">{{ value.phase }}</a>
+                  </li>
+                {%endif%}
+              {% endfor %}
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">More</i></a>
+                <div class="dropdown-menu dropdown-menu-right">
+                  {% for key, value in phases.items %}
+                    {%if forloop.counter >= 3%}
+                        <a class="dropdown-item" href="#" onclick="filterIdeas('{% url 'idea_filter' phase_pk=key %}')">{{ value.phase }}</a>
+                    {%endif%}
+                  {% endfor %}
+                </div>
+              </li>
             </ul>
           </nav>
         </div>

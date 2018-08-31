@@ -33,6 +33,7 @@ from django.core.files.storage import FileSystemStorage, default_storage
 from django.db import connection
 import csv
 from django.http import StreamingHttpResponse
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 # Creating log object
 logger = logging.getLogger('audit_log')
@@ -76,10 +77,9 @@ def accept_use_term(request):
 
 @login_required
 def idea_list(request):
-    from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
     ideas = get_ideas_init(request)
-    ideas['phases'] = Phase.choices()
-
+    ideas['phases'] = get_phases_count()
+    
     page = request.GET.get('page', 1)
     paginator = Paginator(ideas['ideas'], 5)
 
@@ -89,8 +89,10 @@ def idea_list(request):
         ideas['ideas'] = paginator.page(1)
     except EmptyPage:
         ideas['ideas'] = paginator.page(paginator.num_pages)
+    return render(request, 'ideax/idea_list.html', ideas)
 
 
+def get_phases_count():
     cursor = connection.cursor()
     cursor.execute('''select current_phase as phase, count(*) as qtd
                       from ideax_phase_history ph inner join ideax_idea i on ph.idea_id = i.id
@@ -105,10 +107,7 @@ def idea_list(request):
     for d in data:
         phases[d[0]]['qtd'] = d[1]
 
-    ideas['phases'] = phases
-
-
-    return render(request, 'ideax/idea_list.html', ideas)
+    return phases
 
 @login_required
 def get_ideas_init(request):
@@ -118,6 +117,7 @@ def get_ideas_init(request):
     ideas_dic['ideas_disliked'] = get_ideas_voted(request, False)
     ideas_dic['ideas_created_by_me'] = get_ideas_created(request)
     ideas_dic['challenges'] = get_featured_challenges(request)
+    ideas_dic['phase_req'] = Phase.GROW.id
     return ideas_dic
 
 def get_phases():
@@ -133,13 +133,19 @@ def idea_filter(request, phase_pk):
              'ideas_created_by_me' : get_ideas_created(request),}
 
     data = dict()
-    data['html_idea_list'] = render_to_string('ideax/idea_list_loop.html', context, request=request)
-    data['empty'] = 0
+    if request.is_ajax():
+        data['html_idea_list'] = render_to_string('ideax/idea_list_loop.html', context, request=request)
+        data['empty'] = 0
 
-    if not ideas:
-        data['html_idea_list'] = render_to_string('ideax/includes/empty.html', request=request)
-        data['empty'] = 1
-    return JsonResponse(data)
+        if not ideas:
+            data['html_idea_list'] = render_to_string('ideax/includes/empty.html', request=request)
+            data['empty'] = 1
+        return JsonResponse(data)
+    else:
+        context['challenges'] = get_featured_challenges(request)
+        context['phases'] = get_phases_count()
+        context['phase_req'] = phase_pk
+        return render(request, 'ideax/idea_list.html', context)
 
 @login_required
 def save_idea(request, form, template_name, new=False):
@@ -193,8 +199,10 @@ def idea_new(request):
     if request.method == "POST":
         form = IdeaForm(request.POST)
     else:
+        queryset = UserProfile.objects.filter(user__is_staff=False).exclude(user__email__isnull=True).exclude(user__email=request.user.email)
+                                                    
         form = IdeaForm()
-        form.authors = [request.user]
+        
 
     audit(request.user.username, get_client_ip(request), 'CREATE_IDEA_FORM', Idea.__name__, '')
 
