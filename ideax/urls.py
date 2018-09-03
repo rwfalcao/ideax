@@ -9,6 +9,8 @@ from . import views
 from ideax.feeds import *
 
 urlpatterns = [
+    url(r'^media/uploader/$', views.markdown_uploader, name='markdown_uploader_page'),
+    path('martor/', include('martor.urls')),
     url(r'^tinymce/', include('tinymce.urls')),
     path('admin/', admin.site.urls),
     path('accounts/login/', auth_views.login, name='login'),

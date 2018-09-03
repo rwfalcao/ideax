@@ -4,6 +4,7 @@
 
 <html>
     <head>
+      
         <title>Ideia X {%if idea %} #{{idea.id}} - {{idea.category.title}} {%endif%}</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <!-- <link rel="stylesheet" href="{% static 'css/idea.css' %}"> -->
@@ -99,7 +100,7 @@
 
 
       <script src="{% static '/js/popper.min.js' %}"></script>
-      <script src="{% static '/js/bootstrap.min.js' %}"></script>
+      
       <script src="{% static '/js/fontawesome-all.min.js' %}"></script>
       <!-- <script src="{% static '/js/fontawesome.js' %}"></script> -->
       <script src="{% static '/js/idea.js' %}"></script>
@@ -109,6 +110,10 @@
             getUserTerm("#modal-term-text", $("#modal-term").attr("data-url"));
       </script>
       {% endif %}
+      {% block footer %}
+        <!--script bootstrap-->
+        <script src="{% static '/js/bootstrap.min.js' %}"></script>
+      {% endblock %}
 
 
 

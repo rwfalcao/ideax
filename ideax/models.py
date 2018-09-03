@@ -9,7 +9,7 @@ import random
 from django.conf import settings
 from django.utils.translation import ugettext_lazy as _
 from django.contrib.auth.models import User, Group
-
+from martor.models import MartorField
 
 
 def check_user_profile(sender, user, request, **kwargs):

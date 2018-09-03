@@ -1,8 +1,16 @@
 from django.contrib import admin
 from .models import Idea, UserProfile, Popular_Vote, Comment, Category, Dimension, Category_Dimension, Evaluation, Category_Image, Use_Term, Challenge
 from django.contrib.auth.models import Permission
+from martor.widgets import AdminMartorWidget
+from martor.models import MartorField
 
-admin.site.register(Idea)
+class IdeaAdmin(admin.ModelAdmin):
+    list_display = []
+    formfield_overrides = {
+        MartorField: {'widget': AdminMartorWidget},
+}
+
+admin.site.register(Idea, IdeaAdmin)
 admin.site.register(UserProfile)
 admin.site.register(Popular_Vote)
 admin.site.register(Comment)

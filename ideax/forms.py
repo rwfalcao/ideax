@@ -4,16 +4,19 @@ from .models import Idea, Criterion, Category, Dimension, Category_Dimension, Ev
 from django.utils import timezone
 from django.contrib.admin.widgets import AdminDateWidget
 from tinymce import TinyMCE
+from martor.fields import MartorFormField
+from martor.widgets import AdminMartorWidget
+
 
 class IdeaForm(forms.ModelForm):
-
+    
+    oportunity = MartorFormField()
     class Meta:
         model = Idea
         fields = ('title', 'summary', 'oportunity', 'solution', 'target', 'category', 'challenge' )
         labels = {'title': _('Title'), 'summary': _('Summary') , 'oportunity': _('Oportunity'), 'solution': _('Solution'), 'target': _('Target'),'category': _('Category'), 'challenge': _('Challenge')}
         widgets = {
             'summary': forms.Textarea(attrs={'placeholder': _('Sell your idea in 140 characters!')}),
-            'oportunity': forms.Textarea(attrs={'placeholder': _('Describe the problem or opportunity your idea will meet!')}),
             'solution': forms.Textarea(attrs={'placeholder': _('Describe the solution very clearly and succinctly!')}),
             'target': forms.Textarea(attrs={'placeholder': _('Indicate who your solution audience is')}),
         }

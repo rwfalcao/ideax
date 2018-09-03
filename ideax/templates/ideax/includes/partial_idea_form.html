@@ -18,7 +18,7 @@
 
 <div class="form-group{% if form.oportunity.errors %} has-error{% endif %}">
   <label for="{{form.oportunity.id_for_label}}">{{form.oportunity.label}}</label>
-  {{ form.oportunity|add_class:'form-control' }}
+  {{ form.oportunity|add_class:'form-control'|safe }}
   {% for error in form.oportunity.errors %}
     <p class="help-block">{{ error }}</p>
   {% endfor %}
