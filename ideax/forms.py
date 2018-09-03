@@ -9,13 +9,13 @@ from django.conf import settings
 
 
 class IdeaForm(forms.ModelForm):
-    authors = forms.ModelMultipleChoiceField(queryset=UserProfile.objects.filter(user__is_staff=False).exclude(user__email__isnull=True), 
-                                                  widget=FilteredSelectMultiple("", is_stacked=False), required=True)
+    #authors = forms.ModelMultipleChoiceField(queryset=UserProfile.objects.filter(user__is_staff=False).exclude(user__email__isnull=True), 
+    #                                              widget=FilteredSelectMultiple("", is_stacked=False), required=True)
 
     class Meta:
         model = Idea
-        fields = ('title', 'summary', 'oportunity', 'solution', 'target', 'category', 'challenge', 'authors' )
-        labels = {'title': _('Title'), 'summary': _('Summary'), 'oportunity': _('Oportunity'), 'solution': _('Solution'), 'target': _('Target'),'category': _('Category'), 'challenge': _('Challenge'), 'authors': _('Authors')}
+        fields = ('title', 'summary', 'oportunity', 'solution', 'target', 'category', 'challenge')
+        labels = {'title': _('Title'), 'summary': _('Summary'), 'oportunity': _('Oportunity'), 'solution': _('Solution'), 'target': _('Target'),'category': _('Category'), 'challenge': _('Challenge')}
         widgets = {
             'summary': forms.Textarea(attrs={'placeholder': _('Sell your idea in 140 characters!')}),
             'oportunity': forms.Textarea(attrs={'placeholder': _('Describe the problem or opportunity your idea will meet!')}),

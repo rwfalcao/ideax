@@ -155,7 +155,8 @@ def save_idea(request, form, template_name, new=False):
             idea = form.save(commit=False)
             
             if new:
-                idea.author = UserProfile.objects.get(user=request.user)
+                idea_autor = UserProfile.objects.get(user=request.user)
+                idea.author = idea_autor
                 idea.creation_date = timezone.now()
                 idea.phase= Phase.GROW.id
 
@@ -180,10 +181,10 @@ def save_idea(request, form, template_name, new=False):
             else:
                 idea.save()
 
-            idea.authors.clear()
-            if form.cleaned_data['authors']:
-                for author in form.cleaned_data['authors']:
-                    idea.authors.add(author)
+            #idea.authors.clear()
+            #if form.cleaned_data['authors']:
+            #    for author in form.cleaned_data['authors']:
+            #        idea.authors.add(author)
 
             messages.success(request, _('Idea saved successfully!'))
 
@@ -199,10 +200,8 @@ def idea_new(request):
     if request.method == "POST":
         form = IdeaForm(request.POST)
     else:
-        queryset = UserProfile.objects.filter(user__is_staff=False).exclude(user__email__isnull=True).exclude(user__email=request.user.email)
-                                                    
+        #queryset = UserProfile.objects.filter(user__is_staff=False).exclude(user__email__isnull=True).exclude(user__email=request.user.email)                                                    
         form = IdeaForm()
-        
 
     audit(request.user.username, get_client_ip(request), 'CREATE_IDEA_FORM', Idea.__name__, '')
 
