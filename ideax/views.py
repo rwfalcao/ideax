@@ -160,7 +160,6 @@ def save_idea(request, form, template_name, new=False):
                 idea.creation_date = timezone.now()
                 idea.phase= Phase.GROW.id
 
-
                 if(idea.challenge):
                     idea.category = idea.challenge.category
                     category_image = Category_Image.get_random_image(idea.challenge.category)
@@ -170,7 +169,8 @@ def save_idea(request, form, template_name, new=False):
                 if category_image:
                     idea.category_image = category_image.image.url
 
-                idea.save()                
+                idea.save()
+                idea.authors.add(idea.author)
                 phase_history = Phase_History(current_phase=Phase.GROW.id,
                                               previous_phase=0,
                                               date_change=timezone.now(),
@@ -617,7 +617,7 @@ def get_featured_challenges(request):
 @login_required
 def challenge_detail(request, challenge_pk):
      challenge = get_object_or_404(Challenge, pk=challenge_pk)
-     return render(request, 'ideax/challenge_detail.html', {'challenge' : challenge, 'ideas': challenge.idea_set.all()})
+     return render(request, 'ideax/challenge_detail.html', {'challenge' : challenge, 'ideas': challenge.idea_set.filter(discarded=False)})
 
 @login_required
 @permission_required('ideax.change_idea',raise_exception=True)

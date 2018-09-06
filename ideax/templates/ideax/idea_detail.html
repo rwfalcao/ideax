@@ -37,6 +37,7 @@
         </a>
       </p>
       <span class="badge badge-secondary">{{ idea.get_current_phase.description }}</span>
+      <span class="badge badge-info">{{ idea.category }}</span>
       <div class="like-menu">
 
         <a class="like badge" onclick="vote('{% url 'like_ideia' pk=idea.pk %}', '.liked_idea_{{idea.id}}', '.disliked_idea_{{idea.id}}', '.like_{{idea.id}}', '.dislike_{{idea.id}}')"

@@ -11,6 +11,10 @@ from django.conf import settings
 class IdeaForm(forms.ModelForm):
     #authors = forms.ModelMultipleChoiceField(queryset=UserProfile.objects.filter(user__is_staff=False).exclude(user__email__isnull=True), 
     #                                              widget=FilteredSelectMultiple("", is_stacked=False), required=True)
+    challenge = forms.ModelChoiceField(
+                            queryset=Challenge.objects.filter(discarted=False),
+                            empty_label=_('Not related to any challenge'),
+                            required=False)
 
     class Meta:
         model = Idea
