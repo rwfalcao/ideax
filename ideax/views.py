@@ -1,10 +1,8 @@
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.shortcuts import render, get_object_or_404, redirect
 from django.utils import timezone
-from django.http import HttpResponse
 from datetime import date, datetime
 import pytz
-from django.utils.timezone import utc
 from django.http import JsonResponse
 from django.template.loader import render_to_string
 from django.views.decorators.csrf import ensure_csrf_cookie, csrf_protect
@@ -27,7 +25,7 @@ from django.template.loader import get_template
 from django.template import Context
 from django.conf import settings
 from django.contrib.auth.models import Group, Permission
-from django.contrib.auth.decorators import permission_required, login_required
+from django.contrib.auth.decorators import permission_required
 from django.core import mail
 from django.core.mail import EmailMessage
 from .mail_util import Mail_Util

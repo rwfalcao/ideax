@@ -41,7 +41,7 @@ urlpatterns = [
     path('term/accept', views.accept_use_term, name="accept_term"),
     path('term', views.get_term_of_user, name="term_of_use"),
     path('feed/comment/latest',Comment_Feed()),
-    path('feed/idea/latest', New_Idea_Feed()),
+    path('feed/idea/latest', New_Idea_Feed(), name="rss"),
     path('report/idea/<int:idea_id>/detail/', views.idea_detail_pdf, name="idea_detail_pdf"),
     path('challenge/<int:challenge_pk>/', views.challenge_detail, name="challenge_detail"),
     path('challenge/new/', views.challenge_new, name='challenge_new'),
