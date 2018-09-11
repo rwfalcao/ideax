@@ -11,15 +11,14 @@ from martor.widgets import AdminMartorWidget
 class IdeaForm(forms.ModelForm):
     
     oportunity = MartorFormField()
+    solution = MartorFormField()
+    target = MartorFormField()
+    summary = MartorFormField()
     class Meta:
         model = Idea
         fields = ('title', 'summary', 'oportunity', 'solution', 'target', 'category', 'challenge' )
         labels = {'title': _('Title'), 'summary': _('Summary') , 'oportunity': _('Oportunity'), 'solution': _('Solution'), 'target': _('Target'),'category': _('Category'), 'challenge': _('Challenge')}
-        widgets = {
-            'summary': forms.Textarea(attrs={'placeholder': _('Sell your idea in 140 characters!')}),
-            'solution': forms.Textarea(attrs={'placeholder': _('Describe the solution very clearly and succinctly!')}),
-            'target': forms.Textarea(attrs={'placeholder': _('Indicate who your solution audience is')}),
-        }
+
 
 
 class IdeaFormUpdate(forms.ModelForm):

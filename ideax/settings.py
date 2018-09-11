@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'djcelery_email',
     'tinymce',
     'martor',
+    'markdownify',
 ]
 
 
