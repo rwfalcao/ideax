@@ -1,6 +1,5 @@
 {% extends 'ideax/base.html' %}
 {% load i18n staticfiles %}
-{% load markdownify %}
 
 {% block content %}
 <div class="challenge-list-bg" id="idea-title">
@@ -43,7 +42,7 @@
     <div class="col-md-9">
       <div class="challenge-body" >
           <h4>{% trans 'Description' %}</h4>
-          <p>{{ challenge.description|linebreaksbr| markdown| safe }}</p>
+          <p>{{ challenge.description|linebreaksbr }}</p>
           <h4 id="related-ideas">{% trans 'Related Ideas Challenge' %}</h4>
           {% if ideas %}
           <div class="group card-columns" id="idea-list-group">
