@@ -1,9 +1,9 @@
 {% load widget_tweaks i18n %}
 
-<form method="post" class="post-form js-category-remove-form"
-action="{% url 'category_remove' category.id %}"
-data-modal="#modal-category-crud"
-data-list-div="#category-list">
+<form method="post" class="post-form js-use_term-remove-form"
+action="{% url 'use_term_remove' use_term.id %}"
+data-modal="#modal-use_term-crud"
+data-list-div="#use_term-list">
   {% csrf_token %}
 
   <div class="modal-header">
@@ -18,7 +18,7 @@ data-list-div="#category-list">
   <div class="modal-body">
     <p class="lead">
       {% trans 'Would you like to delete the use term?' %}
-      <strong>{{category.description}}</strong> ?
+      <strong>{{use_term.description}}</strong> ?
     </p>
   </div>
   <div class="modal-footer">

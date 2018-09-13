@@ -2,13 +2,30 @@
 {% load i18n %}
 
 {% block content %}
-    {% for criterion in criterions %}
-        <div class="post">
-            <h1>{{criterion.description}}</h1>
-            <p>{{ criterion.peso }}</p>
-            <a href="{% url 'criterion_edit' pk=criterion.pk %}">{% trans 'Edit'%}</a>
-            <a href="{% url 'criterion_remove' pk=criterion.pk %}">{% trans 'Remove'%}</a>
+  <div class="idea-list-bg">
+      <h1 class="display-3">{% trans 'Criterion List' %}</h1>
+  </div>
+  <div class="container">
+    <table class="table">
+      <thead>
+        <tr>
 
-        </div>
+          <th>{% trans 'Description' %}</th>
+          <th>{% trans 'Weight' %}</th>
+          <th>{% trans 'Edit' %}</th>
+          <th>{% trans 'Discard' %}</th>
+
+        </tr>
+      </thead>
+      <tbody>
+    {% for criterion in criterions %}
+      <tr>
+        <td>{{criterion.description}}</td>
+        <td>{{ criterion.peso }}</td>
+        <td><button type="button" class="btn" onclick="location.href='{% url 'criterion_edit' pk=criterion.pk %}';"><i class="fa fa-edit"></i></button></td>
+        <td><button type="button" class="btn" onclick="location.href='{% url 'criterion_remove' pk=criterion.pk %}';"><i class="fa fa-trash"></i></button></td>
     {% endfor %}
+      </tbody>
+    </table>
+  </div>
 {% endblock %}

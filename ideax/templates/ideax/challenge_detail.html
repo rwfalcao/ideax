@@ -1,6 +1,5 @@
 {% extends 'ideax/base.html' %}
 {% load i18n staticfiles %}
-{% load markdownify %}
 
 {% block content %}
 <div class="challenge-list-bg" id="idea-title">
@@ -30,7 +29,7 @@
     <div class="col-md-3 text-center pb-3">
       <div class="challenge-menu">
         <span class="badge badge-secondary">{{ idea.get_current_phase.description }}</span>
-        <p>{% trans 'Expire Date' %}: <span>{{challenge.limit_date|date:"d/m/Y"}}</span></p>
+        <p>{% trans 'Expiration Date' %}: <span>{{challenge.limit_date|date:"d/m/Y"}}</span></p>
         <a href="{% url 'idea_new_from_challenge' challenge_pk=challenge.pk %}" role="button" aria-pressed="true" class="btn btn-outline-info btn-sm" target="_blank">
             {% trans 'Submit Idea' %}
         </a>
@@ -43,7 +42,7 @@
     <div class="col-md-9">
       <div class="challenge-body" >
           <h4>{% trans 'Description' %}</h4>
-          <p>{{ challenge.description|linebreaksbr| markdown| safe }}</p>
+          <p>{{ challenge.description|linebreaksbr }}</p>
           <h4 id="related-ideas">{% trans 'Related Ideas Challenge' %}</h4>
           {% if ideas %}
           <div class="group card-columns" id="idea-list-group">
