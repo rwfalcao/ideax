@@ -1,14 +1,17 @@
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
 from django.contrib.auth import views as auth_views
 from django.conf import settings
 from django.conf.urls.static import static
 from django.views.i18n import JavaScriptCatalog
-
+from django.conf.urls import url
 from . import views
 from ideax.feeds import *
 
 urlpatterns = [
+    url(r'^media/uploader/$', views.markdown_uploader, name='markdown_uploader_page'),
+    path('martor/', include('martor.urls')),
+    url(r'^tinymce/', include('tinymce.urls')),
     path('admin/', admin.site.urls),
     path('accounts/login/', auth_views.login, name='login'),
     path('accounts/logout/', auth_views.logout, name='logout'),
@@ -28,8 +31,7 @@ urlpatterns = [
     path('idea/<int:pk>/changephase/<int:new_phase>/', views.change_idea_phase, name='change_phase'),
     path('idea/filter/<int:phase_pk>', views.idea_filter, name ="idea_filter"),
     path('category/new/', views.category_new, name='category_new'),
-    path('category/', views.open_category_new, name='open_category_new'),
-    path('category/list', views.category_list, name='category_list'),
+    path('category/list/', views.category_list, name='category_list'),
     path('category/<int:pk>/edit/', views.category_edit, name='category_edit'),
     path('category/<int:pk>/remove/', views.category_remove, name='category_remove'),
     #path('idea/comment/<int:pk>', views.form_redirect, name='form'),
@@ -39,14 +41,24 @@ urlpatterns = [
     path('term/accept', views.accept_use_term, name="accept_term"),
     path('term', views.get_term_of_user, name="term_of_use"),
     path('feed/comment/latest',Comment_Feed()),
-    path('feed/idea/latest', New_Idea_Feed()),
+    path('feed/idea/latest', New_Idea_Feed(), name="rss"),
     path('report/idea/<int:idea_id>/detail/', views.idea_detail_pdf, name="idea_detail_pdf"),
     path('challenge/<int:challenge_pk>/', views.challenge_detail, name="challenge_detail"),
     path('challenge/new/', views.challenge_new, name='challenge_new'),
     path('challenge/edit/<int:challenge_pk>', views.challenge_edit, name='challenge_edit'),
-    path('challenge/list', views.challenge_list, name='challenge_list'),
+    path('challenge/list/', views.challenge_list, name='challenge_list'),
     path('report', views.report_ideas, name='report_ideas'),
     path('jsi18n/', JavaScriptCatalog.as_view(), name='javascript-catalog'),
+    path('useterm/new/', views.use_term_new, name='use_term_new'),
+    path('useterm/list/', views.use_term_list, name='use_term_list'),
+    path('useterm/', views.get_valid_use_term, name='use_term'),
+    path('useterm/<int:pk>/', views.use_term_detail, name='use_term_detail'),
+    path('useterm/<int:pk>/edit/', views.use_term_edit, name='use_term_edit'),
+    path('useterm/<int:pk>/remove/', views.use_term_remove, name='use_term_remove'),
+    path('categoryimage/new/', views.category_image_new, name='category_image_new'),
+    path('categoryimage/list/', views.category_image_list, name='category_image_list'),
+    path('categoryimage/<int:pk>/edit/', views.category_image_edit, name='category_image_edit'),
+    path('categoryimage/<int:pk>/remove/', views.category_image_remove, name='category_image_remove'),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

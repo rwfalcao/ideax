@@ -4,6 +4,7 @@
 
 <html>
     <head>
+      
         <title>Ideia X {%if idea %} #{{idea.id}} - {{idea.category.title}} {%endif%}</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <!-- <link rel="stylesheet" href="{% static 'css/idea.css' %}"> -->
@@ -35,6 +36,8 @@
         <script type="text/javascript" src="{% static 'admin/js/SelectBox.js' %}"></script>
         <script type="text/javascript" src="{% static 'admin/js/SelectFilter2.js' %}"></script>
         
+        
+        {{ form.media }}
     </head>
     <body>
       <!-- Image and text -->
@@ -59,7 +62,7 @@
               <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
                 <a class="dropdown-item"  href="/">{% trans 'Explore Ideas' %}</a>
                 <a class="dropdown-item disabled" href="#">{% trans 'Users' %}</a>
-                <a class="dropdown-item disabled" href="#">{% trans 'Terms of Use and Privacy' %}</a>
+                <a class="dropdown-item" href="{% url 'use_term' %}">{% trans 'Terms of Use and Privacy' %}</a>
                 <a class="dropdown-item" href="{% url 'logout' %}">{% trans 'Logout' %}</i></a>
               </div>
             </li>
@@ -105,12 +108,11 @@
           </div>
         </div>
       </div>
-
       {% include 'ideax/includes/footer.html' %}
 
 
       <script src="{% static '/js/popper.min.js' %}"></script>
-      <script src="{% static '/js/bootstrap.min.js' %}"></script>
+      
       <script src="{% static '/js/fontawesome-all.min.js' %}"></script>
       <!-- <script src="{% static '/js/fontawesome.js' %}"></script> -->
       <script src="{% static '/js/idea.js' %}"></script>
@@ -120,6 +122,10 @@
             getUserTerm("#modal-term-text", $("#modal-term").attr("data-url"));
       </script>
       {% endif %}
+      {% block footer %}
+        <!--script bootstrap-->
+        <script src="{% static '/js/bootstrap.min.js' %}"></script>
+      {% endblock %}
 
 
 

@@ -6,7 +6,9 @@ from django.contrib.admin.widgets import AdminDateWidget
 from django.contrib.admin.widgets import FilteredSelectMultiple
 import os
 from django.conf import settings
-
+from tinymce import TinyMCE
+from martor.fields import MartorFormField
+from martor.widgets import AdminMartorWidget  
 
 class IdeaForm(forms.ModelForm):
     #authors = forms.ModelMultipleChoiceField(queryset=UserProfile.objects.filter(user__is_staff=False).exclude(user__email__isnull=True), 
@@ -15,17 +17,14 @@ class IdeaForm(forms.ModelForm):
                             queryset=Challenge.objects.filter(discarted=False),
                             empty_label=_('Not related to any challenge'),
                             required=False)
-
+    oportunity = MartorFormField()
+    solution = MartorFormField()
+    target = MartorFormField()
+    summary = MartorFormField()
     class Meta:
         model = Idea
         fields = ('title', 'summary', 'oportunity', 'solution', 'target', 'category', 'challenge')
         labels = {'title': _('Title'), 'summary': _('Summary'), 'oportunity': _('Oportunity'), 'solution': _('Solution'), 'target': _('Target'),'category': _('Category'), 'challenge': _('Challenge')}
-        widgets = {
-            'summary': forms.Textarea(attrs={'placeholder': _('Sell your idea in 140 characters!')}),
-            'oportunity': forms.Textarea(attrs={'placeholder': _('Describe the problem or opportunity your idea will meet!')}),
-            'solution': forms.Textarea(attrs={'placeholder': _('Describe the solution very clearly and succinctly!')}),
-            'target': forms.Textarea(attrs={'placeholder': _('Indicate who your solution audience is')}),           
-        }
 
     class Media:
         css = {
@@ -47,7 +46,7 @@ class CriterionForm(forms.ModelForm):
     class Meta:
         model = Criterion
         fields = ('description','peso')
-        labels = {'peso': _('Weight'), 'description': _('Description'), }
+        labels = {'peso': _('Weight'), 'description': _('Description')}
 
 
 class CategoryForm(forms.ModelForm):
@@ -55,17 +54,34 @@ class CategoryForm(forms.ModelForm):
     class Meta:
         model = Category
         fields = ('title', 'description', )
-        labels = {'title': _('Title'), 'description': _('Description')}
+        labels = {'title':_('Title'), 'description': _('Description')}
+        
+class CategoryImageForm(forms.ModelForm):
 
+    class Meta:
+        model = Category_Image
+        fields = ('description', 'image', 'category')
+        labels = {'description':_('Description'),'image':_('Image'),'category':_('Category')}
 
 class ChallengeForm(forms.ModelForm):
+
     class Meta:
         model = Challenge
         fields = ('title', 'image', 'summary', 'requester', 'description', 'active' , 'limit_date', 'featured', 'category',)
+        labels = {'title':_('Title'),'image':_('Image'),'summary':_('Summary'),
+                  'requester':_('Requester'),'description':_('Description'),'active':_('Active'),'limit_date':_('Limit Date'),'featured':_('Featured'),'category':_('Category')}
         widgets = {
             'limit_date': forms.DateInput(attrs={'placeholder': 'dd/mm/aaaa'}),
         }
-
+class UseTermForm(forms.ModelForm):
+    
+    class Meta:
+        model = Use_Term
+        fields = ('creator', 'term', 'init_date', 'final_date')
+        labels = {'creator':_('Creator'), 'term':_('Term'), 'init_date':_('Initial Date'), 'final_date':_('Final Date')}
+        widgets = {
+            'term' : TinyMCE(),
+        }
 
 class EvaluationForm(forms.Form):
     FORMAT_ID = 'category_dimension_%s'

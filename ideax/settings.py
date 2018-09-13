@@ -30,8 +30,8 @@ DEBUG = config('DEBUG', default=False, cast=bool)
 
 ALLOWED_HOSTS = config('ALLOWED_HOSTS', cast=Csv())
 
-
 # Application definition
+
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -46,7 +46,13 @@ INSTALLED_APPS = [
     'mptt',
     'djcelery',
     'djcelery_email',
+    'tinymce',
+    'martor',
+    'markdownify',
 ]
+
+
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -230,3 +236,91 @@ LOGGING = {
 }
 
 GENERAL_USER_GROUP=config('GENERAL_USER_GROUP')
+
+TINYMCE_SPELLCHECKER = False
+TINYMCE_FILEBROWSER = False
+#TINYMCE_JS_URL = '//cdn.tinymce.com/4/tinymce.min.js'
+TINYMCE_JS_URL = STATIC_URL + 'tinymce/js/tinymce/tinymce.min.js'
+TINYMCE_ADDITIONAL_JS_URLS = None
+TINYMCE_CSS_URL = None
+TINYMCE_CALLBACKS = {}
+
+
+TINYMCE_DEFAULT_CONFIG = {
+    'selector': 'textarea',
+    'theme': 'modern',
+    'plugins': 'textpattern table code lists',
+    'toolbar1': 'formatselect | bold italic underline | alignleft aligncenter alignright alignjustify '
+               '| bullist numlist | outdent indent | table ',
+    'contextmenu_never_use_native': True,
+    'textpattern_patterns': [
+     {'start': '*', 'end': '*', 'format': 'italic'},
+     {'start': '**', 'end': '**', 'format': 'bold'},
+     {'start': '#', 'format': 'h1'},
+     {'start': '##', 'format': 'h2'},
+     {'start': '###', 'format': 'h3'},
+     {'start': '####', 'format': 'h4'},
+     {'start': '#####', 'format': 'h5'},
+     {'start': '######', 'format': 'h6'},
+     {'start': '1. ', 'cmd': 'InsertOrderedList'},
+     {'start': '* ', 'cmd': 'InsertUnorderedList'},
+     {'start': '- ', 'cmd': 'InsertUnorderedList'}
+    ],
+    'menubar': False,
+    'inline': False,
+    'statusbar': True,
+    'width': 'auto',
+    'height': 360,
+}
+
+
+# Global martor settings
+# Input: string boolean, `true/false`
+MARTOR_ENABLE_CONFIGS = {
+    'imgur': 'true',     # to enable/disable imgur/custom uploader.
+    'mention': 'true',  # to enable/disable mention
+    'jquery': 'true',    # to include/revoke jquery (require for admin default django)
+    'living': 'false',   # to enable/disable live updates in preview
+ }
+
+# To setup the martor editor with label or not (default is False)
+MARTOR_ENABLE_LABEL = True
+
+# Imgur API Keys
+MARTOR_IMGUR_CLIENT_ID = 'your-client-id'
+MARTOR_IMGUR_API_KEY   = 'your-api-key'
+
+# Safe Mode
+MARTOR_MARKDOWN_SAFE_MODE = True # default
+
+# Markdownify
+MARTOR_MARKDOWNIFY_FUNCTION = 'martor.utils.markdownify' # default
+MARTOR_MARKDOWNIFY_URL = '/martor/markdownify/' # default
+
+# Markdown extensions (default)
+MARTOR_MARKDOWN_EXTENSIONS = [
+    'markdown.extensions.extra',
+    'markdown.extensions.nl2br',
+    'markdown.extensions.smarty',
+    'markdown.extensions.fenced_code',
+
+    # Custom markdown extensions.
+    'martor.extensions.urlize',
+    'martor.extensions.del_ins',    # ~~strikethrough~~ and ++underscores++
+    'martor.extensions.mention',    # to parse markdown mention
+    'martor.extensions.mdx_video',  # to parse embed/iframe video
+]
+
+# Markdown Extensions Configs
+MARTOR_MARKDOWN_EXTENSION_CONFIGS = {}
+
+# Markdown urls
+MARTOR_UPLOAD_URL = '/media/uploader/' # default
+MARTOR_SEARCH_USERS_URL = '/martor/search-user/' # default
+
+# Markdown Extensions
+MARTOR_MARKDOWN_BASE_MENTION_URL = 'http://127.0.0.1:8000/author/' # default (change this)
+import time
+MARTOR_UPLOAD_PATH = 'images/uploads/{}'.format(time.strftime("%Y/%m/%d/"))
+
+MAX_IMAGE_UPLOAD_SIZE = 5242880  # 5MB

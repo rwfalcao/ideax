@@ -9,7 +9,7 @@ import random
 from django.conf import settings
 from django.utils.translation import ugettext_lazy as _
 from django.contrib.auth.models import User, Group
-
+from martor.models import MartorField
 
 def check_user_profile(sender, user, request, **kwargs):
     try:
@@ -249,4 +249,15 @@ class Use_Term(models.Model):
     creator = models.ForeignKey('UserProfile', on_delete=models.PROTECT)
     term = models.TextField(max_length=12500)
     init_date = models.DateTimeField()
-    final_date = models.DateTimeField(blank=True, null=True)
+    final_date = models.DateTimeField()
+
+    @property
+    def is_past_due(self):
+        if timezone.now() < self.final_date:
+            return True
+        return False
+
+    def is_invalid_date(self):
+        if self.final_date < self.init_date:
+            return True
+        return False
