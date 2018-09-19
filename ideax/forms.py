@@ -1,6 +1,6 @@
 from django import forms
 from django.utils.translation import ugettext_lazy as _
-from .models import Idea, Criterion, Category, Dimension, Category_Dimension, Evaluation, Challenge, UserProfile
+from .models import Idea, Criterion, Category, Dimension, Category_Dimension, Evaluation, Challenge, Use_Term, Category_Image
 from django.utils import timezone
 from django.contrib.admin.widgets import AdminDateWidget
 from django.contrib.admin.widgets import FilteredSelectMultiple
@@ -28,9 +28,9 @@ class IdeaForm(forms.ModelForm):
 
     class Media:
         css = {
-            'all': (os.path.join(settings.BASE_DIR, '/static/admin/css/widgets.css'),),
+            'all': (os.path.join(settings.BASE_DIR, '/static/admin/css/widgets.css')),
         }
-        js = ('/admin/jsi18n', 'jquery.js', 'jquery.init.js', 'core.js', 'SelectBox.js', 'SelectFilter2.js'),
+        js = ('/admin/jsi18n', 'jquery.js', 'jquery.init.js', 'core.js', 'SelectBox.js', 'SelectFilter2.js')
 
 
 class IdeaFormUpdate(forms.ModelForm):
@@ -55,7 +55,7 @@ class CategoryForm(forms.ModelForm):
         model = Category
         fields = ('title', 'description', )
         labels = {'title':_('Title'), 'description': _('Description')}
-        
+
 class CategoryImageForm(forms.ModelForm):
 
     class Meta:
