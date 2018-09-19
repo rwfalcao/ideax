@@ -28,7 +28,7 @@ class New_Idea_Feed(Feed):
     description = str(_('Sharing ideas'))
 
     def items(self):
-        return Idea.objects.all().order_by('-creation_date')[:10]
+        return Idea.objects.filter(discarded=False).order_by('-creation_date')[:10]
 
     def item_title(self, item):
         return str(_('Idea'))+" #"+str(item.id)+": " + item.title

@@ -54,3 +54,13 @@
     <p class="help-block">{{ error }}</p>
   {% endfor %}
 </div>
+
+{% comment %}
+<div class="form-group{% if form.authors.errors %} has-error{% endif %} authors-new-idea">
+  <label for="{{form.authors.id_for_label}}">{{form.authors.label}}</label>
+  {{ form.authors|add_class:'form-control' }}
+  {% for error in form.authors.errors %}
+    <p class="help-block">{{ error }}</p>
+  {% endfor %}
+</div>
+{% endcomment %}

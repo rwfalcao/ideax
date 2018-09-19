@@ -926,18 +926,27 @@ transition-delay: 0.7s;
     background-color: #04406B;
     border-color: #04406B;
   }
-.edit-term-of-use {
-  color: #1f5093;
+
+.count-ideas {
+  float: right;
 }
 
-.img-dimension {
-  max-height:120px !important;
-  max-width:268px;
-  width: auto;
-  height: auto;
-  padding: 0px;
-  margin: 30px;
-  align-items: center !important;
+.selector {
+  float: none !important;  
+  overflow: auto;  
+}
+
+.selector select {
+  border: 1px solid #ccc;
+}
+
+.authors-new-idea h2{
+  font-size: 13px;
+  padding: 8px;
+  margin-bottom: 0;  
+}
+.edit-term-of-use {
+  color: #1f5093;
 }
 
 .terms-of-use-break-line{

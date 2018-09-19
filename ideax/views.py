@@ -9,7 +9,7 @@ from django.views.decorators.csrf import ensure_csrf_cookie, csrf_protect
 from django.views.decorators.http import require_http_methods
 from django.db.models import Count, Case, When
 from .models import Idea, Criterion, Popular_Vote, Phase, Phase_History, Category, Comment, UserProfile, Dimension, Evaluation, Category_Image, Use_Term, Challenge
-from .forms import IdeaForm, CriterionForm, IdeaFormUpdate, CategoryForm, CategoryImageForm, EvaluationForm, EvaluationForm, ChallengeForm, UseTermForm
+from .forms import IdeaForm, CriterionForm, IdeaFormUpdate, CategoryForm, CategoryImageForm, EvaluationForm, ChallengeForm, UseTermForm
 from .singleton import Profanity_Check
 from django import forms
 from wordfilter import Wordfilter
@@ -36,6 +36,7 @@ from django.core.files.storage import FileSystemStorage, default_storage
 from django.db import connection
 import csv
 from django.http import StreamingHttpResponse
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from martor.utils import LazyEncoder
 from django.core.files.base import ContentFile
 from django.core.files.storage import default_storage
@@ -81,10 +82,9 @@ def accept_use_term(request):
 
 @login_required
 def idea_list(request):
-    from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
     ideas = get_ideas_init(request)
-    ideas['phases'] = Phase.choices()
-
+    ideas['phases'] = get_phases_count()
+    
     page = request.GET.get('page', 1)
     paginator = Paginator(ideas['ideas'], 5)
 
@@ -94,8 +94,25 @@ def idea_list(request):
         ideas['ideas'] = paginator.page(1)
     except EmptyPage:
         ideas['ideas'] = paginator.page(paginator.num_pages)
-
     return render(request, 'ideax/idea_list.html', ideas)
+
+
+def get_phases_count():
+    cursor = connection.cursor()
+    cursor.execute('''select current_phase as phase, count(*) as qtd
+                      from ideax_phase_history ph inner join ideax_idea i on ph.idea_id = i.id
+                      where ph.current =1 and i.discarded = 0 group by current_phase order by phase''')
+    data = cursor.fetchall()
+
+    phases = dict()
+    for i in Phase.choices():
+        phases[i[0]] = {'phase': i[1], 'qtd': 0}
+
+
+    for d in data:
+        phases[d[0]]['qtd'] = d[1]
+
+    return phases
 
 @login_required
 def get_ideas_init(request):
@@ -105,6 +122,7 @@ def get_ideas_init(request):
     ideas_dic['ideas_disliked'] = get_ideas_voted(request, False)
     ideas_dic['ideas_created_by_me'] = get_ideas_created(request)
     ideas_dic['challenges'] = get_featured_challenges(request)
+    ideas_dic['phase_req'] = Phase.GROW.id
     return ideas_dic
 
 def get_phases():
@@ -113,20 +131,26 @@ def get_phases():
     return phase_dic
 
 def idea_filter(request, phase_pk):
-    ideas =  Idea.objects.filter(discarded=False, phase_history__current_phase=phase_pk, phase_history__current=1).annotate(count_like=Count(Case(When(popular_vote__like = True, then=1)))).order_by('-count_like')
+    ideas = Idea.objects.filter(discarded=False, phase_history__current_phase=phase_pk, phase_history__current=1).annotate(count_like=Count(Case(When(popular_vote__like = True, then=1)))).order_by('-count_like')
     context={'ideas': ideas,
              'ideas_liked': get_ideas_voted(request, True),
              'ideas_disliked': get_ideas_voted(request, False),
              'ideas_created_by_me' : get_ideas_created(request),}
 
     data = dict()
-    data['html_idea_list'] = render_to_string('ideax/idea_list_loop.html', context, request=request)
-    data['empty'] = 0
+    if request.is_ajax():
+        data['html_idea_list'] = render_to_string('ideax/idea_list_loop.html', context, request=request)
+        data['empty'] = 0
 
-    if not ideas:
-        data['html_idea_list'] = render_to_string('ideax/includes/empty.html', request=request)
-        data['empty'] = 1
-    return JsonResponse(data)
+        if not ideas:
+            data['html_idea_list'] = render_to_string('ideax/includes/empty.html', request=request)
+            data['empty'] = 1
+        return JsonResponse(data)
+    else:
+        context['challenges'] = get_featured_challenges(request)
+        context['phases'] = get_phases_count()
+        context['phase_req'] = phase_pk
+        return render(request, 'ideax/idea_list.html', context)
 
 @login_required
 def save_idea(request, form, template_name, new=False):
@@ -134,11 +158,12 @@ def save_idea(request, form, template_name, new=False):
     if request.method == "POST":
         if form.is_valid():
             idea = form.save(commit=False)
+            
             if new:
-                idea.author = UserProfile.objects.get(user=request.user)
+                idea_autor = UserProfile.objects.get(user=request.user)
+                idea.author = idea_autor
                 idea.creation_date = timezone.now()
                 idea.phase= Phase.GROW.id
-
 
                 if(idea.challenge):
                     idea.category = idea.challenge.category
@@ -150,6 +175,7 @@ def save_idea(request, form, template_name, new=False):
                     idea.category_image = category_image.image.url
 
                 idea.save()
+                idea.authors.add(idea.author)
                 phase_history = Phase_History(current_phase=Phase.GROW.id,
                                               previous_phase=0,
                                               date_change=timezone.now(),
@@ -159,6 +185,12 @@ def save_idea(request, form, template_name, new=False):
                 phase_history.save()
             else:
                 idea.save()
+
+            #idea.authors.clear()
+            #if form.cleaned_data['authors']:
+            #    for author in form.cleaned_data['authors']:
+            #        idea.authors.add(author)
+
             messages.success(request, _('Idea saved successfully!'))
 
             audit(request.user.username, get_client_ip(request), 'SAVE_IDEA_OPERATION', Idea.__name__, str(idea.id))
@@ -173,6 +205,7 @@ def idea_new(request):
     if request.method == "POST":
         form = IdeaForm(request.POST)
     else:
+        #queryset = UserProfile.objects.filter(user__is_staff=False).exclude(user__email__isnull=True).exclude(user__email=request.user.email)                                                    
         form = IdeaForm()
 
     audit(request.user.username, get_client_ip(request), 'CREATE_IDEA_FORM', Idea.__name__, '')
@@ -633,7 +666,7 @@ def get_featured_challenges(request):
 @login_required
 def challenge_detail(request, challenge_pk):
      challenge = get_object_or_404(Challenge, pk=challenge_pk)
-     return render(request, 'ideax/challenge_detail.html', {'challenge' : challenge, 'ideas': challenge.idea_set.all()})
+     return render(request, 'ideax/challenge_detail.html', {'challenge' : challenge, 'ideas': challenge.idea_set.filter(discarded=False)})
 
 @login_required
 @permission_required('ideax.change_idea',raise_exception=True)

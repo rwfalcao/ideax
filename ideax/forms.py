@@ -3,22 +3,34 @@ from django.utils.translation import ugettext_lazy as _
 from .models import Idea, Criterion, Category, Dimension, Category_Dimension, Evaluation, Challenge, Use_Term, Category_Image
 from django.utils import timezone
 from django.contrib.admin.widgets import AdminDateWidget
+from django.contrib.admin.widgets import FilteredSelectMultiple
+import os
+from django.conf import settings
 from tinymce import TinyMCE
 from martor.fields import MartorFormField
-from martor.widgets import AdminMartorWidget
-
+from martor.widgets import AdminMartorWidget  
 
 class IdeaForm(forms.ModelForm):
-    
+    #authors = forms.ModelMultipleChoiceField(queryset=UserProfile.objects.filter(user__is_staff=False).exclude(user__email__isnull=True), 
+    #                                              widget=FilteredSelectMultiple("", is_stacked=False), required=True)
+    challenge = forms.ModelChoiceField(
+                            queryset=Challenge.objects.filter(discarted=False),
+                            empty_label=_('Not related to any challenge'),
+                            required=False)
     oportunity = MartorFormField()
     solution = MartorFormField()
     target = MartorFormField()
     summary = MartorFormField()
     class Meta:
         model = Idea
-        fields = ('title', 'summary', 'oportunity', 'solution', 'target', 'category', 'challenge' )
-        labels = {'title': _('Title'), 'summary': _('Summary') , 'oportunity': _('Oportunity'), 'solution': _('Solution'), 'target': _('Target'),'category': _('Category'), 'challenge': _('Challenge')}
+        fields = ('title', 'summary', 'oportunity', 'solution', 'target', 'category', 'challenge')
+        labels = {'title': _('Title'), 'summary': _('Summary'), 'oportunity': _('Oportunity'), 'solution': _('Solution'), 'target': _('Target'),'category': _('Category'), 'challenge': _('Challenge')}
 
+    class Media:
+        css = {
+            'all': (os.path.join(settings.BASE_DIR, '/static/admin/css/widgets.css')),
+        }
+        js = ('/admin/jsi18n', 'jquery.js', 'jquery.init.js', 'core.js', 'SelectBox.js', 'SelectFilter2.js')
 
 
 class IdeaFormUpdate(forms.ModelForm):
@@ -28,19 +40,22 @@ class IdeaFormUpdate(forms.ModelForm):
         fields = ('title', 'oportunity', 'solution', 'target')
         labels = {'title': _('Title'), 'oportunity': _('Oportunity'), 'solution': _('Solution'), 'target': _('Target'),  }
 
+
 class CriterionForm(forms.ModelForm):
 
     class Meta:
         model = Criterion
         fields = ('description','peso')
-        labels = {'peso': _('Weight'), 'description': _('Description'), }
+        labels = {'peso': _('Weight'), 'description': _('Description')}
+
 
 class CategoryForm(forms.ModelForm):
 
     class Meta:
         model = Category
         fields = ('title', 'description', )
-        labels = {'title':_('Title'), 'description': _('Description') }
+        labels = {'title':_('Title'), 'description': _('Description')}
+
 class CategoryImageForm(forms.ModelForm):
 
     class Meta:
@@ -56,7 +71,7 @@ class ChallengeForm(forms.ModelForm):
         labels = {'title':_('Title'),'image':_('Image'),'summary':_('Summary'),
                   'requester':_('Requester'),'description':_('Description'),'active':_('Active'),'limit_date':_('Limit Date'),'featured':_('Featured'),'category':_('Category')}
         widgets = {
-            'limit_date' : forms.DateInput(attrs={'placeholder' : 'dd/mm/aaaa'}),
+            'limit_date': forms.DateInput(attrs={'placeholder': 'dd/mm/aaaa'}),
         }
 class UseTermForm(forms.ModelForm):
     

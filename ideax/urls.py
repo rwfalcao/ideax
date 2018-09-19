@@ -48,6 +48,7 @@ urlpatterns = [
     path('challenge/edit/<int:challenge_pk>', views.challenge_edit, name='challenge_edit'),
     path('challenge/list/', views.challenge_list, name='challenge_list'),
     path('report', views.report_ideas, name='report_ideas'),
+    path('jsi18n/', JavaScriptCatalog.as_view(), name='javascript-catalog'),
     path('useterm/new/', views.use_term_new, name='use_term_new'),
     path('useterm/list/', views.use_term_list, name='use_term_list'),
     path('useterm/', views.get_valid_use_term, name='use_term'),

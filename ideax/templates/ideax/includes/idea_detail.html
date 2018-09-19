@@ -1,5 +1,6 @@
 <!-- {% load widget_tweaks i18n %} -->
 {% load staticfiles i18n %}
+{% load markdownify %}
 
 <div class="card infinite-item">
   <!-- <div class="card-header">
@@ -13,9 +14,9 @@
     <h5 class="card-title">{{ idea.title }}</h5>
     <div class="card-text">
         {% if idea.summary %}
-          {{idea.summary}}
+          {{idea.summary|markdownify}}
         {% else %}
-          {{ idea.solution|truncatechars:140 }}
+          {{ idea.solution|truncatechars:140|markdownify }}
         {% endif %}
     </div>
     <div class="text-left pb-2 pt-2">

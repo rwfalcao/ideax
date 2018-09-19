@@ -18,9 +18,9 @@
     <div class="col-sm-12 idea-detail-summary">
       <p class="text-center">
         {% if idea.summary %}
-          {{idea.summary}}
+          {{idea.summary|markdownify}}
         {% else %}
-          {{ idea.solution|truncatechars:140 }}
+          {{ idea.solution|truncatechars:140|markdownify }}
         {% endif %}
       </p>
     </div>
@@ -38,6 +38,7 @@
         </a>
       </p>
       <span class="badge badge-secondary">{{ idea.get_current_phase.description }}</span>
+      <span class="badge badge-info">{{ idea.category }}</span>
       <div class="like-menu">
 
         <a class="like badge" onclick="vote('{% url 'like_ideia' pk=idea.pk %}', '.liked_idea_{{idea.id}}', '.disliked_idea_{{idea.id}}', '.like_{{idea.id}}', '.dislike_{{idea.id}}')"
@@ -89,7 +90,7 @@
         <div class="tab-pane fade show active" id="description" role="tabpanel" aria-labelledby="description-tab">
           <div class="readmore-block">
             <h4>{% trans 'Solution' %}</h4>
-            <p>{{ idea.solution|linebreaksbr }}</p>
+            <p>{{ idea.solution|markdownify}}</p>
             <div class="text-center">
               <a href="javascript:void(0)" class="expand-button">
                 <i class="fas fa-sort-down"></i>
@@ -98,7 +99,7 @@
           </div>
           <div class="readmore-block">
             <h4>{% trans 'Oportunity' %}</h4>
-            <p>{{ idea.oportunity|linebreaksbr|markdownify}}</p>
+            <p>{{ idea.oportunity|markdownify}}</p>
             <div class="text-center">
               <a href="javascript:void(0)" class="expand-button">
                 <i class="fas fa-sort-down"></i>
@@ -107,7 +108,7 @@
           </div>
           <div class="readmore-block">
             <h4>{% trans 'Target' %}</h4>
-            <p>{{ idea.target|linebreaksbr }}</p>
+            <p>{{ idea.target|linebreaksbr|markdownify}}</p>
             <div class="text-center">
               <a href="javascript:void(0)" class="expand-button">
                 <i class="fas fa-sort-down"></i>
