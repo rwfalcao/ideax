@@ -186,10 +186,12 @@ def save_idea(request, form, template_name, new=False):
             else:
                 idea.save()
 
-            #idea.authors.clear()
-            #if form.cleaned_data['authors']:
-            #    for author in form.cleaned_data['authors']:
-            #        idea.authors.add(author)
+            idea.authors.clear()
+            idea.authors.add(UserProfile.objects.get(user__email=request.user.email))
+            if form.cleaned_data['authors']:
+                for author in form.cleaned_data['authors']:
+                    idea.authors.add(author)
+                
 
             messages.success(request, _('Idea saved successfully!'))
 
@@ -202,11 +204,11 @@ def save_idea(request, form, template_name, new=False):
 @login_required
 @permission_required('ideax.add_idea',raise_exception=True)
 def idea_new(request):
+    queryset = UserProfile.objects.filter(user__is_staff=False).exclude(user__email__isnull=True).exclude(user__email=request.user.email)
     if request.method == "POST":
-        form = IdeaForm(request.POST)
+        form = IdeaForm(request.POST,authors=queryset)
     else:
-        #queryset = UserProfile.objects.filter(user__is_staff=False).exclude(user__email__isnull=True).exclude(user__email=request.user.email)                                                    
-        form = IdeaForm()
+        form = IdeaForm(authors=queryset)
 
     audit(request.user.username, get_client_ip(request), 'CREATE_IDEA_FORM', Idea.__name__, '')
 
@@ -219,10 +221,11 @@ def idea_edit(request, pk):
 
     if ((request.user.userprofile == idea.author and idea.get_current_phase() == Phase.GROW)
                     or request.user.has_perm(settings.PERMISSIONS["MANAGE_IDEA"])):
+        queryset = UserProfile.objects.filter(user__is_staff=False).exclude(user__email__isnull=True).exclude(user__email=request.user.email)
         if request.method == "POST":
-            form = IdeaForm(request.POST, instance=idea)
+            form = IdeaForm(request.POST, instance=idea, authors=queryset)
         else:
-            form = IdeaForm(instance=idea)
+            form = IdeaForm(instance=idea, authors=queryset)
 
         audit(request.user.username, get_client_ip(request), 'EDIT_IDEA_FORM', Idea.__name__, str(idea.id))
 

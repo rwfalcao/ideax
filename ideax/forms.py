@@ -1,6 +1,6 @@
 from django import forms
 from django.utils.translation import ugettext_lazy as _
-from .models import Idea, Criterion, Category, Dimension, Category_Dimension, Evaluation, Challenge, Use_Term, Category_Image
+from .models import Idea, Criterion, Category, Dimension, Category_Dimension, Evaluation, Challenge, Use_Term, Category_Image, UserProfile
 from django.utils import timezone
 from django.contrib.admin.widgets import AdminDateWidget
 from django.contrib.admin.widgets import FilteredSelectMultiple
@@ -11,8 +11,12 @@ from martor.fields import MartorFormField
 from martor.widgets import AdminMartorWidget  
 
 class IdeaForm(forms.ModelForm):
-    #authors = forms.ModelMultipleChoiceField(queryset=UserProfile.objects.filter(user__is_staff=False).exclude(user__email__isnull=True), 
-    #                                              widget=FilteredSelectMultiple("", is_stacked=False), required=True)
+    
+    def __init__(self, *args, **kwargs):
+        queryset = kwargs.pop('authors', None)
+        super(IdeaForm, self).__init__(*args,**kwargs)
+        self.fields['authors']=forms.ModelMultipleChoiceField(queryset=queryset, widget=FilteredSelectMultiple("", is_stacked=False), required=False)
+
     challenge = forms.ModelChoiceField(
                             queryset=Challenge.objects.filter(discarted=False),
                             empty_label=_('Not related to any challenge'),
@@ -23,8 +27,8 @@ class IdeaForm(forms.ModelForm):
     summary = MartorFormField()
     class Meta:
         model = Idea
-        fields = ('title', 'summary', 'oportunity', 'solution', 'target', 'category', 'challenge')
-        labels = {'title': _('Title'), 'summary': _('Summary'), 'oportunity': _('Oportunity'), 'solution': _('Solution'), 'target': _('Target'),'category': _('Category'), 'challenge': _('Challenge')}
+        fields = ('title', 'summary', 'oportunity', 'solution', 'target', 'category', 'challenge', 'authors')
+        labels = {'title': _('Title'), 'summary': _('Summary'), 'oportunity': _('Oportunity'), 'solution': _('Solution'), 'target': _('Target'),'category': _('Category'), 'challenge': _('Challenge'), 'authors':_('Coauthors')}
 
     class Media:
         css = {
