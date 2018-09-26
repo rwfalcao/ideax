@@ -507,6 +507,7 @@ def idea_detail(request, pk):
     data["comments"] = comments
     data["idea"] = idea
     data["idea_id"] = idea.pk
+    data["authors"] = idea.authors.all()
 
     initial = collections.OrderedDict()
     form_ = None

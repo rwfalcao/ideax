@@ -32,10 +32,15 @@
         <img src="{{idea.category_image}}" class="img-fluid img-thumbnail" alt="{% trans 'Banner Idea' %}" />
       </div>
       <p>
-        <a href="#">
           <small class="text-muted">{% trans 'By' %}
-          <span id="real-author"></span>@{{idea.author.user}}</small>
-        </a>
+            {% for author in authors %}
+              {% if forloop.last %}
+                {{ author.user }}
+              {% else %}
+                {{ author.user }},
+              {% endif %}
+            {% endfor %}
+          </small>
       </p>
       <span class="badge badge-secondary">{{ idea.get_current_phase.description }}</span>
       <span class="badge badge-info">{{ idea.category }}</span>
