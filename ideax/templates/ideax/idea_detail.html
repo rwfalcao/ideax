@@ -1,6 +1,6 @@
 {% extends 'ideax/base.html' %}
 {% load i18n staticfiles %}
-{% load markdownify %}
+{% load martortags %}
 {% block content %}
 <div class="idea-list-bg" id="idea-title">
   <h1 class="display-3 desktop-title
@@ -18,9 +18,9 @@
     <div class="col-sm-12 idea-detail-summary">
       <p class="text-center">
         {% if idea.summary %}
-          {{idea.summary|markdownify}}
+          {{idea.summary|safe_markdown}}
         {% else %}
-          {{ idea.solution|truncatechars:140|markdownify }}
+          {{idea.solution|truncatechars:140|safe_markdown}}
         {% endif %}
       </p>
     </div>
@@ -90,7 +90,7 @@
         <div class="tab-pane fade show active" id="description" role="tabpanel" aria-labelledby="description-tab">
           <div class="readmore-block">
             <h4>{% trans 'Solution' %}</h4>
-            <p>{{ idea.solution|markdownify}}</p>
+            <p>{{ idea.solution|safe_markdown}}</p>
             <div class="text-center">
               <a href="javascript:void(0)" class="expand-button">
                 <i class="fas fa-sort-down"></i>
@@ -99,7 +99,7 @@
           </div>
           <div class="readmore-block">
             <h4>{% trans 'Oportunity' %}</h4>
-            <p>{{ idea.oportunity|markdownify}}</p>
+            <p>{{ idea.oportunity|safe_markdown}}</p>
             <div class="text-center">
               <a href="javascript:void(0)" class="expand-button">
                 <i class="fas fa-sort-down"></i>
@@ -108,7 +108,7 @@
           </div>
           <div class="readmore-block">
             <h4>{% trans 'Target' %}</h4>
-            <p>{{ idea.target|linebreaksbr|markdownify}}</p>
+            <p>{{ idea.target|linebreaksbr|safe_markdown}}</p>
             <div class="text-center">
               <a href="javascript:void(0)" class="expand-button">
                 <i class="fas fa-sort-down"></i>

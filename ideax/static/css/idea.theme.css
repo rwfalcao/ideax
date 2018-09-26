@@ -861,14 +861,17 @@ transition-delay: 0.7s;
   border-top-right-radius: 0;
 }
 
-.idea-detail-summary {
+.idea-detail-summary, .useterm-detail, .challenge-detail{
   padding: 25px;
   color: #7a7979;
+  text-align: center;
 }
 
-.idea-detail-summary p{
+.idea-detail-summary, .useterm-detail, .challenge-detail p{
   font-size: 20px
+  text-align: center;
 }
+
 .like{
   color: #28a745;
 }

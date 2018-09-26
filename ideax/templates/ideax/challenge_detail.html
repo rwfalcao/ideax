@@ -1,6 +1,6 @@
 {% extends 'ideax/base.html' %}
 {% load i18n staticfiles %}
-{% load markdownify %}
+{% load martortags %}
 {% block content %}
 <div class="challenge-list-bg" id="idea-title">
   <h1 class="display-3 desktop-title
@@ -15,7 +15,7 @@
 </div>
 <div class="container">
   <div class="row">
-    <div class="col-sm-12 idea-detail-summary">
+    <div class="col-sm-12 challenge-detail">
       <p class="text-center">
           {{challenge.summary}}
       </p>
@@ -42,7 +42,7 @@
     <div class="col-md-9">
       <div class="challenge-body" >
           <h4>{% trans 'Description' %}</h4>
-          <p>{{ challenge.description|linebreaksbr|markdownify }}</p>
+          <p>{{ challenge.description|linebreaksbr|safe_markdown }}</p>
           <h4 id="related-ideas">{% trans 'Related Ideas Challenge' %}</h4>
           {% if ideas %}
           <div class="group card-columns" id="idea-list-group">
