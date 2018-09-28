@@ -694,7 +694,7 @@ def challenge_new(request):
             challenge.creation_date = timezone.now()
             challenge.save()
             messages.success(request, _('Challenge saved successfully!'))
-            return redirect('idea_list')
+            return redirect('challenge_list')
     return render(request, 'ideax/challenge_new.html', {'form': form})
 
 @login_required
@@ -709,7 +709,7 @@ def challenge_edit(request, challenge_pk):
             challenge = form.save(commit=False)
             challenge.save()
             messages.success(request, _('Challenge saved successfully!'))
-            return redirect('idea_list')
+            return redirect('challenge_list')
     else:
         form = ChallengeForm(instance=challenge)
 
@@ -721,6 +721,18 @@ def file_upload(request):
     filename = fs.save(myfile.name, myfile)
     uploaded_file_url = fs.url(filename)
     return uploaded_file_url
+
+@login_required
+@permission_required('ideax.delete_challenge',raise_exception=True)
+def challenge_remove(request, pk):
+    challenge = get_object_or_404(Challenge, pk=pk)
+    if request.method == 'GET':
+        challenge.discarted = True
+        challenge.save()
+        messages.success(request, _('Challenge removed successfully!'))
+    else:
+        messages.error(request, _('Not supported action'))
+    return challenge_list(request)
 
 def challenge_list(request):
     challenges = Challenge.objects.filter(discarted=False)
