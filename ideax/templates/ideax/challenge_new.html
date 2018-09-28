@@ -1,0 +1,39 @@
+{% extends 'ideax/base.html' %}
+{% load widget_tweaks i18n %}
+{% load staticfiles %}
+
+{% block content %}
+  <div class="challenge-list-bg">
+      <h1 class="display-3">{% trans 'New Challenge' %}</h1>
+  </div>
+  <div class="container">
+      <form method="post" class="form post-form" action="{% url 'challenge_new' %}" enctype="multipart/form-data">
+        {% csrf_token %}
+        {% include 'ideax/includes/partial_challenge_form.html' %}
+        <div class="button-group">
+          <a href="{% url 'challenge_list' %}">{% trans 'Return' %}</a>
+          <button type="submit" class="btn btn-primary">{% trans 'Save' %}</button>
+        </div>
+      </form>
+  </div>
+
+{% endblock %}
+{% block footer %}
+<script type="text/javascript" src="{% static 'plugins/js/resizable.min.js' %}"></script>
+<script src="{% static '/js/bootstrap.min.js' %}"></script>
+<script type="text/javascript">
+  // <![CDATA[
+  var bootstrapButton = $.fn.button.noConflict();
+  var bootstrapAlert = $.fn.alert.noConflict();
+  var bootstrapCarousel = $.fn.carousel.noConflict();
+  var bootstrapCollapse = $.fn.collapse.noConflict();
+  var bootstrapDropdown = $.fn.dropdown.noConflict();
+  var bootstrapModal = $.fn.modal.noConflict();
+  var bootstrapTooltip = $.fn.tooltip.noConflict();
+  var bootstrapPopover = $.fn.popover.noConflict();
+  var bootstrapScrollspy = $.fn.scrollspy.noConflict();
+  var bootstrapTab = $.fn.tab.noConflict();
+  var bootstrapAffix = $.fn.affix.noConflict();
+  // ]]>
+  </script>
+{% endblock %}

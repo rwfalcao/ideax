@@ -1,6 +1,7 @@
 $('.expand-button').on('click', function (evt) {
   let ideaText = evt.currentTarget.parentNode.parentNode.querySelector('p');
   ideaText.classList.toggle('expand');
+  $(this).classList.toggle('expand-btn');
   //console.log($(evt.currentTarget).parent().parent());
 });
 
@@ -148,6 +149,8 @@ $(function () {
         var score = data.score_value;
         $("#score").removeClass("hide");
         $("#score_value").html(score.toFixed(2));
+        var progressBarWidth = Math.round((score.toFixed(2)/5 * 100)*100) / 100;
+        $("#score_progress_bar").css({width: progressBarWidth.toFixed(0)+'%'})
 
         showMessage("#evaluation-message", data.msg, "alert-info");
       },
@@ -331,7 +334,18 @@ function filterIdeas(url){
     type: 'get',
     dataType: 'json',
     success: function (data){
-      $("#idea-list-group").html(data.html_idea_list);
+      $("#idea-list-group").empty();
+      $(".empty-filter").empty();
+
+      if(data.empty == 0){
+        $(".empty-filter").empty();
+        $("#idea-list-group").html(data.html_idea_list);
+      }
+      else{
+        $(".empty-filter").empty();
+        $(".empty-filter").html(data.html_idea_list);
+      }
+
     }
   });
 };

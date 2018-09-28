@@ -30,8 +30,8 @@ DEBUG = config('DEBUG', default=False, cast=bool)
 
 ALLOWED_HOSTS = config('ALLOWED_HOSTS', cast=Csv())
 
-
 # Application definition
+
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -44,7 +44,15 @@ INSTALLED_APPS = [
     'widget_tweaks',
     'ideax',
     'mptt',
+    'djcelery',
+    'djcelery_email',
+    'tinymce',
+    'martor',
+    'markdownify',
 ]
+
+
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -153,6 +161,9 @@ if AUTH_LDAP_SERVER_URI!='':
         'django.contrib.auth.backends.ModelBackend',
         'django_auth_ldap.backend.LDAPBackend',
     ]
+    AUTH_LDAP_PROFILE_ATTR_MAP = {
+        "memberOf" : "memberOf",
+    }
 else:
     AUTHENTICATION_BACKENDS = [
         'django.contrib.auth.backends.ModelBackend',
@@ -164,3 +175,152 @@ import logging
 logger = logging.getLogger('django_auth_ldap')
 logger.addHandler(logging.StreamHandler())
 logger.setLevel(logging.DEBUG)
+
+PERMISSIONS={
+    "MANAGE_IDEA" : "ideax.manage_idea",
+}
+
+CELERY_ACCEPT_CONTENT = ['pickle', 'json','application/text']
+CELERY_BROKER_URL = config('CELERY_BROKER_URL', default='')
+EMAIL_HOST = config('EMAIL_HOST', default='')
+EMAIL_PORT = config('EMAIL_PORT', default='')
+EMAIL_HOST_USER = config('EMAIL_HOST_USER', default='')
+EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD', default='')
+EMAIL_USE_TLS = config('EMAIL_USE_TLS', default=0, cast=bool)
+EMAIL_USE_SSL = config('EMAIL_USE_SSL', default=0, cast=bool)
+
+if config('EMAIL_BACKEND', default='') != '':
+    EMAIL_BACKEND = config('EMAIL_BACKEND', default='')
+
+if config('DEFAULT_FROM_EMAIL', default='') != '':
+    DEFAULT_FROM_EMAIL=config('DEFAULT_FROM_EMAIL')
+
+IPWARE_META_PRECEDENCE_ORDER = (
+    'HTTP_X_FORWARDED_FOR',
+    'REMOTE_ADDR',
+    'HTTP_X_FORWARDED',
+    'HTTP_CLIENT_IP',
+    'HTTP_X_REAL_IP',
+    'X_FORWARDED_FOR',
+    'HTTP_X_CLUSTER_CLIENT_IP',
+    'HTTP_FORWARDED_FOR',
+    'HTTP_FORWARDED',
+    'HTTP_VIA',
+)
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'audit': {
+            'level': 'INFO',
+            'class': 'logging.handlers.RotatingFileHandler',
+            'filename': os.path.join(BASE_DIR, 'audit.log'),
+            'maxBytes': 1024*1024*5, # 5MB
+            'backupCount': 0,
+            'formatter': 'audit'
+        }
+    },
+    'formatters': {
+        'audit': {
+            'format': 'AUDIT|%(asctime)s|%(message)s'
+        }
+    },
+    'loggers': {
+        'audit_log': {
+            'handlers': ['audit'],
+            'level': 'INFO',
+            'propagate': True
+        }
+    }
+}
+
+GENERAL_USER_GROUP=config('GENERAL_USER_GROUP')
+
+TINYMCE_SPELLCHECKER = False
+TINYMCE_FILEBROWSER = False
+#TINYMCE_JS_URL = '//cdn.tinymce.com/4/tinymce.min.js'
+TINYMCE_JS_URL = STATIC_URL + 'tinymce/js/tinymce/tinymce.min.js'
+TINYMCE_ADDITIONAL_JS_URLS = None
+TINYMCE_CSS_URL = None
+TINYMCE_CALLBACKS = {}
+
+
+TINYMCE_DEFAULT_CONFIG = {
+    'selector': 'textarea',
+    'theme': 'modern',
+    'plugins': 'textpattern table code lists',
+    'toolbar1': 'formatselect | bold italic underline | alignleft aligncenter alignright alignjustify '
+               '| bullist numlist | outdent indent | table ',
+    'contextmenu_never_use_native': True,
+    'textpattern_patterns': [
+     {'start': '*', 'end': '*', 'format': 'italic'},
+     {'start': '**', 'end': '**', 'format': 'bold'},
+     {'start': '#', 'format': 'h1'},
+     {'start': '##', 'format': 'h2'},
+     {'start': '###', 'format': 'h3'},
+     {'start': '####', 'format': 'h4'},
+     {'start': '#####', 'format': 'h5'},
+     {'start': '######', 'format': 'h6'},
+     {'start': '1. ', 'cmd': 'InsertOrderedList'},
+     {'start': '* ', 'cmd': 'InsertUnorderedList'},
+     {'start': '- ', 'cmd': 'InsertUnorderedList'}
+    ],
+    'menubar': False,
+    'inline': False,
+    'statusbar': True,
+    'width': 'auto',
+    'height': 360,
+}
+
+
+# Global martor settings
+# Input: string boolean, `true/false`
+MARTOR_ENABLE_CONFIGS = {
+    'imgur': 'true',     # to enable/disable imgur/custom uploader.
+    'mention': 'true',  # to enable/disable mention
+    'jquery': 'true',    # to include/revoke jquery (require for admin default django)
+    'living': 'false',   # to enable/disable live updates in preview
+ }
+
+# To setup the martor editor with label or not (default is False)
+MARTOR_ENABLE_LABEL = True
+
+# Imgur API Keys
+MARTOR_IMGUR_CLIENT_ID = 'your-client-id'
+MARTOR_IMGUR_API_KEY   = 'your-api-key'
+
+# Safe Mode
+MARTOR_MARKDOWN_SAFE_MODE = True # default
+
+# Markdownify
+MARTOR_MARKDOWNIFY_FUNCTION = 'martor.utils.markdownify' # default
+MARTOR_MARKDOWNIFY_URL = '/martor/markdownify/' # default
+
+# Markdown extensions (default)
+MARTOR_MARKDOWN_EXTENSIONS = [
+    'markdown.extensions.extra',
+    'markdown.extensions.nl2br',
+    'markdown.extensions.smarty',
+    'markdown.extensions.fenced_code',
+
+    # Custom markdown extensions.
+    'martor.extensions.urlize',
+    'martor.extensions.del_ins',    # ~~strikethrough~~ and ++underscores++
+    'martor.extensions.mention',    # to parse markdown mention
+    'martor.extensions.mdx_video',  # to parse embed/iframe video
+]
+
+# Markdown Extensions Configs
+MARTOR_MARKDOWN_EXTENSION_CONFIGS = {}
+
+# Markdown urls
+MARTOR_UPLOAD_URL = '/media/uploader/' # default
+MARTOR_SEARCH_USERS_URL = '/martor/search-user/' # default
+
+# Markdown Extensions
+MARTOR_MARKDOWN_BASE_MENTION_URL = 'http://127.0.0.1:8000/author/' # default (change this)
+import time
+MARTOR_UPLOAD_PATH = 'images/uploads/{}'.format(time.strftime("%Y/%m/%d/"))
+
+MAX_IMAGE_UPLOAD_SIZE = 5242880  # 5MB

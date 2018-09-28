@@ -1,57 +1,85 @@
-{% extends 'ideax/base.html' %} {% load i18n %} {% block content %}
+{% extends 'ideax/base.html' %}
+{% load i18n staticfiles %}
+{% load martortags %}
+{% block content %}
 <div class="idea-list-bg" id="idea-title">
-  <h1 class="display-3 desktop-title">{{ idea.title }}</h1>
+  <h1 class="display-3 desktop-title
+    {% if idea.title|length <= 70 %}
+      big-title
+    {% elif idea.title|length > 70 and idea.title|length <= 130  %}
+      medium-title
+    {% else %}
+      small-title
+    {% endif %}
+  ">{{ idea.title }}</h1>
 </div>
 <div class="container">
   <div class="row">
-    <div class="col-sm-12">
+    <div class="col-sm-12 idea-detail-summary">
       <p class="text-center">
-        {% if idea.summary %} {{idea.summary}} {% else %} {{ idea.solution|truncatechars:140 }} {% endif %}
+        {% if idea.summary %}
+          {{idea.summary|safe_markdown}}
+        {% else %}
+          {{idea.solution|truncatechars:140|safe_markdown}}
+        {% endif %}
       </p>
     </div>
   </div>
   <div class="row">
-    <!-- Idea Utils -->
+    <!-- Idea Utils --> 
     <div class="col-md-3 text-center pb-3">
-      <div>
+      <div class="img-dimension">
         <img src="{{idea.category_image}}" class="img-fluid img-thumbnail" alt="{% trans 'Banner Idea' %}" />
       </div>
       <p>
-        <a href="#">
           <small class="text-muted">{% trans 'By' %}
-            <span id="real-author"></span>@{{idea.author.user}}</small>
-        </a>
+            {% for author in authors %}
+              {% if forloop.last %}
+                {{ author.user }}
+              {% else %}
+                {{ author.user }},
+              {% endif %}
+            {% endfor %}
+          </small>
       </p>
+      <span class="badge badge-secondary">{{ idea.get_current_phase.description }}</span>
+      <span class="badge badge-info">{{ idea.category }}</span>
       <div class="like-menu">
-        <span class="badge badge-secondary">{{ idea.get_current_phase.description }}</span>
-        <a class="like badge badge-success" onclick="vote('{% url 'like_ideia' pk=idea.pk %}', '.liked_idea_{{idea.id}}', '.disliked_idea_{{idea.id}}', '.like_{{idea.id}}', '.dislike_{{idea.id}}')"
+
+        <a class="like badge" onclick="vote('{% url 'like_ideia' pk=idea.pk %}', '.liked_idea_{{idea.id}}', '.disliked_idea_{{idea.id}}', '.like_{{idea.id}}', '.dislike_{{idea.id}}')"
           href="javascript:void(0)">
-          <span class="d-none d-lg-inline">{% trans 'Like' %}</span>
+
           <i class="{%if popular_vote == True %} fas {% else %} far {% endif %} fa-thumbs-up like_{{idea.id}}"></i>
           <span class="liked_idea_{{idea.id}} ">
             {{ idea.count_likes }}
           </span>
         </a>
-        <a class="dislike badge badge-danger" onclick="vote('{% url 'dislike_ideia' pk=idea.pk %}', '.liked_idea_{{idea.id}}', '.disliked_idea_{{idea.id}}', '.like_{{idea.id}}', '.dislike_{{idea.id}}')"
+        <a class="dislike badge" onclick="vote('{% url 'dislike_ideia' pk=idea.pk %}', '.liked_idea_{{idea.id}}', '.disliked_idea_{{idea.id}}', '.like_{{idea.id}}', '.dislike_{{idea.id}}')"
           href="javascript:void(0)">
-          <span class="d-none d-lg-inline">{% trans 'Dislike' %}</span>
+
           <i class="{%if popular_vote == False %} fas {% else %} far {% endif %} fa-thumbs-down dislike_{{idea.id}}"></i>
           <span class="disliked_idea_{{idea.id}}">
             {{ idea.count_dislikes }}
           </span>
         </a>
-        <a href="javascript:void(0);" class="badge badge-primary">
-          <span class="d-none d-lg-inline">{% trans 'Share' %}</span>
-          <i class="fas fa-share-alt"></i>
-          <span>
-            0
-          </span>
+        <!--
+        <a href="{% url 'idea_detail_pdf' idea_id=idea.pk %}" class="badge share">
+          <i class="fas fa-download"></i>
+        </a>
+      -->
+      </div>
+      {%if perms.ideax.manage_idea %}
+      <div>
+        <a href="{% url 'idea_detail_pdf' idea_id=idea.pk %}" role="button" aria-pressed="true" class="btn btn-outline-info btn-sm" target="_blank">
+          <i class="fas fa-download"></i> {% trans 'Technical details' %}
         </a>
       </div>
+      {%endif%}
+
     </div>
     <!-- Idea Information -->
     <div class="col-md-9">
-      <ul class="nav nav-pills nav-fill mb-3" id="idea-pills-tab" role="tablist">
+      <ul class="nav nav-tabs nav-fill mb-3" id="idea-pills-tab" role="tablist">
         <li class="nav-item">
           <a class="nav-link active" id="description-tab" data-toggle="pill" href="#description" role="tab" aria-controls="description"
             aria-selected="true">{% trans 'Description' %}</a>
@@ -67,7 +95,7 @@
         <div class="tab-pane fade show active" id="description" role="tabpanel" aria-labelledby="description-tab">
           <div class="readmore-block">
             <h4>{% trans 'Solution' %}</h4>
-            <p>{{ idea.solution|linebreaksbr }}</p>
+            <p>{{ idea.solution|safe_markdown}}</p>
             <div class="text-center">
               <a href="javascript:void(0)" class="expand-button">
                 <i class="fas fa-sort-down"></i>
@@ -76,7 +104,7 @@
           </div>
           <div class="readmore-block">
             <h4>{% trans 'Oportunity' %}</h4>
-            <p>{{ idea.oportunity|linebreaksbr }}</p>
+            <p>{{ idea.oportunity|safe_markdown}}</p>
             <div class="text-center">
               <a href="javascript:void(0)" class="expand-button">
                 <i class="fas fa-sort-down"></i>
@@ -85,7 +113,7 @@
           </div>
           <div class="readmore-block">
             <h4>{% trans 'Target' %}</h4>
-            <p>{{ idea.target|linebreaksbr }}</p>
+            <p>{{ idea.target|linebreaksbr|safe_markdown}}</p>
             <div class="text-center">
               <a href="javascript:void(0)" class="expand-button">
                 <i class="fas fa-sort-down"></i>
@@ -94,6 +122,8 @@
           </div>
         </div>
         <div class="tab-pane fade" id="comments" role="tabpanel" aria-labelledby="comments-tab">
+        <div id="comment-message" class="alert alert-dismissible fade show" role="alert" style="display:none">
+        </div>
           <form id="commentForm" class="form-horizontal" data-idea-id="{{idea.pk}}" action="/post/comment/">
             {% csrf_token %}
             <fieldset>
@@ -104,9 +134,12 @@
                   <textarea class="form-control" rows="3" id="commentContent"></textarea>
                 </div>
               </div>
+              <div class="col-lg-12">
+                <img src="{% static 'images/markdown.png' %}"/> <a href="https://goo.gl/YCe6QV" target="_blank"><span style="font-size: 12px;">{%trans 'Support Markdown'%}</span></a>
+              </div>
               <div class="form-group">
                 <div class="col-lg-12 text-right">
-                  <button type="submit" class="btn btn-primary">{% trans 'Comment' %}</button>
+                  <button id="submit_comment" type="submit" class="btn btn-primary">{% trans 'Comment' %}</button>
                 </div>
               </div>
             </fieldset>
@@ -116,9 +149,9 @@
           </div>
         </div>
         <div class="tab-pane fade" id="evaluation" role="tabpanel" aria-labelledby="evaluation-tab">
-          {%if request.user.userprofile.manager %} 
-            {% include 'ideax/includes/evaluation.html' %} 
-          {%else%} 
+          {%if perms.ideax.manage_idea %}
+            {% include 'ideax/includes/evaluation.html' %}
+          {%else%}
             {% include 'ideax/includes/evaluation_detail.html' %}
           {%endif%}
         </div>

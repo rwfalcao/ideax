@@ -14,13 +14,9 @@
           <nav class="phase-filter">
             <h4 class="filter-title"><i class="fas fa-filter"></i> {% trans 'Filters' %}</h4>
             <ul class="phase-list nav nav-pills flex-column">
-              {% for phase in phases %}
-                  <li class="nav-item" onclick="filterIdeas('{% url 'idea_filter' phase_pk=phase.0 %}')">
-                    {% if phase.0 == 1 %}
-                    <a class="nav-link active" href="#">{{ phase.1 }}</a>
-                    {% else %}
-                    <a class="nav-link" href="#">{{ phase.1 }}</a>
-                    {% endif %}
+              {% for key, value in phases.items %}
+                  <li class="nav-item" onclick="filterIdeas('{% url 'idea_filter' phase_pk=key %}')">
+                    <a class="nav-link {% if key == phase_req %} active {% endif %}" href="#">{{ value.phase }} <span class="badge badge-pill badge-primary count-ideas">{{ value.qtd }}</span></a>
                   </li>
               {% endfor %}
             </ul>
@@ -30,35 +26,41 @@
         <div class="col-md-12 d-none d-md-block d-lg-none pb-2">
           <nav class="phase-filter">
             <ul class="phase-list nav nav-pills justify-content-center">
-              {% for phase in phases %}
-                  <li class="nav-item" onclick="filterIdeas('{% url 'idea_filter' phase_pk=phase.0 %}')">
-                    <a class="nav-link" href="#">{{ phase.1 }}</a>
+              {% for key, value in phases.items %}
+                  <li class="nav-item" onclick="filterIdeas('{% url 'idea_filter' phase_pk=key %}')">
+                    <a class="nav-link" href="#">{{ value.phase }}</a>
                   </li>
               {% endfor %}
             </ul>
           </nav>
         </div>
         <!-- Menu Mobile -->
+
         <div class="col-sm-12 d-block d-sm-block d-md-none pb-2">
           <nav class="phase-filter">
             <ul class="phase-list nav nav-pills nav-justified">
-              <li class="nav-item" onclick="filterIdeas('{% url 'idea_filter' phase_pk=phases.0.0 %}')">
-                <a class="nav-link" href="#">{{phases.0.1}}</a>
-              </li>
-              <li class="nav-item" onclick="filterIdeas('{% url 'idea_filter' phase_pk=phases.1.0 %}')">
-                <a class="nav-link" href="#">{{phases.1.1}}</a>
-              </li>
+              {% for key, value in phases.items %}
+                {%if forloop.counter < 3%}
+                  <li class="nav-item" onclick="filterIdeas('{% url 'idea_filter' phase_pk=key %}')">
+                    <a class="nav-link {% if key == phase_req %} active {% endif %}" href="#">{{ value.phase }}</a>
+                  </li>
+                {%endif%}
+              {% endfor %}
               <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">More</i></a>
                 <div class="dropdown-menu dropdown-menu-right">
-                  <a class="dropdown-item" href="#" onclick="filterIdeas('{% url 'idea_filter' phase_pk=phases.2.0 %}')">{{phases.2.1}}</a>
-                  <a class="dropdown-item" href="#" onclick="filterIdeas('{% url 'idea_filter' phase_pk=phases.3.0 %}')">{{phases.3.1}}</a>
-                  <a class="dropdown-item" href="#" onclick="filterIdeas('{% url 'idea_filter' phase_pk=phases.4.0 %}')">{{phases.4.1}}</a>
+                  {% for key, value in phases.items %}
+                    {%if forloop.counter >= 3%}
+                        <a class="dropdown-item" href="#" onclick="filterIdeas('{% url 'idea_filter' phase_pk=key %}')">{{ value.phase }}</a>
+                    {%endif%}
+                  {% endfor %}
                 </div>
               </li>
             </ul>
           </nav>
         </div>
+
+
         <!-- Card List -->
         <div class="col-lg-10 col-md-12 col-sm-12">
           {% for message in messages %}
@@ -68,24 +70,85 @@
           </div>
           {% endfor %}
           {%if not ideas %}
-            {% include 'ideax/includes/empty.html' %}
+           {% include 'ideax/includes/empty.html' %}
           {%else%}
-            <div class="input-group mb-3">
+            <div id="idea-search" class="input-group mb-3" style="display: none">
               <input type="text" class="form-control" placeholder="{% trans 'Search for...' %}" aria-label="{% trans 'Search Box' %}" aria-describedby="basic-addon2">
               <div class="input-group-append">
                 <button class="btn btn-outline-secondary" type="button">{% trans 'Search' %}</button>
               </div>
             </div>
-            <div class="group card-columns" id="idea-list-group">
-              {% for idea in ideas %}
-                {% include 'ideax/includes/idea_detail.html' %}
-              {% endfor %}
-            </div>
+            <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+              <ol class="carousel-indicators" style="margin-bottom: 3px;">
+                {% for i in challenges %}
+                  <li data-target="#carouselExampleIndicators" data-slide-to="{{ forloop.counter }}" class="{%if forloop.counter == 1%} active {%endif%}"></li>
+                {% endfor%}
+              </ol>
+              <div class="carousel-inner">
+                {% for challenge in challenges %}
+                <div class="carousel-item {%if forloop.counter == 1%} active {%endif%}">
+
+
+                    <img class="d-block w-100" src="{{challenge.image.url}}" alt="First slide">
+
+
+                  <a href="{% url 'challenge_detail' challenge_pk=challenge.pk %}">
+                    <div class="carousel-caption d-none d-md-block carousel-challenge" >
+                      <h5>{{challenge.title}}</h5>
+                      <p>{{challenge.summary}}</p>
+                    </div>
+                  </a>
+
+                </div>
+                {%endfor%}
+              </div>
+              <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+              </a>
+              <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+              </a>
+          </div>
+          <hr>
+          <div class="empty-filter"></div>
+          <div class="group card-columns infinite-container" id="idea-list-group">
+            {% for idea in ideas %}
+              {% include 'ideax/includes/idea_detail.html' %}
+            {% endfor %}
+          </div>
+
+          {% if ideas.has_next %}
+            <a class="infinite-more-link" href="?page={{ ideas.next_page_number }}">More</a>
+          {% endif %}
+
+          <div class="loading" style="display: none;">
+            Loading...
+          </div>
+
+
           {%endif%}
           {% include 'ideax/includes/modals.html' %}
         </div>
       </div>
     </div>
-    
-    
+
+    <script>
+      var infinite = new Waypoint.Infinite({
+        element: $('.infinite-container')[0],
+        handler: function(direction) {
+          console.log('Scrolled to waypoint!')
+        },
+        onBeforePageLoad: function () {
+          $('.loading').show();
+        },
+        onAfterPageLoad: function ($items) {
+
+          $('.loading').hide();
+        },
+      });
+    </script>
+ 
+
 {% endblock %}

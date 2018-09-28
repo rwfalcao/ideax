@@ -3,15 +3,15 @@ from django.utils.translation import ugettext_lazy as _
 from ideax.models import *
 
 class Comment_Feed(Feed):
-    title = "ideax - Comentários"
+    title = "ideax - "+str(_('Comments'))+": "
     link = "/rss"
-    description = "Compartilhando ideias"
+    description = str(_('Sharing ideas'))
 
     def items(self):
         return Comment.objects.all().order_by('-date')[:10]
 
     def item_title(self, item):
-        return "Ideia: " + item.idea.title
+        return str(_('Idea'))+" #"+str(item.idea.id)+": " + item.idea.title
 
     def item_description(self, item):
         comment = (item.raw_comment[:200] + ' ...') if len(item.raw_comment) > 75 else item.raw_comment
@@ -23,15 +23,15 @@ class Comment_Feed(Feed):
 
 
 class New_Idea_Feed(Feed):
-    title = "ideax - Novas Ideias"
+    title = "ideax - "+str(_('New ideas'))
     link = "/rss"
-    description = "Compartilhando ideias"
+    description = str(_('Sharing ideas'))
 
     def items(self):
-        return Idea.objects.all().order_by('-creation_date')[:10]
+        return Idea.objects.filter(discarded=False).order_by('-creation_date')[:10]
 
     def item_title(self, item):
-        return "Ideia: " + item.title
+        return str(_('Idea'))+" #"+str(item.id)+": " + item.title
 
     def item_description(self, item):
         return item.summary
