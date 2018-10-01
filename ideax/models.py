@@ -11,14 +11,15 @@ from django.utils.translation import ugettext_lazy as _
 from django.contrib.auth.models import User, Group
 from martor.models import MartorField
 
-def check_user_profile(sender, user, request, **kwargs):
+
+def check_user_profile(sender, request, user):
     try:
-        user_profile = UserProfile.objects.get(user=request.user)
+        user_profile = UserProfile.objects.get(user=user)
     except UserProfile.DoesNotExist:
         user_profile = UserProfile()
-        user_profile.user = request.user
+        user_profile.user = user
         user_profile.save()
-        request.user.groups.add(Group.objects.get(
+        user.groups.add(Group.objects.get(
             name=settings.GENERAL_USER_GROUP))
 
 
@@ -157,7 +158,7 @@ class Challenge(models.Model):
     description = models.TextField(max_length=2500)
     limit_date = models.DateTimeField()
     active = models.BooleanField(default=True)
-    author = models.ForeignKey('UserProfile', on_delete=models.CASCADE)    
+    author = models.ForeignKey('UserProfile', on_delete=models.CASCADE)
     creation_date = models.DateTimeField()
     featured = models.BooleanField(default=False)
     category = models.ForeignKey('Category', models.SET_NULL, null=True)
