@@ -12,7 +12,7 @@ from django.contrib.auth.models import User, Group
 from martor.models import MartorField
 
 
-def check_user_profile(sender, request, user):
+def check_user_profile(sender, request, user, **kwargs):
     try:
         user_profile = UserProfile.objects.get(user=user)
     except UserProfile.DoesNotExist:
