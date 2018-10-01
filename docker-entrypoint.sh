@@ -6,6 +6,7 @@ cd /app
 
 export DJANGO_SETTINGS_MODULE=ideax.settings
 pip install -r /app/requirements.txt
+pip install -r /app/requirements/_test.txt
 
 python manage.py collectstatic --no-input
 
