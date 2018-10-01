@@ -5,8 +5,40 @@ ARG VERSION=master
 
 ENV PYTHONUNBUFFERED 1
 
-RUN \
-    apk add --no-cache unzip wget ca-certificates gcc openldap-dev binutils-libs binutils gmp isl libgomp libatomic libgcc pkgconf pkgconfig mpfr3 mpc1 libstdc++ libc-dev musl-dev mariadb-dev postgresql-dev nginx gettext jpeg-dev zlib-dev freetype-dev lcms2-dev openjpeg-dev tiff-dev tk-dev tcl-dev
+# TODO: Clean up some dependencies
+RUN apk add --no-cache \
+    binutils \
+    binutils-libs \
+    ca-certificates \
+    freetype-dev \
+    gcc \
+    gettext \
+    gmp \
+    isl \
+    jpeg-dev \
+    lcms2-dev \
+    libatomic \
+    libc-dev \
+    libgcc \
+    libgomp \
+    libstdc++ \
+    make \
+    mariadb-dev \
+    mpc1 \
+    mpfr3 \
+    musl-dev \
+    nginx \
+    openjpeg-dev \
+    openldap-dev \
+    pkgconf \
+    pkgconfig \
+    postgresql-dev \
+    tcl-dev \
+    tiff-dev \
+    tk-dev \
+    unzip \
+    wget \
+    zlib-dev
 
 COPY requirements.txt /tmp
 RUN pip install -r /tmp/requirements.txt
