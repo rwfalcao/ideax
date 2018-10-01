@@ -18,3 +18,4 @@ fixture.json
 docs/_build/
 *.log
 .vscode
+.venv
