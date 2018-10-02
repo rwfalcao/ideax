@@ -579,24 +579,28 @@ transition-delay: 0.7s;
 
 /*Landing Page*/
 .brief-explanation {
-  background: url("../images/lamp_idea_1-50.png");
+  background: url("../images/bg_head.png");
   background-size: auto auto;
-  min-height: 450px;
+  background-position-y: 60%;
+  min-height: 600px;
   background-size: cover;
-  text-align: center;
+  text-align: left;
   padding-top: 25px;
   font-family: sans-serif;
   background-position-y: 5%;
-  padding: 8% 15% 0 15%;
+  padding: 10% 10% 0 10%;
 }
 
 .brief-explanation h1 {
   margin: 0;
   font-size: 4em;
+  color: white;
 }
 
 .brief-explanation p {
-  font-size: 2em;
+  font-size: 1.5em;
+  color: white;
+  max-width: 620px;
 }
 
 .idea-launch {
@@ -607,36 +611,42 @@ transition-delay: 0.7s;
   font-family: sans-serif;
 }
 
-.idea-launch .launch-text {
-  max-width: 550px;
+.idea-launch {
+  max-width: 2050px;
 }
 
 .launch-text h2 {
   font-size: 2.5em;
-  color: #5990A4;
+  color: rgb(49, 105, 126);
 }
 .launch-text h2 footer.landing-page {
   min-height: 60px;
   background: #333;
   color: #E6E6E6;
+  position: absolute; 
 }
 
 .launch-text p {
   color: #666666;
-  font-size: 1.1em;
-  text-align: justify;
+  font-size: 1.5em;
+  text-align: left;
+
 }
 
 .idea-launch * {
-  margin: 0 50px;
+  margin: 0 70px;
 }
 
 .launch-text * {
-  margin: 10px 0;
+  margin: 20px 0;
+}
+
+.launch-text {
+  background-size: cover;
+  text-align: left;
 }
 
 .functionality {
-  background: url("../images/keyboard.jpg");
   width: 100%;
   min-height: 500px;
   background-size: cover;
@@ -818,11 +828,13 @@ transition-delay: 0.7s;
   .brief-explanation h1 {
     font-size: 3.5em;
     margin-bottom: 20px;
+    color: #ffffff;
   }
 
   .brief-explanation p {
     font-size: 1.8em;
     text-align: justify;
+    color: #ffffff;
   }
 
   .idea {
