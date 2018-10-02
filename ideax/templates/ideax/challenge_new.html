@@ -1,6 +1,6 @@
 {% extends 'ideax/base.html' %}
 {% load widget_tweaks i18n %}
-
+{% load staticfiles %}
 
 {% block content %}
   <div class="challenge-list-bg">
@@ -17,4 +17,23 @@
       </form>
   </div>
 
+{% endblock %}
+{% block footer %}
+<script type="text/javascript" src="{% static 'plugins/js/resizable.min.js' %}"></script>
+<script src="{% static '/js/bootstrap.min.js' %}"></script>
+<script type="text/javascript">
+  // <![CDATA[
+  var bootstrapButton = $.fn.button.noConflict();
+  var bootstrapAlert = $.fn.alert.noConflict();
+  var bootstrapCarousel = $.fn.carousel.noConflict();
+  var bootstrapCollapse = $.fn.collapse.noConflict();
+  var bootstrapDropdown = $.fn.dropdown.noConflict();
+  var bootstrapModal = $.fn.modal.noConflict();
+  var bootstrapTooltip = $.fn.tooltip.noConflict();
+  var bootstrapPopover = $.fn.popover.noConflict();
+  var bootstrapScrollspy = $.fn.scrollspy.noConflict();
+  var bootstrapTab = $.fn.tab.noConflict();
+  var bootstrapAffix = $.fn.affix.noConflict();
+  // ]]>
+  </script>
 {% endblock %}

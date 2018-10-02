@@ -19,13 +19,6 @@
     {% endfor %}
       <form method="post" class="form post-form" action="{% url 'use_term_new' %}">
         {% csrf_token %}
-        <div class="form-group{% if form.creator.errors %} has-error{% endif %}">
-          <label for="{{form.creator.id_for_label}}">{{form.creator.label}}</label>
-          {{ form.creator|add_class:'form-control' }}
-          {% for error in form.creator.errors %}
-            <p class="help-block">{{ error }}</p>
-          {% endfor %}
-        </div>
 
         <div class="form-group{% if form.term.errors %} has-error{% endif %}">
           <label for="{{form.term.id_for_label}}">{{form.term.label}}</label>

@@ -68,7 +68,7 @@ class CategoryImageForm(forms.ModelForm):
         labels = {'description':_('Description'),'image':_('Image'),'category':_('Category')}
 
 class ChallengeForm(forms.ModelForm):
-
+    description = MartorFormField()
     class Meta:
         model = Challenge
         fields = ('title', 'image', 'summary', 'requester', 'description', 'active' , 'limit_date', 'featured', 'category',)
@@ -77,12 +77,13 @@ class ChallengeForm(forms.ModelForm):
         widgets = {
             'limit_date': forms.DateInput(attrs={'placeholder': 'dd/mm/aaaa'}),
         }
+
 class UseTermForm(forms.ModelForm):
     
     class Meta:
         model = Use_Term
-        fields = ('creator', 'term', 'init_date', 'final_date')
-        labels = {'creator':_('Creator'), 'term':_('Term'), 'init_date':_('Initial Date'), 'final_date':_('Final Date')}
+        fields = ('term', 'init_date', 'final_date')
+        labels = {'term':_('Term'), 'init_date':_('Initial Date'), 'final_date':_('Final Date')}
         widgets = {
             'term' : TinyMCE(),
         }

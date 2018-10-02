@@ -364,6 +364,7 @@ def idea_evaluation(request, idea_pk):
     return JsonResponse(data)
 
 @login_required
+@permission_required('ideax.delete_criterion',raise_exception=True)
 def criterion_remove(request, pk):
     criterion = get_object_or_404(Criterion, pk=pk)
 
@@ -417,10 +418,10 @@ def category_remove(request, pk):
     audit(request.user.username, get_client_ip(request), 'REMOVE_CATEGORY', Category.__name__, str(pk))
     return redirect('category_list')
 
+@login_required
 def category_list(request):
     audit(request.user.username, get_client_ip(request), 'CATEGORY_LIST', Category.__name__, '')
     return render(request, 'ideax/category_list.html', get_category_list())
-
 
 def get_category_list():
     return {'category_list': Category.objects.filter(discarded=False)}
@@ -510,6 +511,7 @@ def idea_detail(request, pk):
     data["comments"] = comments
     data["idea"] = idea
     data["idea_id"] = idea.pk
+    data["authors"] = idea.authors.all()
 
     initial = collections.OrderedDict()
     form_ = None
@@ -582,12 +584,15 @@ def get_term_of_user(request):
     else:
         return JsonResponse({"term" : _("No Term of Use found")})
 
+@login_required
 def use_term_list(request):
     return render(request, 'ideax/use_term_list.html',get_use_term_list())
 
 def get_use_term_list():
     return {'use_term_list': Use_Term.objects.all(), 'today': date.today()}
 
+@login_required
+@permission_required('ideax.add_use_term',raise_exception=True)
 def use_term_new(request):
     if request.method == "POST":
         form = UseTermForm(request.POST)
@@ -596,6 +601,7 @@ def use_term_new(request):
     return save_use_term(request, form, 'ideax/use_term_new.html', True)
 
 @login_required
+@permission_required('ideax.change_use_term',raise_exception=True)
 def use_term_edit(request, pk):
     use_term = get_object_or_404(Use_Term, pk=pk)
     if request.method == "POST":
@@ -610,6 +616,7 @@ def save_use_term(request, form, template_name, new = False):
         if form.is_valid():
             active = False
             use_term = form.save(commit=False)
+            use_term.creator = UserProfile.objects.get(user=request.user)
             use_terms = Use_Term.objects.all()
             for term in use_terms:
                 if term.is_past_due:
@@ -630,6 +637,7 @@ def save_use_term(request, form, template_name, new = False):
         return render(request, template_name, {'form': form})
 
 @login_required
+@permission_required('ideax.delete_use_term',raise_exception=True)
 def use_term_remove(request, pk):
     use_term = get_object_or_404(Use_Term, pk=pk)
     if request.method == 'GET':
@@ -676,7 +684,7 @@ def challenge_detail(request, challenge_pk):
      return render(request, 'ideax/challenge_detail.html', {'challenge' : challenge, 'ideas': challenge.idea_set.filter(discarded=False)})
 
 @login_required
-@permission_required('ideax.change_idea',raise_exception=True)
+@permission_required('ideax.add_challenge',raise_exception=True)
 def challenge_new(request):
     form = ChallengeForm()
 
@@ -690,9 +698,11 @@ def challenge_new(request):
             challenge.creation_date = timezone.now()
             challenge.save()
             messages.success(request, _('Challenge saved successfully!'))
-            return redirect('idea_list')
+            return redirect('challenge_list')
     return render(request, 'ideax/challenge_new.html', {'form': form})
 
+@login_required
+@permission_required('ideax.change_challenge',raise_exception=True)
 def challenge_edit(request, challenge_pk):
     challenge = get_object_or_404(Challenge, pk=challenge_pk)
 
@@ -703,7 +713,7 @@ def challenge_edit(request, challenge_pk):
             challenge = form.save(commit=False)
             challenge.save()
             messages.success(request, _('Challenge saved successfully!'))
-            return redirect('idea_list')
+            return redirect('challenge_list')
     else:
         form = ChallengeForm(instance=challenge)
 
@@ -715,6 +725,18 @@ def file_upload(request):
     filename = fs.save(myfile.name, myfile)
     uploaded_file_url = fs.url(filename)
     return uploaded_file_url
+
+@login_required
+@permission_required('ideax.delete_challenge',raise_exception=True)
+def challenge_remove(request, pk):
+    challenge = get_object_or_404(Challenge, pk=pk)
+    if request.method == 'GET':
+        challenge.discarted = True
+        challenge.save()
+        messages.success(request, _('Challenge removed successfully!'))
+    else:
+        messages.error(request, _('Not supported action'))
+    return challenge_list(request)
 
 def challenge_list(request):
     challenges = Challenge.objects.filter(discarted=False)
@@ -757,7 +779,7 @@ def report_ideas(request):
     return redirect('index')
 
 @login_required
-@permission_required('ideax.add_idea',raise_exception=True)
+@permission_required('ideax.add_challenge',raise_exception=True)
 def idea_new_from_challenge(request, challenge_pk):
     challenge = get_object_or_404(Challenge, pk=challenge_pk)
     form = IdeaForm(initial={'challenge': challenge, 'category': challenge.category},)
@@ -765,6 +787,7 @@ def idea_new_from_challenge(request, challenge_pk):
     return save_idea(request, form, 'ideax/idea_new.html', True)
 
 @login_required
+@permission_required('ideax.add_category_image',raise_exception=True)
 def category_image_new(request):
     if request.method == "POST":
         form = CategoryImageForm(request.POST, request.FILES)
@@ -788,6 +811,7 @@ def category_image_list(request):
     return render(request, 'ideax/category_image_list.html', {'category_images': category_images})
 
 @login_required
+@permission_required('ideax.change_category_image',raise_exception=True)
 def category_image_edit(request, pk):
     category_image = get_object_or_404(Category_Image, pk=pk)
 
@@ -804,6 +828,7 @@ def category_image_edit(request, pk):
     return render(request, 'ideax/category_image_edit.html', {'form': form})
 
 @login_required
+@permission_required('ideax.delete_category_image',raise_exception=True)
 def category_image_remove(request, pk):
     category_image = get_object_or_404(Category_Image, pk=pk)
     category_image.delete()

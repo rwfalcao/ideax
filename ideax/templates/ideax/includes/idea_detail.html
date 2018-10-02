@@ -1,6 +1,6 @@
 <!-- {% load widget_tweaks i18n %} -->
 {% load staticfiles i18n %}
-{% load markdownify %}
+{% load martortags %}
 
 <div class="card infinite-item">
   <!-- <div class="card-header">
@@ -14,9 +14,9 @@
     <h5 class="card-title">{{ idea.title }}</h5>
     <div class="card-text">
         {% if idea.summary %}
-          {{idea.summary|markdownify}}
+          {{idea.summary|safe_markdown}}
         {% else %}
-          {{ idea.solution|truncatechars:140|markdownify }}
+          {{ idea.solution|truncatechars:140|safe_markdown }}
         {% endif %}
     </div>
     <div class="text-left pb-2 pt-2">
@@ -46,7 +46,7 @@
   <div class="card-footer">
     <div class="row">
       <div class="col-sm-8 text-left">
-        <button class="btn btn-link"><small class="text-muted">{% trans 'By' %} @{{idea.author.user}}</small></button>
+        <button class="btn btn-link"><small class="text-muted"></small></button>
           <!-- <a href="#"><small class="text-muted">{% trans 'By' %} @{{idea.author.user}}</small></a> -->
       </div>
       <div class="col-sm-4 text-right pl-1">
