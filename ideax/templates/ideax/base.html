@@ -41,6 +41,7 @@
     </head>
     <body>
       <!-- Image and text -->
+      {% block top %}
       <nav class="navbar navbar-expand fixed-top navbar-dark shadow-sm nav-bg">
         <a class="navbar-brand" href="/">
           <img src="{% static 'images/logo_horizontal.png' %}" height="30" class="d-inline-block align-top" alt="">
@@ -82,7 +83,7 @@
           {% endif %}
         </div>
       </nav>
-
+      {% endblock %}
       {% if user.is_authenticated %}
       <div class="fab-button">
         <a class="btn btn-idea-new btn-primary" href="/idea/new/" title="{% trans 'New Idea' %}"><i class="fas fa-plus"></i><i class="fas fa-lightbulb fa-2x"></i></a>

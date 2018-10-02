@@ -576,7 +576,11 @@ transform: rotate(180deg);
 transition-delay: 0.7s;
 }
 
-
+.login-button {
+  color: white !important;
+  max-width: 400px;
+  text-align: center;
+}
 /*Landing Page*/
 .brief-explanation {
   background: url("../images/bg_head.png");
@@ -593,14 +597,15 @@ transition-delay: 0.7s;
 
 .brief-explanation h1 {
   margin: 0;
-  font-size: 4em;
+  font-size: 3em;
   color: white;
+  max-width: 400px;
 }
 
 .brief-explanation p {
   font-size: 1.5em;
   color: white;
-  max-width: 620px;
+  max-width: 400px;
 }
 
 .idea-launch {
@@ -616,7 +621,7 @@ transition-delay: 0.7s;
 }
 
 .launch-text h2 {
-  font-size: 2.5em;
+  font-size: 2em;
   color: rgb(49, 105, 126);
 }
 .launch-text h2 footer.landing-page {
@@ -628,7 +633,7 @@ transition-delay: 0.7s;
 
 .launch-text p {
   color: #666666;
-  font-size: 1.5em;
+  font-size: 1.3em;
   text-align: left;
 
 }
@@ -647,8 +652,8 @@ transition-delay: 0.7s;
 }
 
 .functionality {
+  background-color: #606369;
   width: 100%;
-  min-height: 500px;
   background-size: cover;
   display: flex;
   justify-content: flex-end;
@@ -657,22 +662,25 @@ transition-delay: 0.7s;
 }
 
 .function-list {
-  max-width: 60%;
-  padding-right: 100px;
-  min-height: 500px;
-  display: flex;
-  flex-flow: column;
-  justify-content: space-around;
-  /* font-family: "Open Sans", sans-serif; */
+  justify-content: space-evenly;
+  width: 100%;
+  font-family: "Open Sans", sans-serif;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+  
+.function-item {
+  padding-top: 20px;
 }
 
-.function-list h2,
 .function-list h3 {
-  color: #5990A4;
+  color: rgb(255, 255, 255);
+  font-size: 2em;
 }
 
 .function-list p {
   font-size: 1.2em;
+  color: rgb(255, 255, 255);
 }
 
 .why-info {
@@ -680,6 +688,15 @@ transition-delay: 0.7s;
   justify-content: center;
   align-items: center;
   padding: 5% 1%;
+}
+
+@media (min-width: 992px) {
+  .function-list{
+    display: flex;
+  }
+  .function-item{
+    max-width: 320px;
+  }
 }
 
 @media (max-width: 320px) {
@@ -740,8 +757,7 @@ transition-delay: 0.7s;
   }
 
   .idea-launch img {
-    height: auto;
-    width: 30%;
+    width: 85%;
   }
 
   .idea {
@@ -783,7 +799,7 @@ transition-delay: 0.7s;
   }
 
   .function-list {
-    max-width: 70%;
+    max-width: 80%;
   }
 
   .brief-explanation {
@@ -816,23 +832,18 @@ transition-delay: 0.7s;
     background-position-x: 15%;
   }
 
-  .function-list {
-    max-width: 50%;
-  }
-
   .brief-explanation {
     padding: 3% 10% 0 10%;
     min-height: 350px;
   }
 
   .brief-explanation h1 {
-    font-size: 3.5em;
+    font-size: 3em;
     margin-bottom: 20px;
     color: #ffffff;
   }
 
   .brief-explanation p {
-    font-size: 1.8em;
     text-align: justify;
     color: #ffffff;
   }
