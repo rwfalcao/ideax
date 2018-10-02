@@ -59,6 +59,7 @@ urlpatterns = [
     path('categoryimage/list/', views.category_image_list, name='category_image_list'),
     path('categoryimage/<int:pk>/edit/', views.category_image_edit, name='category_image_edit'),
     path('categoryimage/<int:pk>/remove/', views.category_image_remove, name='category_image_remove'),
+    path('idea/search/', views.idea_search, name='idea_search'),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

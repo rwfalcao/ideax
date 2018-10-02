@@ -406,15 +406,15 @@ msgstr ""
 msgid "Filters"
 msgstr ""
 
-#: ideax/templates/ideax/idea_list.html:76
-msgid "Search for..."
+#: ideax/templates/ideax/idea_list.html:77
+msgid "Search for author, title or summary"
 msgstr ""
 
-#: ideax/templates/ideax/idea_list.html:76
+#: ideax/templates/ideax/idea_list.html:77
 msgid "Search Box"
 msgstr ""
 
-#: ideax/templates/ideax/idea_list.html:78
+#: ideax/templates/ideax/idea_list.html:79
 msgid "Search"
 msgstr ""
 
@@ -640,126 +640,126 @@ msgstr "Termo de uso aceito!"
 msgid "Term of use already accepted!"
 msgstr "Termo de uso aceito!"
 
-#: ideax/views.py:196
+#: ideax/views.py:200
 #, fuzzy
 #| msgid "Term of use accept!"
 msgid "Idea saved successfully!"
 msgstr "Termo de uso aceito!"
 
-#: ideax/views.py:234 ideax/views.py:261
+#: ideax/views.py:238 ideax/views.py:265
 msgid "Not supported action"
 msgstr ""
 
-#: ideax/views.py:354
+#: ideax/views.py:358
 msgid "Something went wrong or you're not allowed!"
 msgstr ""
 
-#: ideax/views.py:359
+#: ideax/views.py:363
 msgid "Evaluation done successfully!"
 msgstr ""
 
-#: ideax/views.py:383
+#: ideax/views.py:387
 #, fuzzy
 #| msgid "Term of use accept!"
 msgid "Category saved successfully!"
 msgstr "Termo de uso aceito!"
 
-#: ideax/views.py:398
+#: ideax/views.py:402
 #, fuzzy
 #| msgid "Term of use accept!"
 msgid "Category changed successfully!"
 msgstr "Termo de uso aceito!"
 
-#: ideax/views.py:412
+#: ideax/views.py:416
 #, fuzzy
 #| msgid "Term of use accept!"
 msgid "Category removed successfully!"
 msgstr "Termo de uso aceito!"
 
-#: ideax/views.py:489
+#: ideax/views.py:493
 #, fuzzy
 #| msgid "Term of use accept!"
 msgid "Phase change successfully!"
 msgstr "Termo de uso aceito!"
 
-#: ideax/views.py:493
+#: ideax/views.py:497
 msgid "Phase change"
 msgstr ""
 
-#: ideax/views.py:535
+#: ideax/views.py:539
 msgid "You need to log in to post new comments."
 msgstr ""
 
-#: ideax/views.py:543
+#: ideax/views.py:547
 msgid "Please check your message it has inappropriate content."
 msgstr ""
 
-#: ideax/views.py:546
+#: ideax/views.py:550
 msgid "You have to write a comment."
 msgstr ""
 
-#: ideax/views.py:565
+#: ideax/views.py:569
 msgid "Your comment has been posted."
 msgstr ""
 
-#: ideax/views.py:579 ideax/views.py:648
+#: ideax/views.py:583 ideax/views.py:652
 #, fuzzy
 #| msgid "Term of use accept!"
 msgid "No Term of Use found"
 msgstr "Termo de uso aceito!"
 
-#: ideax/views.py:617
+#: ideax/views.py:621
 msgid "Invalid Final Date"
 msgstr ""
 
-#: ideax/views.py:620
+#: ideax/views.py:624
 msgid "Already exists a active Term Of Use"
 msgstr ""
 
-#: ideax/views.py:623
+#: ideax/views.py:627
 #, fuzzy
 #| msgid "Term of use accept!"
 msgid "Term of Use saved successfully!"
 msgstr "Termo de uso aceito!"
 
-#: ideax/views.py:634
+#: ideax/views.py:638
 #, fuzzy
 #| msgid "Term of use accept!"
 msgid "Terms of Use removed successfully!"
 msgstr "Termo de uso aceito!"
 
-#: ideax/views.py:688 ideax/views.py:701
+#: ideax/views.py:692 ideax/views.py:705
 #, fuzzy
 #| msgid "Term of use accept!"
 msgid "Challenge saved successfully!"
 msgstr "Termo de uso aceito!"
 
-#: ideax/views.py:773
+#: ideax/views.py:777
 #, fuzzy
 #| msgid "Term of use accept!"
 msgid "Category Image saved successfully!"
 msgstr "Termo de uso aceito!"
 
-#: ideax/views.py:795
+#: ideax/views.py:799
 #, fuzzy
 #| msgid "Term of use accept!"
 msgid "Category Image changed successfully!"
 msgstr "Termo de uso aceito!"
 
-#: ideax/views.py:806
+#: ideax/views.py:810
 #, fuzzy
 #| msgid "Term of use accept!"
 msgid "Category Image removed successfully!"
 msgstr "Termo de uso aceito!"
 
-#: ideax/views.py:826
+#: ideax/views.py:830
 msgid "Bad image format."
 msgstr ""
 
-#: ideax/views.py:835
+#: ideax/views.py:839
 msgid "Maximum image file is %(size) MB."
 msgstr ""
 
-#: ideax/views.py:851 ideax/views.py:852
+#: ideax/views.py:855 ideax/views.py:856
 msgid "Invalid request!"
 msgstr ""
