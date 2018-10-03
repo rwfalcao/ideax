@@ -1,4 +1,4 @@
-from ._core import INSTALLED_APPS, STATIC_URL
+from ..django._core import INSTALLED_APPS, STATIC_URL
 
 
 INSTALLED_APPS.append('tinymce')

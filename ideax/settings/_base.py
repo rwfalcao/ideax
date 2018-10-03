@@ -10,10 +10,11 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/2.0/ref/settings/
 """
 
-from ._core import *
-from ._email import *
-from ._martor import *
-from ._tinymce import *
-from ._celery import *
-from ._ipware import IPWARE_META_PRECEDENCE_ORDER
-from ._logging import LOGGING
+from .django._core import *
+from .django._email import *
+from .django._email import *
+from .django._logging import LOGGING
+from .apps._martor import *
+from .apps._tinymce import *
+from .apps._celery import *
+from .apps._ipware import IPWARE_META_PRECEDENCE_ORDER

@@ -1,6 +1,6 @@
 from decouple import config
 
-from ._core import INSTALLED_APPS
+from ..django._core import INSTALLED_APPS
 
 
 INSTALLED_APPS.extend([

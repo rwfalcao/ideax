@@ -4,7 +4,7 @@ import logging
 from decouple import config
 from django_auth_ldap.config import LDAPSearch
 
-from ._core import AUTHENTICATION_BACKENDS
+from ..django._core import AUTHENTICATION_BACKENDS
 
 
 AUTHENTICATION_BACKENDS.append('django_auth_ldap.backend.LDAPBackend')
