@@ -20,3 +20,10 @@ docs/_build/
 .vscode
 .venv
 .coverage
+ideax/static/admin
+ideax/static/djcelery
+ideax/static/martor
+ideax/static/plugins
+ideax/static/tinymce
+ideax/static/django_extensions
+ideax/static/mptt
