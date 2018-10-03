@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-10-02 17:13-0300\n"
+"POT-Creation-Date: 2018-10-03 13:48-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Generator: Poedit 2.0.7\n"
 
-#: ideax/feeds.py:6 ideax/templates/ideax/idea_detail.html:83
+#: ideax/feeds.py:6 ideax/templates/ideax/idea_detail.html:88
 msgid "Comments"
 msgstr "Comentários"
 
@@ -52,17 +52,17 @@ msgid "Summary"
 msgstr "Resumo"
 
 #: ideax/forms.py:31 ideax/forms.py:45 ideax/templates/ideax/ftec.html:51
-#: ideax/templates/ideax/idea_detail.html:101
+#: ideax/templates/ideax/idea_detail.html:106
 msgid "Oportunity"
 msgstr "Oportunidade"
 
 #: ideax/forms.py:31 ideax/forms.py:45 ideax/templates/ideax/ftec.html:55
-#: ideax/templates/ideax/idea_detail.html:92
+#: ideax/templates/ideax/idea_detail.html:97
 msgid "Solution"
 msgstr "Solução"
 
 #: ideax/forms.py:31 ideax/forms.py:45 ideax/templates/ideax/ftec.html:59
-#: ideax/templates/ideax/idea_detail.html:110
+#: ideax/templates/ideax/idea_detail.html:115
 msgid "Target"
 msgstr "Público-alvo"
 
@@ -86,7 +86,7 @@ msgstr "Peso"
 #: ideax/forms.py:53 ideax/forms.py:61 ideax/forms.py:68 ideax/forms.py:76
 #: ideax/templates/ideax/challenge_detail.html:44
 #: ideax/templates/ideax/criterion_list.html:13
-#: ideax/templates/ideax/idea_detail.html:80
+#: ideax/templates/ideax/idea_detail.html:85
 #: ideax/templates/ideax/includes/partial_category_image_list.html:8
 #: ideax/templates/ideax/includes/partial_category_list.html:7
 msgid "Description"
@@ -115,56 +115,51 @@ msgstr "Data Limite"
 msgid "Featured"
 msgstr "Destaque"
 
-#: ideax/forms.py:85
-#: ideax/templates/ideax/includes/partial_use_term_list.html:6
-msgid "Creator"
-msgstr "Autor"
-
-#: ideax/forms.py:85
+#: ideax/forms.py:86
 #: ideax/templates/ideax/includes/partial_use_term_list.html:7
 msgid "Term"
 msgstr "Termo"
 
-#: ideax/forms.py:85
+#: ideax/forms.py:86
 #: ideax/templates/ideax/includes/partial_use_term_list.html:8
 msgid "Initial Date"
 msgstr "Data Inicial"
 
-#: ideax/forms.py:85
+#: ideax/forms.py:86
 #: ideax/templates/ideax/includes/partial_use_term_list.html:9
 msgid "Final Date"
 msgstr "Data Final"
 
-#: ideax/models.py:29 ideax/templates/ideax/includes/idea_detail.html:61
+#: ideax/models.py:30 ideax/templates/ideax/includes/idea_detail.html:61
 msgid "Discussion"
 msgstr "Discussão"
 
-#: ideax/models.py:30 ideax/templates/ideax/idea_detail.html:86
+#: ideax/models.py:31 ideax/templates/ideax/idea_detail.html:91
 #: ideax/templates/ideax/includes/idea_detail.html:62
 msgid "Evaluation"
 msgstr "Avaliação"
 
-#: ideax/models.py:31 ideax/templates/ideax/includes/idea_detail.html:63
+#: ideax/models.py:32 ideax/templates/ideax/includes/idea_detail.html:63
 msgid "Ideation"
 msgstr "Ideação"
 
-#: ideax/models.py:32 ideax/templates/ideax/includes/idea_detail.html:64
+#: ideax/models.py:33 ideax/templates/ideax/includes/idea_detail.html:64
 msgid "Approval"
 msgstr "Aprovação"
 
-#: ideax/models.py:33 ideax/templates/ideax/includes/idea_detail.html:65
+#: ideax/models.py:34 ideax/templates/ideax/includes/idea_detail.html:65
 msgid "Evolution"
 msgstr "Evolução"
 
-#: ideax/models.py:34 ideax/templates/ideax/includes/idea_detail.html:66
+#: ideax/models.py:35 ideax/templates/ideax/includes/idea_detail.html:66
 msgid "Done"
 msgstr "Concluídas"
 
-#: ideax/models.py:35 ideax/templates/ideax/includes/idea_detail.html:67
+#: ideax/models.py:36 ideax/templates/ideax/includes/idea_detail.html:67
 msgid "Archived"
 msgstr "Arquivadas"
 
-#: ideax/models.py:36 ideax/templates/ideax/includes/idea_detail.html:68
+#: ideax/models.py:37 ideax/templates/ideax/includes/idea_detail.html:68
 msgid "Paused"
 msgstr "Pausadas"
 
@@ -180,70 +175,74 @@ msgstr ""
 #: ideax/templates/ideax/challenge_new.html:14
 #: ideax/templates/ideax/idea_edit.html:14
 #: ideax/templates/ideax/idea_new.html:13
-#: ideax/templates/ideax/use_term_detail.html:29
+#: ideax/templates/ideax/use_term_detail.html:31
 #: ideax/templates/ideax/use_term_edit.html:56
-#: ideax/templates/ideax/use_term_new.html:55
+#: ideax/templates/ideax/use_term_new.html:48
 msgid "Return"
 msgstr "Voltar"
 
-#: ideax/templates/ideax/base.html:62
+#: ideax/templates/ideax/base.html:63
 #, python-format
 msgid "Hi, %(name)s!"
 msgstr "Olá, %(name)s!"
 
-#: ideax/templates/ideax/base.html:69 ideax/templates/ideax/idea_list.html:6
+#: ideax/templates/ideax/base.html:70 ideax/templates/ideax/idea_list.html:6
 msgid "Explore Ideas"
 msgstr "Explorar Ideias"
 
-#: ideax/templates/ideax/base.html:70
+#: ideax/templates/ideax/base.html:71
 msgid "Users"
 msgstr "Usuários"
 
-#: ideax/templates/ideax/base.html:71
+#: ideax/templates/ideax/base.html:72
 msgid "Active Terms of Use and Privacy"
 msgstr "Termos de uso ativo"
 
-#: ideax/templates/ideax/base.html:72
+#: ideax/templates/ideax/base.html:74
+msgid "Challenges"
+msgstr "Desafios"
+
+#: ideax/templates/ideax/base.html:75
 #: ideax/templates/ideax/use_term_list.html:6
 msgid "Terms of Use"
 msgstr "Termos de uso"
 
-#: ideax/templates/ideax/base.html:73
+#: ideax/templates/ideax/base.html:76
 #: ideax/templates/ideax/category_image_list.html:5
 msgid "Category Images"
 msgstr "Imagem das Categorias"
 
-#: ideax/templates/ideax/base.html:74
+#: ideax/templates/ideax/base.html:77
 #: ideax/templates/ideax/category_list.html:5
 msgid "Categorys"
 msgstr "Categorias"
 
-#: ideax/templates/ideax/base.html:75
+#: ideax/templates/ideax/base.html:79
 msgid "Logout"
 msgstr "Sair"
 
-#: ideax/templates/ideax/base.html:82
+#: ideax/templates/ideax/base.html:86
 #: ideax/templates/ideax/includes/chatbot.html:5
 msgid "Help"
 msgstr "Ajuda"
 
-#: ideax/templates/ideax/base.html:85
+#: ideax/templates/ideax/base.html:89
 msgid "Login"
 msgstr "Entrar"
 
-#: ideax/templates/ideax/base.html:93
+#: ideax/templates/ideax/base.html:97
 msgid "New Idea"
 msgstr "Criar Ideia"
 
-#: ideax/templates/ideax/base.html:106 ideax/templates/ideax/base.html:110
+#: ideax/templates/ideax/base.html:110 ideax/templates/ideax/base.html:114
 msgid "Terms of use"
 msgstr "Termo de uso"
 
-#: ideax/templates/ideax/base.html:113
+#: ideax/templates/ideax/base.html:117
 msgid "Cancel"
 msgstr "Cancelar"
 
-#: ideax/templates/ideax/base.html:114
+#: ideax/templates/ideax/base.html:118
 msgid "Accept"
 msgstr "Aceitar"
 
@@ -272,7 +271,7 @@ msgstr "EDitar Imagem de Categoria"
 #: ideax/templates/ideax/includes/evaluation.html:34
 #: ideax/templates/ideax/includes/partial_idea_create.html:25
 #: ideax/templates/ideax/phase_edit.html:12
-#: ideax/templates/ideax/use_term_new.html:56
+#: ideax/templates/ideax/use_term_new.html:49
 msgid "Save"
 msgstr "Salvar"
 
@@ -287,8 +286,7 @@ msgid "New Category"
 msgstr "Nova Categoria"
 
 #: ideax/templates/ideax/challenge_detail.html:23
-#: ideax/templates/ideax/idea_detail.html:36
-#: ideax/templates/ideax/includes/idea_detail.html:49
+#: ideax/templates/ideax/idea_detail.html:35
 #: ideax/templates/ideax/includes/idea_detail.html:50
 #: ideax/templates/ideax/use_term_detail.html:14
 msgid "By"
@@ -340,7 +338,7 @@ msgstr "Lista de Critérios"
 #: ideax/templates/ideax/includes/partial_category_list.html:8
 #: ideax/templates/ideax/includes/partial_use_term_list.html:11
 #: ideax/templates/ideax/phase_list.html:8
-#: ideax/templates/ideax/use_term_detail.html:30
+#: ideax/templates/ideax/use_term_detail.html:32
 msgid "Edit"
 msgstr "Editar"
 
@@ -358,7 +356,7 @@ msgid "New Comment"
 msgstr "Novo Comentário"
 
 #: ideax/templates/ideax/form.html:23
-#: ideax/templates/ideax/idea_detail.html:137
+#: ideax/templates/ideax/idea_detail.html:142
 msgid "Comment"
 msgstr "Comentar"
 
@@ -402,11 +400,11 @@ msgstr "Avaliação da Equipe de Inovação"
 msgid "Banner Idea"
 msgstr "Gestão de ideias"
 
-#: ideax/templates/ideax/idea_detail.html:69
+#: ideax/templates/ideax/idea_detail.html:74
 msgid "Technical details"
 msgstr "Ficha Técnica"
 
-#: ideax/templates/ideax/idea_detail.html:133
+#: ideax/templates/ideax/idea_detail.html:138
 msgid "Support Markdown"
 msgstr "Suporta Markdown"
 
@@ -503,6 +501,10 @@ msgstr "Confirmar"
 msgid "Update Idea"
 msgstr "Atualizar Ideia"
 
+#: ideax/templates/ideax/includes/partial_use_term_list.html:6
+msgid "Creator"
+msgstr "Autor"
+
 #: ideax/templates/ideax/includes/partial_use_term_list.html:10
 msgid "Status"
 msgstr "Status"
@@ -516,23 +518,23 @@ msgstr "Detalhes"
 msgid "Inactive"
 msgstr "Inativo"
 
-#: ideax/templates/ideax/index.html:8
-msgid "Idea<sup>X</sup> sharing ideas!"
-msgstr "Ideia<sup>X</sup> compartilhando ideias!"
+#: ideax/templates/ideax/index.html:10
+msgid "Sharing ideas!"
+msgstr "Compartilhando ideias!"
 
-#: ideax/templates/ideax/index.html:9
+#: ideax/templates/ideax/index.html:11
 msgid ""
-"With Ideia<sup>X</sup> you have an open channel for innovation, getting "
-"ideas from all parties, evaluating and making them happen!"
+"An open channel for innovation, getting ideas from all parties, evaluating "
+"and making them happen!"
 msgstr ""
-"Com o Ideia<sup>X</sup> você tem um canal aberto para a inovação, recebendo "
-"ideias de todas as partes, avaliando e fazendo-as acontecer!"
+"Um canal aberto para a inovação, que recebe ideias de todas as partes, "
+"avaliando-as e fazendo-as acontecer!"
 
-#: ideax/templates/ideax/index.html:13
+#: ideax/templates/ideax/index.html:18
 msgid "Launch your ideas for everyone!"
 msgstr "Lance suas ideias para todos!"
 
-#: ideax/templates/ideax/index.html:14
+#: ideax/templates/ideax/index.html:19
 msgid ""
 "Ideia<sup>X</sup> is the channel to spread and share your ideas, allowing "
 "your peers to contribute, discuss and collaborate to grow it."
@@ -541,55 +543,46 @@ msgstr ""
 "permitindo que seus pares possam contribuir, discutir e colaborar para o "
 "crescimento dela."
 
-#: ideax/templates/ideax/index.html:15
+#: ideax/templates/ideax/index.html:20
 msgid ""
 "In the same way, you can see other posted ideas, interacting with your "
-"opinion, asking and opining to further improve other ideas."
+"opinion and asking to further improve them!"
 msgstr ""
 "Da mesma forma, você pode ver as outras ideias postadas, interagindo com sua "
-"opinião, perguntando e opinando para melhorar ainda mais outras ideias."
+"opinião e perguntas para melhorá-las ainda mais!"
 
-#: ideax/templates/ideax/index.html:21
-msgid "Features"
-msgstr "Funcionalidades"
-
-#: ideax/templates/ideax/index.html:23
+#: ideax/templates/ideax/index.html:31
 msgid "Register Ideas"
 msgstr "Cadastro de ideias"
 
-#: ideax/templates/ideax/index.html:24
+#: ideax/templates/ideax/index.html:32
 msgid ""
-"Everyone within the company or project can collaborate. Innovation can come "
-"from everyone."
+"All company employees can collaborate. Innovation can come from everyone."
 msgstr ""
-"Todos dentro da empresa ou projeto podem colaborar. A inovação poderá vir de "
+"Todos os funcionários da empresa podem colaborar. A inovação poderá vir de "
 "todos."
 
-#: ideax/templates/ideax/index.html:28
+#: ideax/templates/ideax/index.html:35
 msgid "Manage Ideas"
 msgstr "Gestão de ideias"
 
-#: ideax/templates/ideax/index.html:29
+#: ideax/templates/ideax/index.html:36
 msgid ""
-"Ideas can be organized, matured and evaluated, allowing a flow for the "
+"Ideas will be organized, refined and evaluated, allowing a flow for the "
 "innovation management."
 msgstr ""
-"As ideias podem ser organizadas, amadurecidas e avaliadas, permitindo um "
-"fluxo para a gestão da inovação."
+"As ideias serão organizadas, refinadas e avaliadas, permitindo um fluxo "
+"para a gestão da inovação."
 
-#: ideax/templates/ideax/index.html:33
-msgid "Integration with other systems"
-msgstr "Integração com outras ferramentas"
+#: ideax/templates/ideax/index.html:39
+msgid "Integration"
+msgstr "Integração"
 
-#: ideax/templates/ideax/index.html:34
+#: ideax/templates/ideax/index.html:40
 msgid ""
-"Through APIs is possible to integrate with other tools. Integrating with a "
-"project management tool is possible to create a project based on an idea "
-"registered in Idea<sup>X</sup>."
+"Through APIs is possible to integrate the Idea<sup>X</sup> with other tools."
 msgstr ""
-"Através das APIs é possível integrar com outras ferramentas. Integrando com "
-"uma ferramenta de gestão de projetos é possível criar um projeto a partir de "
-"uma ideia cadastrada no Ideia<sup>X</sup>."
+"Por meio de APIs é possível integrar o Ideia<sup>X</sup> com outras ferramentas."
 
 #: ideax/templates/ideax/phase_edit.html:6
 msgid "New phase"
@@ -665,7 +658,7 @@ msgstr "Termo de uso já aceito!"
 msgid "Idea saved successfully!"
 msgstr "Ideia salva com sucesso!"
 
-#: ideax/views.py:238 ideax/views.py:265
+#: ideax/views.py:238 ideax/views.py:265 ideax/views.py:738
 msgid "Not supported action"
 msgstr "Ação não suportada"
 
@@ -677,89 +670,112 @@ msgstr "Aconteceu algum problema ou seu acesso não é permitido!"
 msgid "Evaluation done successfully!"
 msgstr "Avaliação feita com sucesso!"
 
-#: ideax/views.py:387
+#: ideax/views.py:388
 msgid "Category saved successfully!"
 msgstr "Categoria salva com sucesso!"
 
-#: ideax/views.py:402
+#: ideax/views.py:403
 msgid "Category changed successfully!"
 msgstr "Categoria alterada com sucesso!"
 
-#: ideax/views.py:416
+#: ideax/views.py:417
 msgid "Category removed successfully!"
 msgstr "Categoria removida com sucesso!"
 
-#: ideax/views.py:493
+#: ideax/views.py:494
 msgid "Phase change successfully!"
 msgstr "Fase alterada com sucesso!"
 
-#: ideax/views.py:497
+#: ideax/views.py:498
 msgid "Phase change"
 msgstr "Fase alterad "
 
-#: ideax/views.py:539
+#: ideax/views.py:541
 msgid "You need to log in to post new comments."
 msgstr "É necessário estar logado para postar comentários."
 
-#: ideax/views.py:547
+#: ideax/views.py:549
 msgid "Please check your message it has inappropriate content."
 msgstr "Verifique sua mensagem, ela tem conteúdo inapropriado."
 
-#: ideax/views.py:550
+#: ideax/views.py:552
 msgid "You have to write a comment."
 msgstr "É necessário escrever um comentário."
 
-#: ideax/views.py:569
+#: ideax/views.py:571
 msgid "Your comment has been posted."
 msgstr "Comentário postado com sucesso."
 
-#: ideax/views.py:583 ideax/views.py:652
+#: ideax/views.py:585 ideax/views.py:660
 msgid "No Term of Use found"
 msgstr "Termo de Uso não encontrado"
 
-#: ideax/views.py:621
+#: ideax/views.py:628
 msgid "Invalid Final Date"
 msgstr "Data Final Inválida"
 
-#: ideax/views.py:624
+#: ideax/views.py:631
 msgid "Already exists a active Term Of Use"
 msgstr "Já existe um Termo de Uso ativo"
 
-#: ideax/views.py:627
+#: ideax/views.py:634
 msgid "Term of Use saved successfully!"
 msgstr "Termo de Uso salvo com sucesso!"
 
-#: ideax/views.py:638
+#: ideax/views.py:646
 msgid "Terms of Use removed successfully!"
 msgstr "Termo de Uso removido com sucesso!"
 
-#: ideax/views.py:692 ideax/views.py:705
+#: ideax/views.py:700 ideax/views.py:715
 msgid "Challenge saved successfully!"
 msgstr "Desafio salvo com sucesso!"
 
-#: ideax/views.py:777
+#: ideax/views.py:736
+msgid "Challenge removed successfully!"
+msgstr "Desafio removido com sucesso!"
+
+#: ideax/views.py:800
 msgid "Category Image saved successfully!"
 msgstr "Imagem da Categoria salva com sucesso!"
 
-#: ideax/views.py:799
+#: ideax/views.py:823
 msgid "Category Image changed successfully!"
 msgstr "Imagem da Categoria alterada com sucesso!"
 
-#: ideax/views.py:810
+#: ideax/views.py:835
 msgid "Category Image removed successfully!"
 msgstr "Imagem da Categoria removida com sucesso!"
 
-#: ideax/views.py:830
+#: ideax/views.py:855
 msgid "Bad image format."
 msgstr "Formato de imagem não recomendado"
 
-#: ideax/views.py:839
+#: ideax/views.py:864
 msgid "Maximum image file is %(size) MB."
 msgstr "O tamanho máximo do arquivo é %(size) MB."
 
-#: ideax/views.py:855 ideax/views.py:856
+#: ideax/views.py:880 ideax/views.py:881
 msgid "Invalid request!"
 msgstr "Requisição Inválida"
+
+#~ msgid ""
+#~ "Through APIs is possible to integrate the Idea<sup>X</sup> with other "
+#~ "tools. Integrating with a project management tool is possible to create a "
+#~ "project based on an idea registered in Idea<sup>X</sup>."
+#~ msgstr ""
+#~ "Através das APIs é possível integrar o Ideia<sup>X</sup> com outras "
+#~ "ferramentas. Integrando com uma ferramenta de gestão de projetos é "
+#~ "possível criar um projeto a partir de uma ideia cadastrada no "
+#~ "Ideia<sup>X</sup>."
+
+#~ msgid "Idea<sup>X</sup> sharing ideas!"
+#~ msgstr "Ideia<sup>X</sup> compartilhando ideias!"
+
+#~ msgid "Features"
+#~ msgstr "Funcionalidades"
+
+#~ msgid "Integration with other systems"
+#~ msgstr "Integração com outras ferramentas"
 
 #~ msgid "Search for..."
 #~ msgstr "Pesquisar por..."
