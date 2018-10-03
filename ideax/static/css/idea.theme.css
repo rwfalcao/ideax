@@ -295,7 +295,6 @@ border-radius: 2px;
   border-left: solid 0px #0056b3;
 }
 
-
 .phase-list .nav-item:hover{
   border-left: solid 4px #0056b3;
   background-color: #ededed;
@@ -305,9 +304,6 @@ border-radius: 2px;
   background-color: #fff;
 
 }
-
-
-
 
 .separator {
 width: 1px;
@@ -576,69 +572,88 @@ transform: rotate(180deg);
 transition-delay: 0.7s;
 }
 
-
+.login-button {
+  color: white !important;
+  max-width: 500px;
+  text-align: center;
+}
 /*Landing Page*/
 .brief-explanation {
-  background: url("../images/lamp_idea_1-50.png");
+  background: url("../images/bg_head.gif");
   background-size: auto auto;
-  min-height: 450px;
+  background-position-y: 60%;
+  min-height: 600px;
   background-size: cover;
-  text-align: center;
+  text-align: left;
   padding-top: 25px;
   font-family: sans-serif;
   background-position-y: 5%;
-  padding: 8% 15% 0 15%;
+  padding: 10% 10% 0 10%;
 }
 
 .brief-explanation h1 {
   margin: 0;
-  font-size: 4em;
+  font-size: 3em;
+  color: white;
+  font-size: 40px;
+  max-width: 500px;
 }
 
 .brief-explanation p {
-  font-size: 2em;
+  font-size: 1.5em;
+  color: white;
+  max-width: 500px;
+  text-align: justify;
 }
 
 .idea-launch {
-  display: flex;
   justify-content: center;
   align-items: center;
   padding: 30px 0;
   font-family: sans-serif;
 }
 
-.idea-launch .launch-text {
-  max-width: 550px;
+.idea-launch {
+  max-width: 2050px;
 }
 
 .launch-text h2 {
-  font-size: 2.5em;
-  color: #5990A4;
+  font-size: 2em;
+  color: rgb(49, 105, 126);
 }
 .launch-text h2 footer.landing-page {
   min-height: 60px;
   background: #333;
   color: #E6E6E6;
+  position: absolute; 
 }
 
 .launch-text p {
   color: #666666;
   font-size: 1.1em;
   text-align: justify;
+
 }
 
-.idea-launch * {
-  margin: 0 50px;
-}
 
 .launch-text * {
-  margin: 10px 0;
+  margin: 20px 0;
+}
+
+.launch-image img{
+  height: auto;
+  width: 600px;
+  text-align: center;
+}
+
+.launch-text {
+  background-size: cover;
+  text-align: left;
 }
 
 .functionality {
-  background: url("../images/keyboard.jpg");
+  background-color: #606369;
   width: 100%;
-  min-height: 500px;
   background-size: cover;
   display: flex;
   justify-content: flex-end;
@@ -647,22 +662,25 @@ transition-delay: 0.7s;
 }
 
 .function-list {
-  max-width: 60%;
-  padding-right: 100px;
-  min-height: 500px;
-  display: flex;
-  flex-flow: column;
-  justify-content: space-around;
-  /* font-family: "Open Sans", sans-serif; */
+  justify-content: space-evenly;
+  width: 100%;
+  font-family: "Open Sans", sans-serif;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+  
+.function-item {
+  padding: 20 20 0 20;
 }
 
-.function-list h2,
 .function-list h3 {
-  color: #5990A4;
+  color: rgb(255, 255, 255);
+  font-size: 2em;
 }
 
 .function-list p {
   font-size: 1.2em;
+  color: rgb(255, 255, 255);
 }
 
 .why-info {
@@ -670,6 +688,21 @@ transition-delay: 0.7s;
   justify-content: center;
   align-items: center;
   padding: 5% 1%;
+}
+
+@media (min-width: 992px) {
+  .function-list{
+    display: flex;
+  }
+  .function-item{
+    max-width: 320px;
+  }
+  .idea-launch {
+    display: flex;
+  }
+  .idea-launch img {
+    width: 80%;
+  }
 }
 
 @media (max-width: 320px) {
@@ -725,13 +758,8 @@ transition-delay: 0.7s;
     flex-flow: column-reverse;
   }
 
-  .idea-launch * {
-    margin: 10px 20px;
-  }
-
   .idea-launch img {
-    height: auto;
-    width: 30%;
+    width: 100%;
   }
 
   .idea {
@@ -752,13 +780,11 @@ transition-delay: 0.7s;
     border-right: 0px;
   }
 
-
   .nav-item:hover{
     border-right: 0px;
 
   }
 }
-
 
 @media (max-width: 400px) {
   .permission-error img{
@@ -773,7 +799,7 @@ transition-delay: 0.7s;
   }
 
   .function-list {
-    max-width: 70%;
+    max-width: 80%;
   }
 
   .brief-explanation {
@@ -806,23 +832,20 @@ transition-delay: 0.7s;
     background-position-x: 15%;
   }
 
-  .function-list {
-    max-width: 50%;
-  }
-
   .brief-explanation {
     padding: 3% 10% 0 10%;
     min-height: 350px;
   }
 
   .brief-explanation h1 {
-    font-size: 3.5em;
+    font-size: 3em;
     margin-bottom: 20px;
+    color: #ffffff;
   }
 
   .brief-explanation p {
-    font-size: 1.8em;
     text-align: justify;
+    color: #ffffff;
   }
 
   .idea {
@@ -908,7 +931,6 @@ transition-delay: 0.7s;
 
 .carousel-challenge {
   background-color: rgba(0, 0, 0, 0.60);
-
   position: fixed;
   width: 100%;
   padding-bottom: 5px !important;
@@ -982,7 +1004,6 @@ transition-delay: 0.7s;
   
 }
 
-
 .challenge-buttons a{
   display: flex;
   border-radius: 50px;
@@ -993,7 +1014,6 @@ transition-delay: 0.7s;
   margin: 3px 0;
 }
 
-
 .challenge-buttons .delete{
   
   color: #cecece;
@@ -1003,6 +1023,3 @@ transition-delay: 0.7s;
 
   color: #cecece;
 }
-
-
-  
