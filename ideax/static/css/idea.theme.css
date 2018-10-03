@@ -295,7 +295,6 @@ border-radius: 2px;
   border-left: solid 0px #0056b3;
 }
 
-
 .phase-list .nav-item:hover{
   border-left: solid 4px #0056b3;
   background-color: #ededed;
@@ -305,9 +304,6 @@ border-radius: 2px;
   background-color: #fff;
 
 }
-
-
-
 
 .separator {
 width: 1px;
@@ -606,10 +602,10 @@ transition-delay: 0.7s;
   font-size: 1.5em;
   color: white;
   max-width: 400px;
+  text-align: justify;
 }
 
 .idea-launch {
-  display: flex;
   justify-content: center;
   align-items: center;
   padding: 30px 0;
@@ -633,17 +629,20 @@ transition-delay: 0.7s;
 
 .launch-text p {
   color: #666666;
-  font-size: 1.3em;
-  text-align: left;
+  font-size: 1.1em;
+  text-align: justify;
 
 }
 
-.idea-launch * {
-  margin: 0 70px;
-}
 
 .launch-text * {
   margin: 20px 0;
+}
+
+.launch-image img{
+  height: auto;
+  width: 600px;
+  text-align: center;
 }
 
 .launch-text {
@@ -696,6 +695,12 @@ transition-delay: 0.7s;
   }
   .function-item{
     max-width: 320px;
+  }
+  .idea-launch {
+    display: flex;
+  }
+  .idea-launch img {
+    width: 80%;
   }
 }
 
@@ -752,12 +757,8 @@ transition-delay: 0.7s;
     flex-flow: column-reverse;
   }
 
-  .idea-launch * {
-    margin: 10px 20px;
-  }
-
   .idea-launch img {
-    width: 85%;
+    width: 100%;
   }
 
   .idea {
@@ -778,13 +779,11 @@ transition-delay: 0.7s;
     border-right: 0px;
   }
 
-
   .nav-item:hover{
     border-right: 0px;
 
   }
 }
-
 
 @media (max-width: 400px) {
   .permission-error img{
@@ -931,7 +930,6 @@ transition-delay: 0.7s;
 
 .carousel-challenge {
   background-color: rgba(0, 0, 0, 0.60);
-
   position: fixed;
   width: 100%;
   padding-bottom: 5px !important;
@@ -1005,7 +1003,6 @@ transition-delay: 0.7s;
   
 }
 
-
 .challenge-buttons a{
   display: flex;
   border-radius: 50px;
@@ -1016,7 +1013,6 @@ transition-delay: 0.7s;
   margin: 3px 0;
 }
 
-
 .challenge-buttons .delete{
   
   color: #cecece;
@@ -1026,6 +1022,3 @@ transition-delay: 0.7s;
 
   color: #cecece;
 }
-
-
-  
