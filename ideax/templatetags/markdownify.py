@@ -1,7 +1,10 @@
-from django import template
 import mistune
 
+from django import template
+
+
 register = template.Library()
+
 
 @register.filter
 def markdown(value):

@@ -1,5 +1,8 @@
 from ipware import get_client_ip as get_client_ipware
 
+PRIVATE_IPS_PREFIX = ('10.', '172.', '192.', )
+
+
 def get_ip(request):
     client_ip, is_routable = get_client_ipware(request)
     if client_ip is None:
@@ -8,7 +11,6 @@ def get_ip(request):
     else:
         return client_ip
 
-PRIVATE_IPS_PREFIX = ('10.', '172.', '192.', )
 
 def get_client_ip(request):
     """get the client ip from the request

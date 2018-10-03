@@ -20,4 +20,3 @@ class TestCategory(object):
     def test_get_images(self, setup_category):
         # TODO: Test with images created
         assert len(setup_category.get_all_image_header()) == 0
-

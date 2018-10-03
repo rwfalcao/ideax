@@ -3,13 +3,10 @@ from django.utils import timezone
 from enum import Enum
 from mptt.models import MPTTModel, TreeForeignKey
 from django.contrib.auth.signals import user_logged_in
-from django.urls import reverse
-from decouple import config
 import random
 from django.conf import settings
 from django.utils.translation import ugettext_lazy as _
-from django.contrib.auth.models import User, Group
-from martor.models import MartorField
+from django.contrib.auth.models import Group
 
 
 def check_user_profile(sender, request, user, **kwargs):
@@ -112,9 +109,9 @@ class Idea(models.Model):
     solution = models.TextField(max_length=2500, null=True)
     target = models.TextField(max_length=500, null=True)
     creation_date = models.DateTimeField('data criação')
-    author = models.ForeignKey('UserProfile',on_delete=models.CASCADE, related_name='old_author')
+    author = models.ForeignKey('UserProfile', on_delete=models.CASCADE, related_name='old_author')
     authors = models.ManyToManyField('UserProfile', related_name='authors')
-    category = models.ForeignKey('Category', models.SET_NULL,null=True)
+    category = models.ForeignKey('Category', models.SET_NULL, null=True)
     discarded = models.BooleanField(default=False)
     score = models.FloatField(default=0)
     category_image = models.CharField(

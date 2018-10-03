@@ -5,8 +5,10 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.views.i18n import JavaScriptCatalog
 from django.conf.urls import url
+
 from . import views
-from ideax.feeds import *
+from ideax.feeds import Comment_Feed, New_Idea_Feed
+
 
 urlpatterns = [
     url(r'^media/uploader/$', views.markdown_uploader, name='markdown_uploader_page'),
@@ -29,18 +31,18 @@ urlpatterns = [
     path('idea/<int:pk>/like/', views.like_popular_vote, name='like_ideia'),
     path('idea/<int:pk>/dislike/', views.like_popular_vote, name='dislike_ideia'),
     path('idea/<int:pk>/changephase/<int:new_phase>/', views.change_idea_phase, name='change_phase'),
-    path('idea/filter/<int:phase_pk>', views.idea_filter, name ="idea_filter"),
+    path('idea/filter/<int:phase_pk>', views.idea_filter, name="idea_filter"),
     path('category/new/', views.category_new, name='category_new'),
     path('category/list/', views.category_list, name='category_list'),
     path('category/<int:pk>/edit/', views.category_edit, name='category_edit'),
     path('category/<int:pk>/remove/', views.category_remove, name='category_remove'),
-    #path('idea/comment/<int:pk>', views.form_redirect, name='form'),
+    # path('idea/comment/<int:pk>', views.form_redirect, name='form'),
     path('post/comment/', views.post_comment, name='post_comment'),
     path('idea/comments/<int:pk>/', views.idea_comments, name='idea_comments'),
     path('idea/evaluation/<int:idea_pk>/', views.idea_evaluation, name='evaluation'),
     path('term/accept', views.accept_use_term, name="accept_term"),
     path('term', views.get_term_of_user, name="term_of_use"),
-    path('feed/comment/latest',Comment_Feed()),
+    path('feed/comment/latest', Comment_Feed()),
     path('feed/idea/latest', New_Idea_Feed(), name="rss"),
     path('report/idea/<int:idea_id>/detail/', views.idea_detail_pdf, name="idea_detail_pdf"),
     path('challenge/<int:challenge_pk>/', views.challenge_detail, name="challenge_detail"),

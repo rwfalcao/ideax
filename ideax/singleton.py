@@ -1,6 +1,7 @@
-from .badwords import Badword
 import os
-import json
+
+from .badwords import Badword
+
 
 class Profanity_Check:
     __location__ = os.path.realpath(
