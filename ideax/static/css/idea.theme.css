@@ -574,12 +574,12 @@ transition-delay: 0.7s;
 
 .login-button {
   color: white !important;
-  max-width: 400px;
+  max-width: 500px;
   text-align: center;
 }
 /*Landing Page*/
 .brief-explanation {
-  background: url("../images/bg_head.png");
+  background: url("../images/bg_head.gif");
   background-size: auto auto;
   background-position-y: 60%;
   min-height: 600px;
@@ -595,13 +595,14 @@ transition-delay: 0.7s;
   margin: 0;
   font-size: 3em;
   color: white;
-  max-width: 400px;
+  font-size: 40px;
+  max-width: 500px;
 }
 
 .brief-explanation p {
   font-size: 1.5em;
   color: white;
-  max-width: 400px;
+  max-width: 500px;
   text-align: justify;
 }
 
@@ -669,7 +670,7 @@ transition-delay: 0.7s;
 }
   
 .function-item {
-  padding-top: 20px;
+  padding: 20 20 0 20;
 }
 
 .function-list h3 {
