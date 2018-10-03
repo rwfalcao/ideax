@@ -17,3 +17,6 @@ test_watch:
 
 test_ci:
 	py.test --create-db
+
+pip_outdated:
+	pip list --outdated --format=columns
