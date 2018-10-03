@@ -4,7 +4,7 @@ LOG_LEVEL=${LOG_LEVEL:-"info"}
 
 cd /var/www/ideax
 
-export DJANGO_SETTINGS_MODULE=ideax.settings
+export DJANGO_SETTINGS_MODULE=ideax.settings.prod
 
 if [ ! -f /var/www/ideax/.env ]; then
   echo SECRET_KEY=my_super_secret_key > /var/www/ideax/.env

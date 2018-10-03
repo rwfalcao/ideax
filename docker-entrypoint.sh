@@ -4,7 +4,7 @@ LOG_LEVEL=${LOG_LEVEL:-"info"}
 
 cd /app
 
-export DJANGO_SETTINGS_MODULE=ideax.settings
+export DJANGO_SETTINGS_MODULE=ideax.settings.dev
 pip install -r /app/requirements/dev.txt
 
 python manage.py collectstatic --no-input

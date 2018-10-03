@@ -6,7 +6,7 @@ from django.conf import settings
 
 
 # set the default Django settings module for the 'celery' program.
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'ideax.settings')
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'ideax.settings.prod')
 
 
 app = Celery('ideax', broker=settings.CELERY_BROKER_URL)
