@@ -249,7 +249,7 @@ def idea_edit(request, pk):
     idea = get_object_or_404(Idea, pk=pk)
 
     if ((request.user.userprofile == idea.author and idea.get_current_phase() == Phase.GROW) or
-       request.user.has_perm(settings.PERMISSIONS["MANAGE_IDEA"])):
+            request.user.has_perm(settings.PERMISSIONS["MANAGE_IDEA"])):
         queryset = UserProfile.objects \
             .filter(user__is_staff=False) \
             .exclude(user__email__isnull=True) \
@@ -274,7 +274,7 @@ def idea_remove(request, pk):
     data = dict()
 
     if ((request.user.userprofile == idea.author and idea.get_current_phase() == Phase.GROW)
-       or request.user.has_perm(settings.PERMISSIONS["MANAGE_IDEA"])):
+            or request.user.has_perm(settings.PERMISSIONS["MANAGE_IDEA"])):
         if request.method == 'POST':
             idea.discarded = True
             idea.save()

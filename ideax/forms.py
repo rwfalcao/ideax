@@ -21,9 +21,10 @@ class IdeaForm(forms.ModelForm):
             required=False)
 
     challenge = forms.ModelChoiceField(
-                            queryset=Challenge.objects.filter(discarted=False),
-                            empty_label=_('Not related to any challenge'),
-                            required=False)
+        queryset=Challenge.objects.filter(discarted=False),
+        empty_label=_('Not related to any challenge'),
+        required=False
+    )
     oportunity = MartorFormField()
     solution = MartorFormField()
     target = MartorFormField()
@@ -60,7 +61,7 @@ class IdeaFormUpdate(forms.ModelForm):
             'oportunity': _('Oportunity'),
             'solution': _('Solution'),
             'target': _('Target'),
-          }
+        }
 
 
 class CriterionForm(forms.ModelForm):

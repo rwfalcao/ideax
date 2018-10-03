@@ -24,5 +24,8 @@ pip_outdated:
 lint:
 	flake8 ideax
 
+pylint:
+	pylint ideax
+
 ci: lint test_ci
 	@echo "done"

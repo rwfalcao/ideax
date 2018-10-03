@@ -25,8 +25,7 @@ def get_client_ip(request):
     if x_forwarded_for:
         proxies = x_forwarded_for.split(',')
         # remove the private ips from the beginning
-        while (len(proxies) > 0 and
-                proxies[0].startswith(PRIVATE_IPS_PREFIX)):
+        while (len(proxies) > 0 and proxies[0].startswith(PRIVATE_IPS_PREFIX)):
             proxies.pop(0)
         # take the first ip which is not a private one (of a proxy)
         if len(proxies) > 0:

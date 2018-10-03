@@ -201,7 +201,7 @@ class Comment(MPTTModel):
         order_insertion_by = ['-date']
 
 
-class UserProfile (models.Model):
+class UserProfile(models.Model):
     user = models.OneToOneField('auth.User', on_delete=models.PROTECT)
     use_term_accept = models.NullBooleanField(default=False)
     acceptance_date = models.DateTimeField(null=True)
