@@ -15,22 +15,22 @@ Get Idea\ :sup:`X`!
 You can clone its repository or download its zip file.
 .. code::
 
-  $ git clone https://github.com/filhocf/ideax.git
+  $ git clone https://github.com/dataprev/ideax.git
 
 .. code::
 
-  $ wget https://github.com/filhocf/ideax/archive/master.zip
+  $ wget https://github.com/dataprev/ideax/archive/master.zip
 
 Install dependencies
 ^^^^^^^^^^^^^^^^^^^^
 
 If you want to authenticate against a LDAP or AD server, you need to install some python packages for LDAP and its dependencies.
-It and others dependencies are listed in requirements.txt file.
+It and others dependencies are listed in requirements/dev.txt file.
 
 .. code::
 
-  $ sudo apt install gcc libpython3.5-dev libldap2-dev libsasl2-dev
-  $ pip install -r requirements.txt
+  $ sudo apt install gcc libpython3.6-dev libldap2-dev libsasl2-dev
+  $ pip install -r requirements/dev.txt
 
 
 Database Configuration
