@@ -1,36 +1,42 @@
 {% extends 'ideax/base.html' %}
+{% block top %}
+{% endblock %}
 {% load staticfiles i18n %}
 
 {% block content %}
 
 
     <div class="brief-explanation">
-      <h1>{% trans 'Idea<sup>X</sup> sharing ideas!' %}</h1>
-      <p>{% trans 'With Ideia<sup>X</sup> you have an open channel for innovation, getting ideas from all parties, evaluating and making them happen!' %}</p>
+      <h1>{% trans 'Sharing ideas!' %}</h1>
+      <p>{% trans 'An open channel for innovation, getting ideas from all parties, evaluating and making them happen!' %}</p>
+      <div class="login-button">
+          <button type="button" onclick="location.href='{% url 'login' %}';" class="btn btn-warning">Login</button> 
+      </div>
     </div>
     <div class="idea-launch">
-      <div class="launch-text">
-        <h2>{% trans 'Launch your ideas for everyone!' %}</h2>
-        <p>{% trans 'Ideia<sup>X</sup> is the channel to spread and share your ideas, allowing your peers to contribute, discuss and collaborate to grow it.' %}</p>
-        <p>{% trans 'In the same way, you can see other posted ideas, interacting with your opinion, asking and opining to further improve other ideas.' %}</p>
+      <div class="launch-text col-md-12 col-lg-6">
+          <h2>{% trans 'Launch your ideas for everyone!' %}</h2>
+          <p>{% trans 'Ideia<sup>X</sup> is the channel to spread and share your ideas, allowing your peers to contribute, discuss and collaborate to grow it.' %}</p>
+          <p>{% trans 'In the same way, you can see other posted ideas, interacting with your opinion, asking and opining to further improve other ideas.' %}</p>
       </div>
-      <img src="{% static 'images/idea_launch.png' %}" alt="">
+      <div class="launch-image col-md-12 col-lg-6" style="text-align: center;">
+          <img src="../../static/images/stick_man.png"> 
+      </div>
+      
     </div>
+
     <div class="functionality">
       <div class="function-list">
-        <h2>{% trans 'Features' %}</h2>
         <div class="function-item">
           <h3>{% trans 'Register Ideas' %}</h3>
           <p>{% trans 'Everyone within the company or project can collaborate. Innovation can come from everyone.' %}</p>
         </div>
-
         <div class="function-item">
           <h3>{% trans 'Manage Ideas' %}</h3>
           <p>{% trans 'Ideas can be organized, matured and evaluated, allowing a flow for the innovation management.' %}</p>
         </div>
-
         <div class="function-item">
-          <h3>{% trans 'Integration with other systems' %}</h3>
+          <h3>{% trans 'Integration' %}</h3>
           <p>{% trans 'Through APIs is possible to integrate with other tools. Integrating with a project management tool is possible to create a project based on an idea registered in Idea<sup>X</sup>.' %}</p>
         </div>
       </div>
