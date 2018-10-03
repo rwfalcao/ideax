@@ -40,5 +40,5 @@ RUN apk add --no-cache \
     wget \
     zlib-dev
 
-COPY requirements.txt /tmp
-RUN pip install -r /tmp/requirements.txt
+COPY requirements/* /tmp/
+RUN pip install -r /tmp/dev.txt
