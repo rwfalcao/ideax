@@ -12,7 +12,6 @@ https://docs.djangoproject.com/en/2.0/ref/settings/
 
 from .django._core import *
 from .django._email import *
-from .django._email import *
 from .django._logging import LOGGING
 from .apps._martor import *
 from .apps._tinymce import *
