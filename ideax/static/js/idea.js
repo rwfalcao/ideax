@@ -241,6 +241,47 @@ $(function () {
     });
   }
 
+  function searchIdea(event, form) {
+    event.preventDefault();
+    var $form = form;
+    var data = $form.data();
+    url = $form.attr("action");
+    seach_filter = $form.find("input#search_part").val();
+
+    var csrftoken = getCookie('csrftoken');
+
+    $.ajaxSetup({
+        beforeSend: function (xhr, settings) {
+          if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
+              xhr.setRequestHeader("X-CSRFToken", csrftoken);
+          }
+        }
+    });
+
+    var doPost = $.post(url, {        
+      seach_filter: seach_filter
+    });
+
+    doPost.done(function (response) {
+
+        $("#idea-list-group").empty();
+        $(".empty-filter").empty();
+  
+        if(response.empty == 0){
+          $(".empty-filter").empty();
+          $("#idea-list-group").html(response.html_idea_list);
+        }
+        else{
+          $(".empty-filter").empty();
+          $(".empty-filter").html(response.html_idea_list);
+        }                
+    });
+
+    doPost.fail(function (response){
+      
+    });
+  }
+
   function showMessage(idDivMessage, message, classMessage){
     $(idDivMessage).html(message);
     $(idDivMessage).css("display","");
@@ -260,6 +301,10 @@ $(function () {
 
   $(document).on("submit", "#commentForm", function (event) {
     submitEvent(event, $(this));
+  });
+
+  $(document).on("submit", "#searchIdea", function (event) {
+    searchIdea(event, $(this));
   });
 
   var newCommentForm = `
@@ -320,7 +365,7 @@ $(function () {
     submitEvent(event, $(this));
   });
 
-  $('iframe').load( function() {
+ $('iframe').load( function() {
     console.log("iframe css");
       $('iframe').contents().find("head").append($("<style type='text/css'>  .b-agent-demo .b-agent-demo_header{min-height:50px!important;height:50px!important}.b-agent-demo .b-agent-demo_header-icon{top:4px!important}.b-agent-demo .b-agent-demo_header-description{padding-top:0!important}  </style>"));
   });

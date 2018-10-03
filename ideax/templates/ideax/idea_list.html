@@ -1,5 +1,5 @@
 {% extends 'ideax/base.html' %}
-{% load i18n %}
+{% load i18n staticfiles %}
 
 {% block content %}
     <div class="idea-list-bg">
@@ -72,12 +72,14 @@
           {%if not ideas %}
            {% include 'ideax/includes/empty.html' %}
           {%else%}
-            <div id="idea-search" class="input-group mb-3" style="display: none">
-              <input type="text" class="form-control" placeholder="{% trans 'Search for...' %}" aria-label="{% trans 'Search Box' %}" aria-describedby="basic-addon2">
-              <div class="input-group-append">
-                <button class="btn btn-outline-secondary" type="button">{% trans 'Search' %}</button>
+          <form action="{% url 'idea_search' %}" id="searchIdea" method="POST">
+            <div id="idea-search" class="input-group mb-3">
+                <input id="search_part" type="text" class="form-control" placeholder="{% trans 'Search for author, title or summary' %}" aria-label="{% trans 'Search Box' %}" aria-describedby="basic-addon2">
+                <div class="input-group-append">
+                  <button class="btn btn-outline-secondary" type="submit">{% trans 'Search' %}</button>
+                </div>
               </div>
-            </div>
+            </form>
             <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
               <ol class="carousel-indicators" style="margin-bottom: 3px;">
                 {% for i in challenges %}
@@ -120,11 +122,12 @@
           </div>
 
           {% if ideas.has_next %}
-            <a class="infinite-more-link" href="?page={{ ideas.next_page_number }}">More</a>
+            <a class="infinite-more-link" href="?page={{ ideas.next_page_number }}"></a>
           {% endif %}
 
-          <div class="loading" style="display: none;">
-            Loading...
+          <div class="loading" style="display: none; text-align: center">
+            <img src="{% static 'images/loading.gif' %}" alt=""> Loading...
+            <!--animation icon 'eclipse' is provided by loading.io-->
           </div>
 
 
@@ -136,15 +139,11 @@
 
     <script>
       var infinite = new Waypoint.Infinite({
-        element: $('.infinite-container')[0],
-        handler: function(direction) {
-          console.log('Scrolled to waypoint!')
-        },
+        element: $('.infinite-container')[0],        
         onBeforePageLoad: function () {
           $('.loading').show();
         },
         onAfterPageLoad: function ($items) {
-
           $('.loading').hide();
         },
       });

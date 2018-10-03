@@ -324,3 +324,4 @@ import time
 MARTOR_UPLOAD_PATH = 'images/uploads/{}'.format(time.strftime("%Y/%m/%d/"))
 
 MAX_IMAGE_UPLOAD_SIZE = 5242880  # 5MB
+SESSION_COOKIE_AGE = 180

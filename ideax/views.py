@@ -7,7 +7,7 @@ from django.http import JsonResponse
 from django.template.loader import render_to_string
 from django.views.decorators.csrf import ensure_csrf_cookie, csrf_protect
 from django.views.decorators.http import require_http_methods
-from django.db.models import Count, Case, When
+from django.db.models import Count, Case, When, Q
 from .models import Idea, Criterion, Popular_Vote, Phase, Phase_History, Category, Comment, UserProfile, Dimension, Evaluation, Category_Image, Use_Term, Challenge
 from .forms import IdeaForm, CriterionForm, IdeaFormUpdate, CategoryForm, CategoryImageForm, EvaluationForm, ChallengeForm, UseTermForm
 from .singleton import Profanity_Check
@@ -78,7 +78,7 @@ def accept_use_term(request):
         #logger.info('%(username)s|%(ip_addr)s|%(message)s', { 'username': request.user.username, 'ip_addr': get_client_ip(request), 'message': 'Term of use already accepted!'})
 
     audit(request.user.username, get_client_ip(request), 'ACCEPT_TERMS_OF_USE_OPERATION', UserProfile.__name__, '')
-    return redirect('index')
+    return redirect('index') 
 
 @login_required
 def idea_list(request):
@@ -130,8 +130,12 @@ def get_phases():
     phase_dic['phases'] = Phase.choices()
     return phase_dic
 
-def idea_filter(request, phase_pk):
-    ideas = Idea.objects.filter(discarded=False, phase_history__current_phase=phase_pk, phase_history__current=1).annotate(count_like=Count(Case(When(popular_vote__like = True, then=1)))).order_by('-count_like')
+def idea_filter(request, phase_pk=None, search_part=None):
+    if phase_pk:
+        ideas = Idea.objects.filter(discarded=False, phase_history__current_phase=phase_pk, phase_history__current=1).annotate(count_like=Count(Case(When(popular_vote__like = True, then=1)))).order_by('-count_like')
+    else:
+        ideas  = Idea.objects.filter(Q(author__user__first_name__icontains=search_part)|Q(title__icontains=search_part)|Q(summary__icontains=search_part) , discarded=False).annotate(count_like=Count(Case(When(popular_vote__like = True, then=1)))).order_by('-count_like')
+    
     context={'ideas': ideas,
              'ideas_liked': get_ideas_voted(request, True),
              'ideas_disliked': get_ideas_voted(request, False),
@@ -875,3 +879,6 @@ def markdown_uploader(request):
             return HttpResponse(data, content_type='application/json')
         return HttpResponse(_('Invalid request!'))
     return HttpResponse(_('Invalid request!'))
+
+def idea_search(request):
+    return idea_filter(request, search_part=request.POST.get('seach_filter', None))

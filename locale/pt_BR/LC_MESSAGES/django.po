@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-09-21 14:22-0300\n"
+"POT-Creation-Date: 2018-10-02 17:13-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -422,15 +422,15 @@ msgstr "Explorar"
 msgid "Filters"
 msgstr "Filtros"
 
-#: ideax/templates/ideax/idea_list.html:76
-msgid "Search for..."
-msgstr "Pesquisar por..."
+#: ideax/templates/ideax/idea_list.html:77
+msgid "Search for author, title or summary"
+msgstr "Pesquise por autor, título ou resumo da ideia"
 
-#: ideax/templates/ideax/idea_list.html:76
+#: ideax/templates/ideax/idea_list.html:77
 msgid "Search Box"
 msgstr "Caixa de Busca"
 
-#: ideax/templates/ideax/idea_list.html:78
+#: ideax/templates/ideax/idea_list.html:79
 msgid "Search"
 msgstr "Pesquisar"
 
@@ -661,105 +661,108 @@ msgstr "Termo de uso aceito!"
 msgid "Term of use already accepted!"
 msgstr "Termo de uso já aceito!"
 
-#: ideax/views.py:196
+#: ideax/views.py:200
 msgid "Idea saved successfully!"
 msgstr "Ideia salva com sucesso!"
 
-#: ideax/views.py:234 ideax/views.py:261
+#: ideax/views.py:238 ideax/views.py:265
 msgid "Not supported action"
 msgstr "Ação não suportada"
 
-#: ideax/views.py:354
+#: ideax/views.py:358
 msgid "Something went wrong or you're not allowed!"
 msgstr "Aconteceu algum problema ou seu acesso não é permitido!"
 
-#: ideax/views.py:359
+#: ideax/views.py:363
 msgid "Evaluation done successfully!"
 msgstr "Avaliação feita com sucesso!"
 
-#: ideax/views.py:383
+#: ideax/views.py:387
 msgid "Category saved successfully!"
 msgstr "Categoria salva com sucesso!"
 
-#: ideax/views.py:398
+#: ideax/views.py:402
 msgid "Category changed successfully!"
 msgstr "Categoria alterada com sucesso!"
 
-#: ideax/views.py:412
+#: ideax/views.py:416
 msgid "Category removed successfully!"
 msgstr "Categoria removida com sucesso!"
 
-#: ideax/views.py:489
+#: ideax/views.py:493
 msgid "Phase change successfully!"
 msgstr "Fase alterada com sucesso!"
 
-#: ideax/views.py:493
+#: ideax/views.py:497
 msgid "Phase change"
 msgstr "Fase alterad "
 
-#: ideax/views.py:535
+#: ideax/views.py:539
 msgid "You need to log in to post new comments."
 msgstr "É necessário estar logado para postar comentários."
 
-#: ideax/views.py:543
+#: ideax/views.py:547
 msgid "Please check your message it has inappropriate content."
 msgstr "Verifique sua mensagem, ela tem conteúdo inapropriado."
 
-#: ideax/views.py:546
+#: ideax/views.py:550
 msgid "You have to write a comment."
 msgstr "É necessário escrever um comentário."
 
-#: ideax/views.py:565
+#: ideax/views.py:569
 msgid "Your comment has been posted."
 msgstr "Comentário postado com sucesso."
 
-#: ideax/views.py:579 ideax/views.py:648
+#: ideax/views.py:583 ideax/views.py:652
 msgid "No Term of Use found"
 msgstr "Termo de Uso não encontrado"
 
-#: ideax/views.py:617
+#: ideax/views.py:621
 msgid "Invalid Final Date"
 msgstr "Data Final Inválida"
 
-#: ideax/views.py:620
+#: ideax/views.py:624
 msgid "Already exists a active Term Of Use"
 msgstr "Já existe um Termo de Uso ativo"
 
-#: ideax/views.py:623
+#: ideax/views.py:627
 msgid "Term of Use saved successfully!"
 msgstr "Termo de Uso salvo com sucesso!"
 
-#: ideax/views.py:634
+#: ideax/views.py:638
 msgid "Terms of Use removed successfully!"
 msgstr "Termo de Uso removido com sucesso!"
 
-#: ideax/views.py:688 ideax/views.py:701
+#: ideax/views.py:692 ideax/views.py:705
 msgid "Challenge saved successfully!"
 msgstr "Desafio salvo com sucesso!"
 
-#: ideax/views.py:773
+#: ideax/views.py:777
 msgid "Category Image saved successfully!"
 msgstr "Imagem da Categoria salva com sucesso!"
 
-#: ideax/views.py:795
+#: ideax/views.py:799
 msgid "Category Image changed successfully!"
 msgstr "Imagem da Categoria alterada com sucesso!"
 
-#: ideax/views.py:806
+#: ideax/views.py:810
 msgid "Category Image removed successfully!"
 msgstr "Imagem da Categoria removida com sucesso!"
 
-#: ideax/views.py:826
+#: ideax/views.py:830
 msgid "Bad image format."
 msgstr "Formato de imagem não recomendado"
 
-#: ideax/views.py:835
+#: ideax/views.py:839
 msgid "Maximum image file is %(size) MB."
 msgstr "O tamanho máximo do arquivo é %(size) MB."
 
-#: ideax/views.py:851 ideax/views.py:852
+#: ideax/views.py:855 ideax/views.py:856
 msgid "Invalid request!"
 msgstr "Requisição Inválida"
+
+#~ msgid "Search for..."
+#~ msgstr "Pesquisar por..."
 
 #~ msgid "Ordered List"
 #~ msgstr "Lista ordenada"

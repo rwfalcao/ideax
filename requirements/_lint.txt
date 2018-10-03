@@ -1,0 +1,7 @@
+flake8==3.5.0                            # Verifica o código quando a pep8/pyflakes
+# Bloqueios de atualização por conta do bug: https://bugzilla.redhat.com/show_bug.cgi?id=1582075
+pyflakes<2.0.0                           # Validação de código python
+pycodestyle<2.4.0                        # Validações de pep8 para o projeto
+
+pylint==2.1.1                            # Validação de código python
+pylint-django==2.0.2                     # Validação de código django
