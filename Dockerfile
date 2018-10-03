@@ -1,4 +1,4 @@
-FROM python:3.7-alpine3.7
+FROM python:3.6-alpine3.6
 
 ARG VERSION=master
 
