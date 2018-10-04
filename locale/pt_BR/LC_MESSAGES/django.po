@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-10-03 13:48-0300\n"
+"POT-Creation-Date: 2018-10-04 13:19-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,23 +18,23 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Generator: Poedit 2.0.7\n"
 
-#: ideax/feeds.py:6 ideax/templates/ideax/idea_detail.html:88
+#: ideax/feeds.py:7 ideax/templates/ideax/idea_detail.html:88
 msgid "Comments"
 msgstr "Comentários"
 
-#: ideax/feeds.py:8 ideax/feeds.py:28
+#: ideax/feeds.py:9 ideax/feeds.py:29
 msgid "Sharing ideas"
 msgstr "Compartilhando ideias!"
 
-#: ideax/feeds.py:14 ideax/feeds.py:34 ideax/templates/ideax/ftec.html:9
+#: ideax/feeds.py:15 ideax/feeds.py:35 ideax/templates/ideax/ftec.html:9
 msgid "Idea"
 msgstr "Ideia"
 
-#: ideax/feeds.py:18
+#: ideax/feeds.py:19
 msgid "Comment by: "
 msgstr "Comentado por: "
 
-#: ideax/feeds.py:26
+#: ideax/feeds.py:27
 msgid "New ideas"
 msgstr "Novas Ideias"
 
@@ -67,7 +67,7 @@ msgid "Target"
 msgstr "Público-alvo"
 
 #: ideax/forms.py:31 ideax/forms.py:68 ideax/forms.py:76
-#: ideax/templates/ideax/includes/partial_category_image_list.html:7
+#: ideax/templates/ideax/includes/partial_category_image_list.html:6
 msgid "Category"
 msgstr "Categoria"
 
@@ -87,13 +87,13 @@ msgstr "Peso"
 #: ideax/templates/ideax/challenge_detail.html:44
 #: ideax/templates/ideax/criterion_list.html:13
 #: ideax/templates/ideax/idea_detail.html:85
-#: ideax/templates/ideax/includes/partial_category_image_list.html:8
+#: ideax/templates/ideax/includes/partial_category_image_list.html:7
 #: ideax/templates/ideax/includes/partial_category_list.html:7
 msgid "Description"
 msgstr "Descrição"
 
 #: ideax/forms.py:68 ideax/forms.py:75
-#: ideax/templates/ideax/includes/partial_category_image_list.html:9
+#: ideax/templates/ideax/includes/partial_category_image_list.html:8
 msgid "Image"
 msgstr "Imagem"
 
@@ -102,7 +102,7 @@ msgid "Requester"
 msgstr "Solicitante"
 
 #: ideax/forms.py:76
-#: ideax/templates/ideax/includes/partial_use_term_list.html:23
+#: ideax/templates/ideax/includes/partial_use_term_list.html:22
 #: ideax/templates/ideax/use_term_detail.html:19
 msgid "Active"
 msgstr "Ativo"
@@ -116,17 +116,17 @@ msgid "Featured"
 msgstr "Destaque"
 
 #: ideax/forms.py:86
-#: ideax/templates/ideax/includes/partial_use_term_list.html:7
+#: ideax/templates/ideax/includes/partial_use_term_list.html:6
 msgid "Term"
 msgstr "Termo"
 
 #: ideax/forms.py:86
-#: ideax/templates/ideax/includes/partial_use_term_list.html:8
+#: ideax/templates/ideax/includes/partial_use_term_list.html:7
 msgid "Initial Date"
 msgstr "Data Inicial"
 
 #: ideax/forms.py:86
-#: ideax/templates/ideax/includes/partial_use_term_list.html:9
+#: ideax/templates/ideax/includes/partial_use_term_list.html:8
 msgid "Final Date"
 msgstr "Data Final"
 
@@ -334,19 +334,19 @@ msgstr "Lista de Critérios"
 
 #: ideax/templates/ideax/criterion_list.html:15
 #: ideax/templates/ideax/includes/idea_detail.html:73
-#: ideax/templates/ideax/includes/partial_category_image_list.html:10
+#: ideax/templates/ideax/includes/partial_category_image_list.html:9
 #: ideax/templates/ideax/includes/partial_category_list.html:8
-#: ideax/templates/ideax/includes/partial_use_term_list.html:11
+#: ideax/templates/ideax/includes/partial_use_term_list.html:10
 #: ideax/templates/ideax/phase_list.html:8
 #: ideax/templates/ideax/use_term_detail.html:32
 msgid "Edit"
 msgstr "Editar"
 
 #: ideax/templates/ideax/criterion_list.html:16
-#: ideax/templates/ideax/includes/partial_category_image_list.html:11
+#: ideax/templates/ideax/includes/partial_category_image_list.html:10
 #: ideax/templates/ideax/includes/partial_category_list.html:9
 #: ideax/templates/ideax/includes/partial_category_remove.html:27
-#: ideax/templates/ideax/includes/partial_use_term_list.html:12
+#: ideax/templates/ideax/includes/partial_use_term_list.html:11
 #: ideax/templates/ideax/includes/partial_use_term_remove.html:27
 msgid "Discard"
 msgstr "Descartar"
@@ -501,19 +501,19 @@ msgstr "Confirmar"
 msgid "Update Idea"
 msgstr "Atualizar Ideia"
 
-#: ideax/templates/ideax/includes/partial_use_term_list.html:6
+#: ideax/templates/ideax/includes/partial_use_term_list.html:5
 msgid "Creator"
 msgstr "Autor"
 
-#: ideax/templates/ideax/includes/partial_use_term_list.html:10
+#: ideax/templates/ideax/includes/partial_use_term_list.html:9
 msgid "Status"
 msgstr "Status"
 
-#: ideax/templates/ideax/includes/partial_use_term_list.html:13
+#: ideax/templates/ideax/includes/partial_use_term_list.html:12
 msgid "Detail"
 msgstr "Detalhes"
 
-#: ideax/templates/ideax/includes/partial_use_term_list.html:23
+#: ideax/templates/ideax/includes/partial_use_term_list.html:22
 #: ideax/templates/ideax/use_term_detail.html:19
 msgid "Inactive"
 msgstr "Inativo"
@@ -571,8 +571,8 @@ msgid ""
 "Ideas will be organized, refined and evaluated, allowing a flow for the "
 "innovation management."
 msgstr ""
-"As ideias serão organizadas, refinadas e avaliadas, permitindo um fluxo "
-"para a gestão da inovação."
+"As ideias serão organizadas, refinadas e avaliadas, permitindo um fluxo para "
+"a gestão da inovação."
 
 #: ideax/templates/ideax/index.html:39
 msgid "Integration"
@@ -582,7 +582,8 @@ msgstr "Integração"
 msgid ""
 "Through APIs is possible to integrate the Idea<sup>X</sup> with other tools."
 msgstr ""
-"Por meio de APIs é possível integrar o Ideia<sup>X</sup> com outras ferramentas."
+"Por meio de APIs é possível integrar o Ideia<sup>X</sup> com outras "
+"ferramentas."
 
 #: ideax/templates/ideax/phase_edit.html:6
 msgid "New phase"
