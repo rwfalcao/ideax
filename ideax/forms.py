@@ -15,20 +15,21 @@ class IdeaForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         queryset = kwargs.pop('authors', None)
         super(IdeaForm, self).__init__(*args,**kwargs)
-        self.fields['authors']=forms.ModelMultipleChoiceField(queryset=queryset, widget=FilteredSelectMultiple("", is_stacked=False), required=False)
+        self.fields['authors']=forms.ModelMultipleChoiceField(queryset=queryset, widget=FilteredSelectMultiple("", is_stacked=False), required=False, label=_('Coauthors'))
 
     challenge = forms.ModelChoiceField(
                             queryset=Challenge.objects.filter(discarted=False),
                             empty_label=_('Not related to any challenge'),
-                            required=False)
-    oportunity = MartorFormField()
-    solution = MartorFormField()
-    target = MartorFormField()
-    summary = MartorFormField()
+                            required=False,
+                            label=_('Challenge'))
+    oportunity = MartorFormField(label=_('Oportunity'))
+    solution = MartorFormField(label=_('Solution'))
+    target = MartorFormField(label=_('Target'))
+    summary = MartorFormField(label=_('Summary'))
     class Meta:
         model = Idea
         fields = ('title', 'summary', 'oportunity', 'solution', 'target', 'category', 'challenge', 'authors')
-        labels = {'title': _('Title'), 'summary': _('Summary'), 'oportunity': _('Oportunity'), 'solution': _('Solution'), 'target': _('Target'),'category': _('Category'), 'challenge': _('Challenge'), 'authors':_('Coauthors')}
+        labels = {'title': _('Title'), 'category': _('Category')}
 
     class Media:
         css = {

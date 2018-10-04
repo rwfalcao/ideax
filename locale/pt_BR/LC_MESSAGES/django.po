@@ -196,7 +196,7 @@ msgstr "Usuários"
 
 #: ideax/templates/ideax/base.html:72
 msgid "Active Terms of Use and Privacy"
-msgstr "Termos de uso ativo"
+msgstr "Termo de uso ativo"
 
 #: ideax/templates/ideax/base.html:74
 msgid "Challenges"
