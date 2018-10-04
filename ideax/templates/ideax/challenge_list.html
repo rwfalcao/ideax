@@ -23,17 +23,16 @@
               <img class="d-block w-100" src="{{challenge.image.url}}" alt="First slide">
               <a href="{% url 'challenge_detail' challenge_pk=challenge.pk %}">
                   <div class="carousel-caption d-none d-md-block carousel-challenge" >
-                      <div class="challenge-buttons">
-
-                          <a onclick="location.href='{% url 'challenge_remove' pk=challenge.pk %}';" class="delete btn btn-primary"><i class="far fa-trash-alt"></i></a>
-                          <a onclick="location.href='{% url 'challenge_edit' challenge_pk=challenge.pk %}';" class="edit btn btn-primary"><i class="far fa-edit"></i></a>
-                        
-                      </div>
                     <h5>{{challenge.title}}</h5>
                     <p>{{challenge.summary}}</p>
                   </div>
               </a>
+              <div class="challenge-buttons">
+                <a onclick="location.href='{% url 'challenge_remove' pk=challenge.pk %}';" class="delete btn btn-primary"><i class="far fa-trash-alt"></i></a>
+                <a onclick="location.href='{% url 'challenge_edit' challenge_pk=challenge.pk %}';" class="edit btn btn-primary"><i class="far fa-edit"></i></a>
+              </div>
             </div>
+
             {% empty %}
               <p style="text-align:center">No Challenges found</p>
             {%endfor%}

@@ -1044,12 +1044,13 @@ only screen and (max-width: 760px),
 .challenge-buttons{
   position: absolute;
   right: -50px;
-  bottom: 60px;
+  bottom: 90px;
   display: flex;
   flex-direction: column;
   align-items: center;
   margin-bottom: 5px;
   transition: all 0.3s;
+  color: #ffffff
 }
 
 .challenge-item:hover .challenge-buttons{

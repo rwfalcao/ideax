@@ -208,7 +208,7 @@ def save_idea(request, form, template_name, new=False):
 @login_required
 @permission_required('ideax.add_idea',raise_exception=True)
 def idea_new(request):
-    queryset = UserProfile.objects.filter(user__is_staff=False).exclude(user__email__isnull=True).exclude(user__email=request.user.email)
+    queryset = get_authors(request.user.email)
     if request.method == "POST":
         form = IdeaForm(request.POST,authors=queryset)
     else:
@@ -225,7 +225,7 @@ def idea_edit(request, pk):
 
     if ((request.user.userprofile == idea.author and idea.get_current_phase() == Phase.GROW)
                     or request.user.has_perm(settings.PERMISSIONS["MANAGE_IDEA"])):
-        queryset = UserProfile.objects.filter(user__is_staff=False).exclude(user__email__isnull=True).exclude(user__email=request.user.email)
+        queryset = get_authors(request.user.email)
         if request.method == "POST":
             form = IdeaForm(request.POST, instance=idea, authors=queryset)
         else:
@@ -676,7 +676,7 @@ def idea_detail_pdf(request, idea_id):
     #return response
 
 def get_featured_challenges(request):
-    return Challenge.objects.filter(active=True)
+    return Challenge.objects.filter(active=True).exclude(discarted=True)
 
 @login_required
 def challenge_detail(request, challenge_pk):
@@ -781,8 +781,9 @@ def report_ideas(request):
 @login_required
 @permission_required('ideax.add_challenge',raise_exception=True)
 def idea_new_from_challenge(request, challenge_pk):
+    queryset = get_authors(request.user.email)
     challenge = get_object_or_404(Challenge, pk=challenge_pk)
-    form = IdeaForm(initial={'challenge': challenge, 'category': challenge.category},)
+    form = IdeaForm(initial={'challenge': challenge, 'category': challenge.category},authors=queryset)
     audit(request.user.username, get_client_ip(request), 'CREATE_IDEA_FORM_FROM_MISSION', Idea.__name__, '')
     return save_idea(request, form, 'ideax/idea_new.html', True)
 
@@ -885,3 +886,6 @@ def idea_search(request):
 
 def user_profile_page(request):
     return render(request, 'ideax/user_profile.html')
+
+def get_authors(removed_author):
+    return UserProfile.objects.filter(user__is_staff=False).exclude(user__email__isnull=True).exclude(user__email=removed_author)

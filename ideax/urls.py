@@ -74,7 +74,7 @@ urlpatterns = [
     path('categoryimage/<int:pk>/remove/',
          views.category_image_remove, name='category_image_remove'),
     path('idea/search/', views.idea_search, name='idea_search'),
-    re_path('authors/', views.user_profile_page, name='user_profile_page'),    
+    re_path('author/', views.user_profile_page, name='user_profile_page'),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
