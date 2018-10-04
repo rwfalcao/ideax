@@ -1,7 +1,7 @@
 from django.http.response import HttpResponseRedirect
 
 
-class TestViews(object):
+class TestPageViews(object):
     def test_frontpage(self, client):
         response = client.get('/')
         body = response.content.decode('utf-8', 'strict')
