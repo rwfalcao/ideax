@@ -134,7 +134,7 @@ def idea_filter(request, phase_pk=None, search_part=None):
     if phase_pk:
         ideas = Idea.objects.filter(discarded=False, phase_history__current_phase=phase_pk, phase_history__current=1).annotate(count_like=Count(Case(When(popular_vote__like = True, then=1)))).order_by('-count_like')
     else:
-        ideas  = Idea.objects.filter(Q(author__user__first_name__icontains=search_part)|Q(title__icontains=search_part)|Q(summary__icontains=search_part) , discarded=False).annotate(count_like=Count(Case(When(popular_vote__like = True, then=1)))).order_by('-count_like')
+        ideas  = Idea.objects.filter(Q(authors__user__first_name__icontains=search_part)|Q(title__icontains=search_part)|Q(summary__icontains=search_part) , discarded=False).annotate(count_like=Count(Case(When(popular_vote__like = True, then=1)))).order_by('-count_like')
     
     context={'ideas': ideas,
              'ideas_liked': get_ideas_voted(request, True),
@@ -882,3 +882,6 @@ def markdown_uploader(request):
 
 def idea_search(request):
     return idea_filter(request, search_part=request.POST.get('seach_filter', None))
+
+def user_profile_page(request):
+    return render(request, 'ideax/user_profile.html')

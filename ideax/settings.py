@@ -52,12 +52,10 @@ INSTALLED_APPS = [
 ]
 
 
-
-
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
-    #'django.middleware.locale.LocaleMiddleware',
+    # 'django.middleware.locale.LocaleMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -132,7 +130,6 @@ LANGUAGES = (
 LOCALE_PATHS = (os.path.join(BASE_DIR, 'locale'),)
 
 
-
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.0/howto/static-files/
 
@@ -143,15 +140,17 @@ LOGIN_REDIRECT_URL = '/idea/list'
 LOGOUT_REDIRECT_URL = '/'
 
 AUTH_LDAP_SERVER_URI = config('AUTH_LDAP_SERVER_URI', default='')
-if AUTH_LDAP_SERVER_URI!='':
+if AUTH_LDAP_SERVER_URI != '':
     import ldap
     from django_auth_ldap.config import LDAPSearch, GroupOfNamesType
 
     AUTH_LDAP_BIND_DN = config('AUTH_LDAP_BIND_DN', default='')
     AUTH_LDAP_BIND_PASSWORD = config('AUTH_LDAP_BIND_PASSWORD', default='')
-    AUTH_LDAP_GLOBAL_OPTIONS = {ldap.OPT_X_TLS_REQUIRE_CERT : ldap.OPT_X_TLS_NEVER}
+    AUTH_LDAP_GLOBAL_OPTIONS = {
+        ldap.OPT_X_TLS_REQUIRE_CERT: ldap.OPT_X_TLS_NEVER}
     AUTH_LDAP_START_TLS = config('AUTH_LDAP_START_TLS', default=0, cast=bool)
-    AUTH_LDAP_USER_SEARCH = LDAPSearch(config('AUTH_LDAP_USER_SEARCH', default='ou=users,dc=example,dc=com'), ldap.SCOPE_SUBTREE, "(uid=%(user)s)")
+    AUTH_LDAP_USER_SEARCH = LDAPSearch(config(
+        'AUTH_LDAP_USER_SEARCH', default='ou=users,dc=example,dc=com'), ldap.SCOPE_SUBTREE, "(uid=%(user)s)")
     AUTH_LDAP_USER_ATTR_MAP = {
         "first_name": "givenName",
         "last_name": "sn",
@@ -162,7 +161,7 @@ if AUTH_LDAP_SERVER_URI!='':
         'django_auth_ldap.backend.LDAPBackend',
     ]
     AUTH_LDAP_PROFILE_ATTR_MAP = {
-        "memberOf" : "memberOf",
+        "memberOf": "memberOf",
     }
 else:
     AUTHENTICATION_BACKENDS = [
@@ -170,17 +169,16 @@ else:
     ]
 
 
-
 import logging
 logger = logging.getLogger('django_auth_ldap')
 logger.addHandler(logging.StreamHandler())
 logger.setLevel(logging.DEBUG)
 
-PERMISSIONS={
-    "MANAGE_IDEA" : "ideax.manage_idea",
+PERMISSIONS = {
+    "MANAGE_IDEA": "ideax.manage_idea",
 }
 
-CELERY_ACCEPT_CONTENT = ['pickle', 'json','application/text']
+CELERY_ACCEPT_CONTENT = ['pickle', 'json', 'application/text']
 CELERY_BROKER_URL = config('CELERY_BROKER_URL', default='')
 EMAIL_HOST = config('EMAIL_HOST', default='')
 EMAIL_PORT = config('EMAIL_PORT', default='')
@@ -193,7 +191,7 @@ if config('EMAIL_BACKEND', default='') != '':
     EMAIL_BACKEND = config('EMAIL_BACKEND', default='')
 
 if config('DEFAULT_FROM_EMAIL', default='') != '':
-    DEFAULT_FROM_EMAIL=config('DEFAULT_FROM_EMAIL')
+    DEFAULT_FROM_EMAIL = config('DEFAULT_FROM_EMAIL')
 
 IPWARE_META_PRECEDENCE_ORDER = (
     'HTTP_X_FORWARDED_FOR',
@@ -216,7 +214,7 @@ LOGGING = {
             'level': 'INFO',
             'class': 'logging.handlers.RotatingFileHandler',
             'filename': os.path.join(BASE_DIR, 'audit.log'),
-            'maxBytes': 1024*1024*5, # 5MB
+            'maxBytes': 1024*1024*5,  # 5MB
             'backupCount': 0,
             'formatter': 'audit'
         }
@@ -235,7 +233,7 @@ LOGGING = {
     }
 }
 
-GENERAL_USER_GROUP=config('GENERAL_USER_GROUP')
+GENERAL_USER_GROUP = config('GENERAL_USER_GROUP')
 
 TINYMCE_SPELLCHECKER = False
 TINYMCE_FILEBROWSER = False
@@ -254,17 +252,17 @@ TINYMCE_DEFAULT_CONFIG = {
                '| bullist numlist | outdent indent | table ',
     'contextmenu_never_use_native': True,
     'textpattern_patterns': [
-     {'start': '*', 'end': '*', 'format': 'italic'},
-     {'start': '**', 'end': '**', 'format': 'bold'},
-     {'start': '#', 'format': 'h1'},
-     {'start': '##', 'format': 'h2'},
-     {'start': '###', 'format': 'h3'},
-     {'start': '####', 'format': 'h4'},
-     {'start': '#####', 'format': 'h5'},
-     {'start': '######', 'format': 'h6'},
-     {'start': '1. ', 'cmd': 'InsertOrderedList'},
-     {'start': '* ', 'cmd': 'InsertUnorderedList'},
-     {'start': '- ', 'cmd': 'InsertUnorderedList'}
+        {'start': '*', 'end': '*', 'format': 'italic'},
+        {'start': '**', 'end': '**', 'format': 'bold'},
+        {'start': '#', 'format': 'h1'},
+        {'start': '##', 'format': 'h2'},
+        {'start': '###', 'format': 'h3'},
+        {'start': '####', 'format': 'h4'},
+        {'start': '#####', 'format': 'h5'},
+        {'start': '######', 'format': 'h6'},
+        {'start': '1. ', 'cmd': 'InsertOrderedList'},
+        {'start': '* ', 'cmd': 'InsertUnorderedList'},
+        {'start': '- ', 'cmd': 'InsertUnorderedList'}
     ],
     'menubar': False,
     'inline': False,
@@ -279,23 +277,24 @@ TINYMCE_DEFAULT_CONFIG = {
 MARTOR_ENABLE_CONFIGS = {
     'imgur': 'true',     # to enable/disable imgur/custom uploader.
     'mention': 'true',  # to enable/disable mention
-    'jquery': 'true',    # to include/revoke jquery (require for admin default django)
+    # to include/revoke jquery (require for admin default django)
+    'jquery': 'true',
     'living': 'false',   # to enable/disable live updates in preview
- }
+}
 
 # To setup the martor editor with label or not (default is False)
 MARTOR_ENABLE_LABEL = True
 
 # Imgur API Keys
 MARTOR_IMGUR_CLIENT_ID = 'your-client-id'
-MARTOR_IMGUR_API_KEY   = 'your-api-key'
+MARTOR_IMGUR_API_KEY = 'your-api-key'
 
 # Safe Mode
-MARTOR_MARKDOWN_SAFE_MODE = True # default
+MARTOR_MARKDOWN_SAFE_MODE = True  # default
 
 # Markdownify
-MARTOR_MARKDOWNIFY_FUNCTION = 'martor.utils.markdownify' # default
-MARTOR_MARKDOWNIFY_URL = '/martor/markdownify/' # default
+MARTOR_MARKDOWNIFY_FUNCTION = 'martor.utils.markdownify'  # default
+MARTOR_MARKDOWNIFY_URL = '/martor/markdownify/'  # default
 
 # Markdown extensions (default)
 MARTOR_MARKDOWN_EXTENSIONS = [
@@ -315,13 +314,13 @@ MARTOR_MARKDOWN_EXTENSIONS = [
 MARTOR_MARKDOWN_EXTENSION_CONFIGS = {}
 
 # Markdown urls
-MARTOR_UPLOAD_URL = '/media/uploader/' # default
-MARTOR_SEARCH_USERS_URL = '/martor/search-user/' # default
+MARTOR_UPLOAD_URL = '/media/uploader/'  # default
+MARTOR_SEARCH_USERS_URL = '/martor/search-user/'  # default
 
 # Markdown Extensions
-MARTOR_MARKDOWN_BASE_MENTION_URL = '/author/' # default (change this)
+MARTOR_MARKDOWN_BASE_MENTION_URL = '/author/'  # default (change this)
 import time
 MARTOR_UPLOAD_PATH = 'images/uploads/{}'.format(time.strftime("%Y/%m/%d/"))
 
 MAX_IMAGE_UPLOAD_SIZE = 5242880  # 5MB
-SESSION_COOKIE_AGE = 180
+#SESSION_COOKIE_AGE = 180
