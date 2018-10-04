@@ -882,3 +882,6 @@ def markdown_uploader(request):
 
 def idea_search(request):
     return idea_filter(request, search_part=request.POST.get('seach_filter', None))
+
+def user_profile_page(request):
+    return render(request, 'ideax/user_profile.html')
