@@ -149,17 +149,17 @@ def idea_filter(request, phase_pk=None, search_part=None):
             phase_history__current=1).annotate(
                 count_like=Count(Case(When(popular_vote__like=True, then=1)))).order_by('-count_like')
     else:
-        ideas  = Idea.objects.filter(
+        ideas = Idea.objects.filter(
             Q(authors__user__first_name__icontains=search_part) |
             Q(title__icontains=search_part) |
             Q(summary__icontains=search_part), discarded=False).annotate(
-                count_like=Count(Case(When(popular_vote__like = True, then=1)))).order_by('-count_like')
-    
-    context={
+                count_like=Count(Case(When(popular_vote__like=True, then=1)))).order_by('-count_like')
+
+    context = {
         'ideas': ideas,
         'ideas_liked': get_ideas_voted(request, True),
         'ideas_disliked': get_ideas_voted(request, False),
-        'ideas_created_by_me' : get_ideas_created(request),
+        'ideas_created_by_me': get_ideas_created(request),
     }
 
     data = dict()
@@ -908,7 +908,7 @@ def report_ideas(request):
 def idea_new_from_challenge(request, challenge_pk):
     queryset = get_authors(request.user.email)
     challenge = get_object_or_404(Challenge, pk=challenge_pk)
-    form = IdeaForm(initial={'challenge': challenge, 'category': challenge.category},authors=queryset)
+    form = IdeaForm(initial={'challenge': challenge, 'category': challenge.category}, authors=queryset)
     audit(request.user.username, get_client_ip(request), 'CREATE_IDEA_FORM_FROM_MISSION', Idea.__name__, '')
     return save_idea(request, form, 'ideax/idea_new.html', True)
 
@@ -1025,8 +1025,10 @@ def markdown_uploader(request):
 def idea_search(request):
     return idea_filter(request, search_part=request.POST.get('seach_filter', None))
 
+
 def user_profile_page(request):
     return render(request, 'ideax/user_profile.html')
+
 
 def get_authors(removed_author):
     return UserProfile.objects.filter(user__is_staff=False) \
