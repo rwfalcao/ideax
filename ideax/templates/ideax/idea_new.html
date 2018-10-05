@@ -1,9 +1,13 @@
 {% extends 'ideax/base.html' %}
 {% load widget_tweaks i18n %}
 {% load staticfiles %}
+
+{%block contextbutton%}
+{% endblock %}
+
 {% block content %}
   <div class="idea-list-bg">
-      <h1 class="display-3">{% trans 'Create Idea' %}</h1>
+      <h1 class="display-3 ">{% trans 'Create Idea' %}</h1>
   </div>
   <div class="container">
       <form method="post" class="form post-form js-idea-create-form" action="{% url 'idea_new' %}" data-modal="#modal-idea-crud" data-list-div="#idea-list">

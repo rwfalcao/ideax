@@ -307,6 +307,11 @@ $(function () {
     searchIdea(event, $(this));
   });
 
+  $(document).on("reset", "#searchIdea", function (event) {
+    document.getElementById("search_part").value = "";
+    searchIdea(event, $(this));
+  });
+
   var newCommentForm = `
     <form id="commentFormReply" class="form-horizontal" action="/post/comment/">
       <div class="form-group">

@@ -15,7 +15,7 @@ MARTOR_ENABLE_CONFIGS = {
     'mention': 'true',  # to enable/disable mention
     'jquery': 'true',    # to include/revoke jquery (require for admin default django)
     'living': 'false',   # to enable/disable live updates in preview
- }
+}
 
 # To setup the martor editor with label or not (default is False)
 MARTOR_ENABLE_LABEL = True
@@ -53,5 +53,5 @@ MARTOR_UPLOAD_URL = '/media/uploader/'  # default
 MARTOR_SEARCH_USERS_URL = '/martor/search-user/'  # default
 
 # Markdown Extensions
-MARTOR_MARKDOWN_BASE_MENTION_URL = 'http://127.0.0.1:8000/author/'  # default (change this)
+MARTOR_MARKDOWN_BASE_MENTION_URL = '/author/'  # default (change this)
 MARTOR_UPLOAD_PATH = 'images/uploads/{}'.format(time.strftime("%Y/%m/%d/"))
