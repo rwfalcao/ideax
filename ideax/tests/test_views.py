@@ -6,13 +6,14 @@ from ideax.views import accept_use_term, idea_list, index
 
 
 class TestIndexView:
-    def test_index_anonymous(self, rf):
+    def test_index_anonymous(self, rf, debug):
         request = rf.get('/')
         request.user = AnonymousUser()
         response = index(request)
         assert response.status_code == 200
         # TODO: It seems malformed HTML
-        assert '<a href="/accounts/login/">Entrar</i></a>' in response.content.decode('utf-8', 'strict')
+        debug(response.content.decode('utf8'))
+        assert 'class="login-button"' in response.content.decode('utf-8', 'strict')
 
     def test_index(self, rf, admin_user):
         request = rf.get('/')

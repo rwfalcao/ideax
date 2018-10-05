@@ -5,7 +5,8 @@ class TestPageViews(object):
     def test_frontpage(self, client):
         response = client.get('/')
         body = response.content.decode('utf-8', 'strict')
-        assert 'você tem um canal aberto para a inovação' in body
+        assert 'class="login-button"' in body
+        # assert 'você tem um canal aberto para a inovação' in body
 
     def test_redirect_login(self, client):
         response = client.get('/idea/list')
