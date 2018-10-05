@@ -130,7 +130,7 @@ def get_ideas_init(request):
     ideas_dic['ideas_liked'] = get_ideas_voted(request, True)
     ideas_dic['ideas_disliked'] = get_ideas_voted(request, False)
     ideas_dic['ideas_created_by_me'] = get_ideas_created(request)
-    ideas_dic['challenges'] = get_featured_challenges(request)
+    ideas_dic['challenges'] = get_featured_challenges()
     ideas_dic['phase_req'] = Phase.GROW.id
     return ideas_dic
 
@@ -149,17 +149,17 @@ def idea_filter(request, phase_pk=None, search_part=None):
             phase_history__current=1).annotate(
                 count_like=Count(Case(When(popular_vote__like=True, then=1)))).order_by('-count_like')
     else:
-        ideas = Idea.objects.filter(
-            Q(author__user__first_name__icontains=search_part) |
+        ideas  = Idea.objects.filter(
+            Q(authors__user__first_name__icontains=search_part) |
             Q(title__icontains=search_part) |
             Q(summary__icontains=search_part), discarded=False).annotate(
-                count_like=Count(Case(When(popular_vote__like=True, then=1)))).order_by('-count_like')
-
-    context = {
+                count_like=Count(Case(When(popular_vote__like = True, then=1)))).order_by('-count_like')
+    
+    context={
         'ideas': ideas,
         'ideas_liked': get_ideas_voted(request, True),
         'ideas_disliked': get_ideas_voted(request, False),
-        'ideas_created_by_me': get_ideas_created(request),
+        'ideas_created_by_me' : get_ideas_created(request),
     }
 
     data = dict()
@@ -172,7 +172,7 @@ def idea_filter(request, phase_pk=None, search_part=None):
             data['empty'] = 1
         return JsonResponse(data)
     else:
-        context['challenges'] = get_featured_challenges(request)
+        context['challenges'] = get_featured_challenges()
         context['phases'] = get_phases_count()
         context['phase_req'] = phase_pk
         return render(request, 'ideax/idea_list.html', context)
@@ -229,10 +229,7 @@ def save_idea(request, form, template_name, new=False):
 @login_required
 @permission_required('ideax.add_idea', raise_exception=True)
 def idea_new(request):
-    queryset = UserProfile.objects \
-        .filter(user__is_staff=False) \
-        .exclude(user__email__isnull=True) \
-        .exclude(user__email=request.user.email)
+    queryset = get_authors(request.user.email)
     if request.method == "POST":
         form = IdeaForm(request.POST, authors=queryset)
     else:
@@ -250,10 +247,7 @@ def idea_edit(request, pk):
 
     if ((request.user.userprofile == idea.author and idea.get_current_phase() == Phase.GROW) or
             request.user.has_perm(settings.PERMISSIONS["MANAGE_IDEA"])):
-        queryset = UserProfile.objects \
-            .filter(user__is_staff=False) \
-            .exclude(user__email__isnull=True) \
-            .exclude(user__email=request.user.email)
+        queryset = get_authors(request.user.email)
         if request.method == "POST":
             form = IdeaForm(request.POST, instance=idea, authors=queryset)
         else:
@@ -773,8 +767,8 @@ def idea_detail_pdf(request, idea_id):
     # return response
 
 
-def get_featured_challenges(request):
-    return Challenge.objects.filter(active=True)
+def get_featured_challenges():
+    return Challenge.objects.filter(active=True).exclude(discarted=True)
 
 
 @login_required
@@ -846,7 +840,11 @@ def challenge_remove(request, pk):
 
 
 def challenge_list(request):
-    challenges = Challenge.objects.filter(discarted=False)
+    if (request.user.has_perm(settings.PERMISSIONS["MANAGE_IDEA"])):
+        challenges = Challenge.objects.filter(discarted=False)
+    else:
+        challenges = get_featured_challenges()
+
     return render(request, 'ideax/challenge_list.html', {'challenges': challenges})
 
 
@@ -908,8 +906,9 @@ def report_ideas(request):
 @login_required
 @permission_required('ideax.add_challenge', raise_exception=True)
 def idea_new_from_challenge(request, challenge_pk):
+    queryset = get_authors(request.user.email)
     challenge = get_object_or_404(Challenge, pk=challenge_pk)
-    form = IdeaForm(initial={'challenge': challenge, 'category': challenge.category},)
+    form = IdeaForm(initial={'challenge': challenge, 'category': challenge.category},authors=queryset)
     audit(request.user.username, get_client_ip(request), 'CREATE_IDEA_FORM_FROM_MISSION', Idea.__name__, '')
     return save_idea(request, form, 'ideax/idea_new.html', True)
 
@@ -1025,3 +1024,12 @@ def markdown_uploader(request):
 
 def idea_search(request):
     return idea_filter(request, search_part=request.POST.get('seach_filter', None))
+
+def user_profile_page(request):
+    return render(request, 'ideax/user_profile.html')
+
+def get_authors(removed_author):
+    return UserProfile.objects.filter(user__is_staff=False) \
+        .exclude(user__email__isnull=True) \
+        .exclude(user__email__exact='') \
+        .exclude(user__email=removed_author)

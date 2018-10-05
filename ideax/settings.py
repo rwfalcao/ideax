@@ -150,7 +150,7 @@ if AUTH_LDAP_SERVER_URI != '':
     AUTH_LDAP_GLOBAL_OPTIONS = {ldap.OPT_X_TLS_REQUIRE_CERT: ldap.OPT_X_TLS_NEVER}
     AUTH_LDAP_START_TLS = config('AUTH_LDAP_START_TLS', default=0, cast=bool)
     AUTH_LDAP_USER_SEARCH = LDAPSearch(
-        config('AUTH_LDAP_USER_SEARCH', default='ou=users,dc=example,dc=com'),
+        config('AUTH_LDAP_USER_SEARCH', default='ou=users,dc=example,dc=com'), 
         ldap.SCOPE_SUBTREE, "(uid=%(user)s)")
     AUTH_LDAP_USER_ATTR_MAP = {
         "first_name": "givenName",
@@ -251,17 +251,17 @@ TINYMCE_DEFAULT_CONFIG = {
                '| bullist numlist | outdent indent | table ',
     'contextmenu_never_use_native': True,
     'textpattern_patterns': [
-     {'start': '*', 'end': '*', 'format': 'italic'},
-     {'start': '**', 'end': '**', 'format': 'bold'},
-     {'start': '#', 'format': 'h1'},
-     {'start': '##', 'format': 'h2'},
-     {'start': '###', 'format': 'h3'},
-     {'start': '####', 'format': 'h4'},
-     {'start': '#####', 'format': 'h5'},
-     {'start': '######', 'format': 'h6'},
-     {'start': '1. ', 'cmd': 'InsertOrderedList'},
-     {'start': '* ', 'cmd': 'InsertUnorderedList'},
-     {'start': '- ', 'cmd': 'InsertUnorderedList'}
+        {'start': '*', 'end': '*', 'format': 'italic'},
+        {'start': '**', 'end': '**', 'format': 'bold'},
+        {'start': '#', 'format': 'h1'},
+        {'start': '##', 'format': 'h2'},
+        {'start': '###', 'format': 'h3'},
+        {'start': '####', 'format': 'h4'},
+        {'start': '#####', 'format': 'h5'},
+        {'start': '######', 'format': 'h6'},
+        {'start': '1. ', 'cmd': 'InsertOrderedList'},
+        {'start': '* ', 'cmd': 'InsertUnorderedList'},
+        {'start': '- ', 'cmd': 'InsertUnorderedList'}
     ],
     'menubar': False,
     'inline': False,
@@ -276,9 +276,10 @@ TINYMCE_DEFAULT_CONFIG = {
 MARTOR_ENABLE_CONFIGS = {
     'imgur': 'true',     # to enable/disable imgur/custom uploader.
     'mention': 'true',  # to enable/disable mention
-    'jquery': 'true',    # to include/revoke jquery (require for admin default django)
+    # to include/revoke jquery (require for admin default django)
+    'jquery': 'true',
     'living': 'false',   # to enable/disable live updates in preview
- }
+}
 
 # To setup the martor editor with label or not (default is False)
 MARTOR_ENABLE_LABEL = True
@@ -316,8 +317,8 @@ MARTOR_UPLOAD_URL = '/media/uploader/'  # default
 MARTOR_SEARCH_USERS_URL = '/martor/search-user/'  # default
 
 # Markdown Extensions
-MARTOR_MARKDOWN_BASE_MENTION_URL = '/author/' # default (change this)
+MARTOR_MARKDOWN_BASE_MENTION_URL = '/author/'  # default (change this)
 MARTOR_UPLOAD_PATH = 'images/uploads/{}'.format(time.strftime("%Y/%m/%d/"))
 
 MAX_IMAGE_UPLOAD_SIZE = 5242880  # 5MB
-SESSION_COOKIE_AGE = 180
+#SESSION_COOKIE_AGE = 180

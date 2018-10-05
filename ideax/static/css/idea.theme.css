@@ -23,9 +23,8 @@ body {
     /* background-position-y: bottom; */
     /* background-position-y: center;
     background-size: cover; */
-
     height: 206px;
-    margin-top: 0px;
+    margin-top: -3px;
     margin-left: -15px;
     margin-right: -15px;
     margin-bottom: 10px;
@@ -34,6 +33,7 @@ body {
 }
 .idea-list-bg h1 {
     font-family: 'Open Sans', sans;
+    font-size: 60px;
     height: 150px;
     padding-top: 25px;
     color: #fff;
@@ -49,7 +49,7 @@ body {
     background-color: #A5DCF0;
     background-image: url('../images/challenge_bg.jpg');
     height: 206px;
-    margin-top: 0px;
+    margin-top: -3px;
     margin-left: -15px;
     margin-right: -15px;
     margin-bottom: 10px;
@@ -61,8 +61,9 @@ body {
 
 .challenge-list-bg h1 {
     font-family: 'Open Sans', sans;
+    font-size: 50px;
     height: 150px;
-    padding-top: 40px;
+    padding-top: 20px;
     color: #fff;
     text-align: center;
     text-shadow: 0 1px 4px rgba(0,0,0,0.06);
@@ -170,7 +171,6 @@ body {
   padding-left: 5px;
 }
 
-}
 
 .dropdown-toggle::after {
   display:none
@@ -786,6 +786,58 @@ transition-delay: 0.7s;
   }
 }
 
+@media 
+only screen and (max-width: 760px),
+(min-width: 768px) and (max-width: 1024px)  {
+  table, thead, tbody, th, td, tr { 
+    display: block; 
+  }
+
+  thead tr { 
+    position: absolute;
+    top: -9999px;
+    left: -9999px;
+  }
+
+  tr { border: 1px solid #ccc; }
+
+  td {
+    border: none;
+    border-bottom: 1px solid #eee; 
+    position: relative;
+    padding-left: 50% !important; 
+  }
+
+  td:before { 
+    position: absolute;
+    top: 6px;
+    left: 6px;
+    width: 45%; 
+    padding-right: 10px; 
+    white-space: nowrap;
+  }
+
+  .table-term-of-use td:nth-of-type(1):before { content: "Autor"; }
+  .table-term-of-use td:nth-of-type(2):before { content: "Termo"; }
+  .table-term-of-use td:nth-of-type(3):before { content: "Data Inicial"; }
+  .table-term-of-use td:nth-of-type(4):before { content: "Data Final"; }
+  .table-term-of-use td:nth-of-type(5):before { content: "Status"; }
+  .table-term-of-use td:nth-of-type(6):before { content: "Editar"; }
+  .table-term-of-use td:nth-of-type(7):before { content: "Remover"; }
+  .table-term-of-use td:nth-of-type(8):before { content: "Visualizar"; }
+
+  .table-category-image td:nth-of-type(1):before { content: "Categoria"; }
+  .table-category-image td:nth-of-type(2):before { content: "Descrição"; }
+  .table-category-image td:nth-of-type(3):before { content: "Imagem"; }
+  .table-category-image td:nth-of-type(4):before { content: "Editar"; }
+  .table-category-image td:nth-of-type(5):before { content: "Remover"; }
+
+  .table-category td:nth-of-type(1):before { content: "Título"; }
+  .table-category td:nth-of-type(2):before { content: "Descrição"; }
+  .table-category td:nth-of-type(3):before { content: "Editar"; }
+  .table-category td:nth-of-type(4):before { content: "Remover"; }
+}
+
 @media (max-width: 400px) {
   .permission-error img{
     width: 220px;
@@ -850,7 +902,7 @@ transition-delay: 0.7s;
 
   .idea {
     width: 40% !important;
-  }
+  }    
 }
 
 .form-signin {
@@ -991,17 +1043,17 @@ transition-delay: 0.7s;
 .challenge-buttons{
   position: absolute;
   right: -50px;
-  bottom: 60px;
+  bottom: 90px;
   display: flex;
   flex-direction: column;
   align-items: center;
   margin-bottom: 5px;
   transition: all 0.3s;
+  color: #ffffff
 }
 
 .challenge-item:hover .challenge-buttons{
   right: 15px;
-  
 }
 
 .challenge-buttons a{
@@ -1022,4 +1074,31 @@ transition-delay: 0.7s;
 .challenge-buttons .edit{
 
   color: #cecece;
+}
+
+.coming-soon {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.coming-soon img {
+  width: 700px;
+  height: 700px;
+  display: block;  
+}
+
+.error-404 {
+  background: rgba(0, 0, 0, 0) url('../images/404.gif') no-repeat scroll center center;
+  background-size: cover !important;
+  height: 100vh;
+  align-items: center;
+  justify-content: center;
+}
+
+.error-404 p {
+  font-weight: 700;
+  text-transform: Uppercase;
+  font-size: 100px;
+  color: #fc0;
 }
