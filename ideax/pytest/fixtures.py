@@ -39,3 +39,10 @@ def messages():
 @fixture
 def debug():
     return logging.warn
+
+
+@fixture
+def get_ip(mocker):
+    patch = mocker.patch('ideax.views.get_ip')
+    patch.return_value = '1.1.1.1'
+    return patch

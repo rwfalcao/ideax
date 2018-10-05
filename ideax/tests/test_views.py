@@ -1,16 +1,28 @@
-from pytest import fixture
+from model_mommy import mommy
 from django.contrib.auth.models import AnonymousUser
 
-from ideax.views import accept_use_term
+from ideax.views import accept_use_term, index, idea_list
 
 
-class TestViews:
-    @fixture
-    def get_ip(self, mocker):
-        patch = mocker.patch('ideax.views.get_ip')
-        patch.return_value = '1.1.1.1'
-        return patch
+class TestIndexView:
+    def test_index_anonymous(self, rf):
+        request = rf.get('/')
+        request.user = AnonymousUser()
+        response = index(request)
+        assert response.status_code == 200
+        # TODO: It seems malformed HTML
+        assert '<a href="/accounts/login/">Entrar</i></a>' in response.content.decode('utf-8', 'strict')
 
+    def test_index(self, rf, admin_user):
+        request = rf.get('/')
+        request.user = admin_user
+        response = index(request)
+        assert response.status_code == 200
+        # TODO: Enhance test
+        assert '<title>Ideia X </title>' in response.content.decode('utf-8', 'strict')
+
+
+class TestAcceptUseTermView:
     def test_accept_use_term_anonymous(self, rf):
         request = rf.get('/term/accept')
         request.user = AnonymousUser()
@@ -35,3 +47,39 @@ class TestViews:
         response = accept_use_term(request)
         assert (response.status_code, response.url) == (302, '/')
         assert messages.messages == ['Termo de uso já aceito!']
+
+
+class TestIdeaListView:
+    def test_idea_list_anonymous(self, rf):
+        request = rf.get('/idea/list')
+        request.user = AnonymousUser()
+        response = idea_list(request)
+        assert (response.status_code, response.url) == (302, '/accounts/login/?next=/idea/list')
+
+    def test_idea_list_empty(self, rf, admin_user, mocker):
+        get_ideas_init = mocker.patch('ideax.views.get_ideas_init')
+        get_ideas_init.return_value = {
+            'ideas': [],
+            'challenges': [],
+        }
+        get_phases_count = mocker.patch('ideax.views.get_phases_count')
+        get_phases_count.return_value = 5
+        request = rf.get('/idea/list')
+        request.user = admin_user
+        response = idea_list(request)
+        assert response.status_code == 200
+        assert 'Não existem ideias nesta etapa!' in response.content.decode('utf-8', 'strict')
+
+    def test_idea_list(self, rf, admin_user, mocker):
+        get_ideas_init = mocker.patch('ideax.views.get_ideas_init')
+        get_ideas_init.return_value = {
+            'ideas': [mommy.make('Idea')],
+            'challenges': [],
+        }
+        get_phases_count = mocker.patch('ideax.views.get_phases_count')
+        get_phases_count.return_value = 5
+        request = rf.get('/idea/list')
+        request.user = admin_user
+        response = idea_list(request)
+        assert response.status_code == 200
+        assert 'Não existem ideias nesta etapa!' not in response.content.decode('utf-8', 'strict')
