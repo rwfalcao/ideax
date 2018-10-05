@@ -1,4 +1,4 @@
-from .settings import *
+from ._base import *
 
 
 # Usamos o backend em memória para facilitar os testes

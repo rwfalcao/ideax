@@ -1,5 +1,5 @@
 [MASTER]
-ignore=migrations,settings.py,settings_test.py
+ignore=migrations,settings
 
 [FORMAT]
 max-line-length=119
