@@ -1,6 +1,12 @@
 {% extends 'ideax/base.html' %}
-{% load widget_tweaks i18n %}
+{% load widget_tweaks i18n staticfiles %}
 
+
+{%block contextbutton%}
+<div class="fab-button">
+  <a class="btn btn-idea-new btn-primary" href="/challenge/new/" title="{% trans 'New Challenge' %}"><i class="fas fa-plus"></i><i class="fas fa-bullhorn fa-2x"></i></a>
+</div>
+{% endblock %}
 
 {% block content %}
   <div class="challenge-list-bg">

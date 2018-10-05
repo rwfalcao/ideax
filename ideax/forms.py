@@ -69,12 +69,12 @@ class CategoryImageForm(forms.ModelForm):
         labels = {'description':_('Description'),'image':_('Image'),'category':_('Category')}
 
 class ChallengeForm(forms.ModelForm):
-    description = MartorFormField()
+    description = MartorFormField(label=_('Description'))
     class Meta:
         model = Challenge
         fields = ('title', 'image', 'summary', 'requester', 'description', 'active' , 'limit_date', 'featured', 'category',)
         labels = {'title':_('Title'),'image':_('Image'),'summary':_('Summary'),
-                  'requester':_('Requester'),'description':_('Description'),'active':_('Active'),'limit_date':_('Limit Date'),'featured':_('Featured'),'category':_('Category')}
+                  'requester':_('Requester'),'active':_('Active'),'limit_date':_('Limit Date'),'featured':_('Featured'),'category':_('Category')}
         widgets = {
             'limit_date': forms.DateInput(attrs={'placeholder': 'dd/mm/aaaa'}),
         }

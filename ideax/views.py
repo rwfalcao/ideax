@@ -121,7 +121,7 @@ def get_ideas_init(request):
     ideas_dic['ideas_liked'] = get_ideas_voted(request, True)
     ideas_dic['ideas_disliked'] = get_ideas_voted(request, False)
     ideas_dic['ideas_created_by_me'] = get_ideas_created(request)
-    ideas_dic['challenges'] = get_featured_challenges(request)
+    ideas_dic['challenges'] = get_featured_challenges()
     ideas_dic['phase_req'] = Phase.GROW.id
     return ideas_dic
 
@@ -151,7 +151,7 @@ def idea_filter(request, phase_pk=None, search_part=None):
             data['empty'] = 1
         return JsonResponse(data)
     else:
-        context['challenges'] = get_featured_challenges(request)
+        context['challenges'] = get_featured_challenges()
         context['phases'] = get_phases_count()
         context['phase_req'] = phase_pk
         return render(request, 'ideax/idea_list.html', context)
@@ -675,7 +675,7 @@ def idea_detail_pdf(request, idea_id):
     #response['Content-Disposition'] = 'filename="idea_report.txt"'
     #return response
 
-def get_featured_challenges(request):
+def get_featured_challenges():
     return Challenge.objects.filter(active=True).exclude(discarted=True)
 
 @login_required
@@ -739,7 +739,11 @@ def challenge_remove(request, pk):
     return challenge_list(request)
 
 def challenge_list(request):
-    challenges = Challenge.objects.filter(discarted=False)
+    if (request.user.has_perm(settings.PERMISSIONS["MANAGE_IDEA"])):
+        challenges = Challenge.objects.filter(discarted=False)
+    else:
+        challenges = get_featured_challenges()
+
     return render(request, 'ideax/challenge_list.html', {'challenges': challenges})
 
 @login_required
@@ -888,4 +892,4 @@ def user_profile_page(request):
     return render(request, 'ideax/user_profile.html')
 
 def get_authors(removed_author):
-    return UserProfile.objects.filter(user__is_staff=False).exclude(user__email__isnull=True).exclude(user__email=removed_author)
+    return UserProfile.objects.filter(user__is_staff=False).exclude(user__email__isnull=True).exclude(user__email__exact='').exclude(user__email=removed_author)

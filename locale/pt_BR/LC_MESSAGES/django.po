@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-10-04 13:19-0300\n"
+"POT-Creation-Date: 2018-10-05 12:14-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -38,52 +38,52 @@ msgstr "Comentado por: "
 msgid "New ideas"
 msgstr "Novas Ideias"
 
+#: ideax/forms.py:18
+msgid "Coauthors"
+msgstr "Coautores"
+
 #: ideax/forms.py:22
 msgid "Not related to any challenge"
 msgstr "Não relacionada com nenhum desafio"
 
-#: ideax/forms.py:31 ideax/forms.py:45 ideax/forms.py:61 ideax/forms.py:75
-#: ideax/templates/ideax/includes/partial_category_list.html:6
-msgid "Title"
-msgstr "Título"
+#: ideax/forms.py:24
+msgid "Challenge"
+msgstr "Desafio"
 
-#: ideax/forms.py:31 ideax/forms.py:75
-msgid "Summary"
-msgstr "Resumo"
-
-#: ideax/forms.py:31 ideax/forms.py:45 ideax/templates/ideax/ftec.html:51
+#: ideax/forms.py:25 ideax/forms.py:46 ideax/templates/ideax/ftec.html:51
 #: ideax/templates/ideax/idea_detail.html:106
 msgid "Oportunity"
 msgstr "Oportunidade"
 
-#: ideax/forms.py:31 ideax/forms.py:45 ideax/templates/ideax/ftec.html:55
+#: ideax/forms.py:26 ideax/forms.py:46 ideax/templates/ideax/ftec.html:55
 #: ideax/templates/ideax/idea_detail.html:97
 msgid "Solution"
 msgstr "Solução"
 
-#: ideax/forms.py:31 ideax/forms.py:45 ideax/templates/ideax/ftec.html:59
+#: ideax/forms.py:27 ideax/forms.py:46 ideax/templates/ideax/ftec.html:59
 #: ideax/templates/ideax/idea_detail.html:115
 msgid "Target"
 msgstr "Público-alvo"
 
-#: ideax/forms.py:31 ideax/forms.py:68 ideax/forms.py:76
+#: ideax/forms.py:28 ideax/forms.py:76
+msgid "Summary"
+msgstr "Resumo"
+
+#: ideax/forms.py:32 ideax/forms.py:46 ideax/forms.py:62 ideax/forms.py:76
+#: ideax/templates/ideax/includes/partial_category_list.html:6
+msgid "Title"
+msgstr "Título"
+
+#: ideax/forms.py:32 ideax/forms.py:69 ideax/forms.py:77
 #: ideax/templates/ideax/includes/partial_category_image_list.html:6
 msgid "Category"
 msgstr "Categoria"
 
-#: ideax/forms.py:31
-msgid "Challenge"
-msgstr "Desafio"
-
-#: ideax/forms.py:31
-msgid "Coauthors"
-msgstr "Coautores"
-
-#: ideax/forms.py:53 ideax/templates/ideax/criterion_list.html:14
+#: ideax/forms.py:54 ideax/templates/ideax/criterion_list.html:14
 msgid "Weight"
 msgstr "Peso"
 
-#: ideax/forms.py:53 ideax/forms.py:61 ideax/forms.py:68 ideax/forms.py:76
+#: ideax/forms.py:54 ideax/forms.py:62 ideax/forms.py:69 ideax/forms.py:72
 #: ideax/templates/ideax/challenge_detail.html:44
 #: ideax/templates/ideax/criterion_list.html:13
 #: ideax/templates/ideax/idea_detail.html:85
@@ -92,40 +92,40 @@ msgstr "Peso"
 msgid "Description"
 msgstr "Descrição"
 
-#: ideax/forms.py:68 ideax/forms.py:75
+#: ideax/forms.py:69 ideax/forms.py:76
 #: ideax/templates/ideax/includes/partial_category_image_list.html:8
 msgid "Image"
 msgstr "Imagem"
 
-#: ideax/forms.py:76
+#: ideax/forms.py:77
 msgid "Requester"
 msgstr "Solicitante"
 
-#: ideax/forms.py:76
+#: ideax/forms.py:77
 #: ideax/templates/ideax/includes/partial_use_term_list.html:22
 #: ideax/templates/ideax/use_term_detail.html:19
 msgid "Active"
 msgstr "Ativo"
 
-#: ideax/forms.py:76
+#: ideax/forms.py:77
 msgid "Limit Date"
 msgstr "Data Limite"
 
-#: ideax/forms.py:76
+#: ideax/forms.py:77
 msgid "Featured"
 msgstr "Destaque"
 
-#: ideax/forms.py:86
+#: ideax/forms.py:87
 #: ideax/templates/ideax/includes/partial_use_term_list.html:6
 msgid "Term"
 msgstr "Termo"
 
-#: ideax/forms.py:86
+#: ideax/forms.py:87
 #: ideax/templates/ideax/includes/partial_use_term_list.html:7
 msgid "Initial Date"
 msgstr "Data Inicial"
 
-#: ideax/forms.py:86
+#: ideax/forms.py:87
 #: ideax/templates/ideax/includes/partial_use_term_list.html:8
 msgid "Final Date"
 msgstr "Data Final"
@@ -178,6 +178,7 @@ msgstr ""
 #: ideax/templates/ideax/use_term_detail.html:31
 #: ideax/templates/ideax/use_term_edit.html:56
 #: ideax/templates/ideax/use_term_new.html:48
+#: ideax/templates/ideax/user_profile.html:7
 msgid "Return"
 msgstr "Voltar"
 
@@ -191,16 +192,16 @@ msgid "Explore Ideas"
 msgstr "Explorar Ideias"
 
 #: ideax/templates/ideax/base.html:71
+msgid "Challenges"
+msgstr "Desafios"
+
+#: ideax/templates/ideax/base.html:72
 msgid "Users"
 msgstr "Usuários"
 
-#: ideax/templates/ideax/base.html:72
+#: ideax/templates/ideax/base.html:73
 msgid "Active Terms of Use and Privacy"
 msgstr "Termo de uso ativo"
-
-#: ideax/templates/ideax/base.html:74
-msgid "Challenges"
-msgstr "Desafios"
 
 #: ideax/templates/ideax/base.html:75
 #: ideax/templates/ideax/use_term_list.html:6
@@ -431,6 +432,10 @@ msgstr "Caixa de Busca"
 #: ideax/templates/ideax/idea_list.html:79
 msgid "Search"
 msgstr "Pesquisar"
+
+#: ideax/templates/ideax/idea_list.html:80
+msgid "Clean"
+msgstr "Limpar"
 
 #: ideax/templates/ideax/idea_new.html:6
 #: ideax/templates/ideax/includes/partial_idea_create.html:10
@@ -735,27 +740,27 @@ msgstr "Desafio salvo com sucesso!"
 msgid "Challenge removed successfully!"
 msgstr "Desafio removido com sucesso!"
 
-#: ideax/views.py:800
+#: ideax/views.py:805
 msgid "Category Image saved successfully!"
 msgstr "Imagem da Categoria salva com sucesso!"
 
-#: ideax/views.py:823
+#: ideax/views.py:828
 msgid "Category Image changed successfully!"
 msgstr "Imagem da Categoria alterada com sucesso!"
 
-#: ideax/views.py:835
+#: ideax/views.py:840
 msgid "Category Image removed successfully!"
 msgstr "Imagem da Categoria removida com sucesso!"
 
-#: ideax/views.py:855
+#: ideax/views.py:860
 msgid "Bad image format."
 msgstr "Formato de imagem não recomendado"
 
-#: ideax/views.py:864
+#: ideax/views.py:869
 msgid "Maximum image file is %(size) MB."
 msgstr "O tamanho máximo do arquivo é %(size) MB."
 
-#: ideax/views.py:880 ideax/views.py:881
+#: ideax/views.py:885 ideax/views.py:886
 msgid "Invalid request!"
 msgstr "Requisição Inválida"
 

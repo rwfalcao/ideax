@@ -86,11 +86,15 @@
         </div>
       </nav>
       {% endblock %}
+
       {% if user.is_authenticated %}
-      <div class="fab-button">
-        <a class="btn btn-idea-new btn-primary" href="/idea/new/" title="{% trans 'New Idea' %}"><i class="fas fa-plus"></i><i class="fas fa-lightbulb fa-2x"></i></a>
-      </div>
+        {%block contextbutton%}
+        <div class="fab-button">
+          <a class="btn btn-idea-new btn-primary" href="/idea/new/" title="{% trans 'New Idea' %}"><i class="fas fa-plus"></i><i class="fas fa-lightbulb fa-2x"></i></a>
+        </div>
+        {% endblock %}
       {% endif %}
+
       <div class="content ideax-body {% if user.is_authenticated %}container-fluid{% endif %}">
         {% block content %}
         {% endblock %}
