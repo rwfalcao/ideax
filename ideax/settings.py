@@ -11,6 +11,9 @@ https://docs.djangoproject.com/en/2.0/ref/settings/
 """
 
 import os
+import logging
+import time
+
 from decouple import config, Csv
 from dj_database_url import parse as dburl
 
@@ -50,7 +53,6 @@ INSTALLED_APPS = [
     'martor',
     'markdownify',
 ]
-
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -129,7 +131,6 @@ LANGUAGES = (
 )
 LOCALE_PATHS = (os.path.join(BASE_DIR, 'locale'),)
 
-
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.0/howto/static-files/
 
@@ -142,15 +143,15 @@ LOGOUT_REDIRECT_URL = '/'
 AUTH_LDAP_SERVER_URI = config('AUTH_LDAP_SERVER_URI', default='')
 if AUTH_LDAP_SERVER_URI != '':
     import ldap
-    from django_auth_ldap.config import LDAPSearch, GroupOfNamesType
+    from django_auth_ldap.config import LDAPSearch
 
     AUTH_LDAP_BIND_DN = config('AUTH_LDAP_BIND_DN', default='')
     AUTH_LDAP_BIND_PASSWORD = config('AUTH_LDAP_BIND_PASSWORD', default='')
-    AUTH_LDAP_GLOBAL_OPTIONS = {
-        ldap.OPT_X_TLS_REQUIRE_CERT: ldap.OPT_X_TLS_NEVER}
+    AUTH_LDAP_GLOBAL_OPTIONS = {ldap.OPT_X_TLS_REQUIRE_CERT: ldap.OPT_X_TLS_NEVER}
     AUTH_LDAP_START_TLS = config('AUTH_LDAP_START_TLS', default=0, cast=bool)
-    AUTH_LDAP_USER_SEARCH = LDAPSearch(config(
-        'AUTH_LDAP_USER_SEARCH', default='ou=users,dc=example,dc=com'), ldap.SCOPE_SUBTREE, "(uid=%(user)s)")
+    AUTH_LDAP_USER_SEARCH = LDAPSearch(
+        config('AUTH_LDAP_USER_SEARCH', default='ou=users,dc=example,dc=com'), 
+        ldap.SCOPE_SUBTREE, "(uid=%(user)s)")
     AUTH_LDAP_USER_ATTR_MAP = {
         "first_name": "givenName",
         "last_name": "sn",
@@ -168,8 +169,6 @@ else:
         'django.contrib.auth.backends.ModelBackend',
     ]
 
-
-import logging
 logger = logging.getLogger('django_auth_ldap')
 logger.addHandler(logging.StreamHandler())
 logger.setLevel(logging.DEBUG)
@@ -237,7 +236,7 @@ GENERAL_USER_GROUP = config('GENERAL_USER_GROUP')
 
 TINYMCE_SPELLCHECKER = False
 TINYMCE_FILEBROWSER = False
-#TINYMCE_JS_URL = '//cdn.tinymce.com/4/tinymce.min.js'
+# TINYMCE_JS_URL = '//cdn.tinymce.com/4/tinymce.min.js'
 TINYMCE_JS_URL = STATIC_URL + 'tinymce/js/tinymce/tinymce.min.js'
 TINYMCE_ADDITIONAL_JS_URLS = None
 TINYMCE_CSS_URL = None
@@ -319,7 +318,6 @@ MARTOR_SEARCH_USERS_URL = '/martor/search-user/'  # default
 
 # Markdown Extensions
 MARTOR_MARKDOWN_BASE_MENTION_URL = '/author/'  # default (change this)
-import time
 MARTOR_UPLOAD_PATH = 'images/uploads/{}'.format(time.strftime("%Y/%m/%d/"))
 
 MAX_IMAGE_UPLOAD_SIZE = 5242880  # 5MB

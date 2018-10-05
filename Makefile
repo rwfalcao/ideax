@@ -20,3 +20,12 @@ test_ci:
 
 pip_outdated:
 	pip list --outdated --format=columns
+
+lint:
+	flake8 ideax
+
+pylint:
+	pylint ideax
+
+ci: lint test_ci
+	@echo "done"

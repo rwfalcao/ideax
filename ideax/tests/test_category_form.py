@@ -1,4 +1,3 @@
-from pytest import fixture
 from ideax.forms import CategoryForm
 
 

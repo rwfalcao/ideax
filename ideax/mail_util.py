@@ -2,12 +2,13 @@ from django.core import mail
 from django.core.mail import EmailMessage
 from django.template.loader import get_template
 
+
 class Mail_Util:
     def __init__(self):
         self.connection = mail.get_connection()
 
     def send_mail(self, messages):
-        self.connection.open();
+        self.connection.open()
         self.connection.send_messages(messages)
         self.connection.close()
 

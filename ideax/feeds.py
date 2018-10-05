@@ -1,10 +1,11 @@
 from django.contrib.syndication.views import Feed
 from django.utils.translation import ugettext_lazy as _
-from ideax.models import *
+from ideax.models import Comment, Idea
 from martor.templatetags.martortags import safe_markdown
 
+
 class Comment_Feed(Feed):
-    title = "ideax - "+str(_('Comments'))+": "
+    title = "ideax - " + str(_('Comments')) + ": "
     link = "/rss"
     description = str(_('Sharing ideas'))
 
@@ -16,11 +17,11 @@ class Comment_Feed(Feed):
 
     def item_description(self, item):
         comment = (item.raw_comment[:200] + ' ...') if len(item.raw_comment) > 75 else item.raw_comment
-        comment += '</br></br>'+str(_('Comment by: '))+'<strong> '+' '+ item.author.user.username +'</strong>'
+        comment += '</br></br>' + str(_('Comment by: ')) + '<strong> ' + ' ' + item.author.user.username + '</strong>'
         return comment
 
     def item_link(self, item):
-        return  "/idea/"+ str(item.idea.id) + "/#" + str(item.id)
+        return "/idea/" + str(item.idea.id) + "/#" + str(item.id)
 
 
 class New_Idea_Feed(Feed):
@@ -38,9 +39,4 @@ class New_Idea_Feed(Feed):
         return safe_markdown(item.summary)
 
     def item_link(self, item):
-        return  "/idea/"+str(item.id)
-
-       
-
-
-
+        return "/idea/"+str(item.id)

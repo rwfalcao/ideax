@@ -1,8 +1,10 @@
 from django.contrib import admin
-from .models import Idea, UserProfile, Popular_Vote, Comment, Category, Dimension, Category_Dimension, Evaluation, Category_Image, Use_Term, Challenge
 from django.contrib.auth.models import Permission
-from martor.widgets import AdminMartorWidget
-from martor.models import MartorField
+
+from .models import (
+    Idea, UserProfile, Popular_Vote, Comment, Category,
+    Dimension, Category_Dimension, Evaluation, Category_Image, Use_Term, Challenge,
+)
 
 
 admin.site.register(Idea)
