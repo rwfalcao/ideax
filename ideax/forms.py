@@ -11,6 +11,16 @@ from .models import Idea, Criterion, Category, Challenge, Use_Term, Category_Ima
 
 
 class IdeaForm(forms.ModelForm):
+    challenge = forms.ModelChoiceField(
+        queryset=Challenge.objects.filter(discarted=False),
+        empty_label=_('Not related to any challenge'),
+        required=False,
+        label=_('Challenge')
+    )
+    oportunity = MartorFormField(label=_('Oportunity'))
+    solution = MartorFormField(label=_('Solution'))
+    target = MartorFormField(label=_('Target'))
+    summary = MartorFormField(label=_('Summary'))
 
     def __init__(self, *args, **kwargs):
         queryset = kwargs.pop('authors', None)
@@ -18,31 +28,14 @@ class IdeaForm(forms.ModelForm):
         self.fields['authors'] = forms.ModelMultipleChoiceField(
             queryset=queryset,
             widget=FilteredSelectMultiple("", is_stacked=False),
-            required=False)
-
-    challenge = forms.ModelChoiceField(
-        queryset=Challenge.objects.filter(discarted=False),
-        empty_label=_('Not related to any challenge'),
-        required=False
-    )
-    oportunity = MartorFormField()
-    solution = MartorFormField()
-    target = MartorFormField()
-    summary = MartorFormField()
+            required=False,
+            label=_('Coauthors')
+        )
 
     class Meta:
         model = Idea
         fields = ('title', 'summary', 'oportunity', 'solution', 'target', 'category', 'challenge', 'authors')
-        labels = {
-            'title': _('Title'),
-            'summary': _('Summary'),
-            'oportunity': _('Oportunity'),
-            'solution': _('Solution'),
-            'target': _('Target'),
-            'category': _('Category'),
-            'challenge': _('Challenge'),
-            'authors': _('Coauthors'),
-        }
+        labels = {'title': _('Title'), 'category': _('Category')}
 
     class Media:
         css = {
@@ -89,7 +82,7 @@ class CategoryImageForm(forms.ModelForm):
 
 
 class ChallengeForm(forms.ModelForm):
-    description = MartorFormField()
+    description = MartorFormField(label=_('Description'))
 
     class Meta:
         model = Challenge
@@ -109,7 +102,6 @@ class ChallengeForm(forms.ModelForm):
             'image': _('Image'),
             'summary': _('Summary'),
             'requester': _('Requester'),
-            'description': _('Description'),
             'active': _('Active'),
             'limit_date': _('Limit Date'),
             'featured': _('Featured'),

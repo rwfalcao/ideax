@@ -41,6 +41,7 @@
     </head>
     <body>
       <!-- Image and text -->
+      {% block top %}
       <nav class="navbar navbar-expand fixed-top navbar-dark shadow-sm nav-bg">
         <a class="navbar-brand" href="/">
           <img src="{% static 'images/logo_horizontal.png' %}" height="30" class="d-inline-block align-top" alt="">
@@ -61,12 +62,14 @@
               </a>
               <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
                 <a class="dropdown-item"  href="/">{% trans 'Explore Ideas' %}</a>
+                <a class="dropdown-item" href="{% url 'challenge_list' %}">{% trans 'Challenges' %}</a> 
                 <a class="dropdown-item disabled" href="#">{% trans 'Users' %}</a>
                 <a class="dropdown-item" href="{% url 'use_term' %}">{% trans 'Active Terms of Use and Privacy' %}</a>
-                <a class="dropdown-item" href="{% url 'challenge_list' %}">{% trans 'Challenges' %}</a> 
-                <a class="dropdown-item" href="{% url 'use_term_list' %}">{% trans 'Terms of Use' %}</a> 
-                <a class="dropdown-item" href="{% url 'category_image_list' %}">{% trans 'Category Images' %}</a> 
-                <a class="dropdown-item" href="{% url 'category_list' %}">{% trans 'Categorys' %}</a> 
+                {% if perms.ideax.manage_idea %}
+                  <a class="dropdown-item" href="{% url 'use_term_list' %}">{% trans 'Terms of Use' %}</a> 
+                  <a class="dropdown-item" href="{% url 'category_image_list' %}">{% trans 'Category Images' %}</a> 
+                  <a class="dropdown-item" href="{% url 'category_list' %}">{% trans 'Categorys' %}</a> 
+                {% endif %}
                 <a class="dropdown-item" href="{% url 'logout' %}">{% trans 'Logout' %}</i></a>
               </div>
             </li>
@@ -82,12 +85,16 @@
           {% endif %}
         </div>
       </nav>
+      {% endblock %}
 
       {% if user.is_authenticated %}
-      <div class="fab-button">
-        <a class="btn btn-idea-new btn-primary" href="/idea/new/" title="{% trans 'New Idea' %}"><i class="fas fa-plus"></i><i class="fas fa-lightbulb fa-2x"></i></a>
-      </div>
+        {%block contextbutton%}
+        <div class="fab-button">
+          <a class="btn btn-idea-new btn-primary" href="/idea/new/" title="{% trans 'New Idea' %}"><i class="fas fa-plus"></i><i class="fas fa-lightbulb fa-2x"></i></a>
+        </div>
+        {% endblock %}
       {% endif %}
+
       <div class="content ideax-body {% if user.is_authenticated %}container-fluid{% endif %}">
         {% block content %}
         {% endblock %}
