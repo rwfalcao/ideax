@@ -1,2 +1,2 @@
 from ._base import *
-from ._ldap import *
+from .apps._ldap import *
