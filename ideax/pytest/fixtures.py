@@ -1,3 +1,5 @@
+import logging
+
 from pathlib import Path
 from pytest import fixture
 
@@ -32,3 +34,8 @@ class FakeMessages:
 @fixture(scope='function')
 def messages():
     return FakeMessages()
+
+
+@fixture
+def debug():
+    return logging.warn
