@@ -25,8 +25,8 @@ class IdeaForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         queryset = kwargs.pop('authors', None)
         super(IdeaForm, self).__init__(*args, **kwargs)
-        self.fields['authors']=forms.ModelMultipleChoiceField(
-            queryset=queryset, 
+        self.fields['authors'] = forms.ModelMultipleChoiceField(
+            queryset=queryset,
             widget=FilteredSelectMultiple("", is_stacked=False),
             required=False,
             label=_('Coauthors')
