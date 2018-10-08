@@ -7,7 +7,7 @@ test_newdb:
 	py.test -n $(PROCS) --create-db ${ARGS}
 
 test_snapshot:
-	py.test -n $(PROCS) --snapshot-update ${ARGS}
+	py.test -n $(PROCS) --reuse-db --snapshot-update ${ARGS}
 
 test_coverage:
 	py.test -n $(PROCS) --reuse-db --cov-report term-missing --cov=ideax
