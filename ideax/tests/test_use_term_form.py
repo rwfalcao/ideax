@@ -22,7 +22,7 @@ class TestUseTermForm:
         form = UseTermForm(data)
         assert form.is_valid()
 
-    @mark.skip
+    @mark.skip('TODO: Missing date range validation')
     def test_invalid_period(self, db, data):
         data['final_date'] = '2017-12-31'
         form = UseTermForm(data)

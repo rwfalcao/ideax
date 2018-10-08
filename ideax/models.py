@@ -50,6 +50,7 @@ class Phase(Enum):
                 return temp
         return None
 
+    # TODO: Unused method equals to get_phase_by_id
     @classmethod
     def get_css_class(cls, id):
         return cls.get_phase_by_id(id)
