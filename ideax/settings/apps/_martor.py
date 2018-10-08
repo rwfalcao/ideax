@@ -1,6 +1,6 @@
 import time
 
-from ..django._core import INSTALLED_APPS, STATIC_URL
+from ..django._core import INSTALLED_APPS
 
 
 INSTALLED_APPS.extend([

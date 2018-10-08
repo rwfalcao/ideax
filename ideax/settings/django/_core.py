@@ -1,6 +1,4 @@
 import os
-import logging
-import time
 from pathlib import Path
 
 from decouple import config, Csv
