@@ -49,7 +49,7 @@ class TestNonMiscView:
     def test_get_featured_challenges_empty(self, db):
         response = get_featured_challenges()
         assert isinstance(response, QuerySet)
-        assert list(response.all()) == []
+        assert response.count() == 0
 
     def test_get_featured_challenges(self, db):
         challenges = {
@@ -59,12 +59,12 @@ class TestNonMiscView:
         response = get_featured_challenges()
         assert isinstance(response, QuerySet)
         assert response.count() == 1
-        assert list(response.all()) == [challenges[(True, False)]]
+        assert response.first() == challenges[(True, False)]
 
     def test_get_authors_empty(self, db):
         response = get_authors('test@gmail.com')
         assert isinstance(response, QuerySet)
-        assert list(response.all()) == []
+        assert response.count() == 0
 
     def test_get_authors(self, db, debug):
         staff_options = (False, True)
