@@ -818,6 +818,7 @@ def challenge_edit(request, challenge_pk):
     return render(request, 'ideax/challenge_edit.html', {'form': form})
 
 
+# TODO: Refactor, unused code
 def file_upload(request):
     myfile = request.FILES['image']
     fs = FileSystemStorage()
