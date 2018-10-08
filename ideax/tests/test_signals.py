@@ -1,4 +1,5 @@
-from ..models import check_user_profile, UserProfile
+from ..models import UserProfile
+from ..signals import check_user_profile
 
 
 class TestSignals:

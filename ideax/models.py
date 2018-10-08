@@ -1,26 +1,11 @@
+import random
+from enum import Enum
+
+from django.conf import settings
 from django.db import models
 from django.utils import timezone
-from enum import Enum
-from mptt.models import MPTTModel, TreeForeignKey
-from django.contrib.auth.signals import user_logged_in
-import random
-from django.conf import settings
 from django.utils.translation import ugettext_lazy as _
-from django.contrib.auth.models import Group
-
-
-def check_user_profile(sender, request, user, **kwargs):
-    try:
-        user_profile = UserProfile.objects.get(user=user)
-    except UserProfile.DoesNotExist:
-        user_profile = UserProfile()
-        user_profile.user = user
-        user_profile.save()
-        user.groups.add(Group.objects.get(
-            name=settings.GENERAL_USER_GROUP))
-
-
-user_logged_in.connect(check_user_profile)
+from mptt.models import MPTTModel, TreeForeignKey
 
 
 class Phase(Enum):

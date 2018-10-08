@@ -32,7 +32,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django.contrib.humanize',
     'widget_tweaks',
-    'ideax',
+    'ideax.apps.IdeaxConfig',
     'mptt',
 ]
 
