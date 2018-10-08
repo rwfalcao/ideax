@@ -5,7 +5,7 @@ from model_mommy import mommy
 from ideax.forms import CategoryImageForm
 
 
-class TestCategoryImageForm(object):
+class TestCategoryImageForm:
     @fixture
     def data(self):
         category = mommy.make('Category')

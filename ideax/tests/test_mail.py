@@ -53,7 +53,7 @@ class TestMail:
         for part in base_parts + tuple(flatten(context).values()):
             assert part in messages[0].body
 
-    def test_send_messages(self, base_params, context, mocker):
+    def test_send_messages(self, base_params, mocker):
         mocker.patch('ideax.mail_util.mail')
         generate = mocker.patch('ideax.mail_util.Mail_Util.generate_messages')
         generate.return_value = []
@@ -63,7 +63,7 @@ class TestMail:
         generate.assert_called_once_with(*base_params)
         send.assert_called_once_with([])
 
-    def test_send_mail(self, base_params, context, mocker):
+    def test_send_mail(self, mocker):
         conn = mocker.Mock()
         connection = mocker.patch('ideax.mail_util.mail.get_connection')
         connection.return_value = conn

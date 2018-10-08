@@ -2,6 +2,7 @@ import json
 from datetime import datetime, timedelta
 from itertools import product
 
+import pytz
 from django.db.models import QuerySet
 from model_mommy import mommy
 
@@ -20,20 +21,20 @@ class TestNonMiscView:
         cleaned = [(k, str(v)) for k, v in phases['phases']]
         snapshot.assert_match(cleaned)
 
-    def test_get_category_list(self, db, debug):
+    def test_get_category_list(self, db):
         category = mommy.make('Category')
         categories = get_category_list()
         assert list(categories.keys()) == ['category_list']
         assert categories['category_list'].last() == category
 
-    def test_get_term_of_user_empty(self, rf, db, debug):
+    def test_get_term_of_user_empty(self, rf, db):
         request = rf.get('/')
         response = get_term_of_user(request)
         assert response.status_code == 200
         assert json.loads(response.content) == {'term': 'Termo de Uso não encontrado'}
 
-    def test_get_term_of_user(self, rf, db, debug):
-        mommy.make('Use_Term', term='EULA Test', final_date=datetime.now() + timedelta(days=1))
+    def test_get_term_of_user(self, rf, db):
+        mommy.make('Use_Term', term='EULA Test', final_date=datetime.now(pytz.UTC) + timedelta(days=1))
         request = rf.get('/')
         response = get_term_of_user(request)
         assert response.status_code == 200
@@ -66,7 +67,7 @@ class TestNonMiscView:
         assert isinstance(response, QuerySet)
         assert response.count() == 0
 
-    def test_get_authors(self, db, debug):
+    def test_get_authors(self, db):
         staff_options = (False, True)
         # User e-mail cannot be null (refactor get_authors)
         email_options = ('', 'exclude@gmail.com', 'valid@gmail.com')

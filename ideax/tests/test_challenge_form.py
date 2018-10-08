@@ -4,7 +4,7 @@ from model_mommy import mommy
 from ideax.forms import ChallengeForm
 
 
-class TestChallengeForm(object):
+class TestChallengeForm:
     def test_invalid(self, snapshot):
         form = ChallengeForm({})
         assert not form.is_valid()

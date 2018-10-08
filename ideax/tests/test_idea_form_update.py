@@ -1,7 +1,7 @@
 from ideax.forms import IdeaFormUpdate
 
 
-class TestIdeaFormUpdate(object):
+class TestIdeaFormUpdate:
     def test_invalid(self, snapshot):
         form = IdeaFormUpdate({})
         assert not form.is_valid()

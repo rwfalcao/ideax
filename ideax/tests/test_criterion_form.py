@@ -3,7 +3,7 @@ from pytest import mark, fixture
 from ideax.forms import CriterionForm
 
 
-class TestCriterionForm(object):
+class TestCriterionForm:
     @fixture
     def data(self):
         return {

@@ -3,7 +3,7 @@ from django.http.response import HttpResponseRedirect
 import ideax.views
 
 
-class TestPageViews(object):
+class TestPageViews:
     def test_frontpage(self, client):
         response = client.get('/')
         body = response.content.decode('utf-8', 'strict')
@@ -20,9 +20,10 @@ class TestPageViews(object):
         ideax.views.audit = mocker.Mock()
         username, password = 'usuario', 'senha'
         django_user_model.objects.create_user(
-          username=username,
-          password=password,
-          email='x@x.com')
+            username=username,
+            password=password,
+            email='x@x.com'
+        )
         client.login(username=username, password=password)
         response = client.get('/idea/list')
         assert response.status_code == 200

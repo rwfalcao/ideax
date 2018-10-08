@@ -3,7 +3,7 @@ from pytest import fixture, mark
 from ideax.forms import UseTermForm
 
 
-class TestUseTermForm(object):
+class TestUseTermForm:
     @fixture
     def data(self):
         return {

@@ -5,7 +5,7 @@ from ideax.forms import IdeaForm
 from ideax.models import UserProfile
 
 
-class TestIdeaForm(object):
+class TestIdeaForm:
     @fixture
     def authors(self):
         # TODO: Perthaps queryset should have a default value
