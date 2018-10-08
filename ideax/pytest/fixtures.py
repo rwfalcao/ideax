@@ -1,6 +1,7 @@
 import logging
-
+from datetime import date
 from pathlib import Path
+
 from pytest import fixture
 
 
@@ -17,6 +18,14 @@ class FakeMessages:
     @property
     def pop(self):
         return self.messages.pop()
+
+
+class MockDate(date):
+    fix_date = date(2010, 1, 1)
+
+    @classmethod
+    def today(cls):
+        return cls.fix_date
 
 
 @fixture
@@ -41,3 +50,8 @@ def get_ip(mocker):
     patch = mocker.patch('ideax.views.get_ip')
     patch.return_value = '1.1.1.1'
     return patch
+
+
+@fixture
+def mock_today():
+    return MockDate
