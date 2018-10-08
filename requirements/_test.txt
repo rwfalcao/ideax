@@ -16,4 +16,4 @@ model-mommy==1.6.0                       # Auxiliar nos testes de modelos
 snapshottest==0.5.0                      # Suporte para snapshots (like jest)
 
 # Packages for tests only
-flatten-dict>0.0.3                       # Flatten a dict
+flatten-dict==0.0.3.post1                # Flatten a dict
