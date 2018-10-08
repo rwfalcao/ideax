@@ -18,15 +18,3 @@ snapshots['TestCategoryImageForm.test_invalid 1'] = {
         'Este campo é obrigatório.'
     ]
 }
-
-snapshots['TestUseTermForm.test_invalid 1'] = {
-    'final_date': [
-        'Este campo é obrigatório.'
-    ],
-    'init_date': [
-        'Este campo é obrigatório.'
-    ],
-    'term': [
-        'Este campo é obrigatório.'
-    ]
-}
