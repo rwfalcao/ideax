@@ -5,6 +5,7 @@ from django.contrib import admin
 from django.urls import path
 from django.views.i18n import JavaScriptCatalog
 
+from .user.urls import urlpatterns as user_urls
 from .ideax.urls import urlpatterns as ideax_urls
 
 urlpatterns = [
@@ -18,5 +19,5 @@ urlpatterns = [
     # url('', include(('ideax.ideax.urls', 'ideax'), namespace='ideax')),
 ]
 
-urlpatterns += ideax_urls
+urlpatterns += user_urls + ideax_urls
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

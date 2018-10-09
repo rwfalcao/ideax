@@ -1,4 +1,3 @@
-from django.contrib.auth import views as auth_views
 from django.urls import path, re_path
 from django.conf.urls import url
 
@@ -7,8 +6,6 @@ from .feeds import Comment_Feed, New_Idea_Feed
 
 urlpatterns = [
     path('', views.index, name='index'),
-    path('accounts/login/', auth_views.login, name='login'),
-    path('accounts/logout/', auth_views.logout, name='logout'),
     path('idea/list', views.idea_list, name='idea_list'),
     path('idea/<int:pk>/', views.idea_detail, name='idea_detail'),
     path('idea/new/', views.idea_new, name='idea_new'),
