@@ -2,13 +2,11 @@ from django.contrib import admin
 from django.contrib.auth.models import Permission
 
 from .models import (
-    Idea, UserProfile, Popular_Vote, Comment, Category,
+    Idea, Popular_Vote, Comment, Category,
     Dimension, Category_Dimension, Evaluation, Category_Image, Use_Term, Challenge,
 )
 
-
 admin.site.register(Idea)
-admin.site.register(UserProfile)
 admin.site.register(Popular_Vote)
 admin.site.register(Comment)
 admin.site.register(Category)

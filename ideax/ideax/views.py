@@ -25,9 +25,10 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.core.files.base import ContentFile
 from martor.utils import LazyEncoder
 
+from ..users.models import UserProfile
 from .models import (
     Idea, Criterion, Popular_Vote, Phase, Phase_History,
-    Category, Comment, UserProfile, Dimension, Evaluation, Category_Image, Use_Term, Challenge
+    Category, Comment, Dimension, Evaluation, Category_Image, Use_Term, Challenge
 )
 from .forms import (
     IdeaForm, CriterionForm, CategoryForm, CategoryImageForm,

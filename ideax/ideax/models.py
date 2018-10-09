@@ -46,7 +46,7 @@ class Phase_History(models.Model):
     previous_phase = models.PositiveSmallIntegerField()
     date_change = models.DateTimeField('data da mudança')
     idea = models.ForeignKey('Idea', on_delete=models.DO_NOTHING)
-    author = models.ForeignKey('UserProfile', on_delete=models.DO_NOTHING)
+    author = models.ForeignKey('users.UserProfile', on_delete=models.DO_NOTHING)
     current = models.BooleanField()
 
 
@@ -95,8 +95,8 @@ class Idea(models.Model):
     solution = models.TextField(max_length=2500, null=True)
     target = models.TextField(max_length=500, null=True)
     creation_date = models.DateTimeField('data criação')
-    author = models.ForeignKey('UserProfile', on_delete=models.CASCADE, related_name='old_author')
-    authors = models.ManyToManyField('UserProfile', related_name='authors')
+    author = models.ForeignKey('users.UserProfile', on_delete=models.CASCADE, related_name='old_author')
+    authors = models.ManyToManyField('users.UserProfile', related_name='authors')
     category = models.ForeignKey('Category', models.SET_NULL, null=True)
     discarded = models.BooleanField(default=False)
     score = models.FloatField(default=0)
@@ -141,7 +141,7 @@ class Challenge(models.Model):
     description = models.TextField(max_length=2500)
     limit_date = models.DateTimeField()
     active = models.BooleanField(default=True)
-    author = models.ForeignKey('UserProfile', on_delete=models.CASCADE)
+    author = models.ForeignKey('users.UserProfile', on_delete=models.CASCADE)
     creation_date = models.DateTimeField()
     featured = models.BooleanField(default=False)
     category = models.ForeignKey('Category', models.SET_NULL, null=True)
@@ -155,21 +155,21 @@ class Vote(models.Model):
     evaluation_item = models.ForeignKey(
         Evaluation_Item, on_delete=models.PROTECT)
     value = models.IntegerField()
-    voter = models.ForeignKey('UserProfile', on_delete=models.PROTECT)
+    voter = models.ForeignKey('users.UserProfile', on_delete=models.PROTECT)
     idea = models.ForeignKey('Idea', on_delete=models.PROTECT)
     voting_date = models.DateTimeField('data da votação')
 
 
 class Popular_Vote(models.Model):
     like = models.BooleanField()
-    voter = models.ForeignKey('UserProfile', on_delete=models.PROTECT)
+    voter = models.ForeignKey('users.UserProfile', on_delete=models.PROTECT)
     voting_date = models.DateTimeField()
     idea = models.ForeignKey('Idea', on_delete=models.PROTECT)
 
 
 class Comment(MPTTModel):
     idea = models.ForeignKey('Idea', on_delete=models.PROTECT)
-    author = models.ForeignKey('UserProfile', on_delete=models.PROTECT)
+    author = models.ForeignKey('users.UserProfile', on_delete=models.PROTECT)
     raw_comment = models.TextField()
     parent = TreeForeignKey('self',
                             related_name='children',
@@ -185,17 +185,6 @@ class Comment(MPTTModel):
 
     class MPTTMeta:
         order_insertion_by = ['-date']
-
-
-class UserProfile(models.Model):
-    user = models.OneToOneField('auth.User', on_delete=models.PROTECT)
-    use_term_accept = models.NullBooleanField(default=False)
-    acceptance_date = models.DateTimeField(null=True)
-    ip = models.CharField(max_length=20, null=True)
-    manager = models.NullBooleanField(default=False)
-
-    def __str__(self):
-        return self.user.username
 
 
 class Dimension(models.Model):
@@ -219,7 +208,7 @@ class Category_Dimension(models.Model):
 
 
 class Evaluation(models.Model):
-    valuator = models.ForeignKey('UserProfile', on_delete=models.PROTECT)
+    valuator = models.ForeignKey('users.UserProfile', on_delete=models.PROTECT)
     idea = models.ForeignKey('Idea', on_delete=models.PROTECT)
     dimension = models.ForeignKey('Dimension', on_delete=models.PROTECT)
     category_dimension = models.ForeignKey(
@@ -230,7 +219,7 @@ class Evaluation(models.Model):
 
 
 class Use_Term(models.Model):
-    creator = models.ForeignKey('UserProfile', on_delete=models.PROTECT)
+    creator = models.ForeignKey('users.UserProfile', on_delete=models.PROTECT)
     term = models.TextField(max_length=12500)
     init_date = models.DateTimeField()
     final_date = models.DateTimeField()
