@@ -6,8 +6,8 @@ from django.conf.urls.static import static
 from django.views.i18n import JavaScriptCatalog
 from django.conf.urls import url
 
-from . import views
-from ideax.feeds import Comment_Feed, New_Idea_Feed
+from .feeds import Comment_Feed, New_Idea_Feed
+from .ideax import views
 
 
 urlpatterns = [

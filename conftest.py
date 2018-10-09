@@ -3,7 +3,8 @@ from django.core.management import call_command
 
 
 pytest_plugins = [
-    'ideax.pytest.fixtures',
+    'ideax.tests.fixtures',
+    'ideax.ideax.tests.fixtures',
 ]
 
 

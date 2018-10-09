@@ -1,7 +1,7 @@
 from django.conf import settings
 from django.contrib.auth.models import Group
 
-from ideax.models import UserProfile
+from .models import UserProfile
 
 
 def check_user_profile(sender, request, user, **kwargs):

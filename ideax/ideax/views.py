@@ -33,9 +33,9 @@ from .forms import (
     IdeaForm, CriterionForm, CategoryForm, CategoryImageForm,
     EvaluationForm, ChallengeForm, UseTermForm,
 )
-from .singleton import Profanity_Check
-from .mail_util import Mail_Util
-from .util import get_ip, get_client_ip
+from ..singleton import Profanity_Check
+from ..mail_util import Mail_Util
+from ..util import get_ip, get_client_ip
 
 
 # Creating log object
