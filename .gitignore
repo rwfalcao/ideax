@@ -27,3 +27,4 @@ ideax/static/plugins
 ideax/static/tinymce
 ideax/static/django_extensions
 ideax/static/mptt
+*.override.yml
