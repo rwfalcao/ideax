@@ -1,8 +1,8 @@
 from pytest import fixture
-from ideax.models import Category
+from ...models import Category
 
 
-class TestCategory(object):
+class TestCategory:
     @fixture
     def setup_category(self, db):
         c = Category()
@@ -19,4 +19,4 @@ class TestCategory(object):
 
     def test_get_images(self, setup_category):
         # TODO: Test with images created
-        assert len(setup_category.get_all_image_header()) == 0
+        assert not setup_category.get_all_image_header()

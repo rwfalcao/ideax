@@ -1,7 +1,7 @@
-from ideax.forms import CategoryForm
+from ...forms import CategoryForm
 
 
-class TestCategoryForm(object):
+class TestCategoryForm:
     def test_valid(self):
         data = {
             'title': 'Mobile',

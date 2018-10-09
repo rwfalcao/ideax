@@ -1,11 +1,12 @@
 from django.http.response import HttpResponseRedirect
 
 
-class TestViews(object):
+class TestPageViews:
     def test_frontpage(self, client):
         response = client.get('/')
         body = response.content.decode('utf-8', 'strict')
-        assert 'você tem um canal aberto para a inovação' in body
+        assert 'class="login-button"' in body
+        # assert 'você tem um canal aberto para a inovação' in body
 
     def test_redirect_login(self, client):
         response = client.get('/idea/list')
@@ -13,12 +14,14 @@ class TestViews(object):
         assert isinstance(response, HttpResponseRedirect)
         assert response.url == r'/accounts/login/?next=/idea/list'
 
-    def test_idea_list(self, client, django_user_model):
+    def test_idea_list(self, ideax_views, client, django_user_model, mocker):
+        ideax_views.audit = mocker.Mock()
         username, password = 'usuario', 'senha'
         django_user_model.objects.create_user(
-          username=username,
-          password=password,
-          email='x@x.com')
+            username=username,
+            password=password,
+            email='x@x.com'
+        )
         client.login(username=username, password=password)
         response = client.get('/idea/list')
         assert response.status_code == 200
