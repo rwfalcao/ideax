@@ -1,6 +1,6 @@
 from pytest import fixture, mark
 
-from ideax.forms import UseTermForm
+from ...forms import UseTermForm
 
 
 class TestUseTermForm:

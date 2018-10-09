@@ -1,7 +1,7 @@
 from django.core.files.uploadedfile import SimpleUploadedFile
 from model_mommy import mommy
 
-from ideax.forms import ChallengeForm
+from ...forms import ChallengeForm
 
 
 class TestChallengeForm:

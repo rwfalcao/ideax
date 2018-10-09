@@ -2,17 +2,17 @@ from django.contrib.auth.models import AnonymousUser
 from model_mommy import mommy
 from pytest import fixture
 
-from ideax.views import idea_list
+from ...views import idea_list
 
 
 class TestIdeaListView:
     @fixture
-    def get_ideas_init(self, mocker):
-        return mocker.patch('ideax.views.get_ideas_init')
+    def get_ideas_init(self, ideax_views, mocker):
+        return mocker.patch.object(ideax_views, 'get_ideas_init')
 
     @fixture
-    def get_phases_count(self, mocker):
-        return mocker.patch('ideax.views.get_phases_count')
+    def get_phases_count(self, ideax_views, mocker):
+        return mocker.patch.object(ideax_views, 'get_phases_count')
 
     def test_idea_list_anonymous(self, rf):
         request = rf.get('/idea/list')

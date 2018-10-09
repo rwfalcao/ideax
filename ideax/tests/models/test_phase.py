@@ -1,4 +1,4 @@
-from ideax.models import Phase
+from ...models import Phase
 
 
 class TestPhase:

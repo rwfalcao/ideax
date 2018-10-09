@@ -1,6 +1,6 @@
 from pytest import mark
 
-from ideax.forms import EvaluationForm
+from ...forms import EvaluationForm
 
 
 class TestEvaluationForm:

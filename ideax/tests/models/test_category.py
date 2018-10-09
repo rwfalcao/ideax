@@ -1,5 +1,5 @@
 from pytest import fixture
-from ideax.models import Category
+from ...models import Category
 
 
 class TestCategory:

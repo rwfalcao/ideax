@@ -2,7 +2,7 @@ from pytest import fixture
 from django.core.files.uploadedfile import SimpleUploadedFile
 from model_mommy import mommy
 
-from ideax.forms import CategoryImageForm
+from ...forms import CategoryImageForm
 
 
 class TestCategoryImageForm:

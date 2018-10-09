@@ -1,7 +1,6 @@
 from django.contrib.auth.models import AnonymousUser
 
-import ideax.views
-from ideax.views import index
+from ...views import index
 
 
 class TestIndexView:
@@ -12,8 +11,8 @@ class TestIndexView:
         assert response.status_code == 200
         assert 'class="login-button"' in response.content.decode('utf-8', 'strict')
 
-    def test_index(self, rf, admin_user, mocker):
-        ideax.views.audit = mocker.Mock()
+    def test_index(self, ideax_views, rf, admin_user, mocker):
+        ideax_views.audit = mocker.Mock()
         request = rf.get('/')
         request.user = admin_user
         response = index(request)

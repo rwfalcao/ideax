@@ -1,6 +1,6 @@
 from model_mommy import mommy
 
-from ideax.models import Category_Image
+from ...models import Category_Image
 
 
 class TestCategoryImage:

@@ -1,7 +1,6 @@
 from django.contrib.auth.models import AnonymousUser
 
-import ideax.views
-from ideax.views import accept_use_term
+from ...views import accept_use_term
 
 
 class TestAcceptUseTermView:
@@ -11,8 +10,8 @@ class TestAcceptUseTermView:
         response = accept_use_term(request)
         assert (response.status_code, response.url) == (302, '/accounts/login/?next=/term/accept')
 
-    def test_accept_use_term_not_accepted(self, rf, admin_user, messages, get_ip, mocker):
-        ideax.views.audit = mocker.Mock()
+    def test_accept_use_term_not_accepted(self, ideax_views, rf, admin_user, messages, get_ip, mocker):
+        ideax_views.audit = mocker.Mock()
         admin_user.userprofile.use_term_accept = False
         request = rf.get('/term/accept')
         request.user = admin_user
@@ -22,8 +21,8 @@ class TestAcceptUseTermView:
         assert messages.messages == ['Termo de uso aceito!']
         get_ip.assert_called_once_with(request)
 
-    def test_accept_use_term_accepted(self, rf, admin_user, messages, mocker):
-        ideax.views.audit = mocker.Mock()
+    def test_accept_use_term_accepted(self, ideax_views, rf, admin_user, messages, mocker):
+        ideax_views.audit = mocker.Mock()
         admin_user.userprofile.use_term_accept = True
         request = rf.get('/term/accept')
         request.user = admin_user

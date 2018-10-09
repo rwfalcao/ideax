@@ -1,4 +1,4 @@
-from ideax.models import check_user_profile, UserProfile
+from ..models import check_user_profile, UserProfile
 
 
 class TestSignals:

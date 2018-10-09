@@ -1,4 +1,4 @@
-from ideax.forms import CategoryForm
+from ...forms import CategoryForm
 
 
 class TestCategoryForm:

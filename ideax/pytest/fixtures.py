@@ -4,6 +4,8 @@ from pathlib import Path
 
 from pytest import fixture
 
+from .. import views
+
 
 class FakeMessages:
     ''' mocks the Django message framework, makes it easier to get
@@ -46,8 +48,8 @@ def debug():
 
 
 @fixture
-def get_ip(mocker):
-    patch = mocker.patch('ideax.views.get_ip')
+def get_ip(ideax_views, mocker):
+    patch = mocker.patch.object(ideax_views, 'get_ip')
     patch.return_value = '1.1.1.1'
     return patch
 
@@ -55,3 +57,8 @@ def get_ip(mocker):
 @fixture
 def mock_today():
     return MockDate
+
+
+@fixture
+def ideax_views():
+    return views

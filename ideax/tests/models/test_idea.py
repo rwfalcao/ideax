@@ -1,7 +1,7 @@
 from model_mommy import mommy
 from pytest import mark
 
-from ideax.models import Idea
+from ...models import Idea
 
 
 class TestIdea:

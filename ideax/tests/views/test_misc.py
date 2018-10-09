@@ -6,10 +6,8 @@ import pytz
 from django.db.models import QuerySet
 from model_mommy import mommy
 
-import ideax.views
-from ideax.views import (get_authors, get_category_list,
-                         get_featured_challenges, get_phases, get_term_of_user,
-                         get_use_term_list)
+from ...views import (get_authors, get_category_list, get_featured_challenges,
+                      get_phases, get_term_of_user, get_use_term_list)
 
 
 class TestNonMiscView:
@@ -40,8 +38,8 @@ class TestNonMiscView:
         assert response.status_code == 200
         assert json.loads(response.content) == {'term': 'EULA Test'}
 
-    def test_get_use_term_list(self, db, mock_today):
-        ideax.views.date = mock_today
+    def test_get_use_term_list(self, ideax_views, db, mock_today):
+        ideax_views.date = mock_today
         response = get_use_term_list()
         assert len(response['use_term_list']) == 1
         assert response['use_term_list'][0].term == 'A generic Term of Use.'

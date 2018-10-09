@@ -1,7 +1,5 @@
 from django.http.response import HttpResponseRedirect
 
-import ideax.views
-
 
 class TestPageViews:
     def test_frontpage(self, client):
@@ -16,8 +14,8 @@ class TestPageViews:
         assert isinstance(response, HttpResponseRedirect)
         assert response.url == r'/accounts/login/?next=/idea/list'
 
-    def test_idea_list(self, client, django_user_model, mocker):
-        ideax.views.audit = mocker.Mock()
+    def test_idea_list(self, ideax_views, client, django_user_model, mocker):
+        ideax_views.audit = mocker.Mock()
         username, password = 'usuario', 'senha'
         django_user_model.objects.create_user(
             username=username,

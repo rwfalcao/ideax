@@ -1,4 +1,4 @@
-from ideax.forms import IdeaFormUpdate
+from ...forms import IdeaFormUpdate
 
 
 class TestIdeaFormUpdate:

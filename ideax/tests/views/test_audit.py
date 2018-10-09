@@ -1,5 +1,4 @@
-import ideax.views
-from ideax.views import audit
+from ...views import audit
 
 
 class MockLogger:
@@ -10,9 +9,9 @@ class MockLogger:
 
 
 class TestAudit:
-    def test_audit(self):
+    def test_audit(self, ideax_views):
         logger = MockLogger()
-        ideax.views.logger = logger
+        ideax_views.logger = logger
         audit('test_user', '127.0.0.1', 'TEST', 'TestAudit', 444)
         assert len(logger.logs) == 1
         assert logger.logs[0] == (

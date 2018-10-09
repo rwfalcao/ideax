@@ -1,6 +1,6 @@
 from pytest import mark, fixture
 
-from ideax.forms import CriterionForm
+from ...forms import CriterionForm
 
 
 class TestCriterionForm:

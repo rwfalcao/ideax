@@ -1,7 +1,7 @@
 from pytest import fixture
 from flatten_dict import flatten
 
-from ideax.mail_util import Mail_Util
+from ..mail_util import Mail_Util
 
 
 class TestMail:
