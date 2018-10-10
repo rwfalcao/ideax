@@ -1,6 +1,6 @@
 from django.contrib.auth.models import AnonymousUser
 from model_mommy import mommy
-from pytest import fixture
+from pytest import fixture, mark
 
 from ...views import idea_list
 
@@ -31,6 +31,19 @@ class TestIdeaListView:
         response = idea_list(request)
         assert response.status_code == 200
         assert 'There are no ideas at this stage!' in response.content.decode('utf-8', 'strict')
+
+    @mark.usefixtures('set_pt_br_language')
+    def test_idea_list_empty_pt(self, get_ideas_init, get_phases_count, rf, admin_user):
+        get_ideas_init.return_value = {
+            'ideas': [],
+            'challenges': [],
+        }
+        get_phases_count.return_value = 5
+        request = rf.get('/idea/list')
+        request.user = admin_user
+        response = idea_list(request)
+        assert response.status_code == 200
+        assert 'Não existem ideias nesta etapa!' in response.content.decode('utf-8', 'strict')
 
     def test_idea_list(self, get_ideas_init, get_phases_count, rf, admin_user):
         get_ideas_init.return_value = {
