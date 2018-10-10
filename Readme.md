@@ -2,7 +2,7 @@
 
 The goal of this project is to make a simple innovation system, receiving suggestions from general users and giving a way to select/promote this ideas inside the company.
 
-More informations, read the docs in ```docs``` directory.
+More information, read the docs in ```docs``` directory.
 
 # FAQ
 

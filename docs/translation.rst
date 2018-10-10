@@ -7,7 +7,7 @@ After installed your development environment and loaded your virtualenv, add the
 
     $ ./manage.py makemessages -l es
 
-It will create a directory /locale/es/LC_MESSAGES/django.po. Translate this file with a text editor or a PO editor, like POEdit, or other localization software tool. Translated strings will be writted in msgstr fields.
+It will create a directory /locale/es/LC_MESSAGES/django.po. Translate this file with a text editor or a PO editor, like POEdit, or other localization software tool. Translated strings will be written in msgstr fields.
 
 After, add your language in settings.py file.
 
