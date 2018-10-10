@@ -9,24 +9,24 @@ snapshots = Snapshot()
 
 snapshots['TestChallengeForm.test_invalid 1'] = {
     'category': [
-        'Este campo é obrigatório.'
+        'This field is required.'
     ],
     'description': [
-        'Este campo é obrigatório.'
+        'This field is required.'
     ],
     'image': [
-        'Este campo é obrigatório.'
+        'This field is required.'
     ],
     'limit_date': [
-        'Este campo é obrigatório.'
+        'This field is required.'
     ],
     'requester': [
-        'Este campo é obrigatório.'
+        'This field is required.'
     ],
     'summary': [
-        'Este campo é obrigatório.'
+        'This field is required.'
     ],
     'title': [
-        'Este campo é obrigatório.'
+        'This field is required.'
     ]
 }

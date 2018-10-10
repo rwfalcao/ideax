@@ -29,7 +29,7 @@ class TestNonMiscView:
         request = rf.get('/')
         response = get_term_of_user(request)
         assert response.status_code == 200
-        assert json.loads(response.content) == {'term': 'Termo de Uso não encontrado'}
+        assert json.loads(response.content) == {'term': 'No Term of Use found'}
 
     def test_get_term_of_user(self, rf, db):
         mommy.make('Use_Term', term='EULA Test', final_date=datetime.now(pytz.UTC) + timedelta(days=1))

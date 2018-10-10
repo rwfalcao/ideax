@@ -9,12 +9,12 @@ snapshots = Snapshot()
 
 snapshots['TestUseTermForm.test_invalid 1'] = {
     'final_date': [
-        'Este campo é obrigatório.'
+        'This field is required.'
     ],
     'init_date': [
-        'Este campo é obrigatório.'
+        'This field is required.'
     ],
     'term': [
-        'Este campo é obrigatório.'
+        'This field is required.'
     ]
 }

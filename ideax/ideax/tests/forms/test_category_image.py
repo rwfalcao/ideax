@@ -33,5 +33,5 @@ class TestCategoryImageForm:
         form = CategoryImageForm(data, files={'image': image})
         assert not form.is_valid()
         assert form.errors['description'] == [
-            'Certifique-se de que o valor tenha no máximo 50 caracteres (ele possui 51).',
+            'Ensure this value has at most 50 characters (it has 51).',
         ]

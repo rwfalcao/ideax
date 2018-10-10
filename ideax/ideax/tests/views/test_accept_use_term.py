@@ -18,7 +18,7 @@ class TestAcceptUseTermView:
         request._messages = messages
         response = accept_use_term(request)
         assert (response.status_code, response.url) == (302, '/')
-        assert messages.messages == ['Termo de uso aceito!']
+        assert messages.messages == ['Term of use accepted!']
         get_ip.assert_called_once_with(request)
 
     def test_accept_use_term_accepted(self, ideax_views, rf, admin_user, messages, mocker):
@@ -29,4 +29,4 @@ class TestAcceptUseTermView:
         request._messages = messages
         response = accept_use_term(request)
         assert (response.status_code, response.url) == (302, '/')
-        assert messages.messages == ['Termo de uso já aceito!']
+        assert messages.messages == ['Term of use already accepted!']
