@@ -1,7 +1,7 @@
 from pytest import fixture
 from flatten_dict import flatten
 
-from ..mail_util import Mail_Util
+from ..mail_util import MailUtil, mail
 
 
 class TestMail:
@@ -39,9 +39,9 @@ class TestMail:
             'Ideia<sup>x</sup>',
         )
 
-        mocker.patch('ideax.mail_util.mail')
-        mail = Mail_Util()
-        messages = mail.generate_messages(*base_params)
+        mocker.patch.object(mail, 'get_connection')
+        mail_util = MailUtil()
+        messages = mail_util.generate_messages(*base_params)
         assert len(messages) == 2
         assert messages[0].content_subtype == 'html'
         assert messages[0].subject == '[IdeiaX] - Mail test'
@@ -55,20 +55,20 @@ class TestMail:
 
     def test_send_messages(self, base_params, mocker):
         mocker.patch('ideax.mail_util.mail')
-        generate = mocker.patch('ideax.mail_util.Mail_Util.generate_messages')
+        generate = mocker.patch.object(MailUtil, 'generate_messages')
         generate.return_value = []
-        send = mocker.patch('ideax.mail_util.Mail_Util.send_mail')
-        mail = Mail_Util()
-        mail.send_messages(*base_params)
+        send = mocker.patch.object(MailUtil, 'send_mail')
+        mail_util = MailUtil()
+        mail_util.send_messages(*base_params)
         generate.assert_called_once_with(*base_params)
         send.assert_called_once_with([])
 
     def test_send_mail(self, mocker):
         conn = mocker.Mock()
-        connection = mocker.patch('ideax.mail_util.mail.get_connection')
+        connection = mocker.patch.object(mail, 'get_connection')
         connection.return_value = conn
-        mail = Mail_Util()
-        mail.send_mail([])
+        mail_util = MailUtil()
+        mail_util.send_mail([])
         conn.open.assert_called_once()
         conn.send_messages.assert_called_once_with([])
         conn.close.assert_called_once()

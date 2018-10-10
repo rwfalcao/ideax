@@ -35,14 +35,14 @@ from .forms import (
     EvaluationForm, ChallengeForm, UseTermForm,
 )
 from ..singleton import Profanity_Check
-from ..mail_util import Mail_Util
+from ..mail_util import MailUtil
 from ..util import get_ip, get_client_ip
 
 
 # Creating log object
 logger = logging.getLogger('audit_log')
 
-mail_util = Mail_Util()
+mail_util = MailUtil()
 
 
 def audit(username, ip_addr, operation, className, objectId):
