@@ -6,13 +6,19 @@ from ..badwords import Badword
 class TestBadWord:
     def test_empty(self, ipsum, pangrama):
         bd = Badword()
-        assert not bd.search_badwords('')
-        assert not bd.search_badwords(pangrama)
-        assert not bd.search_badwords(ipsum)
+        assert '' not in bd
+        assert pangrama not in bd
+        assert ipsum not in bd
 
     def test_found(self, ipsum, pangrama, pangrama_pt_br):
         bd = Badword()
         bd.blacklist = ('jabuti', 'ipsum')
+        # New pythonic way
+        assert '' not in bd
+        assert pangrama not in bd
+        assert ipsum in bd  # ipsum
+        assert pangrama_pt_br in bd  # jabuti
+        # Old method
         assert not bd.search_badwords('')
         assert not bd.search_badwords(pangrama)
         assert bd.search_badwords(ipsum)  # ipsum
@@ -20,6 +26,7 @@ class TestBadWord:
 
     def test_load_json(self, mocker):
         bd = Badword()
+        assert not list(bd)
         assert bd.blacklist == []
 
         words = 'word test'.split()
@@ -36,8 +43,10 @@ class TestBadWord:
 
         bd = Badword()
         mock_load_json.assert_not_called()
+        assert list(bd) == []
         assert bd.blacklist == []
 
         bd = Badword('bad.json')
         mock_load_json.assert_called_once_with('bad.json')
+        assert list(bd) == ['one', 'two']
         assert bd.blacklist == ['one', 'two']
