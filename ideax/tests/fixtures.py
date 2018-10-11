@@ -110,12 +110,12 @@ def ipsum():
 
 
 @fixture
-def pangrama():
+def pangram():
     return 'The quick brown fox jumps over the lazy dog'
 
 
 @fixture
-def pangrama_pt_br():
+def pangram_pt_br():
     return '''\
         À noite, vovô Kowalsky vê o ímã cair no pé do pinguim queixoso e'
         vovó põe açúcar no chá de tâmaras do jabuti feliz'''

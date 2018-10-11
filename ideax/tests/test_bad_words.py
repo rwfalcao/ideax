@@ -4,25 +4,25 @@ from ..badwords import Badword
 
 
 class TestBadWord:
-    def test_empty(self, ipsum, pangrama):
+    def test_empty(self, ipsum, pangram):
         bd = Badword()
         assert '' not in bd
-        assert pangrama not in bd
+        assert pangram not in bd
         assert ipsum not in bd
 
-    def test_found(self, ipsum, pangrama, pangrama_pt_br):
+    def test_found(self, ipsum, pangram, pangram_pt_br):
         bd = Badword()
         bd.blacklist = ('jabuti', 'ipsum')
         # New pythonic way
         assert '' not in bd
-        assert pangrama not in bd
+        assert pangram not in bd
         assert ipsum in bd  # ipsum
-        assert pangrama_pt_br in bd  # jabuti
+        assert pangram_pt_br in bd  # jabuti
         # Old method
         assert not bd.search_badwords('')
-        assert not bd.search_badwords(pangrama)
+        assert not bd.search_badwords(pangram)
         assert bd.search_badwords(ipsum)  # ipsum
-        assert bd.search_badwords(pangrama_pt_br)  # jabuti
+        assert bd.search_badwords(pangram_pt_br)  # jabuti
 
     def test_load_json(self, mocker):
         bd = Badword()
