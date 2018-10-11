@@ -93,3 +93,29 @@ def mock_today():
 @fixture
 def set_pt_br_language():
     translation.activate('pt_br')
+
+
+@fixture
+def ipsum():
+    return """\
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit,
+        sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+        Ut enim ad minim veniam, quis nostrud exercitation ullamco
+        laboris nisi ut aliquip ex ea commodo consequat.
+
+        Duis aute irure dolor in reprehenderit in voluptate velit esse
+        cillum dolore eu fugiat nulla pariatur. Excepteur sint
+        occaecat cupidatat non proident, sunt in culpa qui officia
+        deserunt mollit anim id est laborum."""
+
+
+@fixture
+def pangrama():
+    return 'The quick brown fox jumps over the lazy dog'
+
+
+@fixture
+def pangrama_pt_br():
+    return '''\
+        À noite, vovô Kowalsky vê o ímã cair no pé do pinguim queixoso e'
+        vovó põe açúcar no chá de tâmaras do jabuti feliz'''
