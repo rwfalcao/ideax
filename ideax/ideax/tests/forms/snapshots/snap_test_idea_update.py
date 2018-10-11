@@ -9,15 +9,15 @@ snapshots = Snapshot()
 
 snapshots['TestIdeaFormUpdate.test_invalid 1'] = {
     'oportunity': [
-        'Este campo é obrigatório.'
+        'This field is required.'
     ],
     'solution': [
-        'Este campo é obrigatório.'
+        'This field is required.'
     ],
     'target': [
-        'Este campo é obrigatório.'
+        'This field is required.'
     ],
     'title': [
-        'Este campo é obrigatório.'
+        'This field is required.'
     ]
 }

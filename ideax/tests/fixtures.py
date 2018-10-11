@@ -2,6 +2,7 @@ import logging
 from base64 import b64decode
 from datetime import date
 
+from django.utils import translation
 from pytest import fixture
 
 
@@ -87,3 +88,8 @@ def debug():
 @fixture
 def mock_today():
     return MockDate
+
+
+@fixture
+def set_pt_br_language():
+    translation.activate('pt_br')

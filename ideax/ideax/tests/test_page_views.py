@@ -26,4 +26,4 @@ class TestPageViews:
         response = client.get('/idea/list')
         assert response.status_code == 200
         body = response.content.decode('utf-8', 'strict')
-        assert 'Não existem ideias nesta etapa' in body
+        assert 'There are no ideas at this stage!' in body

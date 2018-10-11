@@ -1,4 +1,4 @@
-from pytest import fixture
+from pytest import fixture, mark
 from django.core.files.uploadedfile import SimpleUploadedFile
 from model_mommy import mommy
 
@@ -33,5 +33,14 @@ class TestCategoryImageForm:
         form = CategoryImageForm(data, files={'image': image})
         assert not form.is_valid()
         assert form.errors['description'] == [
-            'Certifique-se de que o valor tenha no máximo 50 caracteres (ele possui 51).',
+            'Ensure this value has at most 50 characters (it has 51).',
+        ]
+
+    @mark.usefixtures('set_pt_br_language')
+    def test_max_description_ptbr(self, db, data, image):
+        data['description'] = 'X' * 51
+        form = CategoryImageForm(data, files={'image': image})
+        assert not form.is_valid()
+        assert form.errors['description'] == [
+            'Certifique-se de que o valor tenha no máximo 50 caracteres (ele possui 51).'
         ]

@@ -10,34 +10,34 @@ snapshots = Snapshot()
 snapshots['TestNonMiscView.test_get_phases 1'] = [
     (
         1,
-        'Discussão'
+        'Discussion'
     ),
     (
         2,
-        'Avaliação'
+        'Evaluation'
     ),
     (
         3,
-        'Ideação'
+        'Ideation'
     ),
     (
         4,
-        'Aprovação'
+        'Approval'
     ),
     (
         5,
-        'Evolução'
+        'Evolution'
     ),
     (
         6,
-        'Concluídas'
+        'Done'
     ),
     (
         7,
-        'Arquivadas'
+        'Archived'
     ),
     (
         8,
-        'Pausadas'
+        'Paused'
     )
 ]

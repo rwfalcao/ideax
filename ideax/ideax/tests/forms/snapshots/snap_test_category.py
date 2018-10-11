@@ -9,9 +9,9 @@ snapshots = Snapshot()
 
 snapshots['TestCategoryForm.test_invalid 1'] = {
     'description': [
-        'Este campo é obrigatório.'
+        'This field is required.'
     ],
     'title': [
-        'Este campo é obrigatório.'
+        'This field is required.'
     ]
 }
