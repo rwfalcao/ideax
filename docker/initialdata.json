@@ -83,7 +83,7 @@
     "user_permissions": []
   }
 }, {
-  "model": "ideax.userprofile",
+  "model": "users.userprofile",
   "pk": 1,
   "fields": {
     "user": 1,

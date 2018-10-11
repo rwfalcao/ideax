@@ -1,7 +1,8 @@
 from django.contrib.syndication.views import Feed
 from django.utils.translation import ugettext_lazy as _
-from ideax.models import Comment, Idea
 from martor.templatetags.martortags import safe_markdown
+
+from .models import Comment, Idea
 
 
 class Comment_Feed(Feed):

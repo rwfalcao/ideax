@@ -1,0 +1,23 @@
+language: python
+dist: "xenial"
+python:
+  - "3.6"
+  - "3.7"
+services:
+  - mysql
+before_install:
+  - mysql -e 'CREATE DATABASE IF NOT EXISTS test;'
+install:
+  - pip install -r requirements/dev.txt
+env:
+  global:
+    - DEBUG=True
+    - DJANGO_SETTINGS_MODULE=ideax.settings.test
+    - SECRET_KEY=12345678901234567890123456789012345678901234567890
+    - GENERAL_USER_GROUP=General
+    - ALLOWED_HOSTS=.localhost,ideax
+    - DATABASE_URL=mysql://travis@localhost/test
+script:
+  - flake8 ideax
+  - ./manage.py compilemessages
+  - py.test

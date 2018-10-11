@@ -1,8 +1,8 @@
 from model_mommy import mommy
 from pytest import fixture
 
+from ....users.models import UserProfile
 from ...forms import IdeaForm
-from ...models import UserProfile
 
 
 class TestIdeaForm:

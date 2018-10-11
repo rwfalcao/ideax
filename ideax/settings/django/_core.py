@@ -32,7 +32,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django.contrib.humanize',
     'widget_tweaks',
-    'ideax',
+    'ideax.users.UserConfig',
+    'ideax.ideax.IdeaxConfig',
     'mptt',
 ]
 
@@ -117,7 +118,12 @@ LOCALE_PATHS = (os.path.join(BASE_DIR, 'locale'),)
 # https://docs.djangoproject.com/en/2.0/howto/static-files/
 
 STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'ideax/static'),
+]
+
 
 LOGIN_REDIRECT_URL = '/idea/list'
 LOGOUT_REDIRECT_URL = '/'

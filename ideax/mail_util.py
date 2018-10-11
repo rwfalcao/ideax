@@ -3,7 +3,7 @@ from django.core.mail import EmailMessage
 from django.template.loader import get_template
 
 
-class Mail_Util:
+class MailUtil:
     def __init__(self):
         self.connection = mail.get_connection()
 

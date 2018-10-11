@@ -3,7 +3,7 @@
 __pycache__
 myvenv
 db.sqlite3
-/static
+staticfiles
 .DS_Store
 *bkp*
 _config.yml
@@ -20,10 +20,4 @@ docs/_build/
 .vscode
 .venv
 .coverage
-ideax/static/admin
-ideax/static/djcelery
-ideax/static/martor
-ideax/static/plugins
-ideax/static/tinymce
-ideax/static/django_extensions
-ideax/static/mptt
+*.override.yml
