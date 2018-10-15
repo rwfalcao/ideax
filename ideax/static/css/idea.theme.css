@@ -1076,6 +1076,7 @@ only screen and (max-width: 760px),
   color: #cecece;
 }
 
+<<<<<<< HEAD
 .coming-soon {
   display: flex;
   flex-direction: column;
@@ -1101,4 +1102,8 @@ only screen and (max-width: 760px),
   text-transform: Uppercase;
   font-size: 100px;
   color: #fc0;
+=======
+.modal-header {
+  display: block !important;
+>>>>>>> Fab Button added in CRUD (Category, Term of Use, Category Image)
 }
