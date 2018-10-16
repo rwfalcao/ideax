@@ -1,4 +1,5 @@
 from pytest import fixture
+from model_mommy import mommy
 from ...models import Category
 
 
@@ -17,6 +18,10 @@ class TestCategory:
     def test_str(self, setup_category):
         assert str(setup_category) == setup_category.title
 
-    def test_get_images(self, setup_category):
-        # TODO: Test with images created
+    def test_get_images_empty(self, setup_category):
         assert not setup_category.get_all_image_header()
+
+    def test_get_images(self, setup_category):
+        image = mommy.make('Category_Image', category=setup_category)
+        assert setup_category.get_all_image_header()
+        assert setup_category.get_all_image_header()[0].description == image.description

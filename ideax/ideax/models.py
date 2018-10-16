@@ -127,10 +127,7 @@ class Idea(models.Model):
 
     def get_approval_rate(self):
         sum = self.count_likes() + self.count_dislikes()
-        if sum > 0:
-            return self.count_likes()/sum*100
-        else:
-            return 0
+        return self.count_likes()/sum*100 if sum > 0 else 0
 
 
 class Challenge(models.Model):
