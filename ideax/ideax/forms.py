@@ -82,7 +82,7 @@ class CategoryImageForm(forms.ModelForm):
 
 
 class ChallengeForm(forms.ModelForm):
-    description = MartorFormField(label=_('Description'))
+    description = MartorFormField(label=_('Description'), max_length=Challenge._meta.get_field('description').max_length)
 
     class Meta:
         model = Challenge
