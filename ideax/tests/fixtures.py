@@ -119,3 +119,8 @@ def pangram_pt_br():
     return '''\
         À noite, vovô Kowalsky vê o ímã cair no pé do pinguim queixoso e'
         vovó põe açúcar no chá de tâmaras do jabuti feliz'''
+
+
+@fixture
+def common_user(django_user_model):
+    return django_user_model.objects.create(username='usuario', password='senha')
