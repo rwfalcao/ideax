@@ -1,6 +1,12 @@
 from django.contrib.auth.models import AnonymousUser
+from django.core.exceptions import PermissionDenied
+from django.http.response import Http404
 
-from ...views import accept_use_term
+from model_mommy import mommy
+from pytest import raises
+
+from ...forms import UseTermForm
+from ...views import accept_use_term, save_use_term, use_term_edit
 
 
 class TestAcceptUseTermView:
@@ -30,3 +36,66 @@ class TestAcceptUseTermView:
         response = accept_use_term(request)
         assert (response.status_code, response.url) == (302, '/')
         assert messages.messages == ['Term of use already accepted!']
+
+
+class TestUseTermEdit:
+    def test_anonymous(self, rf):
+        request = rf.get(f'/useterm/99999/edit/')
+        request.user = AnonymousUser()
+        response = use_term_edit(request, 99999)
+        assert (response.status_code, response.url) == (302, '/accounts/login/?next=/useterm/99999/edit/')
+
+    def test_not_found(self, rf, admin_user):
+        request = rf.get(f'/useterm/99999/edit/')
+        request.user = admin_user
+        with raises(Http404):
+            use_term_edit(request, 99999)
+
+    def test_get_common_user(self, rf, common_user, ideax_views, mocker):
+        request = rf.get('/useterm/1/edit/')
+        request.user = common_user
+        with raises(PermissionDenied):
+            use_term_edit(request, 1)
+
+    def test_get(self, rf, admin_user, ideax_views, mocker):
+        use_term = mommy.make('Use_Term')
+        use_term_form = mocker.patch.object(ideax_views, 'UseTermForm')
+        save_use_term = mocker.patch.object(ideax_views, 'save_use_term')
+
+        request = rf.get(f'/useterm/{use_term.id}/edit/')
+        request.user = admin_user
+        use_term_edit(request, use_term.id)
+        use_term_form.assert_called_once_with(instance=use_term)
+        save_use_term.assert_called_once_with(request, use_term_form.return_value, 'ideax/use_term_edit.html')
+
+    def test_post(self, rf, admin_user, ideax_views, mocker):
+        use_term = mommy.make('Use_Term')
+        use_term_form = mocker.patch.object(ideax_views, 'UseTermForm')
+        save_use_term = mocker.patch.object(ideax_views, 'save_use_term')
+
+        request = rf.post(f'/useterm/{use_term.id}/edit/')
+        request.user = admin_user
+        use_term_edit(request, use_term.id)
+        use_term_form.assert_called_once_with(request.POST, instance=use_term)
+        save_use_term.assert_called_once_with(request, use_term_form.return_value, 'ideax/use_term_edit.html')
+
+
+class TestSaveUseTerm:
+    def test_get_full(self, rf, admin_user):
+        # TODO: Change to a integrate test
+        use_term = mommy.make('Use_Term')
+        request = rf.get(f'/useterm/{use_term.id}/edit/')
+        request.user = admin_user
+        response = save_use_term(request, UseTermForm(instance=use_term), 'ideax/use_term_edit.html')
+        body = response.content.decode('utf-8')
+        assert response.status_code == 200
+        assert '<form method="post" class="js-use_term-update-form"' in body
+        assert "input type='hidden' name='csrfmiddlewaretoken'" in body
+        assert '<button type="submit" class="btn btn-primary">Update</button>' in body
+
+    def test_get_mocked(self, rf, admin_user, ideax_views, mocker):
+        render = mocker.patch.object(ideax_views, 'render')
+        request = rf.get('/')
+        request.user = admin_user
+        save_use_term(request, 'form', 'use_term_edit.html')
+        render.assert_called_once_with(request, 'use_term_edit.html', {'form': 'form'})

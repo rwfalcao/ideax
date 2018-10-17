@@ -698,6 +698,7 @@ def use_term_edit(request, pk):
     return save_use_term(request, use_term_form, 'ideax/use_term_edit.html')
 
 
+# TODO: It isn't routed, maybe it unnecessary check it
 @login_required
 def save_use_term(request, form, template_name, new=False):
     if request.method == "POST":
