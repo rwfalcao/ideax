@@ -6,7 +6,8 @@ from model_mommy import mommy
 from pytest import mark, raises
 
 from ...forms import UseTermForm
-from ...views import accept_use_term, save_use_term, use_term_edit
+from ...views import (accept_use_term, get_valid_use_term, save_use_term, use_term_detail, use_term_edit,
+                      use_term_remove)
 
 
 class TestAcceptUseTermView:
@@ -51,7 +52,7 @@ class TestUseTermEdit:
         with raises(Http404):
             use_term_edit(request, 99999)
 
-    def test_get_common_user(self, rf, common_user, ideax_views, mocker):
+    def test_get_common_user(self, rf, common_user):
         request = rf.get('/useterm/1/edit/')
         request.user = common_user
         with raises(PermissionDenied):
@@ -114,17 +115,20 @@ class TestSaveUseTerm:
         render.assert_called_once_with(request, 'use_term_edit.html', {'form': form})
         assert messages.messages == ['Invalid Final Date']
 
-    def test_post_new(self, rf, admin_user, mocker, messages):
+    def test_post_new(self, rf, mocker, messages):
+        """Without DB (100% mocked)"""
+
         form = mocker.patch('ideax.ideax.forms.UseTermForm')
         form.is_valid.return_value = True
         form.save.return_value.is_invalid_date.return_value = False
-        use_term = mocker.Mock()
-        use_term.is_past_due = True
         terms = mocker.patch('ideax.ideax.models.Use_Term.objects')
-        terms.all.return_value = [use_term]
+        terms.all.return_value = [mocker.Mock(is_past_due=True)]
         render = mocker.patch('ideax.ideax.views.render')
+        user_profile = mocker.patch('ideax.users.models.UserProfile.objects')
+        user_profile.get.return_value = None
+
         request = rf.post('/', {})
-        request.user = admin_user
+        request.user = mocker.Mock()
         request._messages = messages
         save_use_term(request, form, 'use_term_edit.html', True)
         render.assert_called_once_with(request, 'use_term_edit.html', {'form': form})
@@ -134,10 +138,8 @@ class TestSaveUseTerm:
         form = mocker.patch('ideax.ideax.forms.UseTermForm')
         form.is_valid.return_value = True
         form.save.return_value.is_invalid_date.return_value = False
-        use_term = mocker.Mock()
-        use_term.is_past_due = False
         terms = mocker.patch('ideax.ideax.models.Use_Term.objects')
-        terms.all.return_value = [use_term]
+        terms.all.return_value = [mocker.Mock(is_past_due=False)]
         request = rf.post('/', {})
         request.user = admin_user
         request._messages = messages
@@ -155,3 +157,93 @@ class TestSaveUseTerm:
         response = save_use_term(request, form, 'use_term_edit.html', True)
         # TODO: maybe a message
         assert response is not None
+
+
+class TestUseTermRemove:
+    def test_anonymous(self, rf):
+        request = rf.get('/')
+        request.user = AnonymousUser()
+        response = use_term_remove(request, 999)
+        assert (response.status_code, response.url) == (302, '/accounts/login/?next=/')
+
+    def test_common_user(self, rf, common_user):
+        request = rf.get('/')
+        request.user = common_user
+        with raises(PermissionDenied):
+            use_term_remove(request, 1)
+
+    def test_invalid_method(self, rf, mocker):
+        mocker.patch('ideax.ideax.views.get_object_or_404')
+        request = rf.post('/', {})
+        request.user = mocker.Mock()
+        response = use_term_remove(request, 999)
+        assert response is None
+
+    def test_get(self, rf, mocker, messages):
+        get = mocker.patch('ideax.ideax.views.get_object_or_404')
+        get_use_term_list = mocker.patch('ideax.ideax.views.get_use_term_list')
+        get_use_term_list.return_value = {}
+        render = mocker.patch('ideax.ideax.views.render')
+        use_term = mocker.patch('ideax.ideax.views.Use_Term')
+
+        request = rf.get('/')
+        request.user = mocker.Mock()
+        request._messages = messages
+        use_term_remove(request, 999)
+
+        get.assert_called_once_with(use_term, pk=999)
+        render.assert_called_once_with(request, 'ideax/use_term_list.html', {})
+        assert messages.messages == ['Terms of Use removed successfully!']
+
+
+class TestUseTermDetail:
+    def test_anonymous(self, rf):
+        request = rf.get('/')
+        request.user = AnonymousUser()
+        response = use_term_detail(request, 999)
+        assert (response.status_code, response.url) == (302, '/accounts/login/?next=/')
+
+    def test_get(self, rf, mocker):
+        get = mocker.patch('ideax.ideax.views.get_object_or_404')
+        render = mocker.patch('ideax.ideax.views.render')
+        use_term = mocker.patch('ideax.ideax.views.Use_Term')
+
+        request = rf.get('/')
+        request.user = mocker.Mock()
+        use_term_detail(request, 999)
+
+        get.assert_called_once_with(use_term, pk=999)
+        render.assert_called_once_with(request, 'ideax/use_term_detail.html', {'use_term': get.return_value})
+
+
+class TestGetValidUseTerm:
+    def test_empty(self, rf, mocker):
+        terms = mocker.patch('ideax.ideax.models.Use_Term.objects')
+        terms.all.return_value = []
+        render = mocker.patch('ideax.ideax.views.render')
+
+        request = rf.get('/')
+        get_valid_use_term(request)
+
+        render.assert_called_once_with(request, 'ideax/use_term.html', {'use_term': 'No Term of Use found'})
+
+    def test_no_valid(self, rf, mocker):
+        terms = mocker.patch('ideax.ideax.models.Use_Term.objects')
+        terms.all.return_value = [mocker.Mock(is_past_due=False)]
+        render = mocker.patch('ideax.ideax.views.render')
+
+        request = rf.get('/')
+        get_valid_use_term(request)
+
+        render.assert_called_once_with(request, 'ideax/use_term.html', {'use_term': 'No Term of Use found'})
+
+    def test_valid(self, rf, mocker):
+        terms = mocker.patch('ideax.ideax.models.Use_Term.objects')
+        term = mocker.Mock(is_past_due=True)
+        terms.all.return_value = [term]
+        render = mocker.patch('ideax.ideax.views.render')
+
+        request = rf.get('/')
+        get_valid_use_term(request)
+
+        render.assert_called_once_with(request, 'ideax/use_term.html', {'use_term': term})

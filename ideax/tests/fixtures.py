@@ -123,4 +123,5 @@ def pangram_pt_br():
 
 @fixture
 def common_user(django_user_model):
+    # TODO: Mock without db (with permissions support)
     return django_user_model.objects.create(username='usuario', password='senha')
