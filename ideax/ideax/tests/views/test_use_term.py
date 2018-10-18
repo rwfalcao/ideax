@@ -7,7 +7,7 @@ from pytest import mark, raises
 
 from ...forms import UseTermForm
 from ...views import (accept_use_term, get_valid_use_term, save_use_term, use_term_detail, use_term_edit,
-                      use_term_remove)
+                      use_term_list, use_term_new, use_term_remove)
 
 
 class TestAcceptUseTermView:
@@ -247,3 +247,60 @@ class TestGetValidUseTerm:
         get_valid_use_term(request)
 
         render.assert_called_once_with(request, 'ideax/use_term.html', {'use_term': term})
+
+
+class TestUseTermList:
+    def test_anonymous(self, rf):
+        request = rf.get('/')
+        request.user = AnonymousUser()
+        response = use_term_list(request)
+        assert (response.status_code, response.url) == (302, '/accounts/login/?next=/')
+
+    def test_get(self, rf, mocker):
+        get_use_term_list = mocker.patch('ideax.ideax.views.get_use_term_list')
+        get_use_term_list.return_value = {}
+        render = mocker.patch('ideax.ideax.views.render')
+
+        request = rf.get('/')
+        request.user = mocker.Mock()
+        use_term_list(request)
+
+        render.assert_called_once_with(request, 'ideax/use_term_list.html', {})
+
+
+class TestUseTermNew:
+    def test_anonymous(self, rf):
+        request = rf.get('/')
+        request.user = AnonymousUser()
+        response = use_term_new(request)
+        assert (response.status_code, response.url) == (302, '/accounts/login/?next=/')
+
+    def test_get_common_user(self, rf, common_user):
+        request = rf.get('/')
+        request.user = common_user
+        with raises(PermissionDenied):
+            use_term_new(request, 1)
+
+    def test_get(self, rf, mocker):
+        form = mocker.patch('ideax.ideax.views.UseTermForm')
+        form.return_value = {}
+        save_use_term = mocker.patch('ideax.ideax.views.save_use_term')
+
+        request = rf.get('/')
+        request.user = mocker.Mock()
+        use_term_new(request)
+
+        form.assert_called_once_with()
+        save_use_term.assert_called_once_with(request, {}, 'ideax/use_term_new.html', True)
+
+    def test_post(self, rf, mocker):
+        form = mocker.patch('ideax.ideax.views.UseTermForm')
+        form.return_value = {}
+        save_use_term = mocker.patch('ideax.ideax.views.save_use_term')
+
+        request = rf.post('/', {})
+        request.user = mocker.Mock()
+        use_term_new(request)
+
+        form.assert_called_once_with(request.POST)
+        save_use_term.assert_called_once_with(request, {}, 'ideax/use_term_new.html', True)
