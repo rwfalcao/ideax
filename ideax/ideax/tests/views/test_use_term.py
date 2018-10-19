@@ -101,17 +101,21 @@ class TestSaveUseTerm:
         save_use_term(request, 'form', 'use_term_edit.html')
         render.assert_called_once_with(request, 'use_term_edit.html', {'form': 'form'})
 
-    def test_post_1(self, rf, admin_user, mocker, messages):
+    def test_post_1(self, rf, mocker, messages):
         form = mocker.patch('ideax.ideax.forms.UseTermForm')
         form.is_valid.return_value = True
         form.save.return_value.is_invalid_date.return_value = True
         terms = mocker.patch('ideax.ideax.models.Use_Term.objects')
         terms.all.return_value = []
         render = mocker.patch('ideax.ideax.views.render')
+        user_profile = mocker.patch('ideax.users.models.UserProfile.objects')
+        user_profile.get.return_value = None
+
         request = rf.post('/', {})
-        request.user = admin_user
+        request.user = mocker.Mock()
         request._messages = messages
         save_use_term(request, form, 'use_term_edit.html')
+
         render.assert_called_once_with(request, 'use_term_edit.html', {'form': form})
         assert messages.messages == ['Invalid Final Date']
 
@@ -133,19 +137,25 @@ class TestSaveUseTerm:
         save_use_term(request, form, 'use_term_edit.html', True)
         render.assert_called_once_with(request, 'use_term_edit.html', {'form': form})
         assert messages.messages == ['Already exists a active Term Of Use']
+        user_profile.get.assert_called_once_with(user=request.user)
+        form.save.assert_called_once_with(commit=False)
 
-    def test_post_new_inactive(self, rf, admin_user, mocker, messages):
+    def test_post_new_inactive(self, rf, mocker, messages):
         form = mocker.patch('ideax.ideax.forms.UseTermForm')
         form.is_valid.return_value = True
         form.save.return_value.is_invalid_date.return_value = False
         terms = mocker.patch('ideax.ideax.models.Use_Term.objects')
         terms.getActive.return_value = False
+        user_profile = mocker.patch('ideax.users.models.UserProfile.objects')
+        user_profile.get.return_value = None
+
         request = rf.post('/', {})
-        request.user = admin_user
+        request.user = mocker.Mock()
         request._messages = messages
         response = save_use_term(request, form, 'use_term_edit.html', True)
         assert (response.status_code, response.url) == (302, '/useterm/list/')
         assert messages.messages == ['Term of Use saved successfully!']
+        user_profile.get.assert_called_once_with(user=request.user)
 
     @mark.skip('TODO: save use term with invalid form')
     def test_post_form_invalid(self, rf, admin_user, mocker):
