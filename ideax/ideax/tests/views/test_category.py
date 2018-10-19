@@ -5,7 +5,7 @@ from django.http.response import Http404
 from pytest import raises
 
 from ...models import Category
-from ...views import category_edit, category_new, category_remove
+from ...views import category_edit, category_list, category_new, category_remove
 
 
 class TestCategoryNew:
@@ -157,3 +157,23 @@ class TestCategoryRemove:
         assert (response.status_code, response.url) == (302, '/category/list/')
         assert get.return_value.discarded is True
         assert messages.messages == ['Category removed successfully!']
+
+
+class TestCategoryList:
+    def test_anonymous(self, rf):
+        request = rf.get('/')
+        request.user = AnonymousUser()
+        response = category_list(request)
+        assert (response.status_code, response.url) == (302, '/accounts/login/?next=/')
+
+    def test_get(self, rf, mocker, common_user):
+        mocker.patch('ideax.ideax.views.audit')
+        get_category_list = mocker.patch('ideax.ideax.views.get_category_list')
+        get_category_list.return_value = {}
+        render = mocker.patch('ideax.ideax.views.render')
+
+        request = rf.get('/')
+        request.user = common_user
+        category_list(request)
+
+        render.assert_called_once_with(request, 'ideax/category_list.html', {})
