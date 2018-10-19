@@ -1,8 +1,11 @@
 from django.contrib.auth.models import AnonymousUser
 from django.core.exceptions import PermissionDenied
+from django.http.response import Http404
+
 from pytest import raises
 
-from ...views import category_new
+from ...models import Category
+from ...views import category_edit, category_new, category_remove
 
 
 class TestCategoryNew:
@@ -57,3 +60,100 @@ class TestCategoryNew:
         response = category_new(request)
         # TODO: Maybe a message
         assert response.status_code == 200
+
+
+class TestCategoryEdit:
+    def test_anonymous(self, rf):
+        request = rf.get(f'/category/99999/edit/')
+        request.user = AnonymousUser()
+        response = category_edit(request, 99999)
+        assert (response.status_code, response.url) == (302, '/accounts/login/?next=/category/99999/edit/')
+
+    def test_not_found(self, rf, factory_user, db):
+        request = rf.get(f'/category/99999/edit/')
+        request.user = factory_user('ideax.change_category')
+        with raises(Http404):
+            category_edit(request, 99999)
+
+    def test_get_common_user(self, rf, common_user):
+        request = rf.get('/category/1/edit/')
+        request.user = common_user
+        with raises(PermissionDenied):
+            category_edit(request, 1)
+
+    def test_get(self, rf, factory_user, mocker):
+        get = mocker.patch('ideax.ideax.views.get_object_or_404')
+        render = mocker.patch('ideax.ideax.views.render')
+        form = mocker.patch('ideax.ideax.views.CategoryForm')
+
+        request = rf.get(f'/category/55/edit/')
+        request.user = factory_user('ideax.change_category')
+        category_edit(request, 55)
+
+        get.assert_called_once_with(Category, pk=55)
+        render.assert_called_once_with(request, 'ideax/category_edit.html', {'form': form.return_value})
+
+    def test_post(self, rf, factory_user, mocker, messages):
+        get = mocker.patch('ideax.ideax.views.get_object_or_404')
+        mocker.patch('ideax.ideax.views.audit')
+        category_form = mocker.patch('ideax.ideax.views.CategoryForm')
+        category_form.return_value.is_valid.return_value = True
+
+        request = rf.post(f'/category/55/edit/', {})
+        request.user = factory_user('ideax.change_category')
+        request._messages = messages
+        response = category_edit(request, 55)
+
+        get.assert_called_once_with(Category, pk=55)
+        category_form.assert_called_once_with(request.POST, instance=get.return_value)
+        assert (response.status_code, response.url) == (302, '/category/list/')
+        assert messages.isSuccess
+        assert messages.messages == ['Category changed successfully!']
+
+    def test_post_invalid_form(self, rf, factory_user, mocker, messages):
+        get = mocker.patch('ideax.ideax.views.get_object_or_404')
+        mocker.patch('ideax.ideax.views.audit')
+        category_form = mocker.patch('ideax.ideax.views.CategoryForm')
+        category_form.return_value.is_valid.return_value = False
+        render = mocker.patch('ideax.ideax.views.render')
+
+        request = rf.post(f'/category/55/edit/', {})
+        request.user = factory_user('ideax.change_category')
+        request._messages = messages
+        category_edit(request, 55)
+
+        get.assert_called_once_with(Category, pk=55)
+        category_form.assert_called_once_with(request.POST, instance=get.return_value)
+        # TODO: any fail message?
+        render.assert_called_once_with(request, 'ideax/category_edit.html', {'form': category_form.return_value})
+
+
+class TestCategoryRemove:
+    def test_anonymous(self, rf):
+        request = rf.get('/')
+        request.user = AnonymousUser()
+        response = category_remove(request, 999)
+        assert (response.status_code, response.url) == (302, '/accounts/login/?next=/')
+
+    def test_common_user(self, rf, common_user):
+        request = rf.get('/')
+        request.user = common_user
+        with raises(PermissionDenied):
+            category_remove(request, 1)
+
+    def test_get(self, rf, factory_user, mocker, messages):
+        get = mocker.patch('ideax.ideax.views.get_object_or_404')
+        get_category_list = mocker.patch('ideax.ideax.views.get_category_list')
+        get_category_list.return_value = {}
+        category = mocker.patch('ideax.ideax.views.Category')
+        category.__name__ = 'Category'
+
+        request = rf.get('/')
+        request.user = factory_user('ideax.delete_category')
+        request._messages = messages
+        response = category_remove(request, 999)
+
+        get.assert_called_once_with(category, pk=999)
+        assert (response.status_code, response.url) == (302, '/category/list/')
+        assert get.return_value.discarded is True
+        assert messages.messages == ['Category removed successfully!']
