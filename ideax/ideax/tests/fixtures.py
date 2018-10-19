@@ -1,7 +1,5 @@
 from pytest import fixture
 
-from .. import views
-
 
 @fixture
 def get_ip(ideax_views, mocker):
@@ -12,4 +10,5 @@ def get_ip(ideax_views, mocker):
 
 @fixture
 def ideax_views():
+    from .. import views  # noqa
     return views
