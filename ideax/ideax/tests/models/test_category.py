@@ -1,22 +1,24 @@
+from model_mommy import mommy
 from pytest import fixture
+
 from ...models import Category
 
 
 class TestCategory:
     @fixture
-    def setup_category(self, db):
-        c = Category()
-        c.title = 'Mobile'
-        c.description = 'Mobile interface for existing service'
-        c.save()
-        return c
+    def category(self, db):
+        return mommy.make('Category')
 
-    def test_created(self, setup_category):
-        assert setup_category.id is not None
+    def test_created(self, category):
+        assert category.id is not None
 
-    def test_str(self, setup_category):
-        assert str(setup_category) == setup_category.title
+    def test_str(self):
+        category = Category(title='Mobile')
+        assert str(category) == 'Mobile'
 
-    def test_get_images(self, setup_category):
-        # TODO: Test with images created
-        assert not setup_category.get_all_image_header()
+    def test_get_images_empty(self, category):
+        assert not category.get_all_image_header()
+
+    def test_get_images(self, category):
+        mommy.make('Category_Image', category=category)
+        assert category.get_all_image_header()
