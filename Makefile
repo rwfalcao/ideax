@@ -10,7 +10,7 @@ test_snapshot:
 	py.test -n $(PROCS) --reuse-db --snapshot-update ${ARGS}
 
 test_coverage:
-	py.test -n $(PROCS) --reuse-db --cov-report term-missing --cov=ideax
+	py.test -n $(PROCS) --reuse-db --cov-report term-missing --cov=ideax ${ARGS}
 
 test_watch:
 	ptw -c -- -n $(PROCS) --reuse-db ${ARGS}
