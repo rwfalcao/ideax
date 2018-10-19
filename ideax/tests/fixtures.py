@@ -1,8 +1,11 @@
 import logging
+
 from base64 import b64decode
 from datetime import date
 
+from django.contrib.messages import constants
 from django.utils import translation
+
 from pytest import fixture
 
 
@@ -12,9 +15,19 @@ class FakeMessages:
 
     def __init__(self):
         self.messages = []
+        self.levels = []
 
     def add(self, level, message, extra_tags):
         self.messages.append(str(message))
+        self.levels.append(level)
+
+    @property
+    def isSuccess(self):
+        return self.levels[-1] == constants.SUCCESS
+
+    @property
+    def isError(self):
+        return self.levels[-1] == constants.ERROR
 
     @property
     def pop(self):
@@ -117,11 +130,21 @@ def pangram():
 @fixture
 def pangram_pt_br():
     return '''\
-        À noite, vovô Kowalsky vê o ímã cair no pé do pinguim queixoso e'
+        À noite, vovô Kowalsky vê o ímã cair no pé do pinguim queixoso e
         vovó põe açúcar no chá de tâmaras do jabuti feliz'''
 
 
 @fixture
-def common_user(django_user_model):
-    # TODO: Mock without db (with permissions support)
-    return django_user_model.objects.create(username='usuario', password='senha')
+def common_user(mocker):
+    user = mocker.Mock()
+    user.has_perms.return_value = False
+    return user
+
+
+@fixture
+def factory_user(mocker):
+    def user(perm):
+        user = mocker.Mock()
+        user.has_perms.side_effect = lambda x: True if x == (perm,) else False
+        return user
+    return user
