@@ -101,7 +101,7 @@ class TestSaveUseTerm:
         save_use_term(request, 'form', 'use_term_edit.html')
         render.assert_called_once_with(request, 'use_term_edit.html', {'form': 'form'})
 
-    def test_post_1(self, rf, mocker, messages):
+    def test_post_invalid_final_date(self, rf, mocker, messages):
         form = mocker.patch('ideax.ideax.forms.UseTermForm')
         form.is_valid.return_value = True
         form.save.return_value.is_invalid_date.return_value = True
