@@ -13,6 +13,7 @@ class TestChallengeForm:
             'summary': 'Test Challenge Summary',
             'requester': 'Test Challenge Requester',
             'description': 'Test Challenge Description',
+            'discarted': False,
         }
 
     def test_max_description(self, db, data, test_image):
@@ -99,7 +100,8 @@ class TestChallengeForm:
             'Certifique-se de que o valor tenha no máximo 140 caracteres (ele possui 141).',
         ]
 
-
+    def test_discarded(self, db, data):
+        assert data['discarted'] is not None
 
     def test_invalid(self, snapshot):
         form = ChallengeForm({})
