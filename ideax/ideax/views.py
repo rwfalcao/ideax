@@ -698,24 +698,15 @@ def use_term_edit(request, pk):
     return save_use_term(request, use_term_form, 'ideax/use_term_edit.html')
 
 
-@login_required
 def save_use_term(request, form, template_name, new=False):
     if request.method == "POST":
         if form.is_valid():
-            active = False
             use_term = form.save(commit=False)
             use_term.creator = UserProfile.objects.get(user=request.user)
-            use_terms = Use_Term.objects.all()
-            for term in use_terms:
-                if term.is_past_due:
-                    active = True
-                    break
-                else:
-                    active = False
             if use_term.is_invalid_date():
                 messages.error(request, _('Invalid Final Date'))
                 return render(request, template_name, {'form': form})
-            if active and new:
+            if Use_Term.objects.getActive() and new:
                 messages.error(request, _('Already exists a active Term Of Use'))
                 return render(request, template_name, {'form': form})
             use_term.save()

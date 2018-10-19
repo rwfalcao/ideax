@@ -215,11 +215,21 @@ class Evaluation(models.Model):
     note = models.TextField(null=True)
 
 
+class UseTermManager(models.Manager):
+    def getActive(self):
+        for term in self.all():
+            if term.is_past_due:
+                return True
+        return False
+
+
 class Use_Term(models.Model):
     creator = models.ForeignKey('users.UserProfile', on_delete=models.PROTECT)
     term = models.TextField(max_length=12500)
     init_date = models.DateTimeField()
     final_date = models.DateTimeField()
+
+    objects = UseTermManager()
 
     @property
     def is_past_due(self):

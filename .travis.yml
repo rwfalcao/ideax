@@ -18,6 +18,4 @@ env:
     - ALLOWED_HOSTS=.localhost,ideax
     - DATABASE_URL=mysql://travis@localhost/test
 script:
-  - flake8 ideax
-  - ./manage.py compilemessages
-  - py.test
+  - make ci
