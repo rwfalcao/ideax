@@ -3,7 +3,7 @@ from django.core.exceptions import PermissionDenied
 from django.http.response import Http404
 
 from model_mommy import mommy
-from pytest import mark, raises
+from pytest import raises
 
 from ...forms import ChallengeForm
 from ...views import (challenge_detail, challenge_edit, challenge_remove)
