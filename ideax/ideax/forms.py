@@ -20,7 +20,7 @@ class IdeaForm(forms.ModelForm):
     oportunity = MartorFormField(label=_('Oportunity'))
     solution = MartorFormField(label=_('Solution'))
     target = MartorFormField(label=_('Target'))
-    summary = MartorFormField(label=_('Summary'))
+    summary = MartorFormField(label=_('Summary'), max_length=Idea._meta.get_field('summary').max_length)
 
     def __init__(self, *args, **kwargs):
         queryset = kwargs.pop('authors', None)
