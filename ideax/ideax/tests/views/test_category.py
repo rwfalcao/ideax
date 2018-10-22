@@ -33,6 +33,7 @@ class TestCategoryNew:
         render.assert_called_once_with(request, 'ideax/category_new.html', {'form': form.return_value})
 
     def test_post(self, rf, factory_user, mocker, messages):
+        audit = mocker.patch('ideax.ideax.views.audit')
         form = mocker.patch('ideax.ideax.views.CategoryForm')
         form.return_value.is_valid.return_value = True
         user_profile = mocker.patch('ideax.users.models.UserProfile.objects')
@@ -44,6 +45,7 @@ class TestCategoryNew:
 
         response = category_new(request)
         form.assert_called_once_with(request.POST)
+        audit.assert_called_once()
         assert (response.status_code, response.url) == (302, '/category/list/')
         assert messages.isSuccess
         assert messages.messages == ['Category saved successfully!']
@@ -142,6 +144,7 @@ class TestCategoryRemove:
             category_remove(request, 1)
 
     def test_get(self, rf, factory_user, mocker, messages):
+        audit = mocker.patch('ideax.ideax.views.audit')
         get = mocker.patch('ideax.ideax.views.get_object_or_404')
         get_category_list = mocker.patch('ideax.ideax.views.get_category_list')
         get_category_list.return_value = {}
@@ -154,8 +157,10 @@ class TestCategoryRemove:
         response = category_remove(request, 999)
 
         get.assert_called_once_with(category, pk=999)
+        audit.assert_called_once()
         assert (response.status_code, response.url) == (302, '/category/list/')
         assert get.return_value.discarded is True
+        assert messages.isSuccess
         assert messages.messages == ['Category removed successfully!']
 
 
