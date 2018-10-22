@@ -17,9 +17,9 @@ class IdeaForm(forms.ModelForm):
         required=False,
         label=_('Challenge')
     )
-    oportunity = MartorFormField(label=_('Oportunity'))
-    solution = MartorFormField(label=_('Solution'))
-    target = MartorFormField(label=_('Target'))
+    oportunity = MartorFormField(label=_('Oportunity'), max_length=Idea._meta.get_field('oportunity').max_length)
+    solution = MartorFormField(label=_('Solution'), max_length=Idea._meta.get_field('solution').max_length)
+    target = MartorFormField(label=_('Target'), max_length=Idea._meta.get_field('target').max_length)
     summary = MartorFormField(label=_('Summary'), max_length=Idea._meta.get_field('summary').max_length)
 
     def __init__(self, *args, **kwargs):

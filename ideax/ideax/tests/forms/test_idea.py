@@ -33,10 +33,16 @@ class TestIdeaForm:
         form = IdeaForm(data, authors=authors)
         assert form.is_valid()
 
-    def test_max_summary(self, authors, data):
+    def test_max_length_textfields(self, authors, data):
         data['summary'] = 'X' * 141
+        data['oportunity'] = 'X' * 2501
+        data['solution'] = 'X' * 2501
+        data['target'] = 'X' * 501
         form = IdeaForm(data, authors=authors)
+
+        message = 'Ensure this value has at most {} characters (it has {}).'
         assert not form.is_valid()
-        assert form.errors['summary'] == [
-            'Ensure this value has at most 140 characters (it has 141).',
-        ]
+        assert form.errors['summary'][0] == message.format(140, 141)
+        assert form.errors['oportunity'][0] == message.format(2500, 2501)
+        assert form.errors['solution'][0] == message.format(2500, 2501)
+        assert form.errors['target'][0] == message.format(500, 501)
