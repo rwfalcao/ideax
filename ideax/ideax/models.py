@@ -127,10 +127,7 @@ class Idea(models.Model):
 
     def get_approval_rate(self):
         sum = self.count_likes() + self.count_dislikes()
-        if sum > 0:
-            return self.count_likes()/sum*100
-        else:
-            return 0
+        return self.count_likes()/sum*100 if sum > 0 else 0
 
 
 class Challenge(models.Model):
@@ -140,6 +137,7 @@ class Challenge(models.Model):
     requester = models.CharField(max_length=140, null=True, blank=False)
     description = models.TextField(max_length=2500)
     limit_date = models.DateTimeField()
+    init_date = models.DateTimeField()
     active = models.BooleanField(default=True)
     author = models.ForeignKey('users.UserProfile', on_delete=models.CASCADE)
     creation_date = models.DateTimeField()

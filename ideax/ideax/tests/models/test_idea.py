@@ -39,3 +39,11 @@ class TestIdea:
         # Fail
         with raises(DataError):
             mommy.make('Idea', summary='X' * 141)
+
+    def test_get_approval_rate_mock(self, mocker):
+        likes = mocker.patch.object(Idea, 'count_likes')
+        likes.return_value = 1
+        dislikes = mocker.patch.object(Idea, 'count_dislikes')
+        dislikes.return_value = 1
+        idea = Idea()
+        assert idea.get_approval_rate() == 50

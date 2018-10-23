@@ -63,7 +63,7 @@
     "creator": 1,
     "term": "A generic Term of Use.",
     "init_date": "2018-05-14T18:45:26Z",
-    "final_date": null
+    "final_date": "2018-09-30T18:45:26Z"
   }
 }, {
   "model": "auth.user",

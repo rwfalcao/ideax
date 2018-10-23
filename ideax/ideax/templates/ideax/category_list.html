@@ -2,6 +2,9 @@
 {% load staticfiles i18n %}
 
 {%block contextbutton%}
+<div class="fab-button">
+  <a class="btn btn-idea-new btn-primary" href="/category/new/" title="{% trans 'New Category' %}"><i class="fas fa-plus"></i><i class="fas fa-list-alt fa-2x"></i></a>
+</div>
 {% endblock %}
 {% block content %}
 <div class="idea-list-bg">
@@ -15,8 +18,7 @@
           {{ message }}
     </div>
   {% endfor %}
-  <button type="button" onclick="location.href='{% url 'category_new' %}';" class="btn btn-primary"> {% trans 'New Category' %} </button>
-
+  
   <div id="category-list">
     {% include 'ideax/includes/partial_category_list.html' %}
 

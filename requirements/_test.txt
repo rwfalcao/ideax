@@ -1,4 +1,4 @@
-pytest==3.8.2                            # Framework de Teste
+pytest>=3.9.2                            # Framework de Teste
 pytest-django==3.4.3                     # Integração do pytest ao Django
 pytest-mock==1.10.0                      # Mocks
 pytest-sugar==0.9.1                      # Torna leitura da saída dos testes mais amigável
