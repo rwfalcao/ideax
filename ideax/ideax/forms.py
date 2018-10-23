@@ -94,6 +94,7 @@ class ChallengeForm(forms.ModelForm):
             'description',
             'active',
             'limit_date',
+            'init_date',
             'featured',
             'category',
         )
@@ -104,10 +105,12 @@ class ChallengeForm(forms.ModelForm):
             'requester': _('Requester'),
             'active': _('Active'),
             'limit_date': _('Limit Date'),
+            'init_date': _('Init Date'),
             'featured': _('Featured'),
             'category': _('Category')}
         widgets = {
             'limit_date': forms.DateInput(attrs={'placeholder': 'dd/mm/aaaa'}),
+            'init_date': forms.DateInput(attrs={'placeholder': 'dd/mm/aaaa'}),
         }
 
 

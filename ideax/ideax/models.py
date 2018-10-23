@@ -137,6 +137,7 @@ class Challenge(models.Model):
     requester = models.CharField(max_length=140, null=True, blank=False)
     description = models.TextField(max_length=2500)
     limit_date = models.DateTimeField()
+    init_date = models.DateTimeField()
     active = models.BooleanField(default=True)
     author = models.ForeignKey('users.UserProfile', on_delete=models.CASCADE)
     creation_date = models.DateTimeField()

@@ -39,3 +39,4 @@ class TestCategoryImageRemove:
         request.user = common_user
         with raises(PermissionDenied):
             category_image_remove(request, 1)
+            

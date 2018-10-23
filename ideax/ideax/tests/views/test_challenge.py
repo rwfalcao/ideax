@@ -14,7 +14,7 @@ class TestChallengeDetail:
         request.user = AnonymousUser()
         response = challenge_detail(request, 999)
         assert (response.status_code, response.url) == (302, '/accounts/login/?next=/')
-    
+
 class TestChallengeEdit:
     def test_anonymous(self, rf):
         request = rf.get(f'/challenge/99999/edit/')
@@ -40,7 +40,7 @@ class TestChallengeRemove:
         request.user = AnonymousUser()
         response = challenge_remove(request, 999)
         assert (response.status_code, response.url) == (302, '/accounts/login/?next=/')
-    
+
     def test_common_user(self, rf, common_user):
         request = rf.get('/')
         request.user = common_user
