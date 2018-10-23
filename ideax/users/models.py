@@ -8,8 +8,5 @@ class UserProfile(models.Model):
     ip = models.CharField(max_length=20, null=True)
     manager = models.NullBooleanField(default=False)
 
-    class Meta:
-        db_table = 'ideax_userprofile'
-
     def __str__(self):
         return self.user.username
