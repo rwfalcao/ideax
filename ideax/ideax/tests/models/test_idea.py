@@ -1,5 +1,7 @@
+from django.db.utils import DataError
+
 from model_mommy import mommy
-from pytest import mark
+from pytest import mark, raises
 
 from ...models import Idea
 
@@ -28,6 +30,15 @@ class TestIdea:
         mommy.make('Popular_Vote', idea=idea, like=True)
         mommy.make('Popular_Vote', idea=idea, like=False)
         assert idea.get_approval_rate() == 50
+
+    @mark.skip("TODO: Longtext (mysql) doesn't have size")
+    def test_max_length_summary(self, db):
+        # Success
+        mommy.make('Idea', summary='X' * 140)
+
+        # Fail
+        with raises(DataError):
+            mommy.make('Idea', summary='X' * 141)
 
     def test_get_approval_rate_mock(self, mocker):
         likes = mocker.patch.object(Idea, 'count_likes')
