@@ -17,10 +17,10 @@ class IdeaForm(forms.ModelForm):
         required=False,
         label=_('Challenge')
     )
-    oportunity = MartorFormField(label=_('Oportunity'))
-    solution = MartorFormField(label=_('Solution'))
-    target = MartorFormField(label=_('Target'))
-    summary = MartorFormField(label=_('Summary'))
+    oportunity = MartorFormField(label=_('Oportunity'), max_length=Idea._meta.get_field('oportunity').max_length)
+    solution = MartorFormField(label=_('Solution'), max_length=Idea._meta.get_field('solution').max_length)
+    target = MartorFormField(label=_('Target'), max_length=Idea._meta.get_field('target').max_length)
+    summary = MartorFormField(label=_('Summary'), max_length=Idea._meta.get_field('summary').max_length)
 
     def __init__(self, *args, **kwargs):
         queryset = kwargs.pop('authors', None)
@@ -82,7 +82,10 @@ class CategoryImageForm(forms.ModelForm):
 
 
 class ChallengeForm(forms.ModelForm):
-    description = MartorFormField(label=_('Description'))
+    description = MartorFormField(
+        label=_('Description'),
+        max_length=Challenge._meta.get_field('description').max_length
+    )
 
     class Meta:
         model = Challenge
@@ -94,6 +97,7 @@ class ChallengeForm(forms.ModelForm):
             'description',
             'active',
             'limit_date',
+            'init_date',
             'featured',
             'category',
         )
@@ -104,10 +108,12 @@ class ChallengeForm(forms.ModelForm):
             'requester': _('Requester'),
             'active': _('Active'),
             'limit_date': _('Limit Date'),
+            'init_date': _('Init Date'),
             'featured': _('Featured'),
             'category': _('Category')}
         widgets = {
             'limit_date': forms.DateInput(attrs={'placeholder': 'dd/mm/aaaa'}),
+            'init_date': forms.DateInput(attrs={'placeholder': 'dd/mm/aaaa'}),
         }
 
 

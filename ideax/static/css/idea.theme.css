@@ -282,6 +282,9 @@ border-radius: 2px;
 #modal-term .modal-dialog{
   max-width: 800px;
 }
+.modal-header {
+  display: block !important;
+}
 
 .phase-list .nav-link.active {
   font-weight: bold;
@@ -1043,7 +1046,7 @@ only screen and (max-width: 760px),
 .challenge-buttons{
   position: absolute;
   right: -50px;
-  bottom: 90px;
+  bottom: 80px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -1101,4 +1104,3 @@ only screen and (max-width: 760px),
   text-transform: Uppercase;
   font-size: 100px;
   color: #fc0;
-}

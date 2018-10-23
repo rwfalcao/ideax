@@ -1,6 +1,5 @@
 from model_mommy import mommy
 from pytest import fixture
-
 from ...models import Category
 
 
