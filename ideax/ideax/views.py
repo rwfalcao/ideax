@@ -6,7 +6,7 @@ import mistune
 import logging
 import csv
 
-from datetime import date, datetime
+from datetime import date
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, get_object_or_404, redirect
 from django.utils import timezone
@@ -661,7 +661,7 @@ def idea_comments(request, pk):
 
 
 def get_term_of_user(request):
-    term = Use_Term.objects.filter(final_date__gte=datetime.now())
+    term = Use_Term.objects.filter(final_date__gte=timezone.now())
     if term.exists():
         return JsonResponse({"term": term[0].term})
     else:
