@@ -143,8 +143,9 @@ def common_user(mocker):
 
 @fixture
 def factory_user(mocker):
-    def user(perm):
+    """mock for user with a specific permission"""
+    def user(permission):
         user = mocker.Mock()
-        user.has_perms.side_effect = lambda x: True if x == (perm,) else False
+        user.has_perms.side_effect = lambda permissions: permissions == (permission,)
         return user
     return user
