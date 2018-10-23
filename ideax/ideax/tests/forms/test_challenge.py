@@ -100,9 +100,6 @@ class TestChallengeForm:
             'Certifique-se de que o valor tenha no máximo 140 caracteres (ele possui 141).',
         ]
 
-    def test_discarded(self, db, data):
-        assert data['discarted'] is not None
-
     def test_invalid(self, snapshot):
         form = ChallengeForm({})
         assert not form.is_valid()
