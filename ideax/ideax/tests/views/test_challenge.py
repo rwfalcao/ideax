@@ -2,11 +2,10 @@ from django.contrib.auth.models import AnonymousUser
 from django.core.exceptions import PermissionDenied
 from django.http.response import Http404
 
-from model_mommy import mommy
 from pytest import raises
 
-from ...forms import ChallengeForm
 from ...views import (challenge_detail, challenge_edit, challenge_remove)
+
 
 class TestChallengeDetail:
     def test_anonymous(self, rf):
@@ -14,6 +13,7 @@ class TestChallengeDetail:
         request.user = AnonymousUser()
         response = challenge_detail(request, 999)
         assert (response.status_code, response.url) == (302, '/accounts/login/?next=/')
+
 
 class TestChallengeEdit:
     def test_anonymous(self, rf):
@@ -33,6 +33,7 @@ class TestChallengeEdit:
         request.user = common_user
         with raises(PermissionDenied):
             challenge_edit(request, 1)
+
 
 class TestChallengeRemove:
     def test_anonymous(self, rf):

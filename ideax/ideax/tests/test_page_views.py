@@ -2,6 +2,7 @@ from django.http.response import HttpResponseRedirect
 from model_mommy import mommy
 from ..models import Phase
 
+
 class TestPageViews:
     def test_frontpage(self, client):
         response = client.get('/')
@@ -31,7 +32,7 @@ class TestPageViews:
 
     def test_idea_list(self, ideax_views, client, django_user_model, mocker):
         idea = mommy.make('Idea')
-        ph = mommy.make('Phase_History', current_phase=Phase.GROW.id, idea=idea, current=True)
+        mommy.make('Phase_History', current_phase=Phase.GROW.id, idea=idea, current=True)
         ideax_views.audit = mocker.Mock()
         username, password = 'usuario', 'senha'
         django_user_model.objects.create_user(
