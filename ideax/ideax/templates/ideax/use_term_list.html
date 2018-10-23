@@ -2,6 +2,9 @@
 {% load staticfiles i18n %}
 
 {%block contextbutton%}
+<div class="fab-button">
+  <a class="btn btn-idea-new btn-primary" href="/useterm/new/" title="{% trans 'New Term of Use' %}"><i class="fas fa-plus"></i><i class="fas fa-balance-scale fa-2x"></i></a>
+</div>
 {% endblock %}
 {% block content %}
   <div class="idea-list-bg">
@@ -15,9 +18,6 @@
           {{ message }}
       </div>
     {% endfor %}
-    <div class="button-group">
-      <button type="button" onclick="location.href='{% url 'use_term_new' %}';" class="btn btn-primary"> {% trans 'New Terms of Use' %} </button>
-    </div>
 
     <div id="use_term-list">
       {% include 'ideax/includes/partial_use_term_list.html' %}

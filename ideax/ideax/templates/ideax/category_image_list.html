@@ -2,6 +2,9 @@
 {% load staticfiles i18n %}
 
 {%block contextbutton%}
+<div class="fab-button">
+  <a class="btn btn-idea-new btn-primary" href="/categoryimage/new/" title="{% trans 'New Category Image' %}"><i class="fas fa-plus"></i><i class="fas fa-images fa-2x"></i></a>
+</div>
 {% endblock %}
 {% block content %}
   <div class="challenge-list-bg">
@@ -14,10 +17,6 @@
             {{ message }}
       </div>
     {% endfor %}
-    <div class="button-group">
-      <button type="button" onclick="location.href='{% url 'category_image_new' %}';" class="btn btn-primary"> {% trans 'New Category Image' %} </button>
-    </div>
-
 
       {% include 'ideax/includes/partial_category_image_list.html' %}
   </div>

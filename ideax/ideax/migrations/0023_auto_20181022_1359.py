@@ -7,7 +7,7 @@ import django.db.models.deletion
 
 
 class Migration(migrations.Migration):
-
+    atomic = False
     dependencies = [
         ('ideax', '0022_auto_20180816_1625'),
     ]

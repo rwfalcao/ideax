@@ -17,6 +17,9 @@ snapshots['TestChallengeForm.test_invalid 1'] = {
     'image': [
         'This field is required.'
     ],
+    'init_date': [
+        'This field is required.'
+    ],
     'limit_date': [
         'This field is required.'
     ],

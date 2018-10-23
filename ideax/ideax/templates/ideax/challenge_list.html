@@ -34,8 +34,24 @@
                   </div>
               </a>
               <div class="challenge-buttons">
-                <a onclick="location.href='{% url 'challenge_remove' pk=challenge.pk %}';" class="delete btn btn-primary"><i class="far fa-trash-alt"></i></a>
+                <a class="delete btn btn-primary" id="btn-confirm"><i class="far fa-trash-alt"></i></a>
                 <a onclick="location.href='{% url 'challenge_edit' challenge_pk=challenge.pk %}';" class="edit btn btn-primary"><i class="far fa-edit"></i></a>
+              </div>
+            </div>
+            
+               
+            <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" id="mi-modal">
+              <div class="modal-dialog modal-bg modal-dialog-centered">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <p class="modal-title" id="myModalLabel">Would you like to delete the challenge: <span class="bold">{{challenge.title}}</span>?</p>
+                  </div>
+                  <div class="modal-footer">
+                    <button onclick="location.href='{% url 'challenge_remove' pk=challenge.pk %}';" type="button" class="btn btn-default" id="modal-btn-yes">Yes</button>
+                    <button type="button" class="btn btn-primary" id="modal-btn-no">No</button>
+                  </div>
+                </div>
               </div>
             </div>
 

@@ -41,6 +41,15 @@
     <p class="help-block">{{ error }}</p>
   {% endfor %}
 </div>
+
+<div class="form-group{% if form.init_date.errors %} has-error{% endif %}">
+    <label for="{{form.init_date.id_for_label}}">{{form.init_date.label}}</label>
+    {{ form.init_date }}
+    {% for error in form.init_date.errors %}
+      <p class="help-block">{{ error }}</p>
+    {% endfor %}
+</div>
+
 <div class="form-group{% if form.limit_date.errors %} has-error{% endif %}">
   <label for="{{form.limit_date.id_for_label}}">{{form.limit_date.label}}</label>
   {{ form.limit_date }}
