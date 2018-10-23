@@ -7,7 +7,7 @@ from ...forms import ChallengeForm
 class TestChallengeForm:
     @fixture
     def data(self):
-        challenge = mommy.make('Challenge')
+        mommy.make('Challenge')
         return {
             'title': 'Test Challenge Title',
             'summary': 'Test Challenge Summary',
@@ -67,7 +67,7 @@ class TestChallengeForm:
         assert form.errors['summary'] == [
             'Ensure this value has at most 140 characters (it has 141).',
         ]
-        
+
     @mark.usefixtures('set_pt_br_language')
     def test_max_summary_ptbr(self, db, data, test_image):
         data['summary'] = 'X' * 141
@@ -106,7 +106,7 @@ class TestChallengeForm:
     def test_invalid(self, snapshot):
         form = ChallengeForm({})
         assert not form.is_valid()
-        assert len(form.errors) == 7
+        assert len(form.errors) == 8
         snapshot.assert_match(form.errors)
 
     def test_valid(self, db, test_image):
@@ -116,6 +116,7 @@ class TestChallengeForm:
             'description': 'Redução do número de documentos para os órgãos públicos',
             'summary': 'Redução ...',
             'limit_date': '2018-12-31',
+            'init_date': '2018-01-01',
             'requester': 'Juracy Filho',
             'category': category.id,
         }
