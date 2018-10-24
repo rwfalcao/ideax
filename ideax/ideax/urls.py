@@ -50,6 +50,10 @@ urlpatterns = [
     path('categoryimage/<int:pk>/edit/', views.category_image_edit, name='category_image_edit'),
     path('categoryimage/<int:pk>/remove/', views.category_image_remove, name='category_image_remove'),
     path('idea/search/', views.idea_search, name='idea_search'),
+    path('dimension/new/', views.dimension_new, name='dimension_new'),
+    path('dimension/list/', views.dimension_list, name='dimension_list'),
+    path('dimension/<int:pk>/edit/', views.dimension_edit, name='dimension_edit'),
+    path('dimension/<int:pk>/remove/', views.dimension_remove, name='dimension_remove'),
     re_path('author/', views.user_profile_page, name='user_profile_page'),
 
     # TODO: Refactor it

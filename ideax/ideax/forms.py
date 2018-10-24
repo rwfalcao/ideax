@@ -7,7 +7,7 @@ from django.conf import settings
 from tinymce import TinyMCE
 from martor.fields import MartorFormField
 
-from .models import Idea, Criterion, Category, Challenge, Use_Term, Category_Image
+from .models import Idea, Criterion, Category, Challenge, Use_Term, Category_Image, Dimension
 
 
 class IdeaForm(forms.ModelForm):
@@ -164,3 +164,15 @@ class EvaluationForm(forms.Form):
                     label='',
                     required=False,
                 )
+
+class DimensionForm(forms.ModelForm):
+
+    class Meta:
+        model = Dimension
+        fields = ('title', 'description','weight','init_date','final_date')
+        labels = {'title': _('Title'), 'description': _('Description'),'weight': _('Weight'),'init_date': _('Initial Date'),'final_date': _('Final Date'),}
+        widgets = {
+            'init_date': forms.DateInput(attrs={'placeholder': 'dd/mm/aaaa'}),
+            'final_date': forms.DateInput(attrs={'placeholder': 'dd/mm/aaaa'}),
+
+        }
