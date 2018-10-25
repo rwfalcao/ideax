@@ -165,14 +165,17 @@ class EvaluationForm(forms.Form):
                     required=False,
                 )
 
+
 class DimensionForm(forms.ModelForm):
 
     class Meta:
         model = Dimension
-        fields = ('title', 'description','weight','init_date','final_date')
-        labels = {'title': _('Title'), 'description': _('Description'),'weight': _('Weight'),'init_date': _('Initial Date'),'final_date': _('Final Date'),}
+        fields = ('title', 'description', 'weight', 'init_date', 'final_date')
+        labels = {
+            'title': _('Title'), 'description': _('Description'), 'weight': _('Weight'),
+            'init_date': _('Initial Date'), 'final_date': _('Final Date'),
+            }
         widgets = {
             'init_date': forms.DateInput(attrs={'placeholder': 'dd/mm/aaaa'}),
             'final_date': forms.DateInput(attrs={'placeholder': 'dd/mm/aaaa'}),
-
         }
