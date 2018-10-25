@@ -186,68 +186,72 @@ msgid "Hi, %(name)s!"
 msgstr ""
 
 #: ideax/ideax/templates/ideax/base.html:74
+msgid "Profile"
+msgstr ""
+
+#: ideax/ideax/templates/ideax/base.html:76
 #: ideax/ideax/templates/ideax/idea_list.html:6
 msgid "Explore Ideas"
 msgstr ""
 
-#: ideax/ideax/templates/ideax/base.html:75
+#: ideax/ideax/templates/ideax/base.html:77
 msgid "Challenges"
 msgstr ""
 
-#: ideax/ideax/templates/ideax/base.html:76
+#: ideax/ideax/templates/ideax/base.html:78
 msgid "Users"
 msgstr ""
 
-#: ideax/ideax/templates/ideax/base.html:77
+#: ideax/ideax/templates/ideax/base.html:79
 msgid "Active Terms of Use and Privacy"
 msgstr ""
 
-#: ideax/ideax/templates/ideax/base.html:79
+#: ideax/ideax/templates/ideax/base.html:81
 #: ideax/ideax/templates/ideax/use_term_list.html:11
 #, fuzzy
 #| msgid "Term of use accept!"
 msgid "Terms of Use"
 msgstr "Termo de uso aceito!"
 
-#: ideax/ideax/templates/ideax/base.html:80
+#: ideax/ideax/templates/ideax/base.html:82
 #: ideax/ideax/templates/ideax/category_image_list.html:11
 msgid "Category Images"
 msgstr ""
 
-#: ideax/ideax/templates/ideax/base.html:81
+#: ideax/ideax/templates/ideax/base.html:83
 #: ideax/ideax/templates/ideax/category_list.html:11
 msgid "Categorys"
 msgstr ""
 
-#: ideax/ideax/templates/ideax/base.html:83
+#: ideax/ideax/templates/ideax/base.html:85
 msgid "Logout"
 msgstr ""
 
-#: ideax/ideax/templates/ideax/base.html:90
+#: ideax/ideax/templates/ideax/base.html:92
 #: ideax/ideax/templates/ideax/includes/chatbot.html:5
 msgid "Help"
 msgstr ""
 
-#: ideax/ideax/templates/ideax/base.html:93
+#: ideax/ideax/templates/ideax/base.html:95
 msgid "Login"
 msgstr ""
 
-#: ideax/ideax/templates/ideax/base.html:103
+#: ideax/ideax/templates/ideax/base.html:105
 msgid "New Idea"
 msgstr ""
 
-#: ideax/ideax/templates/ideax/base.html:118
-#: ideax/ideax/templates/ideax/base.html:122
+#: ideax/ideax/templates/ideax/base.html:120
+#: ideax/ideax/templates/ideax/base.html:124
 #, fuzzy
 #| msgid "Term of use accept!"
 msgid "Terms of use"
 msgstr "Termo de uso aceito!"
 
-#: ideax/ideax/templates/ideax/base.html:125
+#: ideax/ideax/templates/ideax/base.html:127
 msgid "Cancel"
 msgstr ""
 
-#: ideax/ideax/templates/ideax/base.html:126
+#: ideax/ideax/templates/ideax/base.html:128
 msgid "Accept"
 msgstr ""
 
@@ -790,4 +794,13 @@ msgstr ""
 
 #: ideax/ideax/views.py:1014 ideax/ideax/views.py:1015
 msgid "Invalid request!"
+msgstr ""
+
+#: ideax/users/templates/users/profile.html:7
+msgid "User Profile"
+msgstr ""
+
+#: ideax/users/templates/users/profile.html:18
+#, python-format
+msgid "Author of %(size)s idea(s)"
 msgstr ""

@@ -1,0 +1,22 @@
+{% extends 'ideax/base.html' %}
+{% load i18n staticfiles %}
+{% load gravatar %}
+
+{% block content %}
+    <div class="idea-list-bg">
+        <h1 class="display-3 d-none d-md-block">{% trans 'User Profile' %}</h1>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-2 col-md-4 col-sm-4">
+                {% gravatar user.email 128 %}
+                {{ user.name }}
+                {{ user.email }}
+            </div>
+            <div class="col-lg-10 col-md-8 col-sm-8">
+                {% blocktrans with size=ideas|length %}Author of {{ size }} idea(s){% endblocktrans %}
+            </div>
+        </div>
+    </div>
+{% endblock %}
