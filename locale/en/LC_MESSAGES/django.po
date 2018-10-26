@@ -543,46 +543,46 @@ msgid ""
 "and making them happen!"
 msgstr ""
 
-#: ideax/ideax/templates/ideax/index.html:20
+#: ideax/ideax/templates/ideax/index.html:21
 msgid "Launch your ideas for everyone!"
 msgstr ""
 
-#: ideax/ideax/templates/ideax/index.html:21
+#: ideax/ideax/templates/ideax/index.html:22
 msgid ""
 "Ideia<sup>X</sup> is the channel to spread and share your ideas, allowing "
 "your peers to contribute, discuss and collaborate to grow it."
 msgstr ""
 
-#: ideax/ideax/templates/ideax/index.html:22
+#: ideax/ideax/templates/ideax/index.html:23
 msgid ""
 "In the same way, you can see other posted ideas, interacting with your "
 "opinion and asking to further improve them!"
 msgstr ""
 
-#: ideax/ideax/templates/ideax/index.html:33
+#: ideax/ideax/templates/ideax/index.html:34
 msgid "Register Ideas"
 msgstr ""
 
-#: ideax/ideax/templates/ideax/index.html:34
+#: ideax/ideax/templates/ideax/index.html:35
 msgid ""
 "All company employees can collaborate. Innovation can come from everyone."
 msgstr ""
 
-#: ideax/ideax/templates/ideax/index.html:37
+#: ideax/ideax/templates/ideax/index.html:38
 msgid "Manage Ideas"
 msgstr ""
 
-#: ideax/ideax/templates/ideax/index.html:38
+#: ideax/ideax/templates/ideax/index.html:39
 msgid ""
 "Ideas will be organized, refined and evaluated, allowing a flow for the "
 "innovation management."
 msgstr ""
 
-#: ideax/ideax/templates/ideax/index.html:41
+#: ideax/ideax/templates/ideax/index.html:42
 msgid "Integration"
 msgstr ""
 
-#: ideax/ideax/templates/ideax/index.html:42
+#: ideax/ideax/templates/ideax/index.html:43
 msgid ""
 "Through APIs is possible to integrate the Idea<sup>X</sup> with other tools."
 msgstr ""
@@ -796,6 +796,18 @@ msgstr ""
 msgid "Invalid request!"
 msgstr ""
 
+#: ideax/users/forms.py:9
+msgid "First name"
+msgstr ""
+
+#: ideax/users/forms.py:14
+msgid "Last name"
+msgstr ""
+
+#: ideax/users/forms.py:20
+msgid "Required. Inform a valid e-mail address."
+msgstr ""
+
 #: ideax/users/templates/users/profile.html:7
 msgid "User Profile"
 msgstr ""
@@ -806,3 +818,15 @@ msgid "Author of one idea"
 msgid_plural "Author of %(size)s ideas"
 msgstr[0] ""
 msgstr[1] ""
+
+#: ideax/users/templates/users/sign_up.html:6
+msgid "Sign Up"
+msgstr ""
+
+#: ideax/users/templates/users/sign_up.html:20
+msgid "Sign up"
+msgstr ""
+
+#: ideax/users/views.py:33
+msgid "Invalid form!"
+msgstr ""

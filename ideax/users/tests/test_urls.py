@@ -10,5 +10,8 @@ class TestUsersUrls:
     def test_logout(self):
         assert reverse(f'{self.namespace}:logout') == '/accounts/logout/'
 
+    def test_sign_up(self):
+        assert reverse(f'{self.namespace}:sign-up') == '/accounts/sign-up/'
+
     def test_profile(self):
         assert reverse(f'{self.namespace}:profile') == '/users/profile/'

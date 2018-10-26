@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-10-26 13:57-0300\n"
+"POT-Creation-Date: 2018-10-26 15:33-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -563,11 +563,11 @@ msgstr ""
 "Um canal aberto para a inovação, que recebe ideias de todas as partes, "
 "avaliando-as e fazendo-as acontecer!"
 
-#: ideax/ideax/templates/ideax/index.html:20
+#: ideax/ideax/templates/ideax/index.html:21
 msgid "Launch your ideas for everyone!"
 msgstr "Lance suas ideias para todos!"
 
-#: ideax/ideax/templates/ideax/index.html:21
+#: ideax/ideax/templates/ideax/index.html:22
 msgid ""
 "Ideia<sup>X</sup> is the channel to spread and share your ideas, allowing "
 "your peers to contribute, discuss and collaborate to grow it."
@@ -576,7 +576,7 @@ msgstr ""
 "permitindo que seus pares possam contribuir, discutir e colaborar para o "
 "crescimento dela."
 
-#: ideax/ideax/templates/ideax/index.html:22
+#: ideax/ideax/templates/ideax/index.html:23
 msgid ""
 "In the same way, you can see other posted ideas, interacting with your "
 "opinion and asking to further improve them!"
@@ -584,22 +584,22 @@ msgstr ""
 "Da mesma forma, você pode ver as outras ideias postadas, interagindo com sua "
 "opinião e perguntas para melhorá-las ainda mais!"
 
-#: ideax/ideax/templates/ideax/index.html:33
+#: ideax/ideax/templates/ideax/index.html:34
 msgid "Register Ideas"
 msgstr "Cadastro de ideias"
 
-#: ideax/ideax/templates/ideax/index.html:34
+#: ideax/ideax/templates/ideax/index.html:35
 msgid ""
 "All company employees can collaborate. Innovation can come from everyone."
 msgstr ""
 "Todos os funcionários da empresa podem colaborar. A inovação poderá vir de "
 "todos."
 
-#: ideax/ideax/templates/ideax/index.html:37
+#: ideax/ideax/templates/ideax/index.html:38
 msgid "Manage Ideas"
 msgstr "Gestão de ideias"
 
-#: ideax/ideax/templates/ideax/index.html:38
+#: ideax/ideax/templates/ideax/index.html:39
 msgid ""
 "Ideas will be organized, refined and evaluated, allowing a flow for the "
 "innovation management."
@@ -607,11 +607,11 @@ msgstr ""
 "As ideias serão organizadas, refinadas e avaliadas, permitindo um fluxo para "
 "a gestão da inovação."
 
-#: ideax/ideax/templates/ideax/index.html:41
+#: ideax/ideax/templates/ideax/index.html:42
 msgid "Integration"
 msgstr "Integração"
 
-#: ideax/ideax/templates/ideax/index.html:42
+#: ideax/ideax/templates/ideax/index.html:43
 msgid ""
 "Through APIs is possible to integrate the Idea<sup>X</sup> with other tools."
 msgstr ""
@@ -794,6 +794,18 @@ msgstr "O tamanho máximo do arquivo é %(size) MB."
 msgid "Invalid request!"
 msgstr "Requisição Inválida"
 
+#: ideax/users/forms.py:9
+msgid "First name"
+msgstr "Primeiro nome"
+
+#: ideax/users/forms.py:14
+msgid "Last name"
+msgstr "Sobrenome"
+
+#: ideax/users/forms.py:20
+msgid "Required. Inform a valid e-mail address."
+msgstr "Requerido. Informe um e-mail válido."
+
 #: ideax/users/templates/users/profile.html:7
 msgid "User Profile"
 msgstr "Perfil do Usuário"
@@ -804,6 +816,18 @@ msgid "Author of one idea"
 msgid_plural "Author of %(size)s ideas"
 msgstr[0] "Autor de uma ideia"
 msgstr[1] "Autor de %(size)s ideias"
+
+#: ideax/users/templates/users/sign_up.html:6
+msgid "Sign Up"
+msgstr "Inscreva-se"
+
+#: ideax/users/templates/users/sign_up.html:20
+msgid "Sign up"
+msgstr "Inscreva-se"
+
+#: ideax/users/views.py:33
+msgid "Invalid form!"
+msgstr "Formulário inválido"
 
 #~ msgid ""
 #~ "Through APIs is possible to integrate the Idea<sup>X</sup> with other "
