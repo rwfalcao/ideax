@@ -628,7 +628,7 @@ transition-delay: 0.7s;
   min-height: 60px;
   background: #333;
   color: #E6E6E6;
-  position: absolute; 
+  position: absolute;
 }
 
 .launch-text p {
@@ -671,7 +671,7 @@ transition-delay: 0.7s;
   padding-left: 10px;
   padding-right: 10px;
 }
-  
+
 .function-item {
   padding: 20 20 0 20;
 }
@@ -789,14 +789,14 @@ transition-delay: 0.7s;
   }
 }
 
-@media 
+@media
 only screen and (max-width: 760px),
 (min-width: 768px) and (max-width: 1024px)  {
-  table, thead, tbody, th, td, tr { 
-    display: block; 
+  table, thead, tbody, th, td, tr {
+    display: block;
   }
 
-  thead tr { 
+  thead tr {
     position: absolute;
     top: -9999px;
     left: -9999px;
@@ -806,17 +806,17 @@ only screen and (max-width: 760px),
 
   td {
     border: none;
-    border-bottom: 1px solid #eee; 
+    border-bottom: 1px solid #eee;
     position: relative;
-    padding-left: 50% !important; 
+    padding-left: 50% !important;
   }
 
-  td:before { 
+  td:before {
     position: absolute;
     top: 6px;
     left: 6px;
-    width: 45%; 
-    padding-right: 10px; 
+    width: 45%;
+    padding-right: 10px;
     white-space: nowrap;
   }
 
@@ -905,7 +905,7 @@ only screen and (max-width: 760px),
 
   .idea {
     width: 40% !important;
-  }    
+  }
 }
 
 .form-signin {
@@ -1012,8 +1012,8 @@ only screen and (max-width: 760px),
 }
 
 .selector {
-  float: none !important;  
-  overflow: auto;  
+  float: none !important;
+  overflow: auto;
 }
 
 .selector select {
@@ -1023,7 +1023,7 @@ only screen and (max-width: 760px),
 .authors-new-idea h2{
   font-size: 13px;
   padding: 8px;
-  margin-bottom: 0;  
+  margin-bottom: 0;
 }
 .edit-term-of-use {
   color: #1f5093;
@@ -1070,7 +1070,7 @@ only screen and (max-width: 760px),
 }
 
 .challenge-buttons .delete{
-  
+
   color: #cecece;
 }
 
@@ -1088,7 +1088,7 @@ only screen and (max-width: 760px),
 .coming-soon img {
   width: 700px;
   height: 700px;
-  display: block;  
+  display: block;
 }
 
 .error-404 {
@@ -1104,3 +1104,13 @@ only screen and (max-width: 760px),
   text-transform: Uppercase;
   font-size: 100px;
   color: #fc0;
+}
+
+nav .avatar {
+  padding-left: 2px;
+  padding-right: 2px;
+}
+
+nav .avatar img {
+  border-radius: 20%;
+}
