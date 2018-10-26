@@ -137,6 +137,11 @@ def pangram_pt_br():
 @fixture
 def common_user(mocker):
     user = mocker.Mock()
+    user.username = 'common'
+    user.first_name = 'Common'
+    user.last_name = 'Idea'
+    user.get_full_name = lambda: 'Common Idea'
+    user.email = 'common.idea@dtplabs.in'
     user.has_perms.return_value = False
     return user
 

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-10-25 16:36-0300\n"
+"POT-Creation-Date: 2018-10-26 13:57-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -798,10 +798,12 @@ msgstr "Requisição Inválida"
 msgid "User Profile"
 msgstr "Perfil do Usuário"
 
-#: ideax/users/templates/users/profile.html:18
+#: ideax/users/templates/users/profile.html:24
 #, python-format
-msgid "Author of %(size)s idea(s)"
-msgstr "Autor de %(size)s ideia(s)"
+msgid "Author of one idea"
+msgid_plural "Author of %(size)s ideas"
+msgstr[0] "Autor de uma ideia"
+msgstr[1] "Autor de %(size)s ideias"
 
 #~ msgid ""
 #~ "Through APIs is possible to integrate the Idea<sup>X</sup> with other "

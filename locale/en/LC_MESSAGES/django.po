@@ -800,7 +800,9 @@ msgstr ""
 msgid "User Profile"
 msgstr ""
 
-#: ideax/users/templates/users/profile.html:18
+#: ideax/users/templates/users/profile.html:24
 #, python-format
-msgid "Author of %(size)s idea(s)"
-msgstr ""
+msgid "Author of one idea"
+msgid_plural "Author of %(size)s ideas"
+msgstr[0] ""
+msgstr[1] ""
