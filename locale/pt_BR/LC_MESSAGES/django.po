@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-10-26 15:33-0300\n"
+"POT-Creation-Date: 2018-10-26 15:44-0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -253,6 +253,7 @@ msgid "Help"
 msgstr "Ajuda"
 
 #: ideax/ideax/templates/ideax/base.html:95
+#: ideax/ideax/templates/ideax/index.html:15
 msgid "Login"
 msgstr "Entrar"
 
@@ -563,6 +564,11 @@ msgstr ""
 "Um canal aberto para a inovação, que recebe ideias de todas as partes, "
 "avaliando-as e fazendo-as acontecer!"
 
+#: ideax/ideax/templates/ideax/index.html:16
+#: ideax/users/templates/users/sign_up.html:10
+msgid "Sign Up"
+msgstr "Inscreva-se"
+
 #: ideax/ideax/templates/ideax/index.html:21
 msgid "Launch your ideas for everyone!"
 msgstr "Lance suas ideias para todos!"
@@ -817,11 +823,7 @@ msgid_plural "Author of %(size)s ideas"
 msgstr[0] "Autor de uma ideia"
 msgstr[1] "Autor de %(size)s ideias"
 
-#: ideax/users/templates/users/sign_up.html:6
-msgid "Sign Up"
-msgstr "Inscreva-se"
-
-#: ideax/users/templates/users/sign_up.html:20
+#: ideax/users/templates/users/sign_up.html:72
 msgid "Sign up"
 msgstr "Inscreva-se"
 
