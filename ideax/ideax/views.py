@@ -309,7 +309,7 @@ def criterion_new(request):
     else:
         form = CriterionForm()
 
-    return render(request, 'ideax/criterion_edit.html', {'form': form})
+    return render(request, 'ideax/criterion_new.html', {'form': form})
 
 
 @login_required
