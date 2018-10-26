@@ -16,26 +16,12 @@
         <td>{{dimension.description}}</td>
         <div class="button-group">
           <td><button type="button" class="btn" onclick="location.href='{% url 'dimension_edit' pk=dimension.pk %}';"><i class="fa fa-edit"></i></button></td>
-          <td><button type="button" class="delete btn" id="btn-confirm"><i class="fa fa-trash"></i></button></td>
-
-
+          <td><button type="button" class="delete btn btn-click-del" data-name="dimension" data-id="{{dimension.pk}}" id="btn-confirm" ><i class="fa fa-trash"></i></button></td>
         </div>
       </tr>
-
-      <div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" id="mi-modal">
-        <div class="modal-dialog modal-bg modal-dialog-centered">
-          <div class="modal-content">
-            <div class="modal-header">
-              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-              <p class="modal-title" id="myModalLabel">Would you like to delete the dimension: <span class="bold">{{dimension.title}}</span>?</p>
-            </div>
-            <div class="modal-footer">
-              <button onclick="location.href='{% url 'dimension_remove' pk=dimension.pk %}';" type="button" class="btn btn-default" id="modal-btn-yes">Yes</button>
-              <button type="button" class="btn btn-primary" id="modal-btn-no">No</button>
-            </div>
-          </div>
-        </div>
-      </div>
     {% endfor %}
 </tbody>
 </table>
+
+{% include 'ideax/includes/partial_modal_delete.html' %}
+
