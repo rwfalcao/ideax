@@ -1,8 +1,10 @@
 from django.contrib import messages
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import redirect, render
+from django.shortcuts import render
+from django.urls import reverse_lazy
 from django.utils.translation import ugettext_lazy as _
+from django.views.generic import CreateView
 
 from .forms import SignUpForm
 
@@ -19,18 +21,19 @@ def profile(request):
     )
 
 
-def sign_up(request):
-    if request.method == 'POST':
-        form = SignUpForm(request.POST)
-        if form.is_valid():
-            form.save()
-            username = form.cleaned_data.get('username')
-            raw_password = form.cleaned_data.get('password1')
-            user = authenticate(username=username, password=raw_password)
-            login(request, user)
-            return redirect('index')
-        else:
-            messages.error(request, _('Invalid form!'))
-    else:
-        form = SignUpForm()
-    return render(request, 'users/sign_up.html', {'form': form})
+class SignUp(CreateView):
+    form_class = SignUpForm
+    success_url = reverse_lazy('index')
+    template_name = 'users/sign_up.html'
+
+    def form_invalid(self, form):
+        messages.error(self.request, _('Invalid form!'))
+        return super().form_invalid(form)
+
+    def form_valid(self, form):
+        response = super().form_valid(form)
+        username = form.cleaned_data.get('username')
+        raw_password = form.cleaned_data.get('password1')
+        user = authenticate(username=username, password=raw_password)
+        login(self.request, user)
+        return response
