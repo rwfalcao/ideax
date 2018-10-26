@@ -258,7 +258,7 @@ $(function () {
         }
     });
 
-    var doPost = $.post(url, {        
+    var doPost = $.post(url, {
       seach_filter: seach_filter
     });
 
@@ -266,7 +266,7 @@ $(function () {
 
         $("#idea-list-group").empty();
         $(".empty-filter").empty();
-  
+
         if(response.empty == 0){
           $(".empty-filter").empty();
           $("#idea-list-group").html(response.html_idea_list);
@@ -274,11 +274,11 @@ $(function () {
         else{
           $(".empty-filter").empty();
           $(".empty-filter").html(response.html_idea_list);
-        }                
+        }
     });
 
     doPost.fail(function (response){
-      
+
     });
   }
 
@@ -419,7 +419,7 @@ $('#idea-pills-tab a').on('click', function (e) {
 
 //modal challenge
 var modalConfirm = function(callback){
-  
+
   $("#btn-confirm").on("click", function(){
     $("#mi-modal").modal('show');
   });
@@ -428,7 +428,7 @@ var modalConfirm = function(callback){
     callback(true);
     $("#mi-modal").modal('hide');
   });
-  
+
   $("#modal-btn-no").on("click", function(){
     callback(false);
     $("#mi-modal").modal('hide');
@@ -467,6 +467,13 @@ $("#evaluation_form button").click(function(){
       }, 500);
 });
 
-
+$(window).scroll(function() {
+    if ($(this).scrollTop() > 50 ) {
+        $('.scrolltop:hidden').stop(true, true).fadeIn();
+    } else {
+        $('.scrolltop').stop(true, true).fadeOut();
+    }
+});
+$(function(){$(".scroll").click(function(){$("html,body").animate({scrollTop:$(".thetop").offset().top},"1000");return false})})
 
 //chatbot
