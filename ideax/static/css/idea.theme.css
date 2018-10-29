@@ -10,11 +10,6 @@ body {
     bottom: 5px !important;
 }
 
-.admin-btn-group {
-    display: flex;
-    justify-content: center;
-}
-
 .scrolltop {
 	display:none;
 	width:100%;
