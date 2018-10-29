@@ -21,7 +21,7 @@ def profile(request):
     )
 
 
-class SignUp(CreateView):
+class SignUpView(CreateView):
     form_class = SignUpForm
     success_url = reverse_lazy('index')
     template_name = 'users/sign_up.html'
