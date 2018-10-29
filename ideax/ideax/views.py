@@ -577,7 +577,7 @@ def change_idea_phase(request, pk, new_phase):
                     [idea.author.user.email]
                 )
             )
-        except Exception as e:
+        except Exception:
             pass
 
     return redirect('index')
