@@ -41,7 +41,7 @@ class Phase(Enum):
         return cls.get_phase_by_id(id)
 
 
-class Phase_History(models.Model):
+class Phase_History(models.Model):  # noqa
     current_phase = models.PositiveSmallIntegerField()
     previous_phase = models.PositiveSmallIntegerField()
     date_change = models.DateTimeField('data da mudança')
@@ -58,7 +58,7 @@ class Criterion(models.Model):
         return self.description
 
 
-class Evaluation_Item(models.Model):
+class Evaluation_Item(models.Model):  # noqa
     value = models.IntegerField(default=0)
     criterion = models.ForeignKey(Criterion, on_delete=models.PROTECT)
 
@@ -75,7 +75,7 @@ class Category(models.Model):
         return self.title
 
 
-class Category_Image(models.Model):
+class Category_Image(models.Model):  # noqa
     description = models.CharField(max_length=50)
     image = models.ImageField(upload_to='category/')
     category = models.ForeignKey('Category', models.SET_NULL, null=True)
@@ -158,7 +158,7 @@ class Vote(models.Model):
     voting_date = models.DateTimeField('data da votação')
 
 
-class Popular_Vote(models.Model):
+class Popular_Vote(models.Model):  # noqa
     like = models.BooleanField()
     voter = models.ForeignKey('users.UserProfile', on_delete=models.PROTECT)
     voting_date = models.DateTimeField()
@@ -196,7 +196,7 @@ class Dimension(models.Model):
         return self.title
 
 
-class Category_Dimension(models.Model):
+class Category_Dimension(models.Model):  # noqa
     description = models.CharField(max_length=200)
     value = models.IntegerField()
     dimension = models.ForeignKey('Dimension', on_delete=models.PROTECT)
@@ -217,14 +217,14 @@ class Evaluation(models.Model):
 
 
 class UseTermManager(models.Manager):
-    def getActive(self):
+    def get_active(self):
         for term in self.all():
             if term.is_past_due:
                 return True
         return False
 
 
-class Use_Term(models.Model):
+class Use_Term(models.Model):  # noqa
     creator = models.ForeignKey('users.UserProfile', on_delete=models.PROTECT)
     term = models.TextField(max_length=12500)
     init_date = models.DateTimeField()

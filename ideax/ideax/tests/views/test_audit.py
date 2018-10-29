@@ -15,7 +15,7 @@ class TestAudit:
         audit('test_user', '127.0.0.1', 'TEST', 'TestAudit', 444)
         assert len(logger.logs) == 1
         assert logger.logs[0] == (
-            '%(username)s|%(ip_addr)s|%(operation)s|%(className)s|%(objectId)s',
+            '%(username)s|%(ip_addr)s|%(operation)s|%(class_name)s|%(object_id)s',
             {
                 'username': 'test_user',
                 'ip_addr': '127.0.0.1',

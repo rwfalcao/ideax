@@ -5,7 +5,7 @@ from martor.templatetags.martortags import safe_markdown
 from .models import Comment, Idea
 
 
-class Comment_Feed(Feed):
+class CommentFeed(Feed):
     title = "ideax - " + str(_('Comments')) + ": "
     link = "/rss"
     description = str(_('Sharing ideas'))
@@ -25,7 +25,7 @@ class Comment_Feed(Feed):
         return "/idea/" + str(item.idea.id) + "/#" + str(item.id)
 
 
-class New_Idea_Feed(Feed):
+class NewIdeaFeed(Feed):
     title = "ideax - "+str(_('New ideas'))
     link = "/rss"
     description = str(_('Sharing ideas'))

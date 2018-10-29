@@ -2,7 +2,7 @@ from django.urls import path, re_path
 from django.conf.urls import url
 
 from . import views
-from .feeds import Comment_Feed, New_Idea_Feed
+from .feeds import CommentFeed, NewIdeaFeed
 
 urlpatterns = [
     path('', views.index, name='index'),
@@ -30,8 +30,8 @@ urlpatterns = [
     path('idea/evaluation/<int:idea_pk>/', views.idea_evaluation, name='evaluation'),
     path('term/accept', views.accept_use_term, name="accept_term"),
     path('term', views.get_term_of_user, name="term_of_use"),
-    path('feed/comment/latest', Comment_Feed()),
-    path('feed/idea/latest', New_Idea_Feed(), name="rss"),
+    path('feed/comment/latest', CommentFeed()),
+    path('feed/idea/latest', NewIdeaFeed(), name="rss"),
     path('report/idea/<int:idea_id>/detail/', views.idea_detail_pdf, name="idea_detail_pdf"),
     path('challenge/<int:challenge_pk>/', views.challenge_detail, name="challenge_detail"),
     path('challenge/new/', views.challenge_new, name='challenge_new'),
