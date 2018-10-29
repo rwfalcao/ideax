@@ -12,7 +12,8 @@
       <h1>{% trans 'Sharing ideas!' %}</h1>
       <p>{% trans 'An open channel for innovation, getting ideas from all parties, evaluating and making them happen!' %}</p>
       <div class="login-button">
-          <button type="button" onclick="location.href='{% url 'login' %}';" class="btn btn-warning">Login</button> 
+          <button type="button" onclick="location.href='{% url 'users:login' %}';" class="btn btn-warning">{% trans 'Login' %}</button>
+          <button type="button" onclick="location.href='{% url 'users:sign-up' %}';" class="btn">{% trans 'Sign Up' %}</button>
       </div>
     </div>
     <div class="idea-launch">
@@ -22,9 +23,9 @@
           <p>{% trans 'In the same way, you can see other posted ideas, interacting with your opinion and asking to further improve them!' %}</p>
       </div>
       <div class="launch-image col-md-12 col-lg-6" style="text-align: center;">
-          <img src="../../static/images/stick_man.png"> 
+          <img src="../../static/images/stick_man.png">
       </div>
-      
+
     </div>
 
     <div class="functionality">

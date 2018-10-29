@@ -21,6 +21,9 @@ class FakeMessages:
         self.messages.append(str(message))
         self.levels.append(level)
 
+    def __iter__(self):
+        return iter(self.messages)
+
     @property
     def isSuccess(self):
         return self.levels[-1] == constants.SUCCESS
@@ -137,6 +140,11 @@ def pangram_pt_br():
 @fixture
 def common_user(mocker):
     user = mocker.Mock()
+    user.username = 'common'
+    user.first_name = 'Common'
+    user.last_name = 'Idea'
+    user.get_full_name = lambda: 'Common Idea'
+    user.email = 'common.idea@dtplabs.in'
     user.has_perms.return_value = False
     return user
 
