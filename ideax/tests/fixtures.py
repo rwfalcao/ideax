@@ -21,6 +21,9 @@ class FakeMessages:
         self.messages.append(str(message))
         self.levels.append(level)
 
+    def __iter__(self):
+        return iter(self.messages)
+
     @property
     def isSuccess(self):
         return self.levels[-1] == constants.SUCCESS
