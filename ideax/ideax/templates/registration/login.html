@@ -3,7 +3,7 @@
 
 {% trans "Your username and password didn't match. Please try again." as login_error_message %}
 {% block content %}
-    
+
     <div class="login-box container text-center">
 
       {% if form.errors %}
@@ -15,7 +15,7 @@
         </div>
       {% endif %}
 
-      <form class="form-signin" method="post" action="{% url 'login' %}">
+      <form class="form-signin" method="post" action="{% url 'users:login' %}">
         {% csrf_token %}
         <img class="mb-4" src="{% static 'images/idea_launch.png' %}" alt="" width="72">
         <h1 class="h3 mb-3 font-weight-normal">{% trans 'You must be logged in to access ideas.' %}</h1>

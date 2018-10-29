@@ -1185,3 +1185,13 @@ only screen and (max-width: 760px),
   text-transform: Uppercase;
   font-size: 100px;
   color: #fc0;
+}
+
+nav .avatar {
+  padding-left: 2px;
+  padding-right: 2px;
+}
+
+nav .avatar img {
+  border-radius: 20%;
+}
