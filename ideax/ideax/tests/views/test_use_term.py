@@ -1,3 +1,5 @@
+from datetime import date
+
 from django.contrib.auth.models import AnonymousUser
 from django.core.exceptions import PermissionDenied
 from django.http.response import Http404
@@ -6,8 +8,8 @@ from model_mommy import mommy
 from pytest import mark, raises
 
 from ...forms import UseTermForm
-from ...views import (accept_use_term, get_valid_use_term, save_use_term, use_term_detail, use_term_edit,
-                      use_term_list, use_term_new, use_term_remove)
+from ...views.use_term import (UseTermHelper, accept_use_term, get_valid_use_term, save_use_term, use_term_detail,
+                               use_term_edit, use_term_list, use_term_new, use_term_remove)
 
 
 class TestAcceptUseTermView:
@@ -193,7 +195,7 @@ class TestUseTermRemove:
 
     def test_get(self, rf, mocker, messages):
         get = mocker.patch('ideax.ideax.views.use_term.get_object_or_404')
-        get_use_term_list = mocker.patch('ideax.ideax.views.use_term.get_use_term_list')
+        get_use_term_list = mocker.patch('ideax.ideax.views.use_term.UseTermHelper.get_use_term_list')
         get_use_term_list.return_value = {}
         render = mocker.patch('ideax.ideax.views.use_term.render')
         use_term = mocker.patch('ideax.ideax.views.use_term.Use_Term')
@@ -269,7 +271,7 @@ class TestUseTermList:
         assert (response.status_code, response.url) == (302, '/accounts/login/?next=/')
 
     def test_get(self, rf, mocker):
-        get_use_term_list = mocker.patch('ideax.ideax.views.use_term.get_use_term_list')
+        get_use_term_list = mocker.patch('ideax.ideax.views.use_term.UseTermHelper.get_use_term_list')
         get_use_term_list.return_value = {}
         render = mocker.patch('ideax.ideax.views.use_term.render')
 
@@ -316,3 +318,13 @@ class TestUseTermNew:
 
         form.assert_called_once_with(request.POST)
         save_use_term.assert_called_once_with(request, {}, 'ideax/use_term_new.html', True)
+
+
+class TestUseTermHelper:
+    def test_get_use_term_list(self, ideax_views, db, mocker):
+        datelib = mocker.patch('ideax.ideax.views.use_term.date')
+        datelib.today.return_value = date(2010, 1, 1)
+        response = UseTermHelper.get_use_term_list()
+        assert len(response['use_term_list']) == 1
+        assert response['use_term_list'][0].term == 'A generic Term of Use.'
+        assert response['today'] == date(2010, 1, 1)

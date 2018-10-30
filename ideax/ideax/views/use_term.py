@@ -13,6 +13,12 @@ from ..forms import UseTermForm
 from ..models import Use_Term
 
 
+class UseTermHelper:
+    @classmethod
+    def get_use_term_list(cls):
+        return {'use_term_list': Use_Term.objects.all(), 'today': date.today()}
+
+
 @login_required
 def accept_use_term(request):
     if not request.user.userprofile.use_term_accept:
@@ -81,7 +87,7 @@ def use_term_remove(request, pk):
         use_term.final_date = timezone.now()
         use_term.save()
         messages.success(request, _('Terms of Use removed successfully!'))
-        return render(request, 'ideax/use_term_list.html', get_use_term_list())
+        return render(request, 'ideax/use_term_list.html', UseTermHelper.get_use_term_list())
 
 
 @login_required
@@ -92,11 +98,7 @@ def use_term_detail(request, pk):
 
 @login_required
 def use_term_list(request):
-    return render(request, 'ideax/use_term_list.html', get_use_term_list())
-
-
-def get_use_term_list():
-    return {'use_term_list': Use_Term.objects.all(), 'today': date.today()}
+    return render(request, 'ideax/use_term_list.html', UseTermHelper.get_use_term_list())
 
 
 def get_valid_use_term(request):
