@@ -298,6 +298,7 @@ def criterion_new(request):
         if form.is_valid():
             criterion = form.save(commit=False)
             criterion.save()
+            messages.success(request, _('Criterion saved successfully!'))
             audit(
                 request.user.username,
                 get_client_ip(request),
@@ -313,11 +314,13 @@ def criterion_new(request):
 
 
 @login_required
-@permission_required('ideax.add_criterion', raise_exception=True)
 def criterion_list(request):
-    criterion = Criterion.objects.all()
     audit(request.user.username, get_client_ip(request), 'CRITERION_LIST', Criterion.__name__, '')
-    return render(request, 'ideax/criterion_list.html', {'criterions': criterion})
+    return render(request, 'ideax/criterion_list.html', get_criterion_list())
+
+
+def get_criterion_list():
+    return {'criterions': Criterion.objects.all()}
 
 
 @login_required
@@ -329,6 +332,7 @@ def criterion_edit(request, pk):
         if form.is_valid():
             criterion = form.save(commit=False)
             criterion.save()
+            messages.success(request, _('Criterion changed successfully!'))
             audit(
                 request.user.username,
                 get_client_ip(request),
@@ -415,11 +419,9 @@ def idea_evaluation(request, idea_pk):
 @permission_required('ideax.delete_criterion', raise_exception=True)
 def criterion_remove(request, pk):
     criterion = get_object_or_404(Criterion, pk=pk)
-
     criterion.delete()
-
+    messages.success(request, _('Criterion removed successfully!'))
     audit(request.user.username, get_client_ip(request), 'REMOVE_CRITERION_SAVE', Criterion.__name__, str(pk))
-
     return redirect('criterion_list')
 
 
