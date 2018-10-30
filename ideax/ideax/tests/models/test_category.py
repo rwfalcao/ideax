@@ -25,10 +25,12 @@ class TestCategory:
         mommy.make('Category_Image', category=category)
         assert category.get_all_image_header()
 
-    def test_max_title(self, db):
-        with raises(DataError):
-            mommy.make('Category', title='X' * 51)
+    def test_max_title(self, db_vendor):
+        if db_vendor != 'sqlite':
+            with raises(DataError):
+                mommy.make('Category', title='X' * 51)
 
-    def test_max_description(self, db):
-        with raises(DataError):
-            mommy.make('Category', description='X' * 201)
+    def test_max_description(self, db_vendor):
+        if db_vendor != 'sqlite':
+            with raises(DataError):
+                mommy.make('Category', description='X' * 201)

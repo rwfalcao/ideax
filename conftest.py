@@ -28,3 +28,8 @@ def django_db_setup(django_db_setup, django_db_blocker):
 @fixture(autouse=True)
 def set_default_language():
     translation.activate('en')
+
+
+@fixture
+def db_vendor(db):
+    return connection.vendor
