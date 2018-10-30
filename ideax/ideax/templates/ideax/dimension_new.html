@@ -1,0 +1,67 @@
+{% extends 'ideax/base.html' %}
+{% load widget_tweaks i18n %}
+
+{% block content %}
+
+<div class="idea-list-bg">
+    <h1 class="display-3">{% trans 'New Dimension' %}</h1>
+</div>
+<div class="container">
+    {% for message in messages %}
+    <div class="alert alert-dismissible alert-{% if message.tags == 'error' %}danger{%else%}{{message.tags}}{%endif%}">
+        <button type="button" class="close" data-dismiss="alert">×</button>
+        {{ message }}
+    </div>
+    {% endfor %}
+
+    <form method="post" class="form post-form" action="{% url 'dimension_new' %}">
+        {% csrf_token %}
+        <div class="form-group{% if form.title.errors %} has-error{% endif %}">
+            <label for="{{form.title.id_for_label}}">{{form.title.label}}</label>
+            {{ form.title|add_class:'form-control' }}
+            {% for error in form.title.errors %}
+            <p class="help-block">{{ error }}</p>
+            {% endfor %}
+        </div>
+
+        <div class="form-group{% if form.description.errors %} has-error{% endif %}">
+            <label for="{{form.description.id_for_label}}">{{form.description.label}}</label>
+            {{ form.description|add_class:'form-control' }}
+            {% for error in form.description.errors %}
+            <p class="help-block">{{ error }}</p>
+            {% endfor %}
+        </div>
+
+        <div class="form-group{% if form.weight.errors %} has-error{% endif %}">
+            <label for="{{form.weight.id_for_label}}">{{form.weight.label}}</label>
+            {{ form.weight|add_class:'form-control' }}
+            {% for error in form.weight.errors %}
+            <p class="help-block">{{ error }}</p>
+            {% endfor %}
+        </div>
+
+        <div class="form-group{% if form.init_date.errors %} has-error{% endif %}">
+            <label for="{{form.init_date.id_for_label}}">{{form.init_date.label}}</label>
+            {{ form.init_date|add_class:'form-control' }}
+            {% for error in form.init_date.errors %}
+            <p class="help-block">{{ error }}</p>
+            {% endfor %}
+        </div>     
+
+        <div class="form-group{% if form.final_date.errors %} has-error{% endif %}">
+            <label for="{{form.final_date.id_for_label}}">{{form.final_date.label}}</label>
+            {{ form.final_date|add_class:'form-control' }}
+            {% for error in form.final_date.errors %}
+            <p class="help-block">{{ error }}</p>
+            {% endfor %}
+        </div>
+
+
+        <div class="button-group">
+            <a href="{% url 'dimension_list' %}">{% trans 'Return' %}</a>
+            <button type="submit" class="btn btn-primary">{% trans 'Save' %}</button>
+        </div>
+    </form>
+</div>
+
+{% endblock %}
