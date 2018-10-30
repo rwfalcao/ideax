@@ -8,6 +8,12 @@ from ..forms import DimensionForm
 from ..models import Dimension
 
 
+class DimensionHelper:
+    @classmethod
+    def get_dimension_list(cls):
+        return {'dimension_list': Dimension.objects.all()}
+
+
 @login_required
 @permission_required('ideax.add_dimension', raise_exception=True)
 def dimension_new(request):
@@ -27,7 +33,7 @@ def dimension_new(request):
 @login_required
 def dimension_list(request):
     audit(request.user.username, get_client_ip(request), 'DIMENSION_LIST', Dimension.__name__, '')
-    return render(request, 'ideax/dimension_list.html', get_dimension_list())
+    return render(request, 'ideax/dimension_list.html', DimensionHelper.get_dimension_list())
 
 
 @login_required
@@ -61,7 +67,3 @@ def dimension_remove(request, pk):
     messages.success(request, _('Dimension removed successfully!'))
     audit(request.user.username, get_client_ip(request), 'REMOVE_DIMENSION', Dimension.__name__, str(pk))
     return redirect('dimension_list')
-
-
-def get_dimension_list():
-    return {'dimension_list': Dimension.objects.all()}

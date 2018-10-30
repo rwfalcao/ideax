@@ -5,7 +5,7 @@ from django.http.response import Http404
 from pytest import raises
 
 from ...models import Dimension
-from ...views import dimension_edit, dimension_list, dimension_new, dimension_remove, get_dimension_list
+from ...views.dimension import DimensionHelper, dimension_edit, dimension_list, dimension_new, dimension_remove
 
 
 class TestDimensionNew:
@@ -145,8 +145,8 @@ class TestDimensionRemove:
     def test_get(self, rf, factory_user, mocker, messages):
         audit = mocker.patch('ideax.ideax.views.dimension.audit')
         get = mocker.patch('ideax.ideax.views.dimension.get_object_or_404')
-        get_dimension_list = mocker.patch('ideax.ideax.views.dimension.get_dimension_list')
-        get_dimension_list.return_value = {}
+        DimensionHelper = mocker.patch('ideax.ideax.views.dimension.DimensionHelper')
+        DimensionHelper.get_dimension_list.return_value = {}
         dimension = mocker.patch('ideax.ideax.views.dimension.Dimension')
         dimension.__name__ = 'Dimension'
 
@@ -171,8 +171,8 @@ class TestDimensionList:
 
     def test_get(self, rf, mocker, common_user):
         mocker.patch('ideax.ideax.views.dimension.audit')
-        get_dimension_list = mocker.patch('ideax.ideax.views.dimension.get_dimension_list')
-        get_dimension_list.return_value = {}
+        DimensionHelper = mocker.patch('ideax.ideax.views.dimension.DimensionHelper')
+        DimensionHelper.get_dimension_list.return_value = {}
         render = mocker.patch('ideax.ideax.views.dimension.render')
 
         request = rf.get('/')
@@ -182,11 +182,11 @@ class TestDimensionList:
         render.assert_called_once_with(request, 'ideax/dimension_list.html', {})
 
 
-class TestGetDimensionList:
+class TestDimensionHelper:
     def test_get_dimension_list(self, mocker):
         objects = mocker.patch('ideax.ideax.views.dimension.Dimension.objects')
         objects.all.return_value = []
 
-        result = get_dimension_list()
+        result = DimensionHelper.get_dimension_list()
 
         assert result == {'dimension_list': []}
