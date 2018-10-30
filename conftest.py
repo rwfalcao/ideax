@@ -7,6 +7,7 @@ from pytest import fixture
 
 pytest_plugins = [
     'ideax.tests.fixtures',
+    'ideax.users.tests.fixtures',
     'ideax.ideax.tests.fixtures',
 ]
 
