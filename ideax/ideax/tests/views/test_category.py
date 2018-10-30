@@ -172,7 +172,7 @@ class TestCategoryList:
         assert (response.status_code, response.url) == (302, '/accounts/login/?next=/')
 
     def test_get(self, rf, mocker, common_user):
-        mocker.patch('ideax.ideax.views.audit')
+        mocker.patch('ideax.ideax.views.category.audit')
         get_category_list = mocker.patch('ideax.ideax.views.category.get_category_list')
         get_category_list.return_value = {}
         render = mocker.patch('ideax.ideax.views.category.render')
