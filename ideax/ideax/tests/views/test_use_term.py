@@ -17,19 +17,21 @@ class TestAcceptUseTermView:
         response = accept_use_term(request)
         assert (response.status_code, response.url) == (302, '/accounts/login/?next=/term/accept')
 
-    def test_accept_use_term_not_accepted(self, ideax_views, rf, admin_user, messages, get_ip, mocker):
-        ideax_views.audit = mocker.Mock()
-        admin_user.userprofile.use_term_accept = False
+    def test_accept_use_term_not_accepted(self, rf, common_user, messages, mocker):
+        mocker.patch('ideax.users.models.UserProfile.objects')
+        get_ip = mocker.patch('ideax.ideax.views.use_term.get_ip')
+        mocker.patch('ideax.ideax.views.use_term.audit')
+        common_user.userprofile.use_term_accept = False
         request = rf.get('/term/accept')
-        request.user = admin_user
+        request.user = common_user
         request._messages = messages
         response = accept_use_term(request)
         assert (response.status_code, response.url) == (302, '/')
         assert messages.messages == ['Term of use accepted!']
         get_ip.assert_called_once_with(request)
 
-    def test_accept_use_term_accepted(self, ideax_views, rf, admin_user, messages, mocker):
-        ideax_views.audit = mocker.Mock()
+    def test_accept_use_term_accepted(self, rf, admin_user, messages, mocker):
+        mocker.patch('ideax.ideax.views.use_term.audit')
         admin_user.userprofile.use_term_accept = True
         request = rf.get('/term/accept')
         request.user = admin_user
@@ -60,8 +62,8 @@ class TestUseTermEdit:
 
     def test_get(self, rf, admin_user, ideax_views, mocker):
         use_term = mommy.make('Use_Term')
-        use_term_form = mocker.patch.object(ideax_views, 'UseTermForm')
-        save_use_term = mocker.patch.object(ideax_views, 'save_use_term')
+        use_term_form = mocker.patch.object(ideax_views.use_term, 'UseTermForm')
+        save_use_term = mocker.patch.object(ideax_views.use_term, 'save_use_term')
 
         request = rf.get(f'/useterm/{use_term.id}/edit/')
         request.user = admin_user
@@ -71,8 +73,8 @@ class TestUseTermEdit:
 
     def test_post(self, rf, admin_user, ideax_views, mocker):
         use_term = mommy.make('Use_Term')
-        use_term_form = mocker.patch.object(ideax_views, 'UseTermForm')
-        save_use_term = mocker.patch.object(ideax_views, 'save_use_term')
+        use_term_form = mocker.patch.object(ideax_views.use_term, 'UseTermForm')
+        save_use_term = mocker.patch.object(ideax_views.use_term, 'save_use_term')
 
         request = rf.post(f'/useterm/{use_term.id}/edit/')
         request.user = admin_user
@@ -95,7 +97,7 @@ class TestSaveUseTerm:
         assert '<button type="submit" class="btn btn-primary">Update</button>' in body
 
     def test_get_mocked(self, rf, admin_user, ideax_views, mocker):
-        render = mocker.patch.object(ideax_views, 'render')
+        render = mocker.patch.object(ideax_views.use_term, 'render')
         request = rf.get('/')
         request.user = admin_user
         save_use_term(request, 'form', 'use_term_edit.html')
@@ -107,7 +109,7 @@ class TestSaveUseTerm:
         form.save.return_value.is_invalid_date.return_value = True
         terms = mocker.patch('ideax.ideax.models.Use_Term.objects')
         terms.all.return_value = []
-        render = mocker.patch('ideax.ideax.views.render')
+        render = mocker.patch('ideax.ideax.views.use_term.render')
         user_profile = mocker.patch('ideax.users.models.UserProfile.objects')
         user_profile.get.return_value = None
 
@@ -127,7 +129,7 @@ class TestSaveUseTerm:
         form.save.return_value.is_invalid_date.return_value = False
         terms = mocker.patch('ideax.ideax.models.Use_Term.objects')
         terms.getActive.return_value = True
-        render = mocker.patch('ideax.ideax.views.render')
+        render = mocker.patch('ideax.ideax.views.use_term.render')
         user_profile = mocker.patch('ideax.users.models.UserProfile.objects')
         user_profile.get.return_value = None
 
@@ -183,18 +185,18 @@ class TestUseTermRemove:
             use_term_remove(request, 1)
 
     def test_invalid_method(self, rf, mocker):
-        mocker.patch('ideax.ideax.views.get_object_or_404')
+        mocker.patch('ideax.ideax.views.use_term.get_object_or_404')
         request = rf.post('/', {})
         request.user = mocker.Mock()
         response = use_term_remove(request, 999)
         assert response is None
 
     def test_get(self, rf, mocker, messages):
-        get = mocker.patch('ideax.ideax.views.get_object_or_404')
-        get_use_term_list = mocker.patch('ideax.ideax.views.get_use_term_list')
+        get = mocker.patch('ideax.ideax.views.use_term.get_object_or_404')
+        get_use_term_list = mocker.patch('ideax.ideax.views.use_term.get_use_term_list')
         get_use_term_list.return_value = {}
-        render = mocker.patch('ideax.ideax.views.render')
-        use_term = mocker.patch('ideax.ideax.views.Use_Term')
+        render = mocker.patch('ideax.ideax.views.use_term.render')
+        use_term = mocker.patch('ideax.ideax.views.use_term.Use_Term')
 
         request = rf.get('/')
         request.user = mocker.Mock()
@@ -214,9 +216,9 @@ class TestUseTermDetail:
         assert (response.status_code, response.url) == (302, '/accounts/login/?next=/')
 
     def test_get(self, rf, mocker):
-        get = mocker.patch('ideax.ideax.views.get_object_or_404')
-        render = mocker.patch('ideax.ideax.views.render')
-        use_term = mocker.patch('ideax.ideax.views.Use_Term')
+        get = mocker.patch('ideax.ideax.views.use_term.get_object_or_404')
+        render = mocker.patch('ideax.ideax.views.use_term.render')
+        use_term = mocker.patch('ideax.ideax.views.use_term.Use_Term')
 
         request = rf.get('/')
         request.user = mocker.Mock()
@@ -230,7 +232,7 @@ class TestGetValidUseTerm:
     def test_empty(self, rf, mocker):
         terms = mocker.patch('ideax.ideax.models.Use_Term.objects')
         terms.all.return_value = []
-        render = mocker.patch('ideax.ideax.views.render')
+        render = mocker.patch('ideax.ideax.views.use_term.render')
 
         request = rf.get('/')
         get_valid_use_term(request)
@@ -240,7 +242,7 @@ class TestGetValidUseTerm:
     def test_no_valid(self, rf, mocker):
         terms = mocker.patch('ideax.ideax.models.Use_Term.objects')
         terms.all.return_value = [mocker.Mock(is_past_due=False)]
-        render = mocker.patch('ideax.ideax.views.render')
+        render = mocker.patch('ideax.ideax.views.use_term.render')
 
         request = rf.get('/')
         get_valid_use_term(request)
@@ -251,7 +253,7 @@ class TestGetValidUseTerm:
         terms = mocker.patch('ideax.ideax.models.Use_Term.objects')
         term = mocker.Mock(is_past_due=True)
         terms.all.return_value = [term]
-        render = mocker.patch('ideax.ideax.views.render')
+        render = mocker.patch('ideax.ideax.views.use_term.render')
 
         request = rf.get('/')
         get_valid_use_term(request)
@@ -267,9 +269,9 @@ class TestUseTermList:
         assert (response.status_code, response.url) == (302, '/accounts/login/?next=/')
 
     def test_get(self, rf, mocker):
-        get_use_term_list = mocker.patch('ideax.ideax.views.get_use_term_list')
+        get_use_term_list = mocker.patch('ideax.ideax.views.use_term.get_use_term_list')
         get_use_term_list.return_value = {}
-        render = mocker.patch('ideax.ideax.views.render')
+        render = mocker.patch('ideax.ideax.views.use_term.render')
 
         request = rf.get('/')
         request.user = mocker.Mock()
@@ -292,9 +294,9 @@ class TestUseTermNew:
             use_term_new(request, 1)
 
     def test_get(self, rf, mocker):
-        form = mocker.patch('ideax.ideax.views.UseTermForm')
+        form = mocker.patch('ideax.ideax.views.use_term.UseTermForm')
         form.return_value = {}
-        save_use_term = mocker.patch('ideax.ideax.views.save_use_term')
+        save_use_term = mocker.patch('ideax.ideax.views.use_term.save_use_term')
 
         request = rf.get('/')
         request.user = mocker.Mock()
@@ -304,9 +306,9 @@ class TestUseTermNew:
         save_use_term.assert_called_once_with(request, {}, 'ideax/use_term_new.html', True)
 
     def test_post(self, rf, mocker):
-        form = mocker.patch('ideax.ideax.views.UseTermForm')
+        form = mocker.patch('ideax.ideax.views.use_term.UseTermForm')
         form.return_value = {}
-        save_use_term = mocker.patch('ideax.ideax.views.save_use_term')
+        save_use_term = mocker.patch('ideax.ideax.views.use_term.save_use_term')
 
         request = rf.post('/', {})
         request.user = mocker.Mock()

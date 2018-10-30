@@ -1,13 +1,16 @@
 import json
-from datetime import datetime, timedelta
+
+from datetime import date, datetime, timedelta
 from itertools import product
 
-import pytz
 from django.db.models import QuerySet
+
+import pytz
+
 from model_mommy import mommy
 
-from ...views import (get_authors, get_category_list, get_featured_challenges,
-                      get_phases, get_term_of_user, get_use_term_list)
+from ...views import (get_authors, get_category_list, get_featured_challenges, get_phases, get_term_of_user,
+                      get_use_term_list)
 
 
 class TestNonMiscView:
@@ -38,12 +41,13 @@ class TestNonMiscView:
         assert response.status_code == 200
         assert json.loads(response.content) == {'term': 'EULA Test'}
 
-    def test_get_use_term_list(self, ideax_views, db, mock_today):
-        ideax_views.date = mock_today
+    def test_get_use_term_list(self, ideax_views, db, mocker):
+        datelib = mocker.patch('ideax.ideax.views.use_term.date')
+        datelib.today.return_value = date(2010, 1, 1)
         response = get_use_term_list()
         assert len(response['use_term_list']) == 1
         assert response['use_term_list'][0].term == 'A generic Term of Use.'
-        assert response['today'] == mock_today.fix_date
+        assert response['today'] == date(2010, 1, 1)
 
     def test_get_featured_challenges_empty(self, db):
         response = get_featured_challenges()
