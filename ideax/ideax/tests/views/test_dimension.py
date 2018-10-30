@@ -5,7 +5,7 @@ from django.http.response import Http404
 from pytest import raises
 
 from ...models import Dimension
-from ...views import dimension_edit, dimension_list, dimension_new, dimension_remove
+from ...views import dimension_edit, dimension_list, dimension_new, dimension_remove, get_dimension_list
 
 
 class TestDimensionNew:
@@ -180,3 +180,13 @@ class TestDimensionList:
         dimension_list(request)
 
         render.assert_called_once_with(request, 'ideax/dimension_list.html', {})
+
+
+class TestGetDimensionList:
+    def test_get_dimension_list(self, mocker):
+        objects = mocker.patch('ideax.ideax.views.dimension.Dimension.objects')
+        objects.all.return_value = []
+
+        result = get_dimension_list()
+
+        assert result == {'dimension_list': []}

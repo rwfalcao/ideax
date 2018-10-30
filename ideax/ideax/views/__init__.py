@@ -38,7 +38,7 @@ from .use_term import (
     get_term_of_user, get_use_term_list, accept_use_term, get_valid_use_term, save_use_term,
     use_term_detail, use_term_edit, use_term_list, use_term_new, use_term_remove,
 )
-from .dimension import dimension_new, dimension_list, dimension_edit, dimension_remove, get_dimension_list
+from .dimension import dimension_new, dimension_list, dimension_edit, dimension_remove
 
 mail_util = MailUtil()
 
@@ -792,5 +792,5 @@ __all__ = [
     'get_term_of_user', 'get_use_term_list', 'accept_use_term',
     'get_valid_use_term', 'save_use_term', 'use_term_detail', 'use_term_edit', 'use_term_list',
     'use_term_new', 'use_term_remove',
-    'dimension_new', 'dimension_list', 'dimension_edit', 'dimension_remove', 'get_dimension_list',
+    'dimension_new', 'dimension_list', 'dimension_edit', 'dimension_remove',
 ]
