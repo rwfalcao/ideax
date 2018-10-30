@@ -30,7 +30,7 @@ from ..models import (
     Category, Comment, Dimension, Evaluation, Category_Image, Use_Term, Challenge
 )
 from ..forms import (
-    IdeaForm, CriterionForm, CategoryImageForm,
+    IdeaForm, CriterionForm,
     EvaluationForm, ChallengeForm, UseTermForm, DimensionForm
 )
 from ...singleton import Profanity_Check
@@ -38,6 +38,7 @@ from ...mail_util import MailUtil
 from ...util import get_ip, get_client_ip, audit
 
 from .category import category_edit, category_list, category_new, category_remove, get_category_list
+from .category_image import category_image_edit, category_image_list, category_image_new, category_image_remove
 
 mail_util = MailUtil()
 
@@ -829,70 +830,6 @@ def idea_new_from_challenge(request, challenge_pk):
 
 
 @login_required
-@permission_required('ideax.add_category_image', raise_exception=True)
-def category_image_new(request):
-    if request.method == "POST":
-        form = CategoryImageForm(request.POST, request.FILES)
-
-        if form.is_valid():
-            category_image = form.save(commit=False)
-            category_image.author = UserProfile.objects.get(user=request.user)
-            category_image.creation_date = timezone.now()
-            category_image.save()
-            messages.success(request, _('Category Image saved successfully!'))
-            audit(
-                request.user.username,
-                get_client_ip(request),
-                'CREATE_CATEGORY_IMAGE',
-                Category_Image.__name__,
-                category_image.id)
-            return redirect('category_image_list')
-    else:
-        form = CategoryImageForm()
-    return render(request, 'ideax/category_image_new.html', {'form': form})
-
-
-@login_required
-def category_image_list(request):
-    category_images = Category_Image.objects.all()
-    audit(request.user.username, get_client_ip(request), 'LIST_CATEGORY_IMAGE', Category_Image.__name__, '')
-    return render(request, 'ideax/category_image_list.html', {'category_images': category_images})
-
-
-@login_required
-@permission_required('ideax.change_category_image', raise_exception=True)
-def category_image_edit(request, pk):
-    category_image = get_object_or_404(Category_Image, pk=pk)
-
-    if request.method == "POST":
-        form = CategoryImageForm(request.POST, request.FILES, instance=category_image)
-
-        if form.is_valid():
-            form.save()
-            messages.success(request, _('Category Image changed successfully!'))
-            audit(
-                request.user.username,
-                get_client_ip(request),
-                'EDIT_CATEGORY_IMAGE',
-                Category_Image.__name__,
-                str(pk))
-            return redirect('category_image_list')
-    else:
-        form = CategoryImageForm(instance=category_image)
-    return render(request, 'ideax/category_image_edit.html', {'form': form})
-
-
-@login_required
-@permission_required('ideax.delete_category_image', raise_exception=True)
-def category_image_remove(request, pk):
-    category_image = get_object_or_404(Category_Image, pk=pk)
-    category_image.delete()
-    messages.success(request, _('Category Image removed successfully!'))
-    audit(request.user.username, get_client_ip(request), 'REMOVE_CATEGORY_IMAGE', Category_Image.__name__, str(pk))
-    return redirect('category_image_list')
-
-
-@login_required
 def markdown_uploader(request):
     """
     Makdown image upload for locale storage
@@ -1012,5 +949,6 @@ def dimension_remove(request, pk):
 
 
 __all__ = [
-    'category_edit', 'category_list', 'category_new', 'category_remove', 'get_category_list'
+    'category_edit', 'category_list', 'category_new', 'category_remove', 'get_category_list',
+    'category_image_edit', 'category_image_list', 'category_image_new', 'category_image_remove',
 ]
