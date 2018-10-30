@@ -25,9 +25,9 @@ from martor.utils import LazyEncoder
 from ...users.models import UserProfile
 from ..models import (
     Idea, Criterion, Popular_Vote, Phase, Phase_History,
-    Category, Comment, Dimension, Evaluation, Category_Image, Challenge
+    Comment, Evaluation, Category_Image, Challenge, Dimension,
 )
-from ..forms import IdeaForm, CriterionForm, EvaluationForm, ChallengeForm, DimensionForm
+from ..forms import IdeaForm, CriterionForm, EvaluationForm, ChallengeForm
 from ...singleton import Profanity_Check
 from ...mail_util import MailUtil
 from ...util import get_ip, get_client_ip, audit
@@ -38,6 +38,7 @@ from .use_term import (
     get_term_of_user, get_use_term_list, accept_use_term, get_valid_use_term, save_use_term,
     use_term_detail, use_term_edit, use_term_list, use_term_new, use_term_remove,
 )
+from .dimension import dimension_new, dimension_list, dimension_edit, dimension_remove, get_dimension_list
 
 mail_util = MailUtil()
 
@@ -785,69 +786,11 @@ def get_authors(removed_author):
         .exclude(user__email=removed_author)
 
 
-@login_required
-@permission_required('ideax.add_dimension', raise_exception=True)
-def dimension_new(request):
-    if request.method == "POST":
-        form = DimensionForm(request.POST)
-        if form.is_valid():
-            dimension = form.save()
-            dimension.save()
-            messages.success(request, _('Dimension saved successfully!'))
-            audit(request.user.username, get_client_ip(request), 'CREATE_DIMENSION', Dimension.__name__, dimension.id)
-            return redirect('dimension_list')
-    else:
-        form = DimensionForm()
-    return render(request, 'ideax/dimension_new.html', {'form': form})
-
-
-@login_required
-def dimension_list(request):
-    audit(request.user.username, get_client_ip(request), 'DIMENSION_LIST', Category.__name__, '')
-    return render(request, 'ideax/dimension_list.html', get_dimension_list())
-
-
-def get_dimension_list():
-    return {'dimension_list': Dimension.objects.all()}
-
-
-@login_required
-@permission_required('ideax.change_dimension', raise_exception=True)
-def dimension_edit(request, pk):
-    dimension = get_object_or_404(Dimension, pk=pk)
-    if request.method == "POST":
-        form = DimensionForm(request.POST, instance=dimension)
-        if form.is_valid():
-            form.save()
-            messages.success(request, _('Dimension changed successfully!'))
-            audit(
-                request.user.username,
-                get_client_ip(request),
-                'EDIT_DIMENSION_SAVE',
-                Dimension.__name__,
-                str(dimension.id)
-            )
-            return redirect('dimension_list')
-    else:
-        form = DimensionForm(instance=dimension)
-
-    return render(request, 'ideax/dimension_edit.html', {'form': form})
-
-
-@login_required
-@permission_required('ideax.delete_dimension', raise_exception=True)
-def dimension_remove(request, pk):
-    dimension = get_object_or_404(Dimension, pk=pk)
-    dimension.delete()
-    messages.success(request, _('Dimension removed successfully!'))
-    audit(request.user.username, get_client_ip(request), 'REMOVE_DIMENSION', Dimension.__name__, str(pk))
-    return redirect('dimension_list')
-
-
 __all__ = [
     'category_edit', 'category_list', 'category_new', 'category_remove', 'get_category_list',
     'category_image_edit', 'category_image_list', 'category_image_new', 'category_image_remove',
     'get_term_of_user', 'get_use_term_list', 'accept_use_term',
     'get_valid_use_term', 'save_use_term', 'use_term_detail', 'use_term_edit', 'use_term_list',
     'use_term_new', 'use_term_remove',
+    'dimension_new', 'dimension_list', 'dimension_edit', 'dimension_remove', 'get_dimension_list',
 ]

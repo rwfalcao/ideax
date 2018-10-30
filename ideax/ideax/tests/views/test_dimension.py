@@ -22,8 +22,8 @@ class TestDimensionNew:
             dimension_new(request)
 
     def test_get(self, rf, factory_user, mocker):
-        render = mocker.patch('ideax.ideax.views.render')
-        form = mocker.patch('ideax.ideax.views.DimensionForm')
+        render = mocker.patch('ideax.ideax.views.dimension.render')
+        form = mocker.patch('ideax.ideax.views.dimension.DimensionForm')
 
         request = rf.get('/')
         request.user = factory_user('ideax.add_dimension')
@@ -33,8 +33,8 @@ class TestDimensionNew:
         render.assert_called_once_with(request, 'ideax/dimension_new.html', {'form': form.return_value})
 
     def test_post(self, rf, factory_user, mocker, messages):
-        audit = mocker.patch('ideax.ideax.views.audit')
-        form = mocker.patch('ideax.ideax.views.DimensionForm')
+        audit = mocker.patch('ideax.ideax.views.dimension.audit')
+        form = mocker.patch('ideax.ideax.views.dimension.DimensionForm')
         form.return_value.is_valid.return_value = True
         user_profile = mocker.patch('ideax.users.models.UserProfile.objects')
         user_profile.get.return_value = None
@@ -51,7 +51,7 @@ class TestDimensionNew:
         assert messages.messages == ['Dimension saved successfully!']
 
     def test_post_invalid_form(self, rf, factory_user, mocker):
-        form = mocker.patch('ideax.ideax.views.DimensionForm')
+        form = mocker.patch('ideax.ideax.views.dimension.DimensionForm')
         form.return_value.is_valid.return_value = False
         user_profile = mocker.patch('ideax.users.models.UserProfile.objects')
         user_profile.get.return_value = None
@@ -83,9 +83,9 @@ class TestDimensionEdit:
             dimension_edit(request, 1)
 
     def test_get(self, rf, factory_user, mocker):
-        get = mocker.patch('ideax.ideax.views.get_object_or_404')
-        render = mocker.patch('ideax.ideax.views.render')
-        form = mocker.patch('ideax.ideax.views.DimensionForm')
+        get = mocker.patch('ideax.ideax.views.dimension.get_object_or_404')
+        render = mocker.patch('ideax.ideax.views.dimension.render')
+        form = mocker.patch('ideax.ideax.views.dimension.DimensionForm')
 
         request = rf.get(f'/dimension/55/edit/')
         request.user = factory_user('ideax.change_dimension')
@@ -95,9 +95,9 @@ class TestDimensionEdit:
         render.assert_called_once_with(request, 'ideax/dimension_edit.html', {'form': form.return_value})
 
     def test_post(self, rf, factory_user, mocker, messages):
-        get = mocker.patch('ideax.ideax.views.get_object_or_404')
-        mocker.patch('ideax.ideax.views.audit')
-        dimension_form = mocker.patch('ideax.ideax.views.DimensionForm')
+        get = mocker.patch('ideax.ideax.views.dimension.get_object_or_404')
+        mocker.patch('ideax.ideax.views.dimension.audit')
+        dimension_form = mocker.patch('ideax.ideax.views.dimension.DimensionForm')
         dimension_form.return_value.is_valid.return_value = True
 
         request = rf.post(f'/dimension/55/edit/', {})
@@ -112,11 +112,11 @@ class TestDimensionEdit:
         assert messages.messages == ['Dimension changed successfully!']
 
     def test_post_invalid_form(self, rf, factory_user, mocker, messages):
-        get = mocker.patch('ideax.ideax.views.get_object_or_404')
-        mocker.patch('ideax.ideax.views.audit')
-        dimension_form = mocker.patch('ideax.ideax.views.DimensionForm')
+        get = mocker.patch('ideax.ideax.views.dimension.get_object_or_404')
+        mocker.patch('ideax.ideax.views.dimension.audit')
+        dimension_form = mocker.patch('ideax.ideax.views.dimension.DimensionForm')
         dimension_form.return_value.is_valid.return_value = False
-        render = mocker.patch('ideax.ideax.views.render')
+        render = mocker.patch('ideax.ideax.views.dimension.render')
 
         request = rf.post(f'/dimension/55/edit/', {})
         request.user = factory_user('ideax.change_dimension')
@@ -143,11 +143,11 @@ class TestDimensionRemove:
             dimension_remove(request, 1)
 
     def test_get(self, rf, factory_user, mocker, messages):
-        audit = mocker.patch('ideax.ideax.views.audit')
-        get = mocker.patch('ideax.ideax.views.get_object_or_404')
-        get_dimension_list = mocker.patch('ideax.ideax.views.get_dimension_list')
+        audit = mocker.patch('ideax.ideax.views.dimension.audit')
+        get = mocker.patch('ideax.ideax.views.dimension.get_object_or_404')
+        get_dimension_list = mocker.patch('ideax.ideax.views.dimension.get_dimension_list')
         get_dimension_list.return_value = {}
-        dimension = mocker.patch('ideax.ideax.views.Dimension')
+        dimension = mocker.patch('ideax.ideax.views.dimension.Dimension')
         dimension.__name__ = 'Dimension'
 
         request = rf.get('/')
@@ -170,10 +170,10 @@ class TestDimensionList:
         assert (response.status_code, response.url) == (302, '/accounts/login/?next=/')
 
     def test_get(self, rf, mocker, common_user):
-        mocker.patch('ideax.ideax.views.audit')
-        get_dimension_list = mocker.patch('ideax.ideax.views.get_dimension_list')
+        mocker.patch('ideax.ideax.views.dimension.audit')
+        get_dimension_list = mocker.patch('ideax.ideax.views.dimension.get_dimension_list')
         get_dimension_list.return_value = {}
-        render = mocker.patch('ideax.ideax.views.render')
+        render = mocker.patch('ideax.ideax.views.dimension.render')
 
         request = rf.get('/')
         request.user = common_user
