@@ -3,7 +3,7 @@ from pytest import fixture, mark
 from ...forms import DimensionForm
 
 
-class TestCategoryForm:
+class TestDimensionForm:
     @fixture
     def data(self):
         return {
