@@ -1,20 +1,11 @@
-from ...views import audit
-
-
-class MockLogger:
-    logs = []
-
-    def info(self, *args):
-        self.logs.append(args)
+from ....util import audit, logger
 
 
 class TestAudit:
-    def test_audit(self, ideax_views):
-        logger = MockLogger()
-        ideax_views.logger = logger
+    def test_audit(self, mocker):
+        mock = mocker.patch.object(logger, 'info')
         audit('test_user', '127.0.0.1', 'TEST', 'TestAudit', 444)
-        assert len(logger.logs) == 1
-        assert logger.logs[0] == (
+        mock.assert_called_once_with(
             '%(username)s|%(ip_addr)s|%(operation)s|%(className)s|%(objectId)s',
             {
                 'username': 'test_user',
