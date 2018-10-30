@@ -114,5 +114,4 @@ def get_term_of_user(request):
     term = Use_Term.objects.filter(final_date__gte=timezone.now())
     if term.exists():
         return JsonResponse({"term": term[0].term})
-    else:
-        return JsonResponse({"term": _("No Term of Use found")})
+    return JsonResponse({"term": _("No Term of Use found")})

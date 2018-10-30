@@ -6,5 +6,5 @@ class UserConfig(AppConfig):
     name = 'ideax.users'
 
     def ready(self):
-        from .signals import check_user_profile
+        from .signals import check_user_profile  # noqa
         user_logged_in.connect(check_user_profile)
