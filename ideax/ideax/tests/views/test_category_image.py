@@ -146,7 +146,7 @@ class TestCategoryImageRemove:
     def test_get(self, rf, factory_user, mocker, messages):
         audit = mocker.patch('ideax.ideax.views.category_image.audit')
         get = mocker.patch('ideax.ideax.views.category_image.get_object_or_404')
-        get_category_list = mocker.patch('ideax.ideax.views.category.get_category_list')
+        get_category_list = mocker.patch('ideax.ideax.views.category.CategoryHelper.get_category_list')
         get_category_list.return_value = {}
         category = mocker.patch('ideax.ideax.views.category_image.Category_Image')
         category.__name__ = 'Category_Image'

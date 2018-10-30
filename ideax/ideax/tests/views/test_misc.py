@@ -9,7 +9,7 @@ import pytz
 
 from model_mommy import mommy
 
-from ...views import get_authors, get_category_list, get_featured_challenges, get_phases, get_term_of_user
+from ...views import get_authors, get_featured_challenges, get_phases, get_term_of_user
 
 
 class TestNonMiscView:
@@ -20,12 +20,6 @@ class TestNonMiscView:
         # TODO: why str is necessary?
         cleaned = [(k, str(v)) for k, v in phases['phases']]
         snapshot.assert_match(cleaned)
-
-    def test_get_category_list(self, db):
-        category = mommy.make('Category')
-        categories = get_category_list()
-        assert list(categories.keys()) == ['category_list']
-        assert categories['category_list'].last() == category
 
     def test_get_term_of_user_empty(self, rf, db):
         request = rf.get('/')

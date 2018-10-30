@@ -2,10 +2,11 @@ from django.contrib.auth.models import AnonymousUser
 from django.core.exceptions import PermissionDenied
 from django.http.response import Http404
 
+from model_mommy import mommy
 from pytest import raises
 
 from ...models import Category
-from ...views import category_edit, category_list, category_new, category_remove
+from ...views.category import CategoryHelper, category_edit, category_list, category_new, category_remove
 
 
 class TestCategoryNew:
@@ -146,7 +147,7 @@ class TestCategoryRemove:
     def test_get(self, rf, factory_user, mocker, messages):
         audit = mocker.patch('ideax.ideax.views.category.audit')
         get = mocker.patch('ideax.ideax.views.category.get_object_or_404')
-        get_category_list = mocker.patch('ideax.ideax.views.category.get_category_list')
+        get_category_list = mocker.patch('ideax.ideax.views.category.CategoryHelper.get_category_list')
         get_category_list.return_value = {}
         category = mocker.patch('ideax.ideax.views.category.Category')
         category.__name__ = 'Category'
@@ -173,7 +174,7 @@ class TestCategoryList:
 
     def test_get(self, rf, mocker, common_user):
         mocker.patch('ideax.ideax.views.category.audit')
-        get_category_list = mocker.patch('ideax.ideax.views.category.get_category_list')
+        get_category_list = mocker.patch('ideax.ideax.views.category.CategoryHelper.get_category_list')
         get_category_list.return_value = {}
         render = mocker.patch('ideax.ideax.views.category.render')
 
@@ -182,3 +183,11 @@ class TestCategoryList:
         category_list(request)
 
         render.assert_called_once_with(request, 'ideax/category_list.html', {})
+
+
+class TestCategoryHelper:
+    def test_get_category_list(self, db):
+        category = mommy.make('Category')
+        categories = CategoryHelper.get_category_list()
+        assert list(categories.keys()) == ['category_list']
+        assert categories['category_list'].last() == category

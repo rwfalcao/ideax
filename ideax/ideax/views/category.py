@@ -10,6 +10,12 @@ from ..forms import CategoryForm
 from ..models import Category
 
 
+class CategoryHelper:
+    @classmethod
+    def get_category_list(cls):
+        return {'category_list': Category.objects.filter(discarded=False)}
+
+
 @login_required
 @permission_required('ideax.add_category', raise_exception=True)
 def category_new(request):
@@ -65,8 +71,4 @@ def category_remove(request, pk):
 @login_required
 def category_list(request):
     audit(request.user.username, get_client_ip(request), 'CATEGORY_LIST', Category.__name__, '')
-    return render(request, 'ideax/category_list.html', get_category_list())
-
-
-def get_category_list():
-    return {'category_list': Category.objects.filter(discarded=False)}
+    return render(request, 'ideax/category_list.html', CategoryHelper.get_category_list())

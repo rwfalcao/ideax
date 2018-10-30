@@ -32,7 +32,7 @@ from ...singleton import Profanity_Check
 from ...mail_util import MailUtil
 from ...util import get_ip, get_client_ip, audit
 
-from .category import category_edit, category_list, category_new, category_remove, get_category_list
+from .category import category_edit, category_list, category_new, category_remove
 from .category_image import category_image_edit, category_image_list, category_image_new, category_image_remove
 from .use_term import (
     get_term_of_user, accept_use_term, get_valid_use_term, save_use_term,
@@ -787,7 +787,7 @@ def get_authors(removed_author):
 
 
 __all__ = [
-    'category_edit', 'category_list', 'category_new', 'category_remove', 'get_category_list',
+    'category_edit', 'category_list', 'category_new', 'category_remove',
     'category_image_edit', 'category_image_list', 'category_image_new', 'category_image_remove',
     'get_term_of_user', 'accept_use_term',
     'get_valid_use_term', 'save_use_term', 'use_term_detail', 'use_term_edit', 'use_term_list',
