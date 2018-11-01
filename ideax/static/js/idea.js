@@ -472,7 +472,7 @@ $("#evaluation_form button").click(function(){
 
 //sort ideas
 
-$('a#datesort').click(function () {
+$('a#ideaSort').click(function () {
 
     var $divs = $(".infinite-item");
 
