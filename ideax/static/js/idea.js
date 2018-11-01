@@ -503,6 +503,13 @@ $('a#ideaSort').click(function () {
         });
         $("#idea-list-group").html(alphabeticOrderedDivs);
     }
+    else if(this.name=='creationDate'){
+        var creationDateOrderedDivs = $divs.sort(function (a, b) {
+            return $(a).find('.creation-date').text() < $(b).find('.creation-date').text();
+        });
+        $("#idea-list-group").html(creationDateOrderedDivs);
+    }
+
 
     $('#dropdownMenuButton span.option').text($(this).text());
 });
