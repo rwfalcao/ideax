@@ -25,11 +25,11 @@ class FakeMessages:
         return iter(self.messages)
 
     @property
-    def isSuccess(self):
+    def is_success(self):
         return self.levels[-1] == constants.SUCCESS
 
     @property
-    def isError(self):
+    def is_error(self):
         return self.levels[-1] == constants.ERROR
 
     @property
