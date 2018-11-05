@@ -34,7 +34,7 @@ from .forms import (
     IdeaForm, CriterionForm, CategoryForm, CategoryImageForm,
     EvaluationForm, ChallengeForm, UseTermForm, DimensionForm
 )
-from ..singleton import Profanity_Check
+from ..singleton import ProfanityCheck
 from ..mail_util import MailUtil
 from ..util import get_ip, get_client_ip
 
@@ -45,15 +45,15 @@ logger = logging.getLogger('audit_log')
 mail_util = MailUtil()
 
 
-def audit(username, ip_addr, operation, className, objectId):
+def audit(username, ip_addr, operation, class_name, object_id):
     logger.info(
-        '%(username)s|%(ip_addr)s|%(operation)s|%(className)s|%(objectId)s',
+        '%(username)s|%(ip_addr)s|%(operation)s|%(class_name)s|%(object_id)s',
         {
             'username': username,
             'ip_addr': ip_addr,
             'operation': operation,
-            'className': className,
-            'objectId': objectId
+            'className': class_name,
+            'objectId': object_id
         }
     )
 
@@ -577,7 +577,7 @@ def change_idea_phase(request, pk, new_phase):
                     [idea.author.user.email]
                 )
             )
-        except Exception as e:
+        except Exception:
             pass
 
     return redirect('index')
@@ -626,7 +626,7 @@ def post_comment(request):
     author = UserProfile.objects.get(user=request.user)
     idea_id = request.POST.get('ideiaId', None)
 
-    if Profanity_Check.wordcheck().search_badwords(raw_comment):
+    if ProfanityCheck.wordcheck().search_badwords(raw_comment):
         return JsonResponse({'msg': _("Please check your message it has inappropriate content.")}, status=500)
 
     if not raw_comment:
@@ -706,7 +706,7 @@ def save_use_term(request, form, template_name, new=False):
             if use_term.is_invalid_date():
                 messages.error(request, _('Invalid Final Date'))
                 return render(request, template_name, {'form': form})
-            if Use_Term.objects.getActive() and new:
+            if Use_Term.objects.get_active() and new:
                 messages.error(request, _('Already exists a active Term Of Use'))
                 return render(request, template_name, {'form': form})
             use_term.save()
@@ -992,10 +992,10 @@ def markdown_uploader(request):
                     data, content_type='application/json', status=405)
 
             if image._size > settings.MAX_IMAGE_UPLOAD_SIZE:
-                to_MB = settings.MAX_IMAGE_UPLOAD_SIZE / (1024 * 1024)
+                to_mb = settings.MAX_IMAGE_UPLOAD_SIZE / (1024 * 1024)
                 data = json.dumps({
                     'status': 405,
-                    'error': _('Maximum image file is %(size) MB.') % {'size': to_MB}
+                    'error': _('Maximum image file is %(size) MB.') % {'size': to_mb}
                 }, cls=LazyEncoder)
                 return HttpResponse(
                     data, content_type='application/json', status=405)
