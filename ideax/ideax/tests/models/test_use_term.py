@@ -35,17 +35,17 @@ class TestUseTerm:
 
 
 class TestUseTermManager:
-    def test_getActive_empty(self, mocker):
+    def test_get_active_empty(self, mocker):
         all = mocker.patch.object(Use_Term.objects, 'all')
         all.return_value = []
-        assert not Use_Term.objects.getActive()
+        assert not Use_Term.objects.get_active()
 
-    def test_getActive_inactive(self, mocker):
+    def test_get_active_inactive(self, mocker):
         all = mocker.patch.object(Use_Term.objects, 'all')
         all.return_value = [mocker.Mock(is_past_due=False)]
-        assert not Use_Term.objects.getActive()
+        assert not Use_Term.objects.get_active()
 
-    def test_getActive_active(self, mocker):
+    def test_get_active_active(self, mocker):
         all = mocker.patch.object(Use_Term.objects, 'all')
         all.return_value = [mocker.Mock(is_past_due=False), mocker.Mock(is_past_due=True)]
-        assert Use_Term.objects.getActive()
+        assert Use_Term.objects.get_active()

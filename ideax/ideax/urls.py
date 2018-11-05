@@ -2,7 +2,7 @@ from django.urls import path, re_path
 from django.conf.urls import url
 
 from . import views
-from .feeds import Comment_Feed, New_Idea_Feed
+from .feeds import CommentFeed, NewIdeaFeed
 
 urlpatterns = [
     path('', views.index, name='index'),
@@ -30,8 +30,8 @@ urlpatterns = [
     path('idea/evaluation/<int:idea_pk>/', views.idea_evaluation, name='evaluation'),
     path('term/accept', views.accept_use_term, name="accept_term"),
     path('term', views.get_term_of_user, name="term_of_use"),
-    path('feed/comment/latest', Comment_Feed()),
-    path('feed/idea/latest', New_Idea_Feed(), name="rss"),
+    path('feed/comment/latest', CommentFeed()),
+    path('feed/idea/latest', NewIdeaFeed(), name="rss"),
     path('report/idea/<int:idea_id>/detail/', views.idea_detail_pdf, name="idea_detail_pdf"),
     path('challenge/<int:challenge_pk>/', views.challenge_detail, name="challenge_detail"),
     path('challenge/new/', views.challenge_new, name='challenge_new'),
@@ -50,6 +50,10 @@ urlpatterns = [
     path('categoryimage/<int:pk>/edit/', views.category_image_edit, name='category_image_edit'),
     path('categoryimage/<int:pk>/remove/', views.category_image_remove, name='category_image_remove'),
     path('idea/search/', views.idea_search, name='idea_search'),
+    path('dimension/new/', views.dimension_new, name='dimension_new'),
+    path('dimension/', views.dimension_list, name='dimension_list'),
+    path('dimension/<int:pk>/edit/', views.dimension_edit, name='dimension_edit'),
+    path('dimension/<int:pk>/remove/', views.dimension_remove, name='dimension_remove'),
     re_path('author/', views.user_profile_page, name='user_profile_page'),
 
     # TODO: Refactor it

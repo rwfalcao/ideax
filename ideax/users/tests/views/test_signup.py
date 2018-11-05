@@ -21,7 +21,7 @@ class TestSignUpView:
         response = view.form_invalid(SignUpForm(data))
 
         assert response.status_code == 200
-        assert messages.isError
+        assert messages.is_error
         assert messages.messages == ['Invalid form!']
 
     def test_valid(self, sign_up_data, messages, mocker, db, rf):

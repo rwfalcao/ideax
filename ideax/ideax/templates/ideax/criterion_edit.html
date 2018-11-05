@@ -4,17 +4,17 @@
 
 {% block content %}
 <div class="idea-list-bg">
-    <h1 class="display-3">{% trans 'New Criterion' %}</h1>
+    <h1 class="display-3">{% trans 'Update Criterion' %}</h1>
 </div>
 <div class="container">
   <form method="post" class="post-form" novalidate>
     {% csrf_token %}
     {% include 'ideax/includes/base_form.html' with form=form %}
-    <button type="submit" class="btn btn-primary">
-      <span class="glyphicon glyphicon-ok"></span> {% trans 'Save' %}
-    </button>
+    <a href="{% url 'criterion_list' %}">{% trans 'Return' %}</a>
+    <button type="submit" class="btn btn-primary">{% trans 'Update' %}</button>
   </form>
 </div>
+
 
 
 {% endblock %}

@@ -47,7 +47,7 @@ class TestCategoryNew:
         form.assert_called_once_with(request.POST)
         audit.assert_called_once()
         assert (response.status_code, response.url) == (302, '/category/list/')
-        assert messages.isSuccess
+        assert messages.is_success
         assert messages.messages == ['Category saved successfully!']
 
     def test_post_invalid_form(self, rf, factory_user, mocker):
@@ -109,7 +109,7 @@ class TestCategoryEdit:
         get.assert_called_once_with(Category, pk=55)
         category_form.assert_called_once_with(request.POST, instance=get.return_value)
         assert (response.status_code, response.url) == (302, '/category/list/')
-        assert messages.isSuccess
+        assert messages.is_success
         assert messages.messages == ['Category changed successfully!']
 
     def test_post_invalid_form(self, rf, factory_user, mocker, messages):
@@ -160,7 +160,7 @@ class TestCategoryRemove:
         audit.assert_called_once()
         assert (response.status_code, response.url) == (302, '/category/list/')
         assert get.return_value.discarded is True
-        assert messages.isSuccess
+        assert messages.is_success
         assert messages.messages == ['Category removed successfully!']
 
 
