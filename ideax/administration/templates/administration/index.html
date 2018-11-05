@@ -16,29 +16,7 @@
 </div>
 <div class="container">
     <div class='thetop'>
-    <section class="panel idea" id="0">
-        <article class="panel__wrapper">
-            <h1 class="panel__headline"><i class="fas fa-cogs"></i>&nbsp;Ideax Administration</h1>
-            <hr>
-            <div class="fixed-action-btn horizontal" style="bottom: 45px; right: 24px;">
-                <a class="btn-floating btn-large grey">
-                    <i class="large material-icons">add</i>
-                </a>
-                <ul>
-                    <li><a href="#1" title="{% trans 'Idea' %}" class="btn-floating yellow darken-1"><i class="material-icons">lightbulb_outline</i></a></li>
-                    <li><a href="#2" title="{% trans 'Challenge' %}" class="btn-floating purple"><i class="material-icons">flag</i></a></li>
-                    <li><a href="#3" title="{% trans 'Terms Of Use' %}" class="btn-floating orange"><i class="material-icons">format_quote</i></a></li>
-                    <li><a href="#4" title="{% trans 'Category' %}" class="btn-floating brown"><i class="material-icons">format_list_bulleted</i></a></li>
-                    <li><a href="#5" title="{% trans 'Category Images' %}" class="btn-floating red"><i class="material-icons">filter</i></a></li>
-                    <li><a href="#6" title="{% trans 'Criterion' %}" class="btn-floating blue"><i class="material-icons">extension</i></a></li>
-                    <li><a href="#7" title="{% trans 'Dimension' %}" class="btn-floating green"><i class="material-icons">storage</i></a></li>
-                </ul>
-            </div>
-        </article>
-    </section>
-    </div>
-    <section class="panel idea" id="1">
-        <article class="panel__wrapper">
+        <div class="panel__wrapper">
             <h1 class="panel__headline"><i class="far fa-lightbulb"></i>&nbsp;Ideas</h1>
             <hr>
                 <div class="fixed-action-btn horizontal" style="bottom: 45px; right: 24px;">
@@ -50,10 +28,9 @@
                         <li><a onclick="location.href='{% url 'idea_list' %}';" title="{% trans 'More Options' %}" class="btn-floating blue"><i class="material-icons">playlist_add</i></a></li>
                     </ul>
                 </div>
-        </article>
-    </section>
-    <section class="panel challenge" id="2">
-        <article class="panel__wrapper">
+            </div>
+    </div>
+        <div class="panel__wrapper">
             <h1 class="panel__headline"><i class="fas fa-bullhorn"></i>&nbsp;Challenges</h1>
             <hr>
                 <div class="fixed-action-btn horizontal" style="bottom: 45px; right: 24px;">
@@ -65,10 +42,8 @@
                         <li><a onclick="location.href='{% url 'challenge_list' %}';" title="{% trans 'More Options' %}" class="btn-floating blue"><i class="material-icons">playlist_add</i></a></li>
                     </ul>
                 </div>
-        </article>
-    </section>
-    <section class="panel use-term" id="3">
-        <article class="panel__wrapper">
+            </div>
+        <div class="panel__wrapper">
             <h1 class="panel__headline"><i class="far fa-file-alt"></i>&nbsp;Terms of Use</h1>
             <hr>
                 <div class="fixed-action-btn horizontal" style="bottom: 45px; right: 24px;">
@@ -80,10 +55,8 @@
                         <li><a onclick="location.href='{% url 'use_term_list' %}';" title="{% trans 'More Options' %}" class="btn-floating blue"><i class="material-icons">playlist_add</i></a></li>
                     </ul>
                 </div>
-        </article>
-    </section>
-    <section class="panel category" id="4">
-        <article class="panel__wrapper">
+            </div>
+        <div class="panel__wrapper">
             <h1 class="panel__headline"><i class="far fa-list-alt"></i>&nbsp;Categorys</h1>
             <hr>
                 <div class="fixed-action-btn horizontal" style="bottom: 45px; right: 24px;">
@@ -95,10 +68,8 @@
                         <li><a onclick="location.href='{% url 'category_list' %}';" title="{% trans 'More Options' %}" class="btn-floating blue"><i class="material-icons">playlist_add</i></a></li>
                     </ul>
                 </div>
-        </article>
-    </section>
-    <section class="panel category-images" id="5">
-        <article class="panel__wrapper">
+            </div>
+        <div class="panel__wrapper">
             <h1 class="panel__headline"><i class="far fa-images"></i>&nbsp;Category Images</h1>
             <hr>
                 <div class="fixed-action-btn horizontal" style="bottom: 45px; right: 24px;">
@@ -110,10 +81,8 @@
                         <li><a onclick="location.href='{% url 'category_image_list' %}';" title="{% trans 'More Options' %}" class="btn-floating blue"><i class="material-icons">playlist_add</i></a></li>
                     </ul>
                 </div>
-        </article>
-    </section>
-    <section class="panel category-images" id="6">
-        <article class="panel__wrapper">
+        </div>
+        <div class="panel__wrapper">
             <h1 class="panel__headline"><i class="fas fa-puzzle-piece"></i>&nbsp;Criterion</h1>
             <hr>
                 <div class="fixed-action-btn horizontal" style="bottom: 45px; right: 24px;">
@@ -125,10 +94,8 @@
                         <li><a onclick="location.href='{% url 'criterion_list' %}';" title="{% trans 'More Options' %}" class="btn-floating blue"><i class="material-icons">playlist_add</i></a></li>
                     </ul>
                 </div>
-        </article>
-    </section>
-    <section class="panel category-images" id="7">
-        <article class="panel__wrapper">
+        </div>
+        <div class="panel__wrapper">
             <h1 class="panel__headline"><i class="fas fa-cubes"></i>&nbsp;Dimension</h1>
             <hr>
                 <div class="fixed-action-btn horizontal" style="bottom: 45px; right: 24px;">
@@ -140,7 +107,6 @@
                         <li><a onclick="location.href='{% url 'index' %}';" title="{% trans 'More Options' %}" class="btn-floating blue"><i class="material-icons">playlist_add</i></a></li>
                     </ul>
                 </div>
-        </article>
-    </section>
+        </div>
 </div>
 {% endblock %}
