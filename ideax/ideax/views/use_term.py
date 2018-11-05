@@ -69,7 +69,7 @@ def save_use_term(request, form, template_name, new=False):
             if use_term.is_invalid_date():
                 messages.error(request, _('Invalid Final Date'))
                 return render(request, template_name, {'form': form})
-            if Use_Term.objects.getActive() and new:
+            if Use_Term.objects.get_active() and new:
                 messages.error(request, _('Already exists a active Term Of Use'))
                 return render(request, template_name, {'form': form})
             use_term.save()

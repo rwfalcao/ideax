@@ -40,14 +40,14 @@ def get_client_ip(request):
 logger = logging.getLogger('audit_log')
 
 
-def audit(username, ip_addr, operation, className, objectId):
+def audit(username, ip_addr, operation, class_name, object_id):
     logger.info(
-        '%(username)s|%(ip_addr)s|%(operation)s|%(className)s|%(objectId)s',
+        '%(username)s|%(ip_addr)s|%(operation)s|%(class_name)s|%(object_id)s',
         {
             'username': username,
             'ip_addr': ip_addr,
             'operation': operation,
-            'className': className,
-            'objectId': objectId
+            'class_name': class_name,
+            'object_id': object_id
         }
     )

@@ -130,7 +130,7 @@ class TestSaveUseTerm:
         form.is_valid.return_value = True
         form.save.return_value.is_invalid_date.return_value = False
         terms = mocker.patch('ideax.ideax.models.Use_Term.objects')
-        terms.getActive.return_value = True
+        terms.get_active.return_value = True
         render = mocker.patch('ideax.ideax.views.use_term.render')
         user_profile = mocker.patch('ideax.users.models.UserProfile.objects')
         user_profile.get.return_value = None
@@ -149,7 +149,7 @@ class TestSaveUseTerm:
         form.is_valid.return_value = True
         form.save.return_value.is_invalid_date.return_value = False
         terms = mocker.patch('ideax.ideax.models.Use_Term.objects')
-        terms.getActive.return_value = False
+        terms.get_active.return_value = False
         user_profile = mocker.patch('ideax.users.models.UserProfile.objects')
         user_profile.get.return_value = None
 

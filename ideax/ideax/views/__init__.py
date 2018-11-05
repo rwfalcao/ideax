@@ -28,7 +28,7 @@ from ..models import (
     Comment, Evaluation, Category_Image, Challenge, Dimension,
 )
 from ..forms import IdeaForm, CriterionForm, EvaluationForm, ChallengeForm
-from ...singleton import Profanity_Check
+from ...singleton import ProfanityCheck
 from ...mail_util import MailUtil
 from ...util import get_ip, get_client_ip, audit
 
@@ -528,7 +528,7 @@ def post_comment(request):
     author = UserProfile.objects.get(user=request.user)
     idea_id = request.POST.get('ideiaId', None)
 
-    if Profanity_Check.wordcheck().search_badwords(raw_comment):
+    if ProfanityCheck.wordcheck().search_badwords(raw_comment):
         return JsonResponse({'msg': _("Please check your message it has inappropriate content.")}, status=500)
 
     if not raw_comment:
@@ -748,10 +748,10 @@ def markdown_uploader(request):
                     data, content_type='application/json', status=405)
 
             if image._size > settings.MAX_IMAGE_UPLOAD_SIZE:
-                to_MB = settings.MAX_IMAGE_UPLOAD_SIZE / (1024 * 1024)
+                to_mb = settings.MAX_IMAGE_UPLOAD_SIZE / (1024 * 1024)
                 data = json.dumps({
                     'status': 405,
-                    'error': _('Maximum image file is %(size) MB.') % {'size': to_MB}
+                    'error': _('Maximum image file is %(size) MB.') % {'size': to_mb}
                 }, cls=LazyEncoder)
                 return HttpResponse(
                     data, content_type='application/json', status=405)

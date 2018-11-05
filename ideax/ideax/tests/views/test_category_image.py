@@ -47,7 +47,7 @@ class TestCategoryImageNew:
         form.assert_called_once_with(request.POST, request.FILES)
         audit.assert_called_once()
         assert (response.status_code, response.url) == (302, '/categoryimage/list/')
-        assert messages.isSuccess
+        assert messages.is_success
         assert messages.messages == ['Category Image saved successfully!']
 
     def test_post_invalid_form(self, rf, factory_user, mocker):
@@ -109,7 +109,7 @@ class TestCategoryImageEdit:
         get.assert_called_once_with(Category_Image, pk=55)
         category_form.assert_called_once_with(request.POST, request.FILES, instance=get.return_value)
         assert (response.status_code, response.url) == (302, '/categoryimage/list/')
-        assert messages.isSuccess
+        assert messages.is_success
         assert messages.messages == ['Category Image changed successfully!']
 
     def test_post_invalid_form(self, rf, factory_user, mocker, messages):
@@ -160,7 +160,7 @@ class TestCategoryImageRemove:
         audit.assert_called_once()
         get.return_value.delete.assert_called_once()
         assert (response.status_code, response.url) == (302, '/categoryimage/list/')
-        assert messages.isSuccess
+        assert messages.is_success
         assert messages.messages == ['Category Image removed successfully!']
 
 
