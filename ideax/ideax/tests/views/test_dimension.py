@@ -145,8 +145,8 @@ class TestDimensionRemove:
     def test_get(self, rf, factory_user, mocker, messages):
         audit = mocker.patch('ideax.ideax.views.dimension.audit')
         get = mocker.patch('ideax.ideax.views.dimension.get_object_or_404')
-        DimensionHelper = mocker.patch('ideax.ideax.views.dimension.DimensionHelper')
-        DimensionHelper.get_dimension_list.return_value = {}
+        dimension_helper = mocker.patch('ideax.ideax.views.dimension.DimensionHelper')
+        dimension_helper.get_dimension_list.return_value = {}
         dimension = mocker.patch('ideax.ideax.views.dimension.Dimension')
         dimension.__name__ = 'Dimension'
 
@@ -171,8 +171,8 @@ class TestDimensionList:
 
     def test_get(self, rf, mocker, common_user):
         mocker.patch('ideax.ideax.views.dimension.audit')
-        DimensionHelper = mocker.patch('ideax.ideax.views.dimension.DimensionHelper')
-        DimensionHelper.get_dimension_list.return_value = {}
+        dimension_helper = mocker.patch('ideax.ideax.views.dimension.DimensionHelper')
+        dimension_helper.get_dimension_list.return_value = {}
         render = mocker.patch('ideax.ideax.views.dimension.render')
 
         request = rf.get('/')
