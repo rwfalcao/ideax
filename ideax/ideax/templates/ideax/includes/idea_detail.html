@@ -12,6 +12,7 @@
   </div>
   <div class="card-body">
     <h5 class="card-title">{{ idea.title }}</h5>
+    <span class="creation-date d-none">{{idea.creation_date}}</span>
     <div class="card-text">
         {% if idea.summary %}
           {{idea.summary|safe_markdown}}
@@ -26,13 +27,13 @@
       <span class="badge badge-secondary">{{ idea.get_current_phase.description }}</span>
       <a class="like badge" onclick="vote('{% url 'like_ideia' pk=idea.pk %}', '.liked_idea_{{idea.id}}', '.disliked_idea_{{idea.id}}', '.like_{{idea.id}}', '.dislike_{{idea.id}}')" href="javascript:void(0)">
         <i class="{%if idea.id in ideas_liked %} fas {% else %} far {% endif %} fa-thumbs-up like_{{idea.id}}" ></i>
-        <span class="liked_idea_{{idea.id}} ">
+        <span class="liked_idea_{{idea.id}} liked_votes">
           {{ idea.count_likes }}
         </span>
       </a>
       <a class="dislike badge" onclick="vote('{% url 'dislike_ideia' pk=idea.pk %}', '.liked_idea_{{idea.id}}', '.disliked_idea_{{idea.id}}', '.like_{{idea.id}}', '.dislike_{{idea.id}}')" href="javascript:void(0)">
         <i class="{%if idea.id in ideas_disliked %} fas {% else %} far {% endif %} fa-thumbs-down dislike_{{idea.id}}"></i>
-        <span class="disliked_idea_{{idea.id}}">
+        <span class="disliked_idea_{{idea.id}} disliked_votes">
           {{ idea.count_dislikes }}
         </span>
       </a>
