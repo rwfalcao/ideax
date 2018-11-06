@@ -726,7 +726,6 @@ def use_term_remove(request, pk):
         use_term.final_date = timezone.now()
         use_term.save()
         messages.success(request, _('Terms of Use removed successfully!'))
-        #return redirect('use_term_list')
         return render(request, 'ideax/use_term_list.html', get_use_term_list())
 
 
