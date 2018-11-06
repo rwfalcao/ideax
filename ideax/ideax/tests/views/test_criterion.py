@@ -47,7 +47,7 @@ class TestCriterionNew:
         form.assert_called_once_with(request.POST)
         audit.assert_called_once()
         assert (response.status_code, response.url) == (302, '/criterion/')
-        assert messages.isSuccess
+        assert messages.is_success
         assert messages.messages == ['Criterion saved successfully!']
 
     def test_post_invalid_form(self, rf, factory_user, mocker):
@@ -108,7 +108,7 @@ class TestCriterionEdit:
         get.assert_called_once_with(Criterion, pk=55)
         criterion_form.assert_called_once_with(request.POST, instance=get.return_value)
         assert (response.status_code, response.url) == (302, '/criterion/')
-        assert messages.isSuccess
+        assert messages.is_success
         assert messages.messages == ['Criterion changed successfully!']
 
     def test_post_invalid_form(self, rf, factory_user, mocker, messages):
@@ -158,7 +158,7 @@ class TestCriterionRemove:
         get.assert_called_once_with(criterion, pk=999)
         audit.assert_called_once()
         assert (response.status_code, response.url) == (302, '/criterion/')
-        assert messages.isSuccess
+        assert messages.is_success
         assert messages.messages == ['Criterion removed successfully!']
 
 
