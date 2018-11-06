@@ -103,8 +103,20 @@
                         <i class="large material-icons">build</i>
                     </a>
                     <ul>
-                        <li><a onclick="location.href='{% url 'index' %}';" title="{% trans 'New Dimension' %}" class="btn-floating blue"><i class="material-icons">add</i></a></li>
-                        <li><a onclick="location.href='{% url 'index' %}';" title="{% trans 'More Options' %}" class="btn-floating blue"><i class="material-icons">playlist_add</i></a></li>
+                        <li><a onclick="location.href='{% url 'dimension_new' %}';" title="{% trans 'New Dimension' %}" class="btn-floating blue"><i class="material-icons">add</i></a></li>
+                        <li><a onclick="location.href='{% url 'dimension_list' %}';" title="{% trans 'More Options' %}" class="btn-floating blue"><i class="material-icons">playlist_add</i></a></li>
+                    </ul>
+                </div>
+        </div>
+        <div class="panel__wrapper">
+            <h1 class="panel__headline"><i class="fas fa-paperclip"></i>&nbsp;Report</h1>
+            <hr>
+                <div class="fixed-action-btn horizontal" style="bottom: 45px; right: 24px;">
+                    <a class="btn-floating btn-large grey">
+                        <i class="large material-icons">build</i>
+                    </a>
+                    <ul>
+                        <li><a onclick="location.href='{% url 'report_ideas' %}';" title="{% trans 'Report' %}" class="btn-floating blue"><i class="material-icons">add</i></a></li>
                     </ul>
                 </div>
         </div>
