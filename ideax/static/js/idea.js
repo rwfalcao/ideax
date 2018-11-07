@@ -517,12 +517,33 @@ $('a#ideaSort').click(function () {
         $("#idea-list-group").html(creationDateOrderedDivs);
     }
 
-
     $('#dropdownMenuButton span.option').text($(this).text());
 });
 
 //end of sort ideas
 
+//toggle grid/list view
 
+$('a#list-view').click(function(){
+    $('#idea-list-group').removeClass('card-columns');
+    $('.idea-cards').css('flex-direction','row');
+    $('.idea-cards').addClass('mb-2');
+    $('.card-img-top').addClass('m-2');
+    $('.card-body').addClass('w-50');
+    $('.card-footer').addClass('card-footer-list');
+    $('.card-text').css('height', '86px')
+});
+
+$('a#grid-view').click(function(){
+    $('#idea-list-group').addClass('card-columns');
+    $('.idea-cards').css('flex-direction','column');
+    $('.idea-cards').removeClass('mb-2');
+    $('.card-img-top').removeClass('m-2');
+    $('.card-body').removeClass('w-50');
+    $('.card-footer').removeClass('card-footer-list');
+    $('.card-text').css('height', "")
+});
+
+//end of toggle grid/list view
 
 //chatbot

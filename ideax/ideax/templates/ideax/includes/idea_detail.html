@@ -2,7 +2,7 @@
 {% load staticfiles i18n %}
 {% load martortags %}
 
-<div class="card infinite-item">
+<div class="card infinite-item idea-cards"  >
   <!-- <div class="card-header">
 
 
@@ -46,11 +46,10 @@
 
   <div class="card-footer">
     <div class="row">
-      <div class="col-sm-8 text-left">
+      <!--div class="col-sm-8 text-left">
         <button class="btn btn-link"><small class="text-muted"></small></button>
-          <!-- <a href="#"><small class="text-muted">{% trans 'By' %} @{{idea.author.user}}</small></a> -->
-      </div>
-      <div class="col-sm-4 text-right pl-1">
+         <a href="#"><small class="text-muted">{% trans 'By' %} @{{idea.author.user}}</small></a>       </div-->
+      <div class="col-sm-12 text-right pl-1">
           {%if perms.ideax.manage_idea or idea.id in ideas_created_by_me %}
             <div class="btn-group dropup">
               <button type="button" class="btn btn-sm btn-secondary dropdown-toggle button-card-idea" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
