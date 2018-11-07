@@ -22,8 +22,8 @@ class TestCategoryImageNew:
             category_image_new(request)
 
     def test_get(self, rf, factory_user, mocker):
-        render = mocker.patch('ideax.ideax.views.render')
-        form = mocker.patch('ideax.ideax.views.CategoryImageForm')
+        render = mocker.patch('ideax.ideax.views.category_image.render')
+        form = mocker.patch('ideax.ideax.views.category_image.CategoryImageForm')
 
         request = rf.get('/')
         request.user = factory_user('ideax.add_category_image')
@@ -33,8 +33,8 @@ class TestCategoryImageNew:
         render.assert_called_once_with(request, 'ideax/category_image_new.html', {'form': form.return_value})
 
     def test_post(self, rf, factory_user, mocker, messages):
-        audit = mocker.patch('ideax.ideax.views.audit')
-        form = mocker.patch('ideax.ideax.views.CategoryImageForm')
+        audit = mocker.patch('ideax.ideax.views.category_image.audit')
+        form = mocker.patch('ideax.ideax.views.category_image.CategoryImageForm')
         form.return_value.is_valid.return_value = True
         user_profile = mocker.patch('ideax.users.models.UserProfile.objects')
         user_profile.get.return_value = None
@@ -51,7 +51,7 @@ class TestCategoryImageNew:
         assert messages.messages == ['Category Image saved successfully!']
 
     def test_post_invalid_form(self, rf, factory_user, mocker):
-        form = mocker.patch('ideax.ideax.views.CategoryImageForm')
+        form = mocker.patch('ideax.ideax.views.category_image.CategoryImageForm')
         form.return_value.is_valid.return_value = False
         user_profile = mocker.patch('ideax.users.models.UserProfile.objects')
         user_profile.get.return_value = None
@@ -84,9 +84,9 @@ class TestCategoryImageEdit:
             category_image_edit(request, 1)
 
     def test_get(self, rf, factory_user, mocker):
-        get = mocker.patch('ideax.ideax.views.get_object_or_404')
-        render = mocker.patch('ideax.ideax.views.render')
-        form = mocker.patch('ideax.ideax.views.CategoryImageForm')
+        get = mocker.patch('ideax.ideax.views.category_image.get_object_or_404')
+        render = mocker.patch('ideax.ideax.views.category_image.render')
+        form = mocker.patch('ideax.ideax.views.category_image.CategoryImageForm')
 
         request = rf.get(f'/category/55/edit/')
         request.user = factory_user('ideax.change_category_image')
@@ -96,9 +96,9 @@ class TestCategoryImageEdit:
         render.assert_called_once_with(request, 'ideax/category_image_edit.html', {'form': form.return_value})
 
     def test_post(self, rf, factory_user, mocker, messages):
-        get = mocker.patch('ideax.ideax.views.get_object_or_404')
-        mocker.patch('ideax.ideax.views.audit')
-        category_form = mocker.patch('ideax.ideax.views.CategoryImageForm')
+        get = mocker.patch('ideax.ideax.views.category_image.get_object_or_404')
+        mocker.patch('ideax.ideax.views.category_image.audit')
+        category_form = mocker.patch('ideax.ideax.views.category_image.CategoryImageForm')
         category_form.return_value.is_valid.return_value = True
 
         request = rf.post(f'/category/55/edit/', {})
@@ -113,11 +113,11 @@ class TestCategoryImageEdit:
         assert messages.messages == ['Category Image changed successfully!']
 
     def test_post_invalid_form(self, rf, factory_user, mocker, messages):
-        get = mocker.patch('ideax.ideax.views.get_object_or_404')
-        mocker.patch('ideax.ideax.views.audit')
-        category_form = mocker.patch('ideax.ideax.views.CategoryImageForm')
+        get = mocker.patch('ideax.ideax.views.category_image.get_object_or_404')
+        mocker.patch('ideax.ideax.views.category_image.audit')
+        category_form = mocker.patch('ideax.ideax.views.category_image.CategoryImageForm')
         category_form.return_value.is_valid.return_value = False
-        render = mocker.patch('ideax.ideax.views.render')
+        render = mocker.patch('ideax.ideax.views.category_image.render')
 
         request = rf.post(f'/category/55/edit/', {})
         request.user = factory_user('ideax.change_category_image')
@@ -144,11 +144,11 @@ class TestCategoryImageRemove:
             category_image_remove(request, 1)
 
     def test_get(self, rf, factory_user, mocker, messages):
-        audit = mocker.patch('ideax.ideax.views.audit')
-        get = mocker.patch('ideax.ideax.views.get_object_or_404')
-        get_category_list = mocker.patch('ideax.ideax.views.get_category_list')
+        audit = mocker.patch('ideax.ideax.views.category_image.audit')
+        get = mocker.patch('ideax.ideax.views.category_image.get_object_or_404')
+        get_category_list = mocker.patch('ideax.ideax.views.category.CategoryHelper.get_category_list')
         get_category_list.return_value = {}
-        category = mocker.patch('ideax.ideax.views.Category_Image')
+        category = mocker.patch('ideax.ideax.views.category_image.Category_Image')
         category.__name__ = 'Category_Image'
 
         request = rf.get('/')
@@ -164,7 +164,7 @@ class TestCategoryImageRemove:
         assert messages.messages == ['Category Image removed successfully!']
 
 
-class TestCategoryList:
+class TestCategoryImageList:
     def test_anonymous(self, rf):
         request = rf.get('/')
         request.user = AnonymousUser()
@@ -172,10 +172,10 @@ class TestCategoryList:
         assert (response.status_code, response.url) == (302, '/accounts/login/?next=/')
 
     def test_get(self, rf, mocker, common_user):
-        mocker.patch('ideax.ideax.views.audit')
-        get_category_list = mocker.patch('ideax.ideax.views.Category_Image.objects')
+        mocker.patch('ideax.ideax.views.category_image.audit')
+        get_category_list = mocker.patch('ideax.ideax.views.category_image.Category_Image.objects')
         get_category_list.all.return_value = []
-        render = mocker.patch('ideax.ideax.views.render')
+        render = mocker.patch('ideax.ideax.views.category_image.render')
 
         request = rf.get('/')
         request.user = common_user

@@ -1,3 +1,5 @@
+import logging
+
 from ipware import get_client_ip as get_client_ipware
 
 PRIVATE_IPS_PREFIX = ('10.', '172.', '192.', )
@@ -32,3 +34,20 @@ def get_client_ip(request):
             ip = proxies[0]
 
     return ip
+
+
+# Creating log object
+logger = logging.getLogger('audit_log')
+
+
+def audit(username, ip_addr, operation, class_name, object_id):
+    logger.info(
+        '%(username)s|%(ip_addr)s|%(operation)s|%(class_name)s|%(object_id)s',
+        {
+            'username': username,
+            'ip_addr': ip_addr,
+            'operation': operation,
+            'class_name': class_name,
+            'object_id': object_id
+        }
+    )
