@@ -15,6 +15,7 @@ urlpatterns = [
 
     # Apps
     # TODO: namespace
+    url('^administration', include(('ideax.administration.urls', 'administration'), namespace='administration')),
     # url('', include(('ideax.ideax.urls', 'ideax'), namespace='ideax')),
     url('', include(('ideax.users.urls', 'users'), namespace='users')),
 ]

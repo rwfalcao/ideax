@@ -34,6 +34,7 @@ INSTALLED_APPS = [
     'widget_tweaks',
     'ideax.users.UserConfig',
     'ideax.ideax.IdeaxConfig',
+    'ideax.administration.AdministrationConfig',
     'mptt',
 ]
 

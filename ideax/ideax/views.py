@@ -868,7 +868,7 @@ def report_ideas(request):
                 from ideax_idea i inner join ideax_popular_vote pv on i.id = pv.idea_id
                 inner join ideax_phase_history ph on i.id = ph.idea_id
                 inner join ideax_category ic on i.category_id = ic.id
-                inner join ideax_userprofile iu on i.author_id = iu.id
+                inner join users_userprofile iu on i.author_id = iu.id
                 inner join auth_user au on au.id = iu.user_id
             where ph.current = 1 and i.discarded = 0
             group by i.id, ph.current_phase''')

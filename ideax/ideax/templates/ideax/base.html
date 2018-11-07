@@ -60,6 +60,7 @@
             <span class="navbar-text">
               {% blocktrans with name=user.username %}Hi, {{name}}!{% endblocktrans %}
             </span>
+            {% block nav %}
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <i class="fas fa-bars fa-lg"></i>
@@ -69,16 +70,15 @@
                 <hr>
                 <a class="dropdown-item"  href="/">{% trans 'Explore Ideas' %}</a>
                 <a class="dropdown-item" href="{% url 'challenge_list' %}">{% trans 'Challenges' %}</a>
-                <a class="dropdown-item disabled" href="#">{% trans 'Users' %}</a>
                 <a class="dropdown-item" href="{% url 'use_term' %}">{% trans 'Active Terms of Use and Privacy' %}</a>
+                <a class="dropdown-item disabled" href="#">{% trans 'Users' %}</a>
                 {% if perms.ideax.manage_idea %}
-                  <a class="dropdown-item" href="{% url 'use_term_list' %}">{% trans 'Terms of Use' %}</a>
-                  <a class="dropdown-item" href="{% url 'category_image_list' %}">{% trans 'Category Images' %}</a>
-                  <a class="dropdown-item" href="{% url 'category_list' %}">{% trans 'Categorys' %}</a>
+                  <a class="dropdown-item" href="{% url 'administration:index' %}">{% trans 'Administration' %}</a>
                 {% endif %}
                 <a class="dropdown-item" href="{% url 'users:logout' %}">{% trans 'Logout' %}</i></a>
               </div>
             </li>
+            {% endblock %}
           </ul>
 
           {% else %}

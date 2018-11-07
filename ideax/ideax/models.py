@@ -12,7 +12,7 @@ class Phase(Enum):
     GROW = (1, _('Discussion'), 'discussion', 'comments')
     RATE = (2, _('Evaluation'), 'rate', 'clipboard')
     IDEATION = (3, _('Ideation'), 'ideation', 'ideation')
-    APROVED = (4, _('Approval'), 'aproved', 'star')
+    APPROVED = (4, _('Approval'), 'approved', 'star')
     ACT = (5, _('Evolution'), 'develop', 'tasks')
     DONE = (6, _('Done'), 'done', 'check')
     ARCHIVED = (7, _('Archived'), 'archived', 'archive')
