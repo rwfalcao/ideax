@@ -116,9 +116,12 @@
           </div>
           <hr>
           <div class="empty-filter"></div>
-
           <div class="row">
-            <div class="col-lg-12">
+              <div class="col-lg-6 mb-3">
+                <a id="list-view"  href="#" ><i class="fas fa-list-ul"></i> </a>
+                <a id="grid-view"  href="#" ><i class="fas fa-th"></i> </a>
+          </div>
+            <div class="col-lg-6">
             <div class="btn-group float-right">
                 <button class="btn btn-sm btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     <span>{% trans 'Sorted by' %}: </span><span class="option">{% trans 'Highest positive votes' %}</span>
@@ -133,7 +136,6 @@
             </div>
             </div>
          </div>
-
           <div class="group card-columns infinite-container" id="idea-list-group">
             {% for idea in ideas %}
               {% include 'ideax/includes/idea_detail.html' %}

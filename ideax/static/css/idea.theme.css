@@ -1114,3 +1114,17 @@ nav .avatar {
 nav .avatar img {
   border-radius: 20%;
 }
+
+.card-footer-list{
+    align-self: flex-end ;
+    background-color: white;
+    border: none;
+    margin: .5rem;
+}
+
+@media screen and (max-width: 800px) {
+.card-text{
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+}
