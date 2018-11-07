@@ -1,3 +1,62 @@
+#: ideax/administration/templates/administration/index.html:15
+msgid "Back to top"
+msgstr ""
+
+#: ideax/administration/templates/administration/index.html:27
+#: ideax/ideax/templates/ideax/base.html:105
+msgid "New Idea"
+msgstr ""
+
+#: ideax/administration/templates/administration/index.html:28
+#: ideax/administration/templates/administration/index.html:42
+#: ideax/administration/templates/administration/index.html:55
+#: ideax/administration/templates/administration/index.html:68
+#: ideax/administration/templates/administration/index.html:81
+#: ideax/administration/templates/administration/index.html:94
+#: ideax/administration/templates/administration/index.html:107
+msgid "More Options"
+msgstr ""
+
+#: ideax/administration/templates/administration/index.html:41
+#: ideax/ideax/templates/ideax/challenge_list.html:7
+#: ideax/ideax/templates/ideax/challenge_new.html:9
+msgid "New Challenge"
+msgstr ""
+
+#: ideax/administration/templates/administration/index.html:54
+#, fuzzy
+#| msgid "Term of use accept!"
+msgid "New Terms of Use"
+msgstr "Termo de uso aceito!"
+
+#: ideax/administration/templates/administration/index.html:67
+#: ideax/ideax/templates/ideax/category_list.html:6
+#: ideax/ideax/templates/ideax/category_new.html:7
+msgid "New Category"
+msgstr ""
+
+#: ideax/administration/templates/administration/index.html:80
+#: ideax/ideax/templates/ideax/category_image_list.html:6
+#: ideax/ideax/templates/ideax/category_image_new.html:6
+msgid "New Category Image"
+msgstr ""
+
+#: ideax/administration/templates/administration/index.html:93
+#: ideax/ideax/templates/ideax/criterion_list.html:6
+#: ideax/ideax/templates/ideax/criterion_new.html:7
+msgid "New Criterion"
+msgstr ""
+
+#: ideax/administration/templates/administration/index.html:106
+#: ideax/ideax/templates/ideax/dimension_list.html:6
+#: ideax/ideax/templates/ideax/dimension_new.html:7
+msgid "New Dimension"
+msgstr ""
+
+#: ideax/administration/templates/administration/index.html:119
+msgid "Report"
+msgstr ""
+
 #: ideax/ideax/feeds.py:9 ideax/ideax/templates/ideax/idea_detail.html:88
 msgid "Comments"
 msgstr ""
@@ -125,42 +184,42 @@ msgid "Final Date"
 msgstr ""
 
 #: ideax/ideax/models.py:12
-#: ideax/ideax/templates/ideax/includes/idea_detail.html:62
+#: ideax/ideax/templates/ideax/includes/idea_detail.html:61
 msgid "Discussion"
 msgstr ""
 
 #: ideax/ideax/models.py:13 ideax/ideax/templates/ideax/idea_detail.html:91
-#: ideax/ideax/templates/ideax/includes/idea_detail.html:63
+#: ideax/ideax/templates/ideax/includes/idea_detail.html:62
 msgid "Evaluation"
 msgstr ""
 
 #: ideax/ideax/models.py:14
-#: ideax/ideax/templates/ideax/includes/idea_detail.html:64
+#: ideax/ideax/templates/ideax/includes/idea_detail.html:63
 msgid "Ideation"
 msgstr ""
 
 #: ideax/ideax/models.py:15
-#: ideax/ideax/templates/ideax/includes/idea_detail.html:65
+#: ideax/ideax/templates/ideax/includes/idea_detail.html:64
 msgid "Approval"
 msgstr ""
 
 #: ideax/ideax/models.py:16
-#: ideax/ideax/templates/ideax/includes/idea_detail.html:66
+#: ideax/ideax/templates/ideax/includes/idea_detail.html:65
 msgid "Evolution"
 msgstr ""
 
 #: ideax/ideax/models.py:17
-#: ideax/ideax/templates/ideax/includes/idea_detail.html:67
+#: ideax/ideax/templates/ideax/includes/idea_detail.html:66
 msgid "Done"
 msgstr ""
 
 #: ideax/ideax/models.py:18
-#: ideax/ideax/templates/ideax/includes/idea_detail.html:68
+#: ideax/ideax/templates/ideax/includes/idea_detail.html:67
 msgid "Archived"
 msgstr ""
 
 #: ideax/ideax/models.py:19
-#: ideax/ideax/templates/ideax/includes/idea_detail.html:69
+#: ideax/ideax/templates/ideax/includes/idea_detail.html:68
 msgid "Paused"
 msgstr ""
 
@@ -193,45 +252,32 @@ msgstr ""
 msgid "Hi, %(name)s!"
 msgstr ""
 
-#: ideax/ideax/templates/ideax/base.html:74
+#: ideax/ideax/templates/ideax/base.html:75
 msgid "Profile"
 msgstr ""
 
-#: ideax/ideax/templates/ideax/base.html:76
+#: ideax/ideax/templates/ideax/base.html:77
 #: ideax/ideax/templates/ideax/idea_list.html:6
 msgid "Explore Ideas"
 msgstr ""
 
-#: ideax/ideax/templates/ideax/base.html:77
-msgid "Challenges"
-msgstr ""
-
 #: ideax/ideax/templates/ideax/base.html:78
-msgid "Users"
+msgid "Challenges"
 msgstr ""
 
 #: ideax/ideax/templates/ideax/base.html:79
 msgid "Active Terms of Use and Privacy"
 msgstr ""
 
-#: ideax/ideax/templates/ideax/base.html:81
-#: ideax/ideax/templates/ideax/use_term_list.html:11
-#, fuzzy
-#| msgid "Term of use accept!"
-msgid "Terms of Use"
-msgstr "Termo de uso aceito!"
+#: ideax/ideax/templates/ideax/base.html:80
+msgid "Users"
+msgstr ""
 
 #: ideax/ideax/templates/ideax/base.html:82
-#: ideax/ideax/templates/ideax/category_image_list.html:11
-msgid "Category Images"
+msgid "Administration"
 msgstr ""
 
-#: ideax/ideax/templates/ideax/base.html:83
-#: ideax/ideax/templates/ideax/category_list.html:11
-msgid "Categorys"
-msgstr ""
-
-#: ideax/ideax/templates/ideax/base.html:85
+#: ideax/ideax/templates/ideax/base.html:84
 msgid "Logout"
 msgstr ""
 
@@ -243,10 +289,6 @@ msgstr ""
 #: ideax/ideax/templates/ideax/base.html:95
 #: ideax/ideax/templates/ideax/index.html:15
 msgid "Login"
-msgstr ""
-
-#: ideax/ideax/templates/ideax/base.html:105
-msgid "New Idea"
 msgstr ""
 
 #: ideax/ideax/templates/ideax/base.html:120
@@ -296,14 +338,12 @@ msgstr ""
 msgid "Save"
 msgstr ""
 
-#: ideax/ideax/templates/ideax/category_image_list.html:6
-#: ideax/ideax/templates/ideax/category_image_new.html:6
-msgid "New Category Image"
+#: ideax/ideax/templates/ideax/category_image_list.html:11
+msgid "Category Images"
 msgstr ""
 
-#: ideax/ideax/templates/ideax/category_list.html:6
-#: ideax/ideax/templates/ideax/category_new.html:7
-msgid "New Category"
+#: ideax/ideax/templates/ideax/category_list.html:11
+msgid "Categorys"
 msgstr ""
 
 #: ideax/ideax/templates/ideax/challenge_detail.html:27
@@ -337,11 +377,6 @@ msgstr ""
 msgid "Edit Challenge"
 msgstr ""
 
-#: ideax/ideax/templates/ideax/challenge_list.html:7
-#: ideax/ideax/templates/ideax/challenge_new.html:9
-msgid "New Challenge"
-msgstr ""
-
 #: ideax/ideax/templates/ideax/challenge_list.html:13
 msgid "Explore Challenges"
 msgstr ""
@@ -350,17 +385,12 @@ msgstr ""
 msgid "Update Criterion"
 msgstr ""
 
-#: ideax/ideax/templates/ideax/criterion_list.html:6
-#: ideax/ideax/templates/ideax/criterion_new.html:7
-msgid "New Criterion"
-msgstr ""
-
 #: ideax/ideax/templates/ideax/criterion_list.html:12
 msgid "Criterion List"
 msgstr ""
 
 #: ideax/ideax/templates/ideax/criterion_list.html:26
-#: ideax/ideax/templates/ideax/includes/idea_detail.html:74
+#: ideax/ideax/templates/ideax/includes/idea_detail.html:73
 #: ideax/ideax/templates/ideax/includes/partial_category_image_list.html:9
 #: ideax/ideax/templates/ideax/includes/partial_category_list.html:8
 #: ideax/ideax/templates/ideax/includes/partial_dimension_list.html:8
@@ -382,11 +412,6 @@ msgstr ""
 
 #: ideax/ideax/templates/ideax/dimension_edit.html:6
 msgid "Update Dimension"
-msgstr ""
-
-#: ideax/ideax/templates/ideax/dimension_list.html:6
-#: ideax/ideax/templates/ideax/dimension_new.html:7
-msgid "New Dimension"
 msgstr ""
 
 #: ideax/ideax/templates/ideax/dimension_list.html:11
@@ -479,28 +504,28 @@ msgstr ""
 msgid "Clean"
 msgstr ""
 
-#: ideax/ideax/templates/ideax/idea_list.html:124
+#: ideax/ideax/templates/ideax/idea_list.html:127
 msgid "Sorted by"
 msgstr ""
 
-#: ideax/ideax/templates/ideax/idea_list.html:124
 #: ideax/ideax/templates/ideax/idea_list.html:127
+#: ideax/ideax/templates/ideax/idea_list.html:130
 msgid "Highest positive votes"
 msgstr ""
 
-#: ideax/ideax/templates/ideax/idea_list.html:128
+#: ideax/ideax/templates/ideax/idea_list.html:131
 msgid "Highest negative votes"
 msgstr ""
 
-#: ideax/ideax/templates/ideax/idea_list.html:129
+#: ideax/ideax/templates/ideax/idea_list.html:132
 msgid "Highest comments"
 msgstr ""
 
-#: ideax/ideax/templates/ideax/idea_list.html:130
+#: ideax/ideax/templates/ideax/idea_list.html:133
 msgid "Alphabetical"
 msgstr ""
 
-#: ideax/ideax/templates/ideax/idea_list.html:131
+#: ideax/ideax/templates/ideax/idea_list.html:134
 msgid "Latest"
 msgstr ""
 
@@ -521,15 +546,15 @@ msgstr ""
 msgid "Details..."
 msgstr ""
 
-#: ideax/ideax/templates/ideax/includes/idea_detail.html:61
+#: ideax/ideax/templates/ideax/includes/idea_detail.html:60
 msgid "Idea Stage"
 msgstr ""
 
-#: ideax/ideax/templates/ideax/includes/idea_detail.html:73
+#: ideax/ideax/templates/ideax/includes/idea_detail.html:72
 msgid "Actions"
 msgstr ""
 
-#: ideax/ideax/templates/ideax/includes/idea_detail.html:75
+#: ideax/ideax/templates/ideax/includes/idea_detail.html:74
 msgid "Delete"
 msgstr ""
 
@@ -682,6 +707,12 @@ msgstr "Termo de uso aceito!"
 #, fuzzy
 #| msgid "Term of use accept!"
 msgid "New Term of Use"
+msgstr "Termo de uso aceito!"
+
+#: ideax/ideax/templates/ideax/use_term_list.html:11
+#, fuzzy
+#| msgid "Term of use accept!"
+msgid "Terms of Use"
 msgstr "Termo de uso aceito!"
 
 #: ideax/ideax/templates/ideax/use_term_new.html:7
