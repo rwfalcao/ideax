@@ -47,3 +47,16 @@ class TestChallengeRemove:
         request.user = common_user
         with raises(PermissionDenied):
             challenge_remove(request, 1)
+
+    def test_get(self, rf, mocker, messages):
+        get_featured_challenges = mocker.patch('ideax.ideax.views.get_featured_challenges')
+        get_featured_challenges.return_value = {}
+        mocker.patch('ideax.ideax.views.Challenge')
+
+        request = rf.get('/')
+        request.user = mocker.Mock()
+        request._messages = messages
+        challenge_remove(request, 999)
+
+        assert messages.is_success
+        assert messages.messages == ['Challenge removed successfully!']
