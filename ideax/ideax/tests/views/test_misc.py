@@ -1,13 +1,15 @@
 import json
+
 from datetime import datetime, timedelta
 from itertools import product
 
-import pytz
 from django.db.models import QuerySet
+
+import pytz
+
 from model_mommy import mommy
 
-from ...views import (get_authors, get_category_list, get_featured_challenges,
-                      get_phases, get_term_of_user, get_use_term_list)
+from ...views import get_authors, get_featured_challenges, get_phases, get_term_of_user
 
 
 class TestNonMiscView:
@@ -18,12 +20,6 @@ class TestNonMiscView:
         # TODO: why str is necessary?
         cleaned = [(k, str(v)) for k, v in phases['phases']]
         snapshot.assert_match(cleaned)
-
-    def test_get_category_list(self, db):
-        category = mommy.make('Category')
-        categories = get_category_list()
-        assert list(categories.keys()) == ['category_list']
-        assert categories['category_list'].last() == category
 
     def test_get_term_of_user_empty(self, rf, db):
         request = rf.get('/')
@@ -37,13 +33,6 @@ class TestNonMiscView:
         response = get_term_of_user(request)
         assert response.status_code == 200
         assert json.loads(response.content) == {'term': 'EULA Test'}
-
-    def test_get_use_term_list(self, ideax_views, db, mock_today):
-        ideax_views.date = mock_today
-        response = get_use_term_list()
-        assert len(response['use_term_list']) == 1
-        assert response['use_term_list'][0].term == 'A generic Term of Use.'
-        assert response['today'] == mock_today.fix_date
 
     def test_get_featured_challenges_empty(self, db):
         response = get_featured_challenges()
