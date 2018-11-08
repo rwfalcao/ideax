@@ -7,6 +7,7 @@ from pytest import raises
 from ...models import Challenge
 from ...views import (challenge_new, challenge_detail, challenge_edit, challenge_remove)
 
+
 class TestChallengeNew:
     def test_anonymous(self, rf):
         request = rf.get('/')
@@ -21,7 +22,6 @@ class TestChallengeNew:
             challenge_new(request)
 
     def test_get(self, rf, mocker):
-        get = mocker.patch('ideax.ideax.views.get_object_or_404')
         render = mocker.patch('ideax.ideax.views.render')
         form = mocker.patch('ideax.ideax.views.ChallengeForm')
 
