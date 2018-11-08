@@ -25,7 +25,7 @@ lint:
 	flake8 ideax
 
 pylint:
-	pylint ideax
+	pylint --load-plugins pylint_django ideax
 
 gettext: clean_empty_mo
 	python manage.py compilemessages --locale pt_BR

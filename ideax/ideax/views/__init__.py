@@ -3,11 +3,9 @@ import json
 import uuid
 import collections
 import mistune
-import logging
 import csv
 
-from datetime import date
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required, permission_required
 from django.shortcuts import render, get_object_or_404, redirect
 from django.utils import timezone
 from django.http import JsonResponse
@@ -17,7 +15,6 @@ from django.contrib import messages
 from django.utils.translation import ugettext_lazy as _
 from django.http import HttpResponse
 from django.conf import settings
-from django.contrib.auth.decorators import permission_required
 from django.core.files.storage import FileSystemStorage, default_storage
 from django.db import connection
 from django.http import StreamingHttpResponse
@@ -25,37 +22,25 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.core.files.base import ContentFile
 from martor.utils import LazyEncoder
 
-from ..users.models import UserProfile
-from .models import (
+from ...users.models import UserProfile
+from ..models import (
     Idea, Criterion, Popular_Vote, Phase, Phase_History,
-    Category, Comment, Dimension, Evaluation, Category_Image, Use_Term, Challenge
+    Comment, Evaluation, Category_Image, Challenge, Dimension,
 )
-from .forms import (
-    IdeaForm, CriterionForm, CategoryForm, CategoryImageForm,
-    EvaluationForm, ChallengeForm, UseTermForm, DimensionForm
+from ..forms import IdeaForm, CriterionForm, EvaluationForm, ChallengeForm
+from ...singleton import ProfanityCheck
+from ...mail_util import MailUtil
+from ...util import get_ip, get_client_ip, audit
+
+from .category import category_edit, category_list, category_new, category_remove
+from .category_image import category_image_edit, category_image_list, category_image_new, category_image_remove
+from .use_term import (
+    get_term_of_user, accept_use_term, get_valid_use_term, save_use_term,
+    use_term_detail, use_term_edit, use_term_list, use_term_new, use_term_remove,
 )
-from ..singleton import ProfanityCheck
-from ..mail_util import MailUtil
-from ..util import get_ip, get_client_ip
-
-
-# Creating log object
-logger = logging.getLogger('audit_log')
+from .dimension import dimension_new, dimension_list, dimension_edit, dimension_remove
 
 mail_util = MailUtil()
-
-
-def audit(username, ip_addr, operation, class_name, object_id):
-    logger.info(
-        '%(username)s|%(ip_addr)s|%(operation)s|%(class_name)s|%(object_id)s',
-        {
-            'username': username,
-            'ip_addr': ip_addr,
-            'operation': operation,
-            'className': class_name,
-            'objectId': object_id
-        }
-    )
 
 
 def index(request):
@@ -63,27 +48,6 @@ def index(request):
         audit(request.user.username, get_client_ip(request), 'LIST_IDEAS_PAGE', Idea.__name__, '')
         return idea_list(request)
     return render(request, 'ideax/index.html')
-
-
-@login_required
-def accept_use_term(request):
-    if not request.user.userprofile.use_term_accept:
-        user_profile = UserProfile.objects.get(user=request.user)
-        user_profile.use_term_accept = True
-        user_profile.acceptance_date = timezone.localtime(timezone.now())
-        user_profile.ip = get_ip(request)
-        user_profile.save()
-        messages.success(request, _('Term of use accepted!'))
-        # logger.info('%(username)s|%(ip_addr)s|%(message)s', {
-        # 'username': request.user.username, 'ip_addr': get_client_ip(request), 'message': 'Term of use accepted!'})
-    else:
-        messages.success(request, _('Term of use already accepted!'))
-        # logger.info('%(username)s|%(ip_addr)s|%(message)s', {
-        # 'username': request.user.username, 'ip_addr': get_client_ip(request),
-        # 'message': 'Term of use already accepted!'})
-
-    audit(request.user.username, get_client_ip(request), 'ACCEPT_TERMS_OF_USE_OPERATION', UserProfile.__name__, '')
-    return redirect('index')
 
 
 @login_required
@@ -426,68 +390,6 @@ def criterion_remove(request, pk):
 
 
 @login_required
-@permission_required('ideax.add_category', raise_exception=True)
-def category_new(request):
-    if request.method == "POST":
-        form = CategoryForm(request.POST)
-        if form.is_valid():
-            category = form.save(commit=False)
-            category.author = UserProfile.objects.get(user=request.user)
-            category.creation_date = timezone.now()
-            category.save()
-            messages.success(request, _('Category saved successfully!'))
-            audit(request.user.username, get_client_ip(request), 'CREATE_CATEGORY', Category.__name__, category.id)
-            return redirect('category_list')
-    else:
-        form = CategoryForm()
-    return render(request, 'ideax/category_new.html', {'form': form})
-
-
-@login_required
-@permission_required('ideax.change_category', raise_exception=True)
-def category_edit(request, pk):
-    category = get_object_or_404(Category, pk=pk)
-    if request.method == "POST":
-        form = CategoryForm(request.POST, instance=category)
-        if form.is_valid():
-            form.save()
-            messages.success(request, _('Category changed successfully!'))
-            audit(
-                request.user.username,
-                get_client_ip(request),
-                'EDIT_CATEGORY_SAVE',
-                Category.__name__,
-                str(category.id)
-            )
-            return redirect('category_list')
-    else:
-        form = CategoryForm(instance=category)
-
-    return render(request, 'ideax/category_edit.html', {'form': form})
-
-
-@login_required
-@permission_required('ideax.delete_category', raise_exception=True)
-def category_remove(request, pk):
-    category = get_object_or_404(Category, pk=pk)
-    category.discarded = True
-    category.save()
-    messages.success(request, _('Category removed successfully!'))
-    audit(request.user.username, get_client_ip(request), 'REMOVE_CATEGORY', Category.__name__, str(pk))
-    return redirect('category_list')
-
-
-@login_required
-def category_list(request):
-    audit(request.user.username, get_client_ip(request), 'CATEGORY_LIST', Category.__name__, '')
-    return render(request, 'ideax/category_list.html', get_category_list())
-
-
-def get_category_list():
-    return {'category_list': Category.objects.filter(discarded=False)}
-
-
-@login_required
 @permission_required('ideax.add_popular_vote', raise_exception=True)
 def like_popular_vote(request, pk):
     user = UserProfile.objects.get(user=request.user)
@@ -662,88 +564,6 @@ def idea_comments(request, pk):
     return JsonResponse(data)
 
 
-def get_term_of_user(request):
-    term = Use_Term.objects.filter(final_date__gte=timezone.now())
-    if term.exists():
-        return JsonResponse({"term": term[0].term})
-    else:
-        return JsonResponse({"term": _("No Term of Use found")})
-
-
-@login_required
-def use_term_list(request):
-    return render(request, 'ideax/use_term_list.html', get_use_term_list())
-
-
-def get_use_term_list():
-    return {'use_term_list': Use_Term.objects.all(), 'today': date.today()}
-
-
-@login_required
-@permission_required('ideax.add_use_term', raise_exception=True)
-def use_term_new(request):
-    if request.method == "POST":
-        form = UseTermForm(request.POST)
-    else:
-        form = UseTermForm()
-    return save_use_term(request, form, 'ideax/use_term_new.html', True)
-
-
-@login_required
-@permission_required('ideax.change_use_term', raise_exception=True)
-def use_term_edit(request, pk):
-    use_term = get_object_or_404(Use_Term, pk=pk)
-    if request.method == "POST":
-        use_term_form = UseTermForm(request.POST, instance=use_term)
-    else:
-        use_term_form = UseTermForm(instance=use_term)
-    return save_use_term(request, use_term_form, 'ideax/use_term_edit.html')
-
-
-def save_use_term(request, form, template_name, new=False):
-    if request.method == "POST":
-        if form.is_valid():
-            use_term = form.save(commit=False)
-            use_term.creator = UserProfile.objects.get(user=request.user)
-            if use_term.is_invalid_date():
-                messages.error(request, _('Invalid Final Date'))
-                return render(request, template_name, {'form': form})
-            if Use_Term.objects.get_active() and new:
-                messages.error(request, _('Already exists a active Term Of Use'))
-                return render(request, template_name, {'form': form})
-            use_term.save()
-            messages.success(request, _('Term of Use saved successfully!'))
-            return redirect('use_term_list')
-    else:
-        return render(request, template_name, {'form': form})
-
-
-@login_required
-@permission_required('ideax.delete_use_term', raise_exception=True)
-def use_term_remove(request, pk):
-    use_term = get_object_or_404(Use_Term, pk=pk)
-    if request.method == 'GET':
-        use_term.final_date = timezone.now()
-        use_term.save()
-        messages.success(request, _('Terms of Use removed successfully!'))
-        return render(request, 'ideax/use_term_list.html', get_use_term_list())
-
-
-@login_required
-def use_term_detail(request, pk):
-    use_term = get_object_or_404(Use_Term, pk=pk)
-    return render(request, 'ideax/use_term_detail.html', {'use_term': use_term})
-
-
-def get_valid_use_term(request):
-    use_terms = Use_Term.objects.all()
-    for term in use_terms:
-        if term.is_past_due:
-            valid_use_term = term
-            return render(request, 'ideax/use_term.html', {'use_term': valid_use_term})
-    return render(request, 'ideax/use_term.html', {'use_term': _("No Term of Use found")})
-
-
 def idea_detail_pdf(request, idea_id):
     idea = Idea.objects.get(pk=idea_id)
     data = dict()
@@ -909,70 +729,6 @@ def idea_new_from_challenge(request, challenge_pk):
 
 
 @login_required
-@permission_required('ideax.add_category_image', raise_exception=True)
-def category_image_new(request):
-    if request.method == "POST":
-        form = CategoryImageForm(request.POST, request.FILES)
-
-        if form.is_valid():
-            category_image = form.save(commit=False)
-            category_image.author = UserProfile.objects.get(user=request.user)
-            category_image.creation_date = timezone.now()
-            category_image.save()
-            messages.success(request, _('Category Image saved successfully!'))
-            audit(
-                request.user.username,
-                get_client_ip(request),
-                'CREATE_CATEGORY_IMAGE',
-                Category_Image.__name__,
-                category_image.id)
-            return redirect('category_image_list')
-    else:
-        form = CategoryImageForm()
-    return render(request, 'ideax/category_image_new.html', {'form': form})
-
-
-@login_required
-def category_image_list(request):
-    category_images = Category_Image.objects.all()
-    audit(request.user.username, get_client_ip(request), 'LIST_CATEGORY_IMAGE', Category_Image.__name__, '')
-    return render(request, 'ideax/category_image_list.html', {'category_images': category_images})
-
-
-@login_required
-@permission_required('ideax.change_category_image', raise_exception=True)
-def category_image_edit(request, pk):
-    category_image = get_object_or_404(Category_Image, pk=pk)
-
-    if request.method == "POST":
-        form = CategoryImageForm(request.POST, request.FILES, instance=category_image)
-
-        if form.is_valid():
-            form.save()
-            messages.success(request, _('Category Image changed successfully!'))
-            audit(
-                request.user.username,
-                get_client_ip(request),
-                'EDIT_CATEGORY_IMAGE',
-                Category_Image.__name__,
-                str(pk))
-            return redirect('category_image_list')
-    else:
-        form = CategoryImageForm(instance=category_image)
-    return render(request, 'ideax/category_image_edit.html', {'form': form})
-
-
-@login_required
-@permission_required('ideax.delete_category_image', raise_exception=True)
-def category_image_remove(request, pk):
-    category_image = get_object_or_404(Category_Image, pk=pk)
-    category_image.delete()
-    messages.success(request, _('Category Image removed successfully!'))
-    audit(request.user.username, get_client_ip(request), 'REMOVE_CATEGORY_IMAGE', Category_Image.__name__, str(pk))
-    return redirect('category_image_list')
-
-
-@login_required
 def markdown_uploader(request):
     """
     Makdown image upload for locale storage
@@ -1032,60 +788,11 @@ def get_authors(removed_author):
         .exclude(user__email=removed_author)
 
 
-@login_required
-@permission_required('ideax.add_dimension', raise_exception=True)
-def dimension_new(request):
-    if request.method == "POST":
-        form = DimensionForm(request.POST)
-        if form.is_valid():
-            dimension = form.save()
-            dimension.save()
-            messages.success(request, _('Dimension saved successfully!'))
-            audit(request.user.username, get_client_ip(request), 'CREATE_DIMENSION', Dimension.__name__, dimension.id)
-            return redirect('dimension_list')
-    else:
-        form = DimensionForm()
-    return render(request, 'ideax/dimension_new.html', {'form': form})
-
-
-@login_required
-def dimension_list(request):
-    audit(request.user.username, get_client_ip(request), 'DIMENSION_LIST', Category.__name__, '')
-    return render(request, 'ideax/dimension_list.html', get_dimension_list())
-
-
-def get_dimension_list():
-    return {'dimension_list': Dimension.objects.all()}
-
-
-@login_required
-@permission_required('ideax.change_dimension', raise_exception=True)
-def dimension_edit(request, pk):
-    dimension = get_object_or_404(Dimension, pk=pk)
-    if request.method == "POST":
-        form = DimensionForm(request.POST, instance=dimension)
-        if form.is_valid():
-            form.save()
-            messages.success(request, _('Dimension changed successfully!'))
-            audit(
-                request.user.username,
-                get_client_ip(request),
-                'EDIT_DIMENSION_SAVE',
-                Dimension.__name__,
-                str(dimension.id)
-            )
-            return redirect('dimension_list')
-    else:
-        form = DimensionForm(instance=dimension)
-
-    return render(request, 'ideax/dimension_edit.html', {'form': form})
-
-
-@login_required
-@permission_required('ideax.delete_dimension', raise_exception=True)
-def dimension_remove(request, pk):
-    dimension = get_object_or_404(Dimension, pk=pk)
-    dimension.delete()
-    messages.success(request, _('Dimension removed successfully!'))
-    audit(request.user.username, get_client_ip(request), 'REMOVE_DIMENSION', Dimension.__name__, str(pk))
-    return redirect('dimension_list')
+__all__ = [
+    'category_edit', 'category_list', 'category_new', 'category_remove',
+    'category_image_edit', 'category_image_list', 'category_image_new', 'category_image_remove',
+    'get_term_of_user', 'accept_use_term',
+    'get_valid_use_term', 'save_use_term', 'use_term_detail', 'use_term_edit', 'use_term_list',
+    'use_term_new', 'use_term_remove',
+    'dimension_new', 'dimension_list', 'dimension_edit', 'dimension_remove',
+]
