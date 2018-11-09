@@ -79,12 +79,14 @@ def save_use_term(request, form, template_name, new=False):
     else:
         return render(request, template_name, {'form': form})
 
+
 @login_required
 def set_invalid_use_term(request):
     users = UserProfile.objects.filter(user__is_staff=False)
     for user in users:
         user.use_term_accept = False
         user.save()
+
 
 @login_required
 @permission_required('ideax.delete_use_term', raise_exception=True)
