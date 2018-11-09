@@ -73,11 +73,18 @@ def save_use_term(request, form, template_name, new=False):
                 messages.error(request, _('Already exists a active Term Of Use'))
                 return render(request, template_name, {'form': form})
             use_term.save()
+            set_invalid_use_term(request)
             messages.success(request, _('Term of Use saved successfully!'))
             return redirect('use_term_list')
     else:
         return render(request, template_name, {'form': form})
 
+@login_required
+def set_invalid_use_term(request):
+    users = UserProfile.objects.filter(user__is_staff=False)
+    for user in users:
+        user.use_term_accept = False
+        user.save()
 
 @login_required
 @permission_required('ideax.delete_use_term', raise_exception=True)
