@@ -26,7 +26,7 @@
     </div>
   </div>
   <div class="row">
-    <!-- Idea Utils --> 
+    <!-- Idea Utils -->
     <div class="col-md-3 text-center pb-3">
       <div class="img-dimension">
         <img src="{{idea.category_image}}" class="img-fluid img-thumbnail" alt="{% trans 'Banner Idea' %}" />
@@ -40,6 +40,7 @@
                 {{ author.user }},
               {% endif %}
             {% endfor %}
+            {% trans 'on' %} {{creation_date }}
           </small>
       </p>
       <span class="badge badge-secondary">{{ idea.get_current_phase.description }}</span>

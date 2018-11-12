@@ -497,6 +497,7 @@ def idea_detail(request, pk):
     data["idea"] = idea
     data["idea_id"] = idea.pk
     data["authors"] = idea.authors.all()
+    data["creation_date"] = idea.creation_date.strftime("%d/%m/%Y")
 
     initial = collections.OrderedDict()
     form_ = None
