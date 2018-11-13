@@ -13,7 +13,8 @@ from ..ideax.models import Popular_Vote, Comment
 
 @login_required
 def profile(request):
-    votes = Popular_Vote.objects.filter(voter=request.user.id).values('voter_id').annotate(contador=Count(Case(When(like=True, then=1))))
+    votes = Popular_Vote.objects.filter(voter=request.user.id).values(
+        'voter_id').annotate(contador=Count(Case(When(like=True, then=1))))
     comments = Comment.objects.filter(author_id=request.user.id).values('raw_comment')
     return render(
         request,
