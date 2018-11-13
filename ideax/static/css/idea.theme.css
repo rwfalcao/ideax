@@ -1181,6 +1181,23 @@ only screen and (max-width: 760px),
   color: #fc0;
 }
 
+.profile-info {
+    font-family: "Open Sans";
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+    text-align: center;
+}
+
+.avatar img {
+    border-radius: 50%;
+}
+
+.liked-ideas {
+    padding-top: 50px;
+}
+
 nav .avatar {
   padding-left: 2px;
   padding-right: 2px;
