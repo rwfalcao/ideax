@@ -275,6 +275,7 @@ $(function () {
           $(".empty-filter").empty();
           $(".empty-filter").html(response.html_idea_list);
         }
+        ideaView(localStorage.getItem("ideaView"));
     });
 
     doPost.fail(function (response){
@@ -395,7 +396,7 @@ function filterIdeas(url){
         $(".empty-filter").empty();
         $(".empty-filter").html(data.html_idea_list);
       }
-
+      ideaView(localStorage.getItem("ideaView"));
     }
   });
 };
@@ -525,24 +526,36 @@ $('a#ideaSort').click(function () {
 //toggle grid/list view
 
 $('a#list-view').click(function(){
-    $('#idea-list-group').removeClass('card-columns');
-    $('.idea-cards').css('flex-direction','row');
-    $('.idea-cards').addClass('mb-2');
-    $('.card-img-top').addClass('m-2');
-    $('.card-body').addClass('w-50');
-    $('.card-footer').addClass('card-footer-list');
-    $('.card-text').css('height', '86px')
+    localStorage.setItem("ideaView", "1");
+    ideaView(localStorage.getItem("ideaView"));
 });
 
 $('a#grid-view').click(function(){
-    $('#idea-list-group').addClass('card-columns');
-    $('.idea-cards').css('flex-direction','column');
-    $('.idea-cards').removeClass('mb-2');
-    $('.card-img-top').removeClass('m-2');
-    $('.card-body').removeClass('w-50');
-    $('.card-footer').removeClass('card-footer-list');
-    $('.card-text').css('height', "")
+    localStorage.setItem("ideaView", "0");
+    ideaView(localStorage.getItem("ideaView"));
 });
+
+
+function ideaView(ideaView){
+
+    if (ideaView == 1) {
+        $('#idea-list-group').removeClass('card-columns');
+        $('.idea-cards').css('flex-direction','row');
+        $('.idea-cards').addClass('mb-2');
+        $('.card-img-top').addClass('m-2');
+        $('.card-body').addClass('w-50');
+        $('.card-footer').addClass('card-footer-list');
+        $('.card-text').css('height', '86px');
+    }else {
+        $('#idea-list-group').addClass('card-columns');
+        $('.idea-cards').css('flex-direction','column');
+        $('.idea-cards').removeClass('mb-2');
+        $('.card-img-top').removeClass('m-2');
+        $('.card-body').removeClass('w-50');
+        $('.card-footer').removeClass('card-footer-list');
+        $('.card-text').css('height', "")
+    }
+}
 
 //end of toggle grid/list view
 
