@@ -490,10 +490,9 @@ def change_idea_phase(request, pk, new_phase):
 @login_required
 def idea_detail(request, pk):
     idea = get_object_or_404(Idea, pk=pk)
-    comments = idea.comment_set.filter(deleted=False)
 
     data = dict()
-    data["comments"] = comments
+    data["comments"] = idea.comment_set.filter(deleted=False)
     data["idea"] = idea
     data["idea_id"] = idea.pk
     data["authors"] = idea.authors.all()
