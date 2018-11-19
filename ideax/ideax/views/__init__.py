@@ -5,6 +5,7 @@ import collections
 import mistune
 import csv
 
+
 from django.contrib.auth.decorators import login_required, permission_required
 from django.shortcuts import render, get_object_or_404, redirect
 from django.utils import timezone
@@ -487,17 +488,32 @@ def change_idea_phase(request, pk, new_phase):
     return redirect('index')
 
 
+def sort_timeline(timeline_list, timeline_evaluation):
+    if timeline_evaluation:
+        for i in range(len(timeline_list)):
+            if timeline_evaluation.evaluation_date < timeline_list[i].date_change:
+                timeline_list.insert(i, timeline_evaluation)
+                break
+            elif (i == len(timeline_list)-1):
+                timeline_list.insert(len(timeline_list)+1, timeline_evaluation)
+    return timeline_list
+
+
 @login_required
 def idea_detail(request, pk):
     idea = get_object_or_404(Idea, pk=pk)
-    comments = idea.comment_set.filter(deleted=False)
+    timeline_phase_history = idea.phase_history_set.all()
+    timeline_evaluation = idea.evaluation_set.last()
 
     data = dict()
-    data["comments"] = comments
+    data["comments"] = idea.comment_set.filter(deleted=False)
     data["idea"] = idea
     data["idea_id"] = idea.pk
     data["authors"] = idea.authors.all()
     data["creation_date"] = idea.creation_date.strftime("%d/%m/%Y")
+    data["timeline"] = sort_timeline(list(timeline_phase_history), timeline_evaluation)
+    data['phases'] = get_phases_count()
+    data["evaluation"] = timeline_evaluation
 
     initial = collections.OrderedDict()
     form_ = None
