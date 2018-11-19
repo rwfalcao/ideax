@@ -511,9 +511,7 @@ def idea_detail(request, pk):
     data["idea_id"] = idea.pk
     data["authors"] = idea.authors.all()
     data["creation_date"] = idea.creation_date.strftime("%d/%m/%Y")
-    data["timeline"] = sort_timeline(list(timeline_phase_history), timeline_evaluation)
-    data['phases'] = get_phases_count()
-    data["evaluation"] = timeline_evaluation
+    data["timeline"] = sort_timeline(list(timeline_phase_history), timeline_evaluation)    
 
     initial = collections.OrderedDict()
     form_ = None
