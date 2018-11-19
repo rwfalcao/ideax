@@ -5,18 +5,25 @@ from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.utils.translation import ugettext_lazy as _
 from django.views.generic import CreateView
+from django.db.models import Count, Case, When
 
 from .forms import SignUpForm
+from ..ideax.models import Popular_Vote, Comment
 
 
 @login_required
 def profile(request):
+    votes = Popular_Vote.objects.filter(voter=request.user.id).values(
+        'voter_id').annotate(contador=Count(Case(When(like=True, then=1))))
+    comments = Comment.objects.filter(author_id=request.user.id).values('raw_comment')
     return render(
         request,
         'users/profile.html',
         {
             'user': request.user,
             'ideas': request.user.userprofile.authors.all(),
+            'popular_vote': votes[0]['contador'],
+            'comments': len(comments),
         }
     )
 
