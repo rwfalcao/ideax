@@ -490,7 +490,7 @@ def change_idea_phase(request, pk, new_phase):
 
 def sort_timeline(timeline_list, timeline_evaluation):
     if timeline_evaluation:
-        for i in range(len(timeline_list)):ho
+        for i in range(len(timeline_list)):
             if timeline_evaluation.evaluation_date < timeline_list[i].date_change:
                 timeline_list.insert(i, timeline_evaluation)
                 break
