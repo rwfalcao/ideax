@@ -502,12 +502,11 @@ def sort_timeline(timeline_list, timeline_evaluation):
 @login_required
 def idea_detail(request, pk):
     idea = get_object_or_404(Idea, pk=pk)
-    comments = idea.comment_set.filter(deleted=False)
     timeline_phase_history = idea.phase_history_set.all()
     timeline_evaluation = idea.evaluation_set.last()
 
     data = dict()
-    data["comments"] = comments
+    data["comments"] = idea.comment_set.filter(deleted=False)
     data["idea"] = idea
     data["idea_id"] = idea.pk
     data["authors"] = idea.authors.all()
