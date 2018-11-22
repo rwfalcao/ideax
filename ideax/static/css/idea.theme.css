@@ -126,6 +126,28 @@ body {
     margin: 0 0 25px 0;
 }
 
+.profile-bg {
+    background-color: #004779;
+    background-image: url('../images/bg_ideia_azul_62.png');
+    background-repeat: no-repeat;
+    background-position-y: 50% !important;
+    height: 400px;
+    margin-top: -3px;
+    margin-left: -15px;
+    margin-right: -15px;
+    margin-bottom: 10px;
+    padding-top: 56px;
+    background-position: right;
+}
+
+.profile-objects {
+    height: 345px;
+    padding-top: 20px;
+    align-items: center;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
 .idea-list-bg {
     background-color: #004779;
     background-image: url('../images/bg_ideia_azul_62.png');
@@ -1231,6 +1253,19 @@ only screen and (max-width: 760px),
     margin-right: auto;
     width: 50%;
     text-align: center;
+    color: rgb(255, 255, 255);
+}
+
+.profile-email {
+    font-size: 12px;
+}
+
+.profile-name {
+    font-family: "Open Sans";
+    display: block;
+    color: rgb(255, 255, 255);
+    font-size: 30px;
+    font-weight: bold;
 }
 
 .avatar img {
@@ -1238,7 +1273,9 @@ only screen and (max-width: 760px),
 }
 
 .liked-ideas {
-    padding-top: 50px;
+    color: #ffffff;
+    text-align: center;
+    font-size: 30px;
 }
 
 nav .avatar {
