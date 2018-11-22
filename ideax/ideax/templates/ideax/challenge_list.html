@@ -34,7 +34,33 @@
                 </ul>
             </nav>
             </div>
+            <!-- Menu Tablet -->
+            <div class="col-md-12 d-none d-md-block d-lg-none pb-2">
+                    <nav class="phase-filter">
+                    <ul class="phase-list nav nav-pills justify-content-center">
+                        <li class="nav-item" onclick="filterChallenges('{% url 'challenge_filter' status=0 %}')">
+                            <a class="nav-link" href="#">Active<span class="badge badge-pill badge-primary count-ideas">{{ actives.active }}</span></a>
+                        </li>
+                        <li class="nav-item" onclick="filterChallenges('{% url 'challenge_filter' status=1 %}')">
+                            <a class="nav-link" href="#">Inactive<span class="badge badge-pill badge-primary count-ideas">{{ actives.inactive }}</span></a>
+                        </li>
+                    </ul>
+                    </nav>
+                </div>
+            <!-- Menu Mobile -->
 
+            <div class="col-sm-12 d-block d-sm-block d-md-none pb-2">
+                <nav class="phase-filter">
+                    <ul class="phase-list nav nav-pills nav-justified">
+                        <li class="nav-item" onclick="filterChallenges('{% url 'challenge_filter' status=0 %}')">
+                            <a class="nav-link" href="#">Active<span class="badge badge-pill badge-primary count-ideas">{{ actives.active }}</span></a>
+                        </li>
+                        <li class="nav-item" onclick="filterChallenges('{% url 'challenge_filter' status=1 %}')">
+                            <a class="nav-link" href="#">Inactive<span class="badge badge-pill badge-primary count-ideas">{{ actives.inactive }}</span></a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
 
         <div class="col-lg-10">
             <div id="carouselExampleIndicators">
