@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-11-19 11:51-0200\n"
+"POT-Creation-Date: 2018-11-23 10:03-0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -19,6 +19,7 @@ msgstr ""
 "X-Generator: Poedit 2.0.7\n"
 
 #: ideax/administration/templates/administration/index.html:15
+#: ideax/users/templates/users/profile.html:7
 msgid "Back to top"
 msgstr ""
 
@@ -169,7 +170,9 @@ msgstr "Imagem"
 msgid "Requester"
 msgstr "Solicitante"
 
-#: ideax/ideax/forms.py:109
+#: ideax/ideax/forms.py:109 ideax/ideax/templates/ideax/challenge_list.html:29
+#: ideax/ideax/templates/ideax/challenge_list.html:42
+#: ideax/ideax/templates/ideax/challenge_list.html:56
 #: ideax/ideax/templates/ideax/includes/partial_use_term_list.html:22
 #: ideax/ideax/templates/ideax/use_term_detail.html:19
 msgid "Active"
@@ -403,6 +406,23 @@ msgstr "Editar Desafio"
 msgid "Explore Challenges"
 msgstr "Explore os Desafios"
 
+#: ideax/ideax/templates/ideax/challenge_list.html:26
+#: ideax/ideax/templates/ideax/idea_list.html:15
+msgid "Filters"
+msgstr "Filtros"
+
+#: ideax/ideax/templates/ideax/challenge_list.html:32
+#: ideax/ideax/templates/ideax/challenge_list.html:45
+#: ideax/ideax/templates/ideax/challenge_list.html:59
+#: ideax/ideax/templates/ideax/includes/partial_use_term_list.html:22
+#: ideax/ideax/templates/ideax/use_term_detail.html:19
+msgid "Inactive"
+msgstr "Inativo"
+
+#: ideax/ideax/templates/ideax/challenge_list.html:73
+msgid "No Challenges found"
+msgstr "Não há Desafios"
+
 #: ideax/ideax/templates/ideax/criterion_edit.html:7
 msgid "Update Criterion"
 msgstr "Atualizar Critério"
@@ -425,12 +445,25 @@ msgstr "Editar"
 #: ideax/ideax/templates/ideax/criterion_list.html:27
 #: ideax/ideax/templates/ideax/includes/partial_category_image_list.html:10
 #: ideax/ideax/templates/ideax/includes/partial_category_list.html:9
-#: ideax/ideax/templates/ideax/includes/partial_category_remove.html:27
 #: ideax/ideax/templates/ideax/includes/partial_dimension_list.html:9
 #: ideax/ideax/templates/ideax/includes/partial_use_term_list.html:11
-#: ideax/ideax/templates/ideax/includes/partial_use_term_remove.html:27
 msgid "Discard"
 msgstr "Descartar"
+
+#: ideax/ideax/templates/ideax/criterion_list.html:38
+#: ideax/ideax/templates/ideax/includes/partial_category_image_list.html:22
+#: ideax/ideax/templates/ideax/includes/partial_category_list.html:19
+#: ideax/ideax/templates/ideax/includes/partial_challenge_list.html:14
+#: ideax/ideax/templates/ideax/includes/partial_dimension_list.html:19
+#: ideax/ideax/templates/ideax/includes/partial_use_term_list.html:25
+msgid "Would you like to delete "
+msgstr "Deseja descartar "
+
+#: ideax/ideax/templates/ideax/criterion_list.html:38
+#, fuzzy
+#| msgid "New Criterion"
+msgid "the criterion"
+msgstr "Novo Critério"
 
 #: ideax/ideax/templates/ideax/dimension_edit.html:6
 msgid "Update Dimension"
@@ -514,10 +547,6 @@ msgstr "Atualizar Ideia"
 msgid "Explore"
 msgstr "Explorar"
 
-#: ideax/ideax/templates/ideax/idea_list.html:15
-msgid "Filters"
-msgstr "Filtros"
-
 #: ideax/ideax/templates/ideax/idea_list.html:77
 msgid "Search for author, title or summary"
 msgstr "Pesquise por autor, título ou resumo da ideia"
@@ -535,27 +564,34 @@ msgid "Clean"
 msgstr "Limpar"
 
 #: ideax/ideax/templates/ideax/idea_list.html:127
+#: ideax/users/templates/users/profile.html:101
 msgid "Sorted by"
 msgstr "Ordenado por"
 
 #: ideax/ideax/templates/ideax/idea_list.html:127
 #: ideax/ideax/templates/ideax/idea_list.html:130
+#: ideax/users/templates/users/profile.html:101
+#: ideax/users/templates/users/profile.html:104
 msgid "Highest positive votes"
 msgstr "Mais votos positivos"
 
 #: ideax/ideax/templates/ideax/idea_list.html:131
+#: ideax/users/templates/users/profile.html:105
 msgid "Highest negative votes"
 msgstr "Mais votos negativos"
 
 #: ideax/ideax/templates/ideax/idea_list.html:132
+#: ideax/users/templates/users/profile.html:106
 msgid "Highest comments"
 msgstr "Mais comentados"
 
 #: ideax/ideax/templates/ideax/idea_list.html:133
+#: ideax/users/templates/users/profile.html:107
 msgid "Alphabetical"
 msgstr "Ordem alfabética"
 
 #: ideax/ideax/templates/ideax/idea_list.html:134
+#: ideax/users/templates/users/profile.html:108
 msgid "Latest"
 msgstr "Mais recentes"
 
@@ -567,6 +603,10 @@ msgstr "Cadastrar Ideia"
 #: ideax/ideax/templates/ideax/includes/empty.html:4
 msgid "There are no ideas at this stage!"
 msgstr "Não existem ideias nesta etapa!"
+
+#: ideax/ideax/templates/ideax/includes/empty_challenge.html:4
+msgid "There are no challenges here!"
+msgstr "Não tem nenhum desafio aqui!"
 
 #: ideax/ideax/templates/ideax/includes/evaluation_detail.html:24
 msgid "Evaluation not yet done"
@@ -588,21 +628,17 @@ msgstr "Ações"
 msgid "Delete"
 msgstr "Remover"
 
-#: ideax/ideax/templates/ideax/includes/partial_category_remove.html:14
-#: ideax/ideax/templates/ideax/includes/partial_use_term_remove.html:14
-msgid "Confirm use term removal"
-msgstr "Confirmar descarte de Termo de Uso"
+#: ideax/ideax/templates/ideax/includes/partial_category_image_list.html:22
+msgid "the category image"
+msgstr "a Imagem de Categoria"
 
-#: ideax/ideax/templates/ideax/includes/partial_category_remove.html:20
-#: ideax/ideax/templates/ideax/includes/partial_use_term_remove.html:20
-msgid "Would you like to delete the use term?"
-msgstr "Deseja apagar o Termo de Uso?"
+#: ideax/ideax/templates/ideax/includes/partial_category_list.html:19
+msgid "the category"
+msgstr "a Categoria"
 
-#: ideax/ideax/templates/ideax/includes/partial_category_remove.html:26
-#: ideax/ideax/templates/ideax/includes/partial_idea_update.html:21
-#: ideax/ideax/templates/ideax/includes/partial_use_term_remove.html:26
-msgid "Close"
-msgstr "Fechar"
+#: ideax/ideax/templates/ideax/includes/partial_challenge_list.html:14
+msgid "the challenge"
+msgstr "o Desafio"
 
 #: ideax/ideax/templates/ideax/includes/partial_comments.html:10
 msgid "made a comment"
@@ -611,6 +647,10 @@ msgstr "fez um comentário"
 #: ideax/ideax/templates/ideax/includes/partial_comments.html:17
 msgid "reply"
 msgstr "responder"
+
+#: ideax/ideax/templates/ideax/includes/partial_dimension_list.html:19
+msgid "the dimension"
+msgstr "a Dimensão"
 
 #: ideax/ideax/templates/ideax/includes/partial_idea_remove.html:10
 msgid "Confirm ideia removal"
@@ -628,6 +668,10 @@ msgstr "Confirmar"
 msgid "Update Idea"
 msgstr "Atualizar Ideia"
 
+#: ideax/ideax/templates/ideax/includes/partial_idea_update.html:21
+msgid "Close"
+msgstr "Fechar"
+
 #: ideax/ideax/templates/ideax/includes/partial_use_term_list.html:5
 msgid "Creator"
 msgstr "Autor"
@@ -640,10 +684,9 @@ msgstr "Status"
 msgid "Detail"
 msgstr "Detalhes"
 
-#: ideax/ideax/templates/ideax/includes/partial_use_term_list.html:22
-#: ideax/ideax/templates/ideax/use_term_detail.html:19
-msgid "Inactive"
-msgstr "Inativo"
+#: ideax/ideax/templates/ideax/includes/partial_use_term_list.html:25
+msgid "the terms of use"
+msgstr "o Termo de uso"
 
 #: ideax/ideax/templates/ideax/includes/timeline_detail.html:17
 msgid "This idea was"
@@ -805,8 +848,8 @@ msgstr "Acessar"
 msgid "Idea saved successfully!"
 msgstr "Ideia salva com sucesso!"
 
-#: ideax/ideax/views/__init__.py:226 ideax/ideax/views/__init__.py:254
-#: ideax/ideax/views/__init__.py:671
+#: ideax/ideax/views/__init__.py:225 ideax/ideax/views/__init__.py:253
+#: ideax/ideax/views/__init__.py:653
 msgid "Not supported action"
 msgstr "Ação não suportada"
 
@@ -838,39 +881,39 @@ msgstr "Fase alterada com sucesso!"
 msgid "Phase change"
 msgstr "Fase alterad "
 
-#: ideax/ideax/views/__init__.py:544
+#: ideax/ideax/views/__init__.py:526
 msgid "You need to log in to post new comments."
 msgstr "É necessário estar logado para postar comentários."
 
-#: ideax/ideax/views/__init__.py:552
+#: ideax/ideax/views/__init__.py:534
 msgid "Please check your message it has inappropriate content."
 msgstr "Verifique sua mensagem, ela tem conteúdo inapropriado."
 
-#: ideax/ideax/views/__init__.py:555
+#: ideax/ideax/views/__init__.py:537
 msgid "You have to write a comment."
 msgstr "É necessário escrever um comentário."
 
-#: ideax/ideax/views/__init__.py:574
+#: ideax/ideax/views/__init__.py:556
 msgid "Your comment has been posted."
 msgstr "Comentário postado com sucesso."
 
-#: ideax/ideax/views/__init__.py:629 ideax/ideax/views/__init__.py:645
+#: ideax/ideax/views/__init__.py:611 ideax/ideax/views/__init__.py:627
 msgid "Challenge saved successfully!"
 msgstr "Desafio salvo com sucesso!"
 
-#: ideax/ideax/views/__init__.py:669
+#: ideax/ideax/views/__init__.py:651
 msgid "Challenge removed successfully!"
 msgstr "Desafio removido com sucesso!"
 
-#: ideax/ideax/views/__init__.py:765
+#: ideax/ideax/views/__init__.py:787
 msgid "Bad image format."
 msgstr "Formato de imagem não recomendado"
 
-#: ideax/ideax/views/__init__.py:774
+#: ideax/ideax/views/__init__.py:796
 msgid "Maximum image file is %(size) MB."
 msgstr "O tamanho máximo do arquivo é %(size) MB."
 
-#: ideax/ideax/views/__init__.py:790 ideax/ideax/views/__init__.py:791
+#: ideax/ideax/views/__init__.py:812 ideax/ideax/views/__init__.py:813
 msgid "Invalid request!"
 msgstr "Requisição Inválida"
 
@@ -950,11 +993,7 @@ msgstr "Sobrenome"
 msgid "Required. Inform a valid e-mail address."
 msgstr "Requerido. Informe um e-mail válido."
 
-#: ideax/users/templates/users/profile.html:7
-msgid "User Profile"
-msgstr "Perfil do Usuário"
-
-#: ideax/users/templates/users/profile.html:24
+#: ideax/users/templates/users/profile.html:22
 #, python-format
 msgid "Author of one idea"
 msgid_plural "Author of %(size)s ideas"
@@ -965,9 +1004,18 @@ msgstr[1] "Autor de %(size)s ideias"
 msgid "Sign up"
 msgstr "Inscreva-se"
 
-#: ideax/users/views.py:30
+#: ideax/users/views.py:37
 msgid "Invalid form!"
 msgstr "Formulário inválido"
+
+#~ msgid "User Profile"
+#~ msgstr "Perfil do Usuário"
+
+#~ msgid "Confirm use term removal"
+#~ msgstr "Confirmar descarte de Termo de Uso"
+
+#~ msgid "Would you like to delete the use term?"
+#~ msgstr "Deseja apagar o Termo de Uso?"
 
 #~ msgid ""
 #~ "Through APIs is possible to integrate the Idea<sup>X</sup> with other "

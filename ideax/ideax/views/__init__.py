@@ -676,7 +676,47 @@ def challenge_list(request):
     else:
         challenges = get_featured_challenges()
 
-    return render(request, 'ideax/challenge_list.html', {'challenges': challenges})
+    return render(request, 'ideax/challenge_list.html', {'challenges': challenges, 'actives': get_active_count()})
+
+
+def get_active_count():
+    cursor = connection.cursor()
+    cursor.execute('''select count(*) as qtd from ideax_challenge where active = 1 and discarted = 0''')
+    data_active = cursor.fetchall()
+    cursor.execute('''select count(*) as qtd from ideax_challenge where active = 0 and discarted = 0''')
+    data_inactive = cursor.fetchall()
+    actives = dict()
+    actives['active'] = data_active[0][0]
+    actives['inactive'] = data_inactive[0][0]
+
+    return actives
+
+
+def challenge_filter(request, status=None):
+    if status == 0:
+        status = True
+    else:
+        status = False
+    challenges = Challenge.objects.filter(
+            discarted=False,
+            active=status)
+
+    context = {
+        'challenges': challenges,
+    }
+
+    data = dict()
+    if request.is_ajax():
+        data['html_challenge_list'] = render_to_string('ideax/challenge_list_loop.html', context, request=request)
+        data['empty'] = 0
+        if not challenges:
+            data['html_challenge_list'] = render_to_string('ideax/includes/empty_challenge.html', request=request)
+            data['empty'] = 1
+        return JsonResponse(data)
+    else:
+        context['challenges'] = get_featured_challenges()
+        context['actives'] = get_active_count()
+        return render(request, 'ideax/challenge_list.html', context)
 
 
 @login_required
