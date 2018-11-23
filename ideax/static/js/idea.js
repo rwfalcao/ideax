@@ -378,6 +378,28 @@ $(function () {
 
 });
 
+function filterChallenges(url){
+    $.ajax({
+      url: url,
+      type: 'get',
+      dataType: 'json',
+      success: function (data){
+        $("#challenge-list-group").empty();
+        $(".empty-filter").empty();
+
+        if(data.empty == 0){
+          $(".empty-filter").empty();
+          $("#challenge-list-group").html(data.html_challenge_list);
+        }
+        else{
+          $(".empty-filter").empty();
+          $(".empty-filter").html(data.html_challenge_list);
+        }
+        ideaView(localStorage.getItem("ideaView"));
+      }
+    });
+  };
+
 
 function filterIdeas(url){
   $.ajax({
@@ -419,30 +441,22 @@ $('#idea-pills-tab a').on('click', function (e) {
 })
 
 //modal challenge
-var modalConfirm = function(callback){
+//var modalConfirmDeletion = function(callback){
 
-  $("#btn-confirm").on("click", function(){
-    $("#mi-modal").modal('show');
-  });
+    $(document).on("click", "#btn-confirm-deletion", function(){
+        $("#mi-modal").modal('show');
+    });
 
-  $("#modal-btn-yes").on("click", function(){
-    callback(true);
-    $("#mi-modal").modal('hide');
-  });
+    $(document).on("click", "#modal-btn-yes", function(){
+        //callback(true)
+        $("#mi-modal").modal('hide');
+    });
 
-  $("#modal-btn-no").on("click", function(){
-    callback(false);
-    $("#mi-modal").modal('hide');
-  });
-};
-
-modalConfirm(function(confirm){
-  if(confirm){
-    $("#result").html("");
-  }else{
-    $("#result").html("");
-  }
-});
+    $(document).on("click", "#modal-btn-no", function(){
+        //callback(false)
+        $("#mi-modal").modal('hide');
+    });
+//}
 
 // tooltip functions
 
