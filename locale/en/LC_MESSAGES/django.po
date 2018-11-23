@@ -336,10 +336,8 @@ msgstr ""
 #: ideax/ideax/templates/ideax/idea_new.html:18
 #: ideax/ideax/templates/ideax/includes/evaluation.html:34
 #: ideax/ideax/templates/ideax/includes/partial_idea_create.html:25
-#: ideax/ideax/templates/ideax/phase_edit.html:12x/views/__init__.py:651
-
-#: ideax/ideax/templates/ideax/use_term_new.html:x/views/__init__.py:651
-
+#: ideax/ideax/templates/ideax/phase_edit.html:12
+#: ideax/ideax/templates/ideax/use_term_new.html:49
 msgid "Save"
 msgstr ""
 
@@ -560,7 +558,7 @@ msgstr ""
 
 #: ideax/ideax/templates/ideax/idea_list.html:132
 #: ideax/users/templates/users/profile.html:106
-msgid "Highest comments"
+msgid "Most discussed"
 msgstr ""
 
 #: ideax/ideax/templates/ideax/idea_list.html:133
@@ -822,8 +820,8 @@ msgstr ""
 msgid "Idea saved successfully!"
 msgstr "Termo de uso aceito!"
 
-#: ideax/ideax/views/__init__.py:225 ideax/ideax/views/__init__.py:253
-#: ideax/ideax/views/__init__.py:653
+#: ideax/ideax/views/__init__.py:226 ideax/ideax/views/__init__.py:254
+#: ideax/ideax/views/__init__.py:669
 msgid "Not supported action"
 msgstr ""
 
@@ -863,43 +861,43 @@ msgstr "Termo de uso aceito!"
 msgid "Phase change"
 msgstr ""
 
-#: ideax/ideax/views/__init__.py:526
+#: ideax/ideax/views/__init__.py:542
 msgid "You need to log in to post new comments."
 msgstr ""
 
-#: ideax/ideax/views/__init__.py:534
+#: ideax/ideax/views/__init__.py:550
 msgid "Please check your message it has inappropriate content."
 msgstr ""
 
-#: ideax/ideax/views/__init__.py:537
+#: ideax/ideax/views/__init__.py:553
 msgid "You have to write a comment."
 msgstr ""
 
-#: ideax/ideax/views/__init__.py:556
+#: ideax/ideax/views/__init__.py:572
 msgid "Your comment has been posted."
 msgstr ""
 
-#: ideax/ideax/views/__init__.py:611 ideax/ideax/views/__init__.py:627
+#: ideax/ideax/views/__init__.py:627 ideax/ideax/views/__init__.py:643
 #, fuzzy
 #| msgid "Term of use accept!"
 msgid "Challenge saved successfully!"
 msgstr "Termo de uso aceito!"
 
-#: ideax/ideax/views/__init__.py:651
+#: ideax/ideax/views/__init__.py:667
 #, fuzzy
 #| msgid "Term of use accept!"
 msgid "Challenge removed successfully!"
 msgstr "Termo de uso aceito!"
 
-#: ideax/ideax/views/__init__.py:787
+#: ideax/ideax/views/__init__.py:803
 msgid "Bad image format."
 msgstr ""
 
-#: ideax/ideax/views/__init__.py:796
+#: ideax/ideax/views/__init__.py:812
 msgid "Maximum image file is %(size) MB."
 msgstr ""
 
-#: ideax/ideax/views/__init__.py:812 ideax/ideax/views/__init__.py:813
+#: ideax/ideax/views/__init__.py:828 ideax/ideax/views/__init__.py:829
 msgid "Invalid request!"
 msgstr ""
 
