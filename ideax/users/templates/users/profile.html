@@ -3,50 +3,55 @@
 {% load gravatar %}
 
 {% block content %}
-    <div class="idea-list-bg">
-        <h1 class="display-3 d-none d-md-block">{% trans 'User Profile' %}</h1>
-    </div>
-
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-5 col-md-4 col-sm-4">
-                <div class="profile-info">
-                    <div class="avatar" >
-                        {% gravatar user.email 128 %}
-                    </div>
-                    <span>
-                        {{ user.get_full_name|default:user.username }}
-                    </span>
-                    <span>
-                        {{ user.email }}
-                    </span>
+<div class="scrolltop">
+    <a class="scroll icon" title="{% trans 'Back to top' %}" class="btn-floating grey"><i class="fas fa-chevron-up"></i></a>
+</div>
+    <div class="profile-bg thetop">
+        <div class="profile-objects">
+            <div class="profile-info">
+                <div class="avatar" >
+                    {% gravatar user.email 128 %}
+                </div>
+                <div class="profile-name">
+                    {{ user.get_full_name|default:user.username }}
+                </div>
+                <div class="profile-email">
+                    {{ user.email }}
+                </div>
                     <span>
                         {% blocktrans trimmed count size=ideas|length %}
                         Author of one idea
                         {% plural %}
                         Author of {{ size }} ideas
                         {% endblocktrans %}
-                    </span>
-                </div>
+                </span>
             </div>
-            <div class="col-lg-3 col-md-4 col-sm-4">
-                <div class="liked-ideas">
-                    <i class="far fa-thumbs-up"></i>
-                    <span>
-                        {{ popular_vote }} liked ideas
-                    </span>
-                </div>
-            </div>
-            <div class="col-lg-4 col-md-4 col-sm-4">
-                    <div class="liked-ideas">
-                        <i class="far fa-comments"></i>
+
+            <div class="container">
+                <hr>
+                <div class="row">
+                    <div style="padding-left: 400px;" class="liked-ideas col-lg-6">
+                        {{ popular_vote }}
+                    </div>
+                    <div style="padding-right: 400px;" class="liked-ideas col-lg-6">
+                        {{ comments }}
+                    </div>
+                    <div style="color: #ffffff; text-align: center; padding-left: 400px;" class="col-lg-6">
                         <span>
-                            {{ comments }} comented ideas
+                            likes
+                        </span>
+                    </div>
+                    <div style="color: #ffffff; text-align: center; padding-right: 400px;" class="col-lg-6">
+                        <span>
+                            coments
                         </span>
                     </div>
                 </div>
+            </div>
         </div>
+    </div>
 
+    <div class="container">
         <div style="padding-top: 15px;">
             {%if not ideas %}
             {% include 'ideax/includes/empty.html' %}
@@ -84,7 +89,6 @@
                 <span class="sr-only">Next</span>
             </a>
         </div>
-        <hr>
         <div class="empty-filter"></div>
         <div class="row">
             <div class="col-lg-6 mb-3">
@@ -99,7 +103,7 @@
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                     <a class="dropdown-item" href="#" id="ideaSort" name='thumbsUp'>{% trans 'Highest positive votes' %}</a>
                     <a class="dropdown-item" href="#" id="ideaSort" name='thumbsDown'>{% trans 'Highest negative votes' %}</a>
-                    <a class="dropdown-item" href="#" id="ideaSort" name='comments'>{% trans 'Highest comments' %}</a>
+                    <a class="dropdown-item" href="#" id="ideaSort" name='comments'>{% trans 'Most discussed' %}</a>
                     <a class="dropdown-item" href="#" id="ideaSort" name='alphabetic'>{% trans 'Alphabetical' %}</a>
                     <a class="dropdown-item" href="#" id="ideaSort" name='creationDate'>{% trans 'Latest' %}</a>
                 </div>

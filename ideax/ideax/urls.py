@@ -20,6 +20,7 @@ urlpatterns = [
     path('idea/<int:pk>/dislike/', views.like_popular_vote, name='dislike_ideia'),
     path('idea/<int:pk>/changephase/<int:new_phase>/', views.change_idea_phase, name='change_phase'),
     path('idea/filter/<int:phase_pk>', views.idea_filter, name="idea_filter"),
+    path('challenge/filter/<int:status>', views.challenge_filter, name="challenge_filter"),
     path('category/new/', views.category_new, name='category_new'),
     path('category/list/', views.category_list, name='category_list'),
     path('category/<int:pk>/edit/', views.category_edit, name='category_edit'),
