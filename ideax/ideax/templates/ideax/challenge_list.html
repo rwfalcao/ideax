@@ -26,10 +26,10 @@
                 <h4 class="filter-title"><i class="fas fa-filter"></i> {% trans 'Filters' %}</h4>
                 <ul class="phase-list nav nav-pills flex-column">
                     <li class="nav-item" onclick="filterChallenges('{% url 'challenge_filter' status=0 %}')">
-                        <a class="nav-link" href="#">Active<span class="badge badge-pill badge-primary count-ideas">{{ actives.active }}</span></a>
+                        <a class="nav-link" href="#">{% trans 'Active' %}<span class="badge badge-pill badge-primary count-ideas">{{ actives.active }}</span></a>
                     </li>
                     <li class="nav-item" onclick="filterChallenges('{% url 'challenge_filter' status=1 %}')">
-                        <a class="nav-link" href="#">Inactive<span class="badge badge-pill badge-primary count-ideas">{{ actives.inactive }}</span></a>
+                        <a class="nav-link" href="#">{% trans 'Inactive' %}<span class="badge badge-pill badge-primary count-ideas">{{ actives.inactive }}</span></a>
                     </li>
                 </ul>
             </nav>
@@ -39,10 +39,10 @@
                     <nav class="phase-filter">
                     <ul class="phase-list nav nav-pills justify-content-center">
                         <li class="nav-item" onclick="filterChallenges('{% url 'challenge_filter' status=0 %}')">
-                            <a class="nav-link" href="#">Active<span class="badge badge-pill badge-primary count-ideas">{{ actives.active }}</span></a>
+                            <a class="nav-link" href="#">{% trans 'Active' %}<span class="badge badge-pill badge-primary count-ideas">{{ actives.active }}</span></a>
                         </li>
                         <li class="nav-item" onclick="filterChallenges('{% url 'challenge_filter' status=1 %}')">
-                            <a class="nav-link" href="#">Inactive<span class="badge badge-pill badge-primary count-ideas">{{ actives.inactive }}</span></a>
+                            <a class="nav-link" href="#">{% trans 'Inactive' %}<span class="badge badge-pill badge-primary count-ideas">{{ actives.inactive }}</span></a>
                         </li>
                     </ul>
                     </nav>
@@ -53,10 +53,10 @@
                 <nav class="phase-filter">
                     <ul class="phase-list nav nav-pills nav-justified">
                         <li class="nav-item" onclick="filterChallenges('{% url 'challenge_filter' status=0 %}')">
-                            <a class="nav-link" href="#">Active<span class="badge badge-pill badge-primary count-ideas">{{ actives.active }}</span></a>
+                            <a class="nav-link" href="#">{% trans 'Active' %}<span class="badge badge-pill badge-primary count-ideas">{{ actives.active }}</span></a>
                         </li>
                         <li class="nav-item" onclick="filterChallenges('{% url 'challenge_filter' status=1 %}')">
-                            <a class="nav-link" href="#">Inactive<span class="badge badge-pill badge-primary count-ideas">{{ actives.inactive }}</span></a>
+                            <a class="nav-link" href="#">{% trans 'Inactive' %}<span class="badge badge-pill badge-primary count-ideas">{{ actives.inactive }}</span></a>
                         </li>
                     </ul>
                 </nav>
@@ -70,7 +70,7 @@
                     {% for challenge in challenges %}
                         {% include 'ideax/includes/partial_challenge_list.html' %}
                     {% empty %}
-                        <p style="text-align:center">No Challenges found</p>
+                        <p style="text-align:center">{% trans 'No Challenges found' %}</p>
                     {%endfor%}
                 </div>
                 </div>

@@ -1,4 +1,5 @@
 #: ideax/administration/templates/administration/index.html:15
+#: ideax/users/templates/users/profile.html:7
 msgid "Back to top"
 msgstr ""
 
@@ -149,7 +150,9 @@ msgstr ""
 msgid "Requester"
 msgstr ""
 
-#: ideax/ideax/forms.py:109
+#: ideax/ideax/forms.py:109 ideax/ideax/templates/ideax/challenge_list.html:29
+#: ideax/ideax/templates/ideax/challenge_list.html:42
+#: ideax/ideax/templates/ideax/challenge_list.html:56
 #: ideax/ideax/templates/ideax/includes/partial_use_term_list.html:22
 #: ideax/ideax/templates/ideax/use_term_detail.html:19
 msgid "Active"
@@ -386,6 +389,18 @@ msgstr ""
 msgid "Filters"
 msgstr ""
 
+#: ideax/ideax/templates/ideax/challenge_list.html:32
+#: ideax/ideax/templates/ideax/challenge_list.html:45
+#: ideax/ideax/templates/ideax/challenge_list.html:59
+#: ideax/ideax/templates/ideax/includes/partial_use_term_list.html:22
+#: ideax/ideax/templates/ideax/use_term_detail.html:19
+msgid "Inactive"
+msgstr ""
+
+#: ideax/ideax/templates/ideax/challenge_list.html:73
+msgid "No Challenges found"
+msgstr ""
+
 #: ideax/ideax/templates/ideax/criterion_edit.html:7
 msgid "Update Criterion"
 msgstr ""
@@ -521,34 +536,34 @@ msgid "Clean"
 msgstr ""
 
 #: ideax/ideax/templates/ideax/idea_list.html:127
-#: ideax/users/templates/users/profile.html:97
+#: ideax/users/templates/users/profile.html:101
 msgid "Sorted by"
 msgstr ""
 
 #: ideax/ideax/templates/ideax/idea_list.html:127
 #: ideax/ideax/templates/ideax/idea_list.html:130
-#: ideax/users/templates/users/profile.html:97
-#: ideax/users/templates/users/profile.html:100
+#: ideax/users/templates/users/profile.html:101
+#: ideax/users/templates/users/profile.html:104
 msgid "Highest positive votes"
 msgstr ""
 
 #: ideax/ideax/templates/ideax/idea_list.html:131
-#: ideax/users/templates/users/profile.html:101
+#: ideax/users/templates/users/profile.html:105
 msgid "Highest negative votes"
 msgstr ""
 
 #: ideax/ideax/templates/ideax/idea_list.html:132
-#: ideax/users/templates/users/profile.html:102
+#: ideax/users/templates/users/profile.html:106
 msgid "Highest comments"
 msgstr ""
 
 #: ideax/ideax/templates/ideax/idea_list.html:133
-#: ideax/users/templates/users/profile.html:103
+#: ideax/users/templates/users/profile.html:107
 msgid "Alphabetical"
 msgstr ""
 
 #: ideax/ideax/templates/ideax/idea_list.html:134
-#: ideax/users/templates/users/profile.html:104
+#: ideax/users/templates/users/profile.html:108
 msgid "Latest"
 msgstr ""
 
@@ -639,11 +654,6 @@ msgstr ""
 
 #: ideax/ideax/templates/ideax/includes/partial_use_term_list.html:12
 msgid "Detail"
-msgstr ""
-
-#: ideax/ideax/templates/ideax/includes/partial_use_term_list.html:22
-#: ideax/ideax/templates/ideax/use_term_detail.html:19
-msgid "Inactive"
 msgstr ""
 
 #: ideax/ideax/templates/ideax/includes/partial_use_term_list.html:25
@@ -975,11 +985,7 @@ msgstr ""
 msgid "Required. Inform a valid e-mail address."
 msgstr ""
 
-#: ideax/users/templates/users/profile.html:7
-msgid "User Profile"
-msgstr ""
-
-#: ideax/users/templates/users/profile.html:24
+#: ideax/users/templates/users/profile.html:22
 #, python-format
 msgid "Author of one idea"
 msgid_plural "Author of %(size)s ideas"
