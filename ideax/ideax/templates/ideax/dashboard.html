@@ -13,11 +13,10 @@
             <div class="btn-group float-right">
                 <button class="btn btn-sm btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton"
                     data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <span>{% trans 'Sorted by' %}: </span><span class="option">{% trans 'Most ideas' %}</span>
+                    <span>{% trans 'Sorted by' %}: </span><span class="option">{% trans 'Collaborators' %}</span>
                 </button>
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                    <a class="dropdown-item" href="#" id="dashboardSort" name='mostIdeas'>{% trans 'Most ideas'%}</a>
-                    <a class="dropdown-item" href="#" id="dashboardSort" name='fewerIdeas'>{% trans 'Fewer ideias'%}</a>
+                    <a class="dropdown-item" href="#" id="dashboardSort" name='collaborators'>{% trans 'Collaborators'%}</a>
                     <a class="dropdown-item" href="#" id="dashboardSort" name='thumbsUp'>{% trans 'Highest positive votes'%}</a>
                     <a class="dropdown-item" href="#" id="dashboardSort" name='thumbsDown'>{% trans 'Highest negative votes'%}</a>
                 </div>
@@ -27,7 +26,7 @@
     <div id="innovator-container">
         <div class="row mt-4">
             {% for idea in ideas %}
-                <div class="profile-info col-3" data-like="{{idea.count_like}}" data-dislike="{{idea.count_dislike}}">
+                <div class="innovator-info col-3" data-like="{{idea.count_like}}" data-dislike="{{idea.count_dislike}}">
                     <div class="avatar">
                         {% gravatar idea.author__user__email 128 %}
                     </div>{{idea.author__user__username}} -
