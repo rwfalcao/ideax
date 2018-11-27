@@ -536,6 +536,17 @@ def idea_detail(request, pk):
 
 
 @login_required
+def dashboard(request):
+    data = dict()
+    data['ideas'] = Idea.objects.values("author__user__username", "author__user__email").annotate(
+        qtd=Count('author_id')).annotate(
+        count_dislike=Count(Case(When(popular_vote__like=False, then=1)))).annotate(
+        count_like=Count(Case(When(popular_vote__like=True, then=1))))
+
+    return render(request, 'ideax/dashboard.html', data)
+
+
+@login_required
 @permission_required('ideax.add_comment', raise_exception=True)
 def post_comment(request):
     if not request.user.is_authenticated:

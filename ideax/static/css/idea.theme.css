@@ -1412,3 +1412,12 @@ nav .avatar img {
         overflow: hidden;
     }
 }
+
+.innovator-info {
+    font-family: "Open Sans";
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+    text-align: center;
+}
