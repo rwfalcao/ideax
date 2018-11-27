@@ -8,7 +8,8 @@ from django.views.generic import CreateView
 from django.db.models import Count, Case, When
 
 from .forms import SignUpForm
-from ..ideax.models import Popular_Vote, Comment
+from ..ideax.models import Popular_Vote, Comment, Idea
+from .models import UserProfile
 
 
 @login_required
@@ -24,6 +25,23 @@ def profile(request):
             'ideas': request.user.userprofile.authors.all(),
             'popular_vote': votes[0]['contador'],
             'comments': len(comments),
+        }
+    )
+
+
+@login_required
+def who_innovates(request):
+    count_ideas = {}
+    for user in UserProfile.objects.all():
+        for idea in Idea.objects.all():
+            count_ideas[user] = len(Idea.objects.filter(author=user))
+
+    return render(
+        request,
+        'users/who_innovates.html',
+        {
+            'ideas': count_ideas,
+            'authors': UserProfile.objects.all(),
         }
     )
 

@@ -1,0 +1,27 @@
+{% extends 'ideax/base.html' %}
+{% load i18n staticfiles %}
+{% load gravatar %}
+{% block content %}
+    <div class="idea-list-bg">
+        <h1 class="display-3 d-none d-md-block">{% trans 'Who Innovates' %}</h1>
+    </div>
+<div class="row">
+    <div class="staff-items innovates">
+    {% for author in authors %}
+    <section id="#1" class="staff-item">
+        <div class="container">
+            <div class="avatar" >
+                {% gravatar author.user.email 128 %}
+            </div>
+        <h2>{{ author }}</h2>
+        <div class="description">
+            <ul class="staff-icon">
+            <li><a style="font-size: 25px;" href="#">{{ideas.author}}<i class="far fa-lightbulb"></i></a></li>
+            </ul>
+        </div>
+        </div>
+    </section>
+    {% endfor %}
+    </div>
+</div>
+{% endblock %}
