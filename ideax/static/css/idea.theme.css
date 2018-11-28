@@ -10,8 +10,7 @@ body {
     list-style: none;
 }
 
-.innovates div,h2,a,img,i,ul,li,section {
-    font: inherit;
+.innovates div,h2,a,img,i,ul,li {
     font-size: 100%;
     margin: 0;
     padding: 0;
@@ -19,10 +18,10 @@ body {
     border: 0;
 }
 
-.staff-items {
+.staff-item {
     font-family: 'Lato', 'Roboto', sans-serif;
     font-weight: 300;
-    display: flex;
+    display: block;
     width: 100%;
     max-width: 990px;
     margin: 20px auto;
@@ -33,8 +32,12 @@ body {
     justify-content: center;
   }
 
-  .staff-items section {
-    display: block;
+  .staff-card section {
+    display: flex;
+    font-size: 100%;
+    margin: 0;
+    padding: 0;
+    border: 0;
   }
 
   .staff-item a {
@@ -44,7 +47,6 @@ body {
 
   .staff-item {
     width: 20%;
-    padding: 35px 15px 25px;
     -webkit-transition: .4s;
     -moz-transition: .4s;
     -o-transition: .4s;
@@ -1411,13 +1413,4 @@ nav .avatar img {
         white-space: nowrap;
         overflow: hidden;
     }
-}
-
-.innovator-info {
-    font-family: "Open Sans";
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    width: 50%;
-    text-align: center;
 }

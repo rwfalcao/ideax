@@ -31,19 +31,13 @@ def profile(request):
 
 @login_required
 def who_innovates(request):
-    count_ideas = {}
-    for user in UserProfile.objects.all():
-        for idea in Idea.objects.all():
-            count_ideas[user] = len(Idea.objects.filter(author=user))
+    data = dict()
+    data['ideas'] = Idea.objects.values("author__user__username", "author__user__email").annotate(
+        qtd=Count('author_id')).annotate(
+        count_dislike=Count(Case(When(popular_vote__like=False, then=1)))).annotate(
+        count_like=Count(Case(When(popular_vote__like=True, then=1))))
 
-    return render(
-        request,
-        'users/who_innovates.html',
-        {
-            'ideas': count_ideas,
-            'authors': UserProfile.objects.all(),
-        }
-    )
+    return render(request, 'users/who_innovates.html', data)
 
 
 class SignUpView(CreateView):
