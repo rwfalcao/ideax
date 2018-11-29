@@ -13,26 +13,45 @@ from .models import UserProfile
 
 
 @login_required
-def profile(request):
-    votes = Popular_Vote.objects.filter(voter=request.user.id).values(
-        'voter_id').annotate(contador=Count(Case(When(like=True, then=1))))
-    comments = Comment.objects.filter(author_id=request.user.id).values('raw_comment')
-    return render(
-        request,
-        'users/profile.html',
-        {
-            'user': request.user,
-            'ideas': request.user.userprofile.authors.all(),
-            'popular_vote': votes[0]['contador'],
-            'comments': len(comments),
-        }
-    )
+def profile(request, pk):
+    if pk == 0:
+        votes = Popular_Vote.objects.filter(voter=request.user.id).values(
+            'voter_id').annotate(contador=Count(Case(When(like=True, then=1))))
+        comments = Comment.objects.filter(author_id=request.user.id).values('raw_comment')
+        return render(
+            request,
+            'users/profile.html',
+            {
+                'user': request.user,
+                'ideas': request.user.userprofile.authors.all(),
+                'popular_vote': votes[0]['contador'],
+                'comments': len(comments),
+            }
+        )
+    else:
+        votes = Popular_Vote.objects.filter(voter=pk).values(
+            'voter_id').annotate(contador=Count(Case(When(like=True, then=1))))
+        comments = Comment.objects.filter(author_id=pk).values('raw_comment')
+        if not votes:
+            getvotes = 0
+        else:
+            getvotes = votes[0]['contador']
+        return render(
+            request,
+            'users/profile.html',
+            {
+                'user': UserProfile.objects.filter(id=pk)[0].user,
+                'ideas': UserProfile.objects.filter(id=pk)[0].user.userprofile.authors.all(),
+                'popular_vote': getvotes,
+                'comments': len(comments),
+            }
+        )
 
 
 @login_required
 def who_innovates(request):
     data = dict()
-    data['ideas'] = Idea.objects.values("author__user__username", "author__user__email").annotate(
+    data['ideas'] = Idea.objects.values("author__user__username", "author__user__email", "author_id").annotate(
         qtd=Count('author_id')).annotate(
         count_dislike=Count(Case(When(popular_vote__like=False, then=1)))).annotate(
         count_like=Count(Case(When(popular_vote__like=True, then=1))))
