@@ -175,7 +175,7 @@ def save_idea(request, form, template_name, new=False):
                     'response': recaptcha_response
                 }
                 data = urllib.parse.urlencode(values).encode()
-                req =  urllib.request.Request(url, data=data)
+                req = urllib.request.Request(url, data=data)
                 response = urllib.request.urlopen(req)
                 result = json.loads(response.read().decode())
                 ''' End reCAPTCHA validation '''
