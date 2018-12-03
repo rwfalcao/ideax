@@ -4,6 +4,7 @@ import uuid
 import collections
 import mistune
 import csv
+import urllib
 
 
 from django.contrib.auth.decorators import login_required, permission_required
@@ -21,6 +22,7 @@ from django.db import connection
 from django.http import StreamingHttpResponse
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.core.files.base import ContentFile
+from ideax.settings.django._core import GOOGLE_RECAPTCHA_SECRET_KEY
 from martor.utils import LazyEncoder
 
 from ...users.models import UserProfile
@@ -165,15 +167,31 @@ def save_idea(request, form, template_name, new=False):
                 if category_image:
                     idea.category_image = category_image.image.url
 
-                idea.save()
-                idea.authors.add(idea.author)
-                phase_history = Phase_History(current_phase=Phase.GROW.id,
-                                              previous_phase=0,
-                                              date_change=timezone.now(),
-                                              idea=idea,
-                                              author=idea.author,
-                                              current=True)
-                phase_history.save()
+                ''' Begin reCAPTCHA validation '''
+                recaptcha_response = request.POST.get('g-recaptcha-response')
+                url = 'https://www.google.com/recaptcha/api/siteverify'
+                values = {
+                    'secret': GOOGLE_RECAPTCHA_SECRET_KEY,
+                    'response': recaptcha_response
+                }
+                data = urllib.parse.urlencode(values)
+                req = urllib.request.Request(url, data)
+                response = urllib.request.urlopen(req)
+                result = json.load(response)
+                ''' End reCAPTCHA validation '''
+
+                if result['success']:
+                    idea.save()
+                    idea.authors.add(idea.author)
+                    phase_history = Phase_History(current_phase=Phase.GROW.id,
+                                                previous_phase=0,
+                                                date_change=timezone.now(),
+                                                idea=idea,
+                                                author=idea.author,
+                                                current=True)
+                    phase_history.save()
+                else:
+                    messages.error(request, _('Invalid reCAPTCHA. Please try again.'))
             else:
                 idea.save()
 
