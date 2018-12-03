@@ -174,10 +174,10 @@ def save_idea(request, form, template_name, new=False):
                     'secret': GOOGLE_RECAPTCHA_SECRET_KEY,
                     'response': recaptcha_response
                 }
-                data = urllib.parse.urlencode(values)
-                req = urllib.request.Request(url, data)
+                data = urllib.parse.urlencode(values).encode()
+                req =  urllib.request.Request(url, data=data)
                 response = urllib.request.urlopen(req)
-                result = json.load(response)
+                result = json.loads(response.read().decode())
                 ''' End reCAPTCHA validation '''
 
                 if result['success']:
