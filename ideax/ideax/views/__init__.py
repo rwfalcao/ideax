@@ -184,11 +184,11 @@ def save_idea(request, form, template_name, new=False):
                     idea.save()
                     idea.authors.add(idea.author)
                     phase_history = Phase_History(current_phase=Phase.GROW.id,
-                                                previous_phase=0,
-                                                date_change=timezone.now(),
-                                                idea=idea,
-                                                author=idea.author,
-                                                current=True)
+                                                  previous_phase=0,
+                                                  date_change=timezone.now(),
+                                                  idea=idea,
+                                                  author=idea.author,
+                                                  current=True)
                     phase_history.save()
                 else:
                     messages.error(request, _('Invalid reCAPTCHA. Please try again.'))
