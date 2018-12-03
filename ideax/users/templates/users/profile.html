@@ -2,7 +2,6 @@
 {% load i18n staticfiles %}
 {% load gravatar %}
 
-{% block content %}
 {% block top %}
 <nav class="navbar navbar-expand fixed-top navbar-dark shadow-sm nav-bg">
         <a class="navbar-brand" href="/">
@@ -54,7 +53,7 @@
         </div>
       </nav>
 {% endblock %}
-
+{% block content %}
 <div class="scrolltop">
     <a class="scroll icon" title="{% trans 'Back to top' %}" class="btn-floating grey"><i class="fas fa-chevron-up"></i></a>
 </div>
