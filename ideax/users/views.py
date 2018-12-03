@@ -18,34 +18,29 @@ def profile(request, pk):
         votes = Popular_Vote.objects.filter(voter=request.user.id).values(
             'voter_id').annotate(contador=Count(Case(When(like=True, then=1))))
         comments = Comment.objects.filter(author_id=request.user.id).values('raw_comment')
-        return render(
-            request,
-            'users/profile.html',
-            {
-                'user': request.user,
-                'ideas': request.user.userprofile.authors.all(),
-                'popular_vote': votes[0]['contador'],
-                'comments': len(comments),
-            }
-        )
+        filter_user = request.user
+        query_ideas = request.user.userprofile.authors.all()
     else:
         votes = Popular_Vote.objects.filter(voter=pk).values(
             'voter_id').annotate(contador=Count(Case(When(like=True, then=1))))
         comments = Comment.objects.filter(author_id=pk).values('raw_comment')
-        if not votes:
-            getvotes = 0
-        else:
-            getvotes = votes[0]['contador']
-        return render(
-            request,
-            'users/profile.html',
-            {
-                'user': UserProfile.objects.filter(id=pk)[0].user,
-                'ideas': UserProfile.objects.filter(id=pk)[0].user.userprofile.authors.all(),
-                'popular_vote': getvotes,
-                'comments': len(comments),
-            }
-        )
+        filter_user = UserProfile.objects.filter(id=pk)[0].user
+        query_ideas = UserProfile.objects.filter(id=pk)[0].user.userprofile.authors.all()
+    if not votes:
+        getvotes = 0
+    else:
+        getvotes = votes[0]['contador']
+    return render(
+        request,
+        'users/profile.html',
+        {
+            'user': filter_user,
+            'ideas': query_ideas,
+            'popular_vote': getvotes,
+            'comments': len(comments),
+            'username': request.user,
+        }
+    )
 
 
 @login_required
