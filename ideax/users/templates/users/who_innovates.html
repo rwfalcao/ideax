@@ -20,12 +20,12 @@
                 </div>
             </div>
         </div>
-        <div class="staff-items">
+        <div style="padding-top: 20px;" class="staff-items">
             <div class="staff-card" >
                 <div id="innovator-container" class="innovates staff-items">
                     <section  id="innovator-container">
                         {% for idea in ideas %}
-                            <div style="width:200 !important; height: 260 !important;" class="staff-item" data-like="{{idea.count_like}}" data-dislike="{{idea.count_dislike}}">
+                            <div style="width:200 !important; height: 260 !important; padding-top: 10px;" class="staff-item" data-like="{{idea.count_like}}" data-dislike="{{idea.count_dislike}}">
                                 <div class="container">
                                     <a href="{% url 'users:profile' pk=idea.author_id %}" class="avatar" style="padding-top: 10px;">
                                         {% gravatar idea.author__user__email 128 %}
