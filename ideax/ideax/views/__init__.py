@@ -22,7 +22,7 @@ from django.db import connection
 from django.http import StreamingHttpResponse
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.core.files.base import ContentFile
-from ideax.settings.django._core import GOOGLE_RECAPTCHA_SECRET_KEY
+from ideax.settings.django._core import GOOGLE_RECAPTCHA_SECRET_KEY, GOOGLE_RECAPTCHA_URL
 from martor.utils import LazyEncoder
 
 from ...users.models import UserProfile
@@ -154,7 +154,7 @@ def save_idea(request, form, template_name, new=False):
 
             ''' Begin reCAPTCHA validation '''
             recaptcha_response = request.POST.get('g-recaptcha-response')
-            url = 'https://www.google.com/recaptcha/api/siteverify'
+            url = GOOGLE_RECAPTCHA_URL
             values = {
                 'secret': GOOGLE_RECAPTCHA_SECRET_KEY,
                 'response': recaptcha_response

@@ -20,7 +20,9 @@ DEBUG = config('DEBUG', default=False, cast=bool)
 
 ALLOWED_HOSTS = config('ALLOWED_HOSTS', cast=Csv())
 
-GOOGLE_RECAPTCHA_SECRET_KEY = '6Ldegn4UAAAAAGON_xJMLCBO92zxfNadS1Ce_zWS'
+GOOGLE_RECAPTCHA_SECRET_KEY = config('GOOGLE_RECAPTCHA_SECRET_KEY', default='')
+
+GOOGLE_RECAPTCHA_URL = config('GOOGLE_RECAPTCHA_URL', default='')
 
 # Application definition
 

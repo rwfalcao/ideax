@@ -20,7 +20,9 @@
         {% csrf_token %}
         {% include 'ideax/includes/partial_idea_form.html' %}
         <div class="button-group">
-          <div class="g-recaptcha" data-sitekey="6Ldegn4UAAAAAKHqzTlMkRfYNSwY93RWfrV5sCnr"></div>
+
+            {% include 'ideax/includes/recaptcha.html' %}
+
           <a class="back-redirect btn" href="/">{% trans 'Return' %}</a>
           <button type="submit" class="btn btn-primary">{% trans 'Save' %}</button>
         </div>
