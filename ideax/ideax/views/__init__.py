@@ -152,61 +152,54 @@ def save_idea(request, form, template_name, new=False):
         if form.is_valid():
             idea = form.save(commit=False)
 
-            ''' Begin reCAPTCHA validation '''
-            recaptcha_response = request.POST.get('g-recaptcha-response')
-            url = GOOGLE_RECAPTCHA_URL
-            values = {
-                'secret': GOOGLE_RECAPTCHA_SECRET_KEY,
-                'response': recaptcha_response
-            }
-            data = urllib.parse.urlencode(values).encode()
-            req = urllib.request.Request(url, data=data)
-            response = urllib.request.urlopen(req)
-            result = json.loads(response.read().decode())
-            ''' End reCAPTCHA validation '''
+            if GOOGLE_RECAPTCHA_URL:
+                ''' Begin reCAPTCHA validation '''
+                recaptcha_response = request.POST.get('g-recaptcha-response')
+                url = GOOGLE_RECAPTCHA_URL
+                values = {
+                    'secret': GOOGLE_RECAPTCHA_SECRET_KEY,
+                    'response': recaptcha_response
+                }
+                data = urllib.parse.urlencode(values).encode()
+                req = urllib.request.Request(url, data=data)
+                response = urllib.request.urlopen(req)
+                result = json.loads(response.read().decode())
+                ''' End reCAPTCHA validation '''
+                if not result['success']:
+                    messages.error(request, _('Invalid reCAPTCHA. Please try again.'))
+                    return render(request, template_name, {'form': form})
 
-            if result['success']:
-
-                if new:
-                    idea_autor = UserProfile.objects.get(user=request.user)
-                    idea.author = idea_autor
-                    idea.creation_date = timezone.now()
-                    idea.phase = Phase.GROW.id
-
-                    if(idea.challenge):
-                        idea.category = idea.challenge.category
-                        category_image = Category_Image.get_random_image(idea.challenge.category)
-                    else:
-                        category_image = Category_Image.get_random_image(idea.category)
-
-                    if category_image:
-                        idea.category_image = category_image.image.url
-
-                    idea.save()
-                    idea.authors.add(idea.author)
-                    phase_history = Phase_History(current_phase=Phase.GROW.id,
-                                                  previous_phase=0,
-                                                  date_change=timezone.now(),
-                                                  idea=idea,
-                                                  author=idea.author,
-                                                  current=True)
-                    phase_history.save()
+            if new:
+                idea_autor = UserProfile.objects.get(user=request.user)
+                idea.author = idea_autor
+                idea.creation_date = timezone.now()
+                idea.phase = Phase.GROW.id
+                if(idea.challenge):
+                    idea.category = idea.challenge.category
+                    category_image = Category_Image.get_random_image(idea.challenge.category)
                 else:
-                    idea.save()
-
-                idea.authors.clear()
-                idea.authors.add(UserProfile.objects.get(user__email=request.user.email))
-                if form.cleaned_data['authors']:
-                    for author in form.cleaned_data['authors']:
-                        idea.authors.add(author)
-
-                messages.success(request, _('Idea saved successfully!'))
-
-                audit(request.user.username, get_client_ip(request), 'SAVE_IDEA_OPERATION',
-                      Idea.__name__, str(idea.id))
+                    category_image = Category_Image.get_random_image(idea.category)
+                if category_image:
+                    idea.category_image = category_image.image.url
+                idea.save()
+                idea.authors.add(idea.author)
+                phase_history = Phase_History(current_phase=Phase.GROW.id,
+                                              previous_phase=0,
+                                              date_change=timezone.now(),
+                                              idea=idea,
+                                              author=idea.author,
+                                              current=True)
+                phase_history.save()
             else:
-                messages.error(request, _('Invalid reCAPTCHA. Please try again.'))
-                return render(request, template_name, {'form': form})
+                idea.save()
+            idea.authors.clear()
+            idea.authors.add(UserProfile.objects.get(user__email=request.user.email))
+            if form.cleaned_data['authors']:
+                for author in form.cleaned_data['authors']:
+                    idea.authors.add(author)
+            messages.success(request, _('Idea saved successfully!'))
+            audit(request.user.username, get_client_ip(request), 'SAVE_IDEA_OPERATION',
+                  Idea.__name__, str(idea.id))
 
             return redirect('idea_list')
 
