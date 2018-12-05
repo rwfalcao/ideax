@@ -202,7 +202,8 @@ def save_idea(request, form, template_name, new=False):
 
                 messages.success(request, _('Idea saved successfully!'))
 
-                audit(request.user.username, get_client_ip(request), 'SAVE_IDEA_OPERATION', Idea.__name__, str(idea.id))
+                audit(request.user.username, get_client_ip(request), 'SAVE_IDEA_OPERATION',
+                      Idea.__name__, str(idea.id))
             else:
                 messages.error(request, _('Invalid reCAPTCHA. Please try again.'))
                 return render(request, template_name, {'form': form})
