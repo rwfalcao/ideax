@@ -1,9 +1,11 @@
 import os
 
+from PIL import Image
 from django import forms
 from django.utils.translation import ugettext_lazy as _
 from django.contrib.admin.widgets import FilteredSelectMultiple
 from django.conf import settings
+from django.core.files import File
 from tinymce import TinyMCE
 from martor.fields import MartorFormField
 
@@ -86,12 +88,19 @@ class ChallengeForm(forms.ModelForm):
         label=_('Description'),
         max_length=Challenge._meta.get_field('description').max_length
     )
-
+    x = forms.FloatField(widget=forms.HiddenInput())
+    y = forms.FloatField(widget=forms.HiddenInput())
+    width = forms.FloatField(widget=forms.HiddenInput())
+    height = forms.FloatField(widget=forms.HiddenInput())
     class Meta:
         model = Challenge
         fields = (
             'title',
             'image',
+            'x',
+            'y',
+            'width',
+            'height',
             'summary',
             'requester',
             'description',
@@ -104,6 +113,10 @@ class ChallengeForm(forms.ModelForm):
         labels = {
             'title': _('Title'),
             'image': _('Image'),
+            'x': _('x'),
+            'y': _('y'),
+            'width': _('Width'),
+            'height': _('Height'),
             'summary': _('Summary'),
             'requester': _('Requester'),
             'active': _('Active'),
@@ -116,6 +129,19 @@ class ChallengeForm(forms.ModelForm):
             'init_date': forms.DateInput(attrs={'placeholder': 'dd/mm/aaaa'}),
         }
 
+    def save(self):
+        image = super(ChallengeForm, self).save()
+        x = self.cleaned_data.get('x')
+        y = self.cleaned_data.get('y')
+        width = self.cleaned_data.get('width')
+        height = self.cleaned_data.get('height')
+
+        picture = Image.open(image.File)
+        cropped = picture.crop((x,y,width+x,height+y))
+        resized = cropped.resize((1200,600), Image.ANTIALIAS)
+        resized.save(image.file.path)
+
+        return image
 
 class UseTermForm(forms.ModelForm):
 
