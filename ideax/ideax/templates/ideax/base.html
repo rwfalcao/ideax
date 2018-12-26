@@ -140,6 +140,9 @@
       <script src="{% static '/js/dashboard.js' %}"></script>
       <script src="{% static '/js/timeline.js' %}"></script>
       <script src="{% static '/js/cropper.min.js' %}"></script>
+      {% block javascript %}
+      {% endblock %}
+
       {% block footer %}
         <!--script bootstrap-->
         <script src="{% static '/js/bootstrap.min.js' %}"></script>
