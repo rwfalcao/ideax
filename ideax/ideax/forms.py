@@ -5,7 +5,6 @@ from django import forms
 from django.utils.translation import ugettext_lazy as _
 from django.contrib.admin.widgets import FilteredSelectMultiple
 from django.conf import settings
-from django.core.files import File
 from tinymce import TinyMCE
 from martor.fields import MartorFormField
 
@@ -92,6 +91,7 @@ class ChallengeForm(forms.ModelForm):
     y = forms.FloatField(widget=forms.HiddenInput())
     width = forms.FloatField(widget=forms.HiddenInput())
     height = forms.FloatField(widget=forms.HiddenInput())
+
     class Meta:
         model = Challenge
         fields = (
@@ -137,11 +137,12 @@ class ChallengeForm(forms.ModelForm):
         height = self.cleaned_data.get('height')
 
         picture = Image.open(image.File)
-        cropped = picture.crop((x,y,width+x,height+y))
-        resized = cropped.resize((1200,600), Image.ANTIALIAS)
+        cropped = picture.crop((x, y, width+x, height+y))
+        resized = cropped.resize((1200, 600), Image.ANTIALIAS)
         resized.save(image.file.path)
 
         return image
+
 
 class UseTermForm(forms.ModelForm):
 
