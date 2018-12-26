@@ -638,12 +638,8 @@ def challenge_new(request):
             challenge.author = UserProfile.objects.get(user=request.user)
             challenge.creation_date = timezone.now()
             challenge.save()
-            data = {'is_valid': True}
             messages.success(request, _('Challenge saved successfully!'))
             return redirect('challenge_list')
-        else:
-            data = {'is_valid': False}
-        return JsonResponse(data)
     return render(request, 'ideax/challenge_new.html', {'form': form})
 
 
