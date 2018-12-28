@@ -130,18 +130,19 @@ class ChallengeForm(forms.ModelForm):
         }
 
     def save(self):
-        image = super(ChallengeForm, self).save()
+        photo = super(ChallengeForm, self).save()
+
         x = self.cleaned_data.get('x')
         y = self.cleaned_data.get('y')
-        width = self.cleaned_data.get('width')
-        height = self.cleaned_data.get('height')
+        w = self.cleaned_data.get('width')
+        h = self.cleaned_data.get('height')
 
-        picture = Image.open(image.File)
-        cropped = picture.crop((x, y, width+x, height+y))
-        resized = cropped.resize((1200, 600), Image.ANTIALIAS)
-        resized.save(image.file.path)
+        image = Image.open(photo.file)
+        cropped_image = image.crop((x, y, w+x, h+y))
+        resized_image = cropped_image.resize((200, 200), Image.ANTIALIAS)
+        resized_image.save(photo.file.path)
 
-        return image
+        return photo
 
 
 class UseTermForm(forms.ModelForm):

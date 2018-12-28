@@ -572,14 +572,13 @@ function ideaView(ideaView){
 }
 
 /* SCRIPT TO OPEN THE MODAL WITH THE PREVIEW */
-$(function () {
+$(document).ready(function (){
     $("#id_image").change(function () {
         if (this.files && this.files[0]) {
         var reader = new FileReader();
         reader.onload = function (e) {
         $("#image").attr("src", e.target.result);
         $("#modalCrop").modal("show");
-        $("#modalCrop").css("opacity", "1");
         }
         reader.readAsDataURL(this.files[0]);
         }
@@ -591,7 +590,7 @@ $(function () {
         var canvasData;
     $("#modalCrop").on("shown.bs.modal", function () {
         $image.cropper({
-        viewMode: 3,
+        viewMode: 1,
         movable: false,
         zoomable: false,
         rotatable: false,

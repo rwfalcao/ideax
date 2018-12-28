@@ -628,7 +628,7 @@ def challenge_detail(request, challenge_pk):
 @permission_required('ideax.add_challenge', raise_exception=True)
 def challenge_new(request):
     form = ChallengeForm()
-
+    images = Challenge.objects.values_list('image', flat=True)
     if request.method == "POST":
         form = ChallengeForm(request.POST, request.FILES)
 
@@ -640,7 +640,7 @@ def challenge_new(request):
             challenge.save()
             messages.success(request, _('Challenge saved successfully!'))
             return redirect('challenge_list')
-    return render(request, 'ideax/challenge_new.html', {'form': form})
+    return render(request, 'ideax/challenge_new.html', {'form': form, 'images': images})
 
 
 @login_required

@@ -1,7 +1,9 @@
 {% extends 'ideax/base.html' %}
 {% load widget_tweaks i18n %}
 {% load staticfiles %}
-
+{% block jquery %}
+    <script src="{% static '/js/jquery-3.1.1.min.js' %}"></script>
+{% endblock %}
 {%block contextbutton%}
 {% endblock %}
 {% block content %}
@@ -9,7 +11,7 @@
       <h1 class="display-3">{% trans 'New Challenge' %}</h1>
   </div>
   <div class="container">
-      <form method="post" class="form post-form" action="{% url 'challenge_new' %}" enctype="multipart/form-data" id="formUpload">
+      <form method="post" class="form post-form" action="{% url 'challenge_new' %}" enctype="multipart/form-data" id="formUpload" >
         {% csrf_token %}
         {% include 'ideax/includes/partial_challenge_form.html' %}
         <div class="button-group">
@@ -17,8 +19,8 @@
           <button type="submit" class="btn btn-primary">{% trans 'Save' %}</button>
         </div>
       </form>
-        <div class="modal fade" id="modalCrop">
-            <div class="modal-dialog modal-dialog-centered">
+    <div class="modal fade" id="modalCrop">
+            <div class="modal-dialog">
               <div class="modal-content">
                 <div class="modal-header">
                   <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -35,6 +37,13 @@
                 </div>
               </div>
             </div>
+        </div>
+        <div class="row" style="margin-top: 20px">
+            {% for image in images %}
+                <div class="col-sm-4 col-md-3">
+                    <img src="{{ image.file.url }}" class="thumbnail">
+                </div>
+            {% endfor %}
         </div>
   </div>
 
