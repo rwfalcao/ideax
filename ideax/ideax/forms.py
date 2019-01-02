@@ -148,7 +148,6 @@ class ChallengeForm(forms.ModelForm):
 
         image = Image.open(challenge.image)
         cropped_image = image.crop((x, y, w+x, h+y))
-        resized_image = cropped_image.resize((200, 200), Image.ANTIALIAS)
 
         img_path = challenge.image.path.split('/')
         img_name = img_path.pop()
@@ -158,7 +157,7 @@ class ChallengeForm(forms.ModelForm):
 
         cropped_image.save(img_path, format='JPEG', subsampling=0, quality=100)
 
-        challenge.image =  '/challenges/'+img_name
+        challenge.image = '/challenges/'+img_name
 
         return challenge
 
