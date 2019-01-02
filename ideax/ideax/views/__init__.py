@@ -634,7 +634,7 @@ def challenge_new(request):
 
         if form.is_valid():
             # path  = file_upload(request)
-            challenge = form.save(commit=False)
+            challenge = form.save()
             challenge.author = UserProfile.objects.get(user=request.user)
             challenge.creation_date = timezone.now()
             challenge.save()

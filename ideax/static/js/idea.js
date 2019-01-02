@@ -591,13 +591,13 @@ $(document).ready(function (){
     $("#modalCrop").on("shown.bs.modal", function () {
         $image.cropper({
         viewMode: 1,
-        movable: false,
-        zoomable: false,
+        movable: true,
+        zoomable: true,
         rotatable: false,
         scalable: false,
-        aspectRatio: 1/1,
-        minCropBoxWidth: 368,
-        minCropBoxHeight: 80,
+        aspectRatio: 4.5/1,
+        minCropBoxWidth: 50,
+        minCropBoxHeight: 20,
         ready: function () {
         $image.cropper("setCanvasData", canvasData);
         $image.cropper("setCropBoxData", cropBoxData);
@@ -609,13 +609,25 @@ $(document).ready(function (){
         $image.cropper("destroy");
         });
 
-        $(".js-crop-and-upload").click(function () {
+        $(".js-zoom-in").click(function (e) {
+          e.preventDefault()
+          $image.cropper("zoom", 0.1);
+        });
+
+        $(".js-zoom-out").click(function (e) {
+          e.preventDefault()
+          $image.cropper("zoom", -0.1);
+        });
+
+        $(".js-crop-and-upload").click(function (e) {
+            e.preventDefault()
             var cropData = $image.cropper("getData");
             $("#id_x").val(cropData["x"]);
             $("#id_y").val(cropData["y"]);
             $("#id_height").val(cropData["height"]);
             $("#id_width").val(cropData["width"]);
-            $("#formUpload").submit();
+            $("#modalCrop").modal('hide');
+            //$("#formUpload").submit();
         });
 });
 

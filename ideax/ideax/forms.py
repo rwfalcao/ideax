@@ -83,14 +83,15 @@ class CategoryImageForm(forms.ModelForm):
 
 
 class ChallengeForm(forms.ModelForm):
-    description = MartorFormField(
-        label=_('Description'),
-        max_length=Challenge._meta.get_field('description').max_length
-    )
     x = forms.FloatField(widget=forms.HiddenInput())
     y = forms.FloatField(widget=forms.HiddenInput())
     width = forms.FloatField(widget=forms.HiddenInput())
     height = forms.FloatField(widget=forms.HiddenInput())
+
+    description = MartorFormField(
+        label=_('Description'),
+        max_length=Challenge._meta.get_field('description').max_length
+    )
 
     class Meta:
         model = Challenge
@@ -113,10 +114,6 @@ class ChallengeForm(forms.ModelForm):
         labels = {
             'title': _('Title'),
             'image': _('Image'),
-            'x': _('x'),
-            'y': _('y'),
-            'width': _('Width'),
-            'height': _('Height'),
             'summary': _('Summary'),
             'requester': _('Requester'),
             'active': _('Active'),
@@ -130,19 +127,40 @@ class ChallengeForm(forms.ModelForm):
         }
 
     def save(self):
-        photo = super(ChallengeForm, self).save()
+        data = self.cleaned_data
+
+        challenge = Challenge(title=data['title'],
+                              image=data['image'],
+                              summary=data['summary'],
+                              requester=data['requester'],
+                              description=data['description'],
+                              limit_date=data['limit_date'],
+                              init_date=data['init_date'],
+                              active=data['active'],
+                              featured=data['featured'],
+                              category=data['category'],
+                              discarted=False)
 
         x = self.cleaned_data.get('x')
         y = self.cleaned_data.get('y')
         w = self.cleaned_data.get('width')
         h = self.cleaned_data.get('height')
 
-        image = Image.open(photo.file)
+        image = Image.open(challenge.image)
         cropped_image = image.crop((x, y, w+x, h+y))
         resized_image = cropped_image.resize((200, 200), Image.ANTIALIAS)
-        resized_image.save(photo.file.path)
 
-        return photo
+        img_path = challenge.image.path.split('/')
+        img_name = img_path.pop()
+        img_path.append('challenges')
+        img_path.append(img_name)
+        img_path = "/".join(img_path)
+
+        cropped_image.save(img_path, format='JPEG', subsampling=0, quality=100)
+
+        challenge.image =  '/challenges/'+img_name
+
+        return challenge
 
 
 class UseTermForm(forms.ModelForm):

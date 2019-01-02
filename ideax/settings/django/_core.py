@@ -8,7 +8,7 @@ from dj_database_url import parse as dburl
 BASE_DIR = Path(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))).parent.parent
 
 MEDIA_URL = '/media/'
-MEDIA_ROOT = BASE_DIR / 'media'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.0/howto/deployment/checklist/
 
