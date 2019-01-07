@@ -9,21 +9,18 @@ from ...views import (challenge_new, challenge_detail, challenge_edit, challenge
 
 
 class TestChallengeNew:
-    @mark.skip
     def test_anonymous(self, rf):
         request = rf.get('/')
         request.user = AnonymousUser()
         response = challenge_new(request)
         assert (response.status_code, response.url) == (302, '/accounts/login/?next=/')
 
-    @mark.skip
     def test_permission_denied(self, rf, common_user):
         request = rf.get('/')
         request.user = common_user
         with raises(PermissionDenied):
             challenge_new(request)
 
-    @mark.skip
     def test_get(self, rf, mocker):
         render = mocker.patch('ideax.ideax.views.render')
         form = mocker.patch('ideax.ideax.views.ChallengeForm')
@@ -35,7 +32,6 @@ class TestChallengeNew:
         form.assert_called_once()
         render.assert_called_once_with(request, 'ideax/challenge_new.html', {'form': form.return_value})
 
-    @mark.skip
     def test_post(self, rf, mocker, messages):
         form = mocker.patch('ideax.ideax.views.ChallengeForm')
         form.return_value.is_valid.return_value = True
@@ -53,14 +49,12 @@ class TestChallengeNew:
 
 
 class TestChallengeDetail:
-    @mark.skip
     def test_anonymous(self, rf):
         request = rf.get('/')
         request.user = AnonymousUser()
         response = challenge_detail(request, 999)
         assert (response.status_code, response.url) == (302, '/accounts/login/?next=/')
 
-    @mark.skip
     def test_get(self, rf, mocker):
         get = mocker.patch('ideax.ideax.views.get_object_or_404')
         render = mocker.patch('ideax.ideax.views.render')
@@ -78,28 +72,24 @@ class TestChallengeDetail:
 
 
 class TestChallengeEdit:
-    @mark.skip
     def test_anonymous(self, rf):
         request = rf.get(f'/challenge/99999/edit/')
         request.user = AnonymousUser()
         response = challenge_edit(request, 99999)
         assert (response.status_code, response.url) == (302, '/accounts/login/?next=/challenge/99999/edit/')
 
-    @mark.skip
     def test_not_found(self, rf, admin_user):
         request = rf.get(f'/challenge/99999/edit/')
         request.user = admin_user
         with raises(Http404):
             challenge_edit(request, 99999)
 
-    @mark.skip
     def test_get_common_user(self, rf, common_user):
         request = rf.get('/challenge/1/edit/')
         request.user = common_user
         with raises(PermissionDenied):
             challenge_edit(request, 1)
 
-    @mark.skip
     def test_get(self, rf, mocker):
         get = mocker.patch('ideax.ideax.views.get_object_or_404')
         render = mocker.patch('ideax.ideax.views.render')
@@ -112,7 +102,6 @@ class TestChallengeEdit:
         get.assert_called_once_with(Challenge, pk=55)
         render.assert_called_once_with(request, 'ideax/challenge_edit.html', {'form': form.return_value})
 
-    @mark.skip
     def test_post(self, rf, mocker, messages):
         get = mocker.patch('ideax.ideax.views.get_object_or_404')
         challenge_form = mocker.patch('ideax.ideax.views.ChallengeForm')
@@ -131,14 +120,12 @@ class TestChallengeEdit:
 
 
 class TestChallengeRemove:
-    @mark.skip
     def test_anonymous(self, rf):
         request = rf.get('/')
         request.user = AnonymousUser()
         response = challenge_remove(request, 999)
         assert (response.status_code, response.url) == (302, '/accounts/login/?next=/')
 
-    @mark.skip
     def test_common_user(self, rf, common_user):
         request = rf.get('/')
         request.user = common_user
