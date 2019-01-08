@@ -13,19 +13,26 @@ from .models import UserProfile
 
 
 @login_required
-def profile(request, pk):
-    if pk == 0:
+def profile(request, username):
+
+    if request.user.username == username:
         votes = Popular_Vote.objects.filter(voter=request.user.id).values(
             'voter_id').annotate(contador=Count(Case(When(like=True, then=1))))
         comments = Comment.objects.filter(author_id=request.user.id).values('raw_comment')
         filter_user = request.user
-        query_ideas = request.user.userprofile.authors.all()
+        query_ideas = request.user.userprofile.authors.filter(discarded=False)
     else:
+        users = UserProfile.objects.all()
+        for profile in users:
+            if profile.user.username == username:
+                user = profile.user
+                break
+        pk = user.id
         votes = Popular_Vote.objects.filter(voter=pk).values(
             'voter_id').annotate(contador=Count(Case(When(like=True, then=1))))
         comments = Comment.objects.filter(author_id=pk).values('raw_comment')
         filter_user = UserProfile.objects.filter(id=pk)[0].user
-        query_ideas = UserProfile.objects.filter(id=pk)[0].user.userprofile.authors.all()
+        query_ideas = UserProfile.objects.filter(id=pk)[0].user.userprofile.authors.filter(discarded=False)
     if not votes:
         getvotes = 0
     else:
@@ -38,7 +45,8 @@ def profile(request, pk):
             'ideas': query_ideas,
             'popular_vote': getvotes,
             'comments': len(comments),
-            'username': request.user,
+            'username': request.user.username,
+            'logged': request.user,
         }
     )
 

@@ -55,6 +55,7 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarText">
           {% if user.is_authenticated %}
+          {%block nav%}
           <ul class="navbar-nav mx-auto"></ul>
           <ul class="navbar-nav">
             <span class="navbar-text avatar">
@@ -63,13 +64,13 @@
             <span class="navbar-text">
               {% blocktrans with name=user.username %}Hi, {{name}}!{% endblocktrans %}
             </span>
-            {% block nav %}
+           {% endblock %}
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <i class="fas fa-bars fa-lg"></i>
               </a>
               <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
-                <a class="dropdown-item"  href="{% url 'users:profile' pk=0 %}">{% trans 'Profile' %}</a>
+                <a class="dropdown-item"  href="{% url 'users:profile' username=user.username %}">{% trans 'Profile' %}</a>
                 <a class="dropdown-item"  href="{% url 'users:whoinnovates' %}">{% trans 'Who Innovates' %}</a>
                 <hr>
                 <a class="dropdown-item"  href="/">{% trans 'Explore Ideas' %}</a>
@@ -82,7 +83,6 @@
                 <a class="dropdown-item" href="{% url 'users:logout' %}">{% trans 'Logout' %}</i></a>
               </div>
             </li>
-            {% endblock %}
           </ul>
 
           {% else %}

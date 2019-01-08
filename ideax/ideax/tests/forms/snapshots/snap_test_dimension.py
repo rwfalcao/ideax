@@ -18,24 +18,24 @@ snapshots['TestDimensionForm.test_max_ptbr 1'] = {
 
 snapshots['TestDimensionForm.test_invalid 1'] = {
     'description': [
-        'This field is required.'
+        'Este campo é obrigatório.'
     ],
     'init_date': [
-        'This field is required.'
+        'Este campo é obrigatório.'
     ],
     'title': [
-        'This field is required.'
+        'Este campo é obrigatório.'
     ],
     'weight': [
-        'This field is required.'
+        'Este campo é obrigatório.'
     ]
 }
 
 snapshots['TestDimensionForm.test_max 1'] = {
     'description': [
-        'Ensure this value has at most 500 characters (it has 501).'
+        'Certifique-se de que o valor tenha no máximo 500 caracteres (ele possui 501).'
     ],
     'title': [
-        'Ensure this value has at most 200 characters (it has 201).'
+        'Certifique-se de que o valor tenha no máximo 200 caracteres (ele possui 201).'
     ]
 }
