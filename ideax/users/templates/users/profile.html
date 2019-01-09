@@ -1,16 +1,6 @@
 {% extends 'ideax/base.html' %}
 {% load i18n staticfiles %}
 {% load gravatar %}
-{%block nav%}
-<ul class="navbar-nav mx-auto"></ul>
-<ul class="navbar-nav">
-  <span class="navbar-text avatar">
-      {% gravatar logged.email 20 %}
-  </span>
-  <span class="navbar-text">
-    {% blocktrans with name=logged.username %}Hi, {{name}}!{% endblocktrans %}
-  </span>
- {% endblock %}
 {% block content %}
 <div class="scrolltop">
     <a class="scroll icon" title="{% trans 'Back to top' %}" class="btn-floating grey"><i class="fas fa-chevron-up"></i></a>
@@ -19,13 +9,13 @@
         <div class="profile-objects">
             <div class="profile-info">
                 <div class="avatar" >
-                    {% gravatar user.email 128 %}
+                    {% gravatar userP.email 128 %}
                 </div>
                 <div class="profile-name">
-                    {{ user.get_full_name|default:user.username }}
+                    {{ user.get_full_name|default:userP.username }}
                 </div>
                 <div class="profile-email">
-                    {{ user.email }}
+                    {{ userP.email }}
                 </div>
                     <span>
                         {% blocktrans trimmed count size=ideas|length %}

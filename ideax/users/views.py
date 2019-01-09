@@ -17,17 +17,13 @@ def profile(request, username):
 
     if request.user.username == username:
         votes = Popular_Vote.objects.filter(voter=request.user.id).values(
-            'voter_id').annotate(contador=Count(Case(When(like=True, then=1))))
+            'id').annotate(contador=Count(Case(When(like=True, then=1))))
         comments = Comment.objects.filter(author_id=request.user.id).values('raw_comment')
         filter_user = request.user
         query_ideas = request.user.userprofile.authors.filter(discarded=False)
     else:
-        users = UserProfile.objects.all()
-        for profile in users:
-            if profile.user.username == username:
-                user = profile.user
-                break
-        pk = user.id
+        user = UserProfile.objects.filter(user__username=username)
+        pk = user[0].id
         votes = Popular_Vote.objects.filter(voter=pk).values(
             'voter_id').annotate(contador=Count(Case(When(like=True, then=1))))
         comments = Comment.objects.filter(author_id=pk).values('raw_comment')
@@ -41,12 +37,11 @@ def profile(request, username):
         request,
         'users/profile.html',
         {
-            'user': filter_user,
+            'userP': filter_user,
             'ideas': query_ideas,
             'popular_vote': getvotes,
             'comments': len(comments),
             'username': request.user.username,
-            'logged': request.user,
         }
     )
 
