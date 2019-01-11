@@ -1,6 +1,5 @@
 from django.contrib.auth import views as auth_views
 from django.urls import path
-from django.conf.urls import include, url
 
 from .views import profile, SignUpView, who_innovates
 
@@ -10,5 +9,4 @@ urlpatterns = [
     path('accounts/sign-up/', SignUpView.as_view(), name='sign-up'),
     path('users/profile/<username>/', profile, name='profile'),
     path('users/whoinnovates/', who_innovates, name='whoinnovates'),
-    url(r"^notifications/", include("pinax.notifications.urls", namespace="pinax_notifications")),
 ]
