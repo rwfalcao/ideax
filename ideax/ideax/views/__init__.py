@@ -24,6 +24,7 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.core.files.base import ContentFile
 from ideax.settings.django._core import GOOGLE_RECAPTCHA_SECRET_KEY, GOOGLE_RECAPTCHA_URL
 from martor.utils import LazyEncoder
+from notifications.signals import notify
 
 from ...users.models import UserProfile
 from ..models import (
@@ -416,6 +417,7 @@ def like_popular_vote(request, pk):
     if vote.count() == 0:
         like = Popular_Vote(like=like_boolean, voter=user, voting_date=timezone.now(), idea=idea_)
         like.save()
+        notify.send(request.user, recipient=idea_.author.user, verb='someone liked your idea!')
         audit(request.user.username, get_client_ip(request), 'LIKE_SAVE', Popular_Vote.__name__, str(like.id))
     else:
         if vote[0].like == like_boolean:
