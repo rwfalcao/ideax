@@ -1,10 +1,12 @@
 from django.urls import path, re_path
-from django.conf.urls import url
+from django.conf.urls import include, url
+import notifications.urls
 
 from . import views
 from .feeds import CommentFeed, NewIdeaFeed
 
 urlpatterns = [
+    url('^inbox/notifications/', include(notifications.urls, namespace='notifications')),
     path('', views.index, name='index'),
     path('idea/list', views.idea_list, name='idea_list'),
     path('idea/<int:pk>/', views.idea_detail, name='idea_detail'),
