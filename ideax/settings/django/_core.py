@@ -54,7 +54,6 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'ideax.urls'
-
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
@@ -67,6 +66,7 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 'ideax.context_processors.export_vars',
+                'ideax.context_processors.notifications_processor',
             ],
         },
     },

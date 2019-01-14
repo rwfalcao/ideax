@@ -11,3 +11,8 @@ def export_vars(request):
         "PERMISSIONS": settings.PERMISSIONS,
         "IDEAX_VERSION": config("IDEAX_VERSION", default=""),
     }
+
+
+def notifications_processor(request):
+    notifications = request.user.notifications.unread()
+    return {'notifications': notifications}
