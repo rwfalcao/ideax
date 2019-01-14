@@ -12,19 +12,17 @@
         <div class="profile-objects">
             <div class="profile-info">
                 <div class="avatar" >
-                    {% gravatar userP.email 128 %}
+                    {% gravatar userP.email 120 %}
                 </div>
                 <div class="profile-name">
                     {{ user.get_full_name|default:userP.username }}
-                    <button type="button" class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="true" aria-label="Toggle navigation">
-                            <i class="fas fa-bell" style="color:white;">  </i> <span  class="badge badge-light" >{{ notifications|length }}</span>
-                    </button>
-                    <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            </a>
-                            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
+                    <li style="list-style:none;" class="dropdown">
+                            <button style="background-color: Transparent;border: Transparent;" class="btn btn-secondary dropdown-toggle" type="button" id="notificationsDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fas fa-bell" style="color:white;"> </i> <span class="badge badge-light" >{{ notifications|length }}</span>
+                            </button>
+                            <div class="dropdown-menu dropdown-menu-left" aria-labelledby="notificationsDropdown">
                                 {% for notification in notifications %}
-                                    <ul class="dropdown-item">{{notification}}</ul>
+                                <ul class="dropdown-item">{{notification}}</ul>
                                 {% endfor%}
                             </div>
                     </li>

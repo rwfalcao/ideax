@@ -243,7 +243,7 @@ body {
       background-image: url('../images/bg_ideia_azul_62.png');
       background-repeat: no-repeat;
       background-position-y: 50% !important;
-      height: 416px;
+      height: 435px;
       margin-top: -3px;
       margin-left: -15px;
       margin-right: -15px;
@@ -253,7 +253,7 @@ body {
   }
 
   .profile-objects {
-      height: 360px;
+      height: 380px;
       padding-top: 20px;
       align-items: center;
       box-shadow: 0 1px 4px rgba(0,0,0,0.06);

@@ -584,6 +584,7 @@ def post_comment(request):
                       ip=get_ip(request))
 
     comment.save()
+    notify.send(request.user, recipient=idea.author.user, verb='someone commented on your idea!')
     audit(request.user.username, get_client_ip(request), 'COMMENT_SAVE', Comment.__name__, str(comment.id))
     return JsonResponse({"msg": _("Your comment has been posted.")})
 
