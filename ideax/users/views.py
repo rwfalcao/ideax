@@ -42,6 +42,7 @@ def profile(request, username):
             'popular_vote': getvotes,
             'comments': len(comments),
             'username': request.user.username,
+            'notifications': request.user.notifications.unread()
         }
     )
 

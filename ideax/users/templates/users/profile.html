@@ -1,10 +1,13 @@
 {% extends 'ideax/base.html' %}
 {% load i18n staticfiles %}
+{% load notifications_tags %}
+{% notifications_unread as unread_count %}
 {% load gravatar %}
 {% block content %}
 <div class="scrolltop">
     <a class="scroll icon" title="{% trans 'Back to top' %}" class="btn-floating grey"><i class="fas fa-chevron-up"></i></a>
 </div>
+
     <div class="profile-bg thetop">
         <div class="profile-objects">
             <div class="profile-info">
@@ -16,14 +19,17 @@
                 </div>
                 <div class="profile-email">
                     {{ userP.email }}
+                <button type="button" class="btn btn-primary ">
+                        <i class="fas fa-bell">  </i> <span  class="badge badge-light">{{ notifications|length }}</span>
+                </button>
                 </div>
-                    <span>
+                    <span class="col-lg-6">
                         {% blocktrans trimmed count size=ideas|length %}
                         Author of one idea
                         {% plural %}
                         Author of {{ size }} ideas
                         {% endblocktrans %}
-                </span>
+                    </span>
             </div>
 
             <div class="container">
