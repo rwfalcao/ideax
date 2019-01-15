@@ -58,8 +58,8 @@ def mark_notifications_as_read(request):
     notifications = request.user.notifications.unread()
     notifications.mark_all_as_read()
     data = {
-    'size': 0
-    }
+            'size': 0
+           }
     return JsonResponse(data)
 
 
