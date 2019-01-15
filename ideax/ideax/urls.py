@@ -58,7 +58,7 @@ urlpatterns = [
     path('dimension/<int:pk>/edit/', views.dimension_edit, name='dimension_edit'),
     path('dimension/<int:pk>/remove/', views.dimension_remove, name='dimension_remove'),
     re_path('author/', views.user_profile_page, name='user_profile_page'),
-
+    path('notifications/dismiss/', views.mark_notifications_as_read, name='mark_notifications_as_read'),
     # TODO: Refactor it
     url(r'^media/uploader/$', views.markdown_uploader, name='markdown_uploader_page'),
 ]

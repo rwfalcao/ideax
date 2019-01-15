@@ -54,6 +54,15 @@ def index(request):
     return render(request, 'ideax/index.html')
 
 
+def mark_notifications_as_read(request):
+    notifications = request.user.notifications.unread()
+    notifications.mark_all_as_read()
+    data = {
+    'size': 0
+    }
+    return JsonResponse(data)
+
+
 @login_required
 def idea_list(request):
     ideas = get_ideas_init(request)
@@ -584,7 +593,7 @@ def post_comment(request):
                       ip=get_ip(request))
 
     comment.save()
-    notify.send(request.user, recipient=idea.author.user, verb='someone commented on your idea!')
+    notify.send(request.user, recipient=idea.author.user, verb='Someone commented on your idea.')
     audit(request.user.username, get_client_ip(request), 'COMMENT_SAVE', Comment.__name__, str(comment.id))
     return JsonResponse({"msg": _("Your comment has been posted.")})
 

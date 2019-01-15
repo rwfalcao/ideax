@@ -14,5 +14,10 @@ def export_vars(request):
 
 
 def notifications_processor(request):
+    boolnotify = False
+    if request.user.is_anonymous:
+        return {'notifications': "", 'qtde': 0, 'boolnotify': boolnotify}
     notifications = request.user.notifications.unread()
-    return {'notifications': notifications}
+    if len(notifications) == 0:
+        boolnotify = True
+    return {'notifications': notifications, 'qtde': len(notifications), 'boolnotify': boolnotify}

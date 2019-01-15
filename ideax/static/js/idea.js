@@ -631,7 +631,19 @@ $(document).ready(function (){
         });
 });
 
+function dismissAll(){
+    console.log("dismissAll")
+    $.ajax({
+        url: '/notifications/dismiss/',
+        dataType: 'json',
+        success: function (data) {
 
+        var notifHtml = '<ul style="padding: 5px;">No new notifications!</ul>'
+        $('#notificationsDropdownMenu').html(notifHtml);
+        $('#notificationCount').text("0");
+        }
+    });
+}
 //end of toggle grid/list view
 
 //chatbot
