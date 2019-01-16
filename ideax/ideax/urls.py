@@ -8,7 +8,6 @@ from .feeds import CommentFeed, NewIdeaFeed
 urlpatterns = [
     url('^inbox/notifications/', include(notifications.urls, namespace='notifications')),
     path('', views.index, name='index'),
-    path('email/send', views.email_notification, name='email_notification'),
     path('idea/list', views.idea_list, name='idea_list'),
     path('idea/<int:pk>/', views.idea_detail, name='idea_detail'),
     path('idea/new/', views.idea_new, name='idea_new'),
