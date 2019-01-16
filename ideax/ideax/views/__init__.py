@@ -880,14 +880,14 @@ def email_notification(request, idea, username, email, notification):
     message = 'mensagem'
 
     ctx = {
-        'idea': idea,
-        'username': username,
-        'notification': notification,
+    'idea': idea.title,
+    'username': username.username,
+    'notification': notification,
     }
 
     message = render_to_string('ideax/email_notification.html', ctx)
 
-    email = EmailMessage(subject=subject, body=message, to=email)
+    email = EmailMessage(subject=subject, body=message, to=[email])
     email.content_subtype = "html"
     email.send()
 
