@@ -25,6 +25,7 @@ from django.core.files.base import ContentFile
 from ideax.settings.django._core import GOOGLE_RECAPTCHA_SECRET_KEY, GOOGLE_RECAPTCHA_URL
 from martor.utils import LazyEncoder
 from notifications.signals import notify
+from email.message import EmailMessage
 
 from ...users.models import UserProfile
 from ..models import (
@@ -52,6 +53,23 @@ def index(request):
         audit(request.user.username, get_client_ip(request), 'LIST_IDEAS_PAGE', Idea.__name__, '')
         return idea_list(request)
     return render(request, 'ideax/index.html')
+
+
+def email_notification(request):
+    subject = 'Assunto'
+    message = 'mensagem'
+
+    ctx = {
+           'tipo': 'Especial'
+          }
+
+    message = render_to_string('ideax/email_notification.html', ctx)
+
+    email = EmailMessage(subject=subject, body=message, to=['izabela.head@gmail.com'])
+    email.content_subtype = "html"
+    email.send()
+
+    return redirect('idea_list')
 
 
 def mark_notifications_as_read(request):
