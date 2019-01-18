@@ -25,7 +25,6 @@ from django.core.files.base import ContentFile
 from ideax.settings.django._core import GOOGLE_RECAPTCHA_SECRET_KEY, GOOGLE_RECAPTCHA_URL
 from martor.utils import LazyEncoder
 from notifications.signals import notify
-from django.core.mail import EmailMessage
 
 from ...users.models import UserProfile
 from ..models import (
@@ -385,8 +384,8 @@ def idea_evaluation(request, idea_pk):
             idea_score = soma/divisor
             idea.score = idea_score
             idea.save()
-            notify.send(idea.author.user, recipient=idea.author.user, description=idea, target=idea, action_object=idea,
-                        verb='evaluation of your idea has been completed!')
+            notify.send(idea.author.user, recipient=idea.author.user, description=idea, target=idea,
+                        action_object=idea, verb='evaluation of your idea has been completed!')
             audit(
                 request.user.username,
                 get_client_ip(request),
