@@ -74,7 +74,9 @@
                         <ul style="padding: 5px;">No new notifications!</ul>
                     {% else %}
                         {% for notification in notifications %}
-                        <ul class="dropdown-item">{{notification}}</ul>
+                            <ul class="dropdown-item">
+                                <a href="{% url 'idea_detail' pk=notification.target.pk %}">{{notification.actor}} {{notification.verb}}</a>
+                            </ul>
                         {% endfor%}
                         <ul onclick="dismissAll()" style="display: flex;align-items: flex-end;justify-content: end;" class="dropdown-item"><button type="button" class="btn btn-secondary btn-sm">Mark all as read</button></ul>
                     {% endif %}
