@@ -427,7 +427,6 @@ def like_popular_vote(request, pk):
     if vote.count() == 0:
         like = Popular_Vote(like=like_boolean, voter=user, voting_date=timezone.now(), idea=idea_)
         like.save()
-        email_notification(request, idea_, idea_.author.user, idea_.author.user.email, notification='like')
         notify.send(request.user, recipient=idea_.author.user, verb='someone liked your idea!')
         audit(request.user.username, get_client_ip(request), 'LIKE_SAVE', Popular_Vote.__name__, str(like.id))
     else:
@@ -490,6 +489,7 @@ def change_idea_phase(request, pk, new_phase):
                                           author=UserProfile.objects.get(user=request.user),
                                           current=True)
         phase_history_new.save()
+        notify.send(request.user, recipient=idea.author.user, verb='your idea has changed phase!')
         audit(
             request.user.username,
             get_client_ip(request),
@@ -595,7 +595,6 @@ def post_comment(request):
                       ip=get_ip(request))
 
     comment.save()
-    email_notification(request, idea, idea.author.user, idea.author.user.email, notification='comment')
     notify.send(request.user, recipient=idea.author.user, verb='Someone commented on your idea.')
     audit(request.user.username, get_client_ip(request), 'COMMENT_SAVE', Comment.__name__, str(comment.id))
     return JsonResponse({"msg": _("Your comment has been posted.")})
@@ -875,22 +874,21 @@ def get_authors(removed_author):
         .exclude(user__email=removed_author)
 
 
-def email_notification(request, idea, username, email, notification):
-    subject = 'Assunto'
-    message = 'mensagem'
+# def email_notification(request, idea, username, email, notification):
+#     subject = 'Assunto'
+#     message = 'mensagem'
 
-    ctx = {
-    'idea': idea.title,
-    'username': username.username,
-    'notification': notification,
-    }
+#     ctx = {
+#     'idea': idea.title,
+#     'username': username.username,
+#     'notification': notification,
+#     }
 
-    message = render_to_string('ideax/email_notification.html', ctx)
+#     message = render_to_string('ideax/email_notification.html', ctx)
 
-    email = EmailMessage(subject=subject, body=message, to=[email])
-    email.content_subtype = "html"
-    email.send()
-
+#     email = EmailMessage(subject=subject, body=message, to=[email])
+#     email.content_subtype = "html"
+#     email.send()
 
 
 __all__ = [
