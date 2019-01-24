@@ -384,8 +384,12 @@ def idea_evaluation(request, idea_pk):
             idea_score = soma/divisor
             idea.score = idea_score
             idea.save()
-            notify.send(idea.author.user, recipient=idea.author.user, description=idea, target=idea,
-                        action_object=idea, verb='evaluation of your idea has been completed!')
+            notify.send(idea.author.user,
+                        icon_class="far fa-check-square",
+                        recipient=idea.author.user,
+                        description="An idea of yours has ben evaluated",
+                        target=idea,
+                        verb='evaluate')
             audit(
                 request.user.username,
                 get_client_ip(request),
@@ -427,8 +431,12 @@ def like_popular_vote(request, pk):
     if vote.count() == 0:
         like = Popular_Vote(like=like_boolean, voter=user, voting_date=timezone.now(), idea=idea_)
         like.save()
-        notify.send(request.user, recipient=idea_.author.user, description=idea_, target=idea_, action_object=idea_,
-                    verb='liked your idea!')
+        notify.send(request.user,
+                    icon_class="far fa-thumbs-up",
+                    recipient=idea_.author.user,
+                    description="liked your idea",
+                    target=idea_,
+                    verb='like')
         audit(request.user.username, get_client_ip(request), 'LIKE_SAVE', Popular_Vote.__name__, str(like.id))
     else:
         if vote[0].like == like_boolean:
@@ -490,8 +498,12 @@ def change_idea_phase(request, pk, new_phase):
                                           author=UserProfile.objects.get(user=request.user),
                                           current=True)
         phase_history_new.save()
-        notify.send(idea.author.user, recipient=idea.author.user, description=idea, target=idea, action_object=idea,
-                    verb='your idea has changed phase!')
+        notify.send(idea.author.user,
+                    icon_class="far fa-check-square",
+                    recipient=idea.author.user,
+                    description="Your idea has reached a new phase!",
+                    target=idea,
+                    verb='phase')
         audit(
             request.user.username,
             get_client_ip(request),
@@ -597,8 +609,12 @@ def post_comment(request):
                       ip=get_ip(request))
 
     comment.save()
-    notify.send(request.user, recipient=idea.author.user, description=idea, target=idea, action_object=idea,
-                verb='commented on your idea.')
+    notify.send(request.user,
+                icon_class="far fa-comment",
+                recipient=idea.author.user,
+                description="commented on your idea",
+                target=idea,
+                verb='comment')
     audit(request.user.username, get_client_ip(request), 'COMMENT_SAVE', Comment.__name__, str(comment.id))
     return JsonResponse({"msg": _("Your comment has been posted.")})
 
