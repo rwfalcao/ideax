@@ -387,7 +387,7 @@ def idea_evaluation(request, idea_pk):
             notify.send(idea.author.user,
                         icon_class="far fa-check-square",
                         recipient=idea.author.user,
-                        description="An idea of yours has ben evaluated",
+                        description=_("An idea of yours has ben evaluated"),
                         target=idea,
                         verb='evaluate')
             audit(
@@ -434,7 +434,7 @@ def like_popular_vote(request, pk):
         notify.send(request.user,
                     icon_class="far fa-thumbs-up",
                     recipient=idea_.author.user,
-                    description="liked your idea",
+                    description=_("liked your idea"),
                     target=idea_,
                     verb='like')
         audit(request.user.username, get_client_ip(request), 'LIKE_SAVE', Popular_Vote.__name__, str(like.id))
@@ -501,7 +501,7 @@ def change_idea_phase(request, pk, new_phase):
         notify.send(idea.author.user,
                     icon_class="far fa-check-square",
                     recipient=idea.author.user,
-                    description="Your idea has reached a new phase!",
+                    description=_("Your idea has reached a new phase!"),
                     target=idea,
                     verb='phase')
         audit(
@@ -612,7 +612,7 @@ def post_comment(request):
     notify.send(request.user,
                 icon_class="far fa-comment",
                 recipient=idea.author.user,
-                description="commented on your idea",
+                description=_("commented on your idea"),
                 target=idea,
                 verb='comment')
     audit(request.user.username, get_client_ip(request), 'COMMENT_SAVE', Comment.__name__, str(comment.id))

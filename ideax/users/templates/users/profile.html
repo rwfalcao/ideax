@@ -22,13 +22,13 @@
                 </div>
                     <span class="col-lg-6">
                         {% if ideas|length == 0 %}
-                            No ideas
+                            {% trans 'No ideas' %}
                         {% endif %}
                         {% if ideas|length == 1 %}
-                            Author of one idea
+                            {% trans 'Author of one idea' %}
                         {% endif %}
                         {% if ideas|length > 1 %}
-                            Author of {{ ideas|length }} ideas
+                            {% trans 'Author of' %} {{ ideas|length }} {% trans 'ideas' %}
                         {% endif %}
                     </span>
             </div>

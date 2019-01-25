@@ -73,11 +73,11 @@
                             </button>
                     <div id="notificationsDropdownMenu" class="dropdown-menu dropdown-menu-right" aria-labelledby="notificationsDropdown">
                       {% if boolnotify %}
-                        <p class="no-notif">No new notifications!</p>
+                        <p class="no-notif">{% trans 'No new notifications!' %}</p>
                       {% else %}
                         {% for notification in notifications %}
                           {% if notification.verb == 'comment' or notification.verb == 'like' %}
-                            <a href="{% url 'idea_detail' pk=notification.target.pk %}" class="dropdown-item notification-item"><i class="{{ notification.data.icon_class }}"></i> {{notification.actor}} {{notification.description}}</a>
+                            <a href="{% url 'idea_detail' pk=notification.target.pk %}" class="dropdown-item notification-item"><i class="{{ notification.data.icon_class }}"></i> {{notification.actor}} {{notification.description}} {% trans 'at' %} {{notification.timestamp|date:"d/m/Y H:i" }}</a>
                           {% else %}
                              <a href="{% url 'idea_detail' pk=notification.target.pk %}" class="dropdown-item notification-item"><i class="{{ notification.data.icon_class }}"></i>{{notification.description}}</a>
                           {% endif %}
