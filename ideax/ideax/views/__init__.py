@@ -23,7 +23,8 @@ from django.http import StreamingHttpResponse
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.core.files.base import ContentFile
 from ideax.settings.django._core import GOOGLE_RECAPTCHA_SECRET_KEY, GOOGLE_RECAPTCHA_URL
-from martor.utils import LazyEncoder
+from martor.utils import LazyEncoder, markdownify
+from bs4 import BeautifulSoup
 from notifications.signals import notify
 
 from ...users.models import UserProfile
@@ -216,7 +217,18 @@ def save_idea(request, form, template_name, new=False):
             messages.success(request, _('Idea saved successfully!'))
             audit(request.user.username, get_client_ip(request), 'SAVE_IDEA_OPERATION',
                   Idea.__name__, str(idea.id))
-
+            mark = markdownify(idea.summary + idea.target + idea.oportunity + idea.solution)
+            string = BeautifulSoup(mark, 'html.parser')
+            usernames = list(set(username.text[1::] for username in
+                                 string.findAll('a', {'class': 'direct-mention-link'})))
+            for username in usernames:
+                user = UserProfile.objects.get(user__username=username)
+                notify.send(request.user,
+                            icon_class="fas fa-at",
+                            recipient=user.user,
+                            description=_("You have been mentioned in an idea!"),
+                            target=idea,
+                            verb='mention')
             return redirect('idea_list')
 
     return render(request, template_name, {'form': form})
