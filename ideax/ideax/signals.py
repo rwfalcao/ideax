@@ -1,8 +1,6 @@
 from django.db.models.signals import post_save
 from notifications.signals import notify
 from .models import Popular_Vote, Idea, Evaluation_Item, Phase, Comment
-from django.dispatch import receiver
-from django.core.signals import request_finished
 
 
 def my_handler(sender, instance, created, **kwargs):
