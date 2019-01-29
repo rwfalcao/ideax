@@ -207,6 +207,12 @@ def save_idea(request, form, template_name, new=False):
             if form.cleaned_data['authors']:
                 for author in form.cleaned_data['authors']:
                     idea.authors.add(author)
+                    notify.send(request.user,
+                                icon_class="fas fa-plus",
+                                recipient=author.user,
+                                description=_("You're a co-author of a new idea!"),
+                                target=idea,
+                                verb='author')
             messages.success(request, _('Idea saved successfully!'))
             audit(request.user.username, get_client_ip(request), 'SAVE_IDEA_OPERATION',
                   Idea.__name__, str(idea.id))
