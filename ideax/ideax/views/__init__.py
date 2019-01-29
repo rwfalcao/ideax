@@ -14,7 +14,7 @@ from django.http import JsonResponse
 from django.template.loader import render_to_string
 from django.db.models import Count, Case, When, Q
 from django.contrib import messages
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import ugettext_lazy as _ # noqa
 from django.http import HttpResponse
 from django.conf import settings
 from django.core.files.storage import FileSystemStorage, default_storage

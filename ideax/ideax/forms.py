@@ -2,7 +2,7 @@ import os
 
 from PIL import Image
 from django import forms
-from django.utils.translation import ugettext_lazy as _
+from django.utils.translation import ugettext_lazy as _ # noqa
 from django.contrib.admin.widgets import FilteredSelectMultiple
 from django.conf import settings
 from tinymce import TinyMCE
