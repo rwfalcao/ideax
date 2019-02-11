@@ -583,7 +583,7 @@ $(".dropdown-trigger").dropdown({
 }
 );
 $('.fixed-action-btn').floatingActionButton();
-$('.sidenav').sidenav();
+
         
     $("#id_image").change(function () {
         if (this.files && this.files[0]) {

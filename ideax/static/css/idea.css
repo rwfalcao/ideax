@@ -141,7 +141,7 @@
 
 /* end of nav css */
 
-/* start of banner image */
+/* start of idea list */
 
 .idea-list-bg{
     background-image: url('../images/hanging2.png');
@@ -155,5 +155,8 @@
 
 }
 
-
+#idea-list-content{
+    margin-top: 200px;
 }
+
+/* end of idea list */
