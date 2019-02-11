@@ -1,3 +1,4 @@
+
 $('.expand-button').on('click', function (evt) {
   let ideaText = evt.currentTarget.parentNode.parentNode.querySelector('p');
   ideaText.classList.toggle('expand');
@@ -573,6 +574,17 @@ function ideaView(ideaView){
 
 /* SCRIPT TO OPEN THE MODAL WITH THE PREVIEW */
 $(document).ready(function (){
+$(".dropdown-trigger").dropdown({
+  inDuration: 300,
+  outDuration: 225,
+  belowOrigin: true, // Displays dropdown below the button
+  alignment: 'right', // Displays dropdown with edge aligned to the left of button
+  constrainWidth: false
+}
+);
+$('.fixed-action-btn').floatingActionButton();
+$('.sidenav').sidenav();
+        
     $("#id_image").change(function () {
         if (this.files && this.files[0]) {
         var reader = new FileReader();
@@ -646,4 +658,4 @@ function dismissAll(){
 }
 //end of toggle grid/list view
 
-//chatbot
+//
